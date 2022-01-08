@@ -44,6 +44,11 @@
           <img class="person-icon" src="../../assets/icon-people.png" alt="" />
         </el-col>
       </el-row>
+      <el-row>
+        <el-col>
+          <el-button>Book</el-button>
+        </el-col></el-row
+      >
     </base-container>
   </section>
 </template>
@@ -137,5 +142,10 @@ export default {
   right: 20.5rem;
   top: 18%;
   width: 20px;
+}
+
+.booking .el-button--default {
+  padding: 1rem 4rem;
+  border-radius: 0;
 }
 </style>
