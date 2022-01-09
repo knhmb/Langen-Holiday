@@ -36,6 +36,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
+  text-align: center;
 }
 
 .carousel .el-carousel__arrow.el-carousel__arrow--left,

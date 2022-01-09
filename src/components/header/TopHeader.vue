@@ -1,12 +1,12 @@
 <template>
   <div class="top-header">
     <el-row>
-      <el-col :span="12">
+      <el-col class="logo-content" :sm="24" :lg="9">
         <img src="../../assets/logo.png" class="logo" alt="" />
         <!-- <span>LanGen Holiday</span> -->
         <img class="brand-name" src="../../assets/brand-name.png" alt="" />
       </el-col>
-      <el-col :span="12">
+      <el-col :sm="24" :lg="15">
         <el-menu
           :ellipsis="false"
           menu-trigger="click"
@@ -31,9 +31,10 @@
             alt=""
           />
           <span>WhatsApp:</span>
-          <span>+852 5396 2553</span>
+          <span class="number">+852 5396 2553</span>
         </el-menu>
       </el-col>
+      <!-- <el-col :span=""></el-col> -->
       <!-- <el-col :span="8" class="contact">
         <img
           class="whats-app-logo"
@@ -52,7 +53,11 @@
   align-items: center;
 }
 .top-header {
-  padding: 1rem 8rem 0 8rem;
+  padding: 2rem 8rem 0 8rem;
+  /* overflow-x: hidden; */
+  /* position: absolute; */
+  /* min-width: 600px; */
+  /* min-width: 300px; */
 }
 
 .top-header .logo {
@@ -106,5 +111,57 @@
 .top-header .whats-app-logo ~ span {
   margin-left: 0.5rem;
   font-size: 12px;
+}
+
+@media screen and (max-width: 1024px) {
+  .top-header .logo-content,
+  .top-header .logo-content + .el-col {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .top-header .brand-name {
+    display: block;
+    width: 200px;
+  }
+  .top-header {
+    padding: 0;
+    /* padding-top: 1rem;
+    padding-left: 0.5rem; */
+  }
+  /* .top-header .el-row .el-col .el-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  } */
+
+  .top-header .logo {
+    width: 50px;
+  }
+
+  .top-header .el-col:last-of-type {
+    justify-content: center;
+  }
+
+  .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
+    display: none;
+  }
+  .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
+    padding: 0;
+    padding-right: 0.5rem;
+  }
+
+  .top-header .whats-app-logo {
+    width: 15px;
+  }
+
+  .top-header .number {
+    margin-left: 0;
+  }
+  .top-header .logo-content {
+    justify-content: center;
+  }
 }
 </style>

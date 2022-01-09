@@ -12,7 +12,9 @@
 
 body {
   font-family: "Noto Sans HK", sans-serif;
+  min-width: 100%;
   /* position: absolute;
-  width: 100%; */
+  left: 0;
+  right: 0; */
 }
 </style>

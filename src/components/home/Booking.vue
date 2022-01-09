@@ -18,7 +18,7 @@
         </el-col>
       </el-row>
       <el-row :gutter="3">
-        <el-col class="form-control" :span="16">
+        <el-col class="form-control" :sm="24" :lg="16">
           <el-input
             class="calendar-input"
             v-model="input"
@@ -31,17 +31,23 @@
             alt=""
           />
         </el-col>
-        <el-col :span="8">
-          <el-select v-model="value" placeholder="Select">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-          <img class="person-icon" src="../../assets/icon-people.png" alt="" />
+        <el-col :sm="24" :lg="8">
+          <div class="select-input">
+            <el-select v-model="value" placeholder="Select">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+            <img
+              class="person-icon"
+              src="../../assets/icon-people.png"
+              alt=""
+            />
+          </div>
         </el-col>
       </el-row>
       <el-row>
@@ -68,6 +74,7 @@ export default {
   background-color: orange;
   margin-top: -0.6rem;
   padding: 4rem 0;
+  /* overflow-x: hidden; */
 }
 
 .booking .el-col:first-child {
@@ -133,19 +140,25 @@ export default {
   width: 100%;
 }
 
+.booking .select-input {
+  position: relative;
+}
+
 /* .booking .el-select .el-input__inner {
   padding: 20px 55px;
 } */
 
 .booking .person-icon {
   position: absolute;
-  right: 20.5rem;
-  top: 18%;
+  top: 50%;
+  left: 0.9rem;
   width: 20px;
+  transform: translateY(-50%);
 }
 
 .booking .el-button--default {
   padding: 1rem 4rem;
   border-radius: 0;
+  margin-top: 1rem;
 }
 </style>

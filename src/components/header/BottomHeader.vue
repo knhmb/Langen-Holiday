@@ -1,9 +1,9 @@
 <template>
   <div class="bottom-header">
     <el-row>
-      <el-col :span="22">
+      <el-col :sm="24" :lg="22">
         <el-menu
-          :ellipsis="false"
+          :ellipsis="true"
           menu-trigger="click"
           class="el-menu-demo"
           mode="horizontal"
@@ -40,7 +40,7 @@
           </el-sub-menu>
         </el-menu>
       </el-col>
-      <el-col :span="2">
+      <el-col :sm="24" :lg="2">
         <el-button>Login</el-button>
       </el-col>
     </el-row>
@@ -54,6 +54,7 @@
 .bottom-header {
   padding: 0rem 8rem;
   margin-top: -1rem;
+  overflow-x: hidden;
 }
 
 .bottom-header .logo {
@@ -107,5 +108,36 @@
 
 .bottom-header .el-button span {
   margin: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .bottom-header .el-col {
+    justify-content: center;
+  }
+
+  .bottom-header .el-button {
+    width: 20%;
+    margin-top: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bottom-header {
+    padding: 0;
+  }
+
+  .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
+    padding: 0;
+    /* padding-left: 1rem; */
+    /* margin-right: 2.5rem; */
+  }
+
+  .bottom-header .el-col {
+    justify-content: center;
+  }
+
+  .bottom-header .el-button {
+    margin-top: 0.5rem;
+  }
 }
 </style>

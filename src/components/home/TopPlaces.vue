@@ -26,7 +26,8 @@ export default {
   background-image: url("../../assets/main-bg1.png");
   background-size: contain;
   background-repeat: no-repeat;
-  padding: 8rem 0;
+  padding-top: 8rem;
+  overflow-x: hidden;
   /* margin-top: -0.6rem; */
 }
 
@@ -43,5 +44,15 @@ export default {
 
 .top-places .places-icon {
   width: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .top-places h1 {
+    font-size: 1rem;
+  }
+
+  .top-places .places-icon {
+    width: 30px;
+  }
 }
 </style>

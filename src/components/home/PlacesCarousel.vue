@@ -1,137 +1,127 @@
 <template>
   <div class="places-carousel">
-    <el-carousel trigger="click" height="530px" arrow="always">
-      <el-carousel-item v-for="item in 3" :key="item">
+    <el-carousel
+      class="hidden-md-and-up"
+      trigger="click"
+      height="570px"
+      arrow="always"
+    >
+      <el-carousel-item v-for="service in services" :key="service.id">
         <base-container>
-          <el-row :gutter="20">
-            <el-col v-for="o in 3" :key="o" :span="8">
-              <el-card :body-style="{ padding: '0px' }">
-                <img
-                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                  class="image"
-                />
-                <div class="ranking">
-                  <img src="../../assets/icon-rank1.png" alt="" />
-                  <img src="../../assets/icon-rank2.png" alt="" />
-                  <img src="../../assets/icon-rank3.png" alt="" />
-                </div>
-                <div>
-                  <el-row>
-                    <el-col :span="14">
-                      <span>Yummy hamburger</span>
-                      <span class="small">burger</span>
-                      <span class="discount">HK560</span>
-                      <span class="price">HK500</span>
-                      <el-rate
-                        v-model="value"
-                        show-score
-                        disabled
-                        text-color="#c6c6c6"
-                        score-template="62 points"
-                      >
-                      </el-rate>
-                    </el-col>
-                    <el-col :span="10"
-                      ><span style="text-align: end; display: block"
-                        >icon</span
-                      ></el-col
-                    >
-                  </el-row>
-
-                  <!-- <div class="bottom">
-                  <time class="time">{{ new Date().getTime() }}</time>
-                  <el-button type="text" class="button">Operating</el-button>
-                </div> -->
-                </div>
-              </el-card>
+          <el-row :gutter="10">
+            <el-col :span="24">
+              <Card
+                :name="service.name"
+                :description="service.description"
+                :discount="service.discount"
+                :price="service.price"
+                :rate-value="service.rateValue"
+                :rate-text="service.rateText"
+                :icon="service.icon"
+              />
             </el-col>
           </el-row>
         </base-container>
       </el-carousel-item>
     </el-carousel>
+
+    <el-carousel
+      class="hidden-sm-and-down"
+      trigger="click"
+      height="570px"
+      arrow="always"
+    >
+      <el-carousel-item v-for="item in 4" :key="item">
+        <base-container>
+          <el-row :gutter="10">
+            <el-col v-for="service in services" :key="service.id" :span="8">
+              <Card
+                :name="service.name"
+                :description="service.description"
+                :discount="service.discount"
+                :price="service.price"
+                :rate-value="service.rateValue"
+                :rate-text="service.rateText"
+                :icon="service.icon"
+              />
+            </el-col>
+          </el-row>
+        </base-container>
+      </el-carousel-item>
+    </el-carousel>
+    <base-container>
+      <el-row>
+        <el-col :span="12">
+          <img src="../../assets/main-img1.png" class="fish-img" alt="" />
+        </el-col>
+        <el-col class="swimming-img" :span="12">
+          <img src="../../assets/main-img2.png" alt="" />
+        </el-col>
+      </el-row>
+    </base-container>
   </div>
 </template>
 
 <script>
+import Card from "./Card.vue";
+
 export default {
+  components: {
+    Card,
+  },
   data() {
     return {
-      value: 4,
+      services: [
+        {
+          id: 1,
+          name: "Yummy hamburger",
+          description: "Burger",
+          discount: "HK560",
+          price: "HK500",
+          rateValue: 4,
+          rateText: "62 points",
+          icon: require("../../assets/icon-rank1.png"),
+        },
+        {
+          id: 2,
+          name: "Yummy hamburger",
+          description: "Burger",
+          discount: "HK560",
+          price: "HK500",
+          rateValue: 4,
+          rateText: "62 points",
+          icon: require("../../assets/icon-rank2.png"),
+        },
+        {
+          id: 3,
+          name: "Yummy hamburger",
+          description: "Burger",
+          discount: "HK560",
+          price: "HK500",
+          rateValue: 4,
+          rateText: "62 points",
+          icon: require("../../assets/icon-rank3.png"),
+        },
+      ],
     };
   },
 };
 </script>
 
+
+
 <style>
-.places-carousel .el-card {
-  border: none;
-  box-shadow: none;
+.places-carousel .swimming-img {
+  text-align: end;
+}
+.places-carousel .swimming-img img {
+  width: 200px;
+  position: relative;
+  /* left: 350px; */
 }
 
-.places-carousel .el-card .el-card__body {
-  /* max-width: 300px; */
-}
-
-.places-carousel .image {
-  width: 100%;
-}
-
-.places-carousel span {
-  display: block;
-}
-
-.places-carousel .small {
-  font-size: 12px;
-}
-
-.places-carousel .discount {
-  text-decoration: line-through;
-  color: #ddd;
-  font-size: 13px;
-  margin-top: 0.3rem;
-}
-
-.places-carousel .price {
-  font-size: 16px;
-}
-
-.places-carousel .el-rate {
-  height: 50px;
-}
-
-.places-carousel .el-rate span {
-  display: inline;
-}
-
-.places-carousel .el-rate .el-rate__text {
-  font-size: 12px;
-}
-
-.places-carousel .ranking img {
-  position: absolute;
-  width: 60px;
-  top: -1.5rem;
-}
-
-.places-carousel .ranking img {
-  left: 19.6rem;
-}
-
-/* .places-carousel .ranking img:nth-child(2) {
-  left: 50.2rem;
-}
-
-.places-carousel .ranking img:nth-child(3) {
-  left: 73.4rem;
-} */
-
-.places-carousel .el-carousel {
-  /* position: relative; */
-  /* background-color: red; */
-
-  /* max-height: 400px; */
-  /* z-index: -1; */
-  /* padding-top: 1rem; */
+.places-carousel .fish-img {
+  width: 300px;
 }
 
 .places-carousel .el-carousel .el-carousel__item {
@@ -156,5 +146,19 @@ export default {
 .places-carousel .el-carousel__arrow.el-carousel__arrow--left .el-icon {
   color: #fff;
   font-size: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .places-carousel .el-carousel__arrow.el-carousel__arrow--left {
+    left: 1%;
+  }
+
+  .places-carousel .swimming-img img {
+    width: 150px;
+  }
+
+  .places-carousel .fish-img {
+    width: 150px;
+  }
 }
 </style>
