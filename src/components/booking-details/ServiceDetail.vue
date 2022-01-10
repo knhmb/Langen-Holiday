@@ -1,6 +1,6 @@
 <template>
-  <div class="service-detail">
-    <base-container>
+  <base-container>
+    <div class="service-detail">
       <h3>Service</h3>
       <el-row :gutter="30">
         <el-col :span="12">
@@ -47,8 +47,8 @@
           <service-detail-right></service-detail-right>
         </el-col>
       </el-row>
-    </base-container>
-  </div>
+    </div>
+  </base-container>
 </template>
 
 <script>
@@ -64,6 +64,8 @@ export default {
 <style scoped>
 .service-detail {
   margin-top: 1rem;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 4rem;
 }
 
 .service-detail h3 {
