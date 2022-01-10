@@ -9,6 +9,8 @@ import "element-plus/theme-chalk/display.css";
 import Home from "./pages/Home.vue";
 import Search from "./pages/Search.vue";
 
+import BookingDetails from "./pages/BookingDetails.vue";
+
 import BaseContainer from "./ui/BaseContainer.vue";
 
 const app = createApp(App);
@@ -19,6 +21,7 @@ const router = createRouter({
     { path: "/", redirect: "/home" },
     { path: "/home", component: Home },
     { path: "/search", component: Search },
+    { path: "/booking-details", component: BookingDetails },
   ],
 });
 
