@@ -3,9 +3,49 @@
     <el-row>
       <el-col :sm="24" :lg="22">
         <el-menu
+          unique-opened
           :ellipsis="true"
           menu-trigger="click"
-          class="el-menu-demo"
+          class="el-menu-demo hidden-lg-and-up"
+          mode="horizontal"
+        >
+          <el-sub-menu index="1">
+            <template #title>Workspace</template>
+            <el-menu-item index="1-1">item one</el-menu-item>
+            <el-menu-item index="1-2">item two</el-menu-item>
+            <el-menu-item index="1-3">item three</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="2">
+            <template #title>Workspace</template>
+            <el-menu-item index="2-1">item one</el-menu-item>
+            <el-menu-item index="2-2">item two</el-menu-item>
+            <el-menu-item index="2-3">item three</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="3">
+            <template #title>Workspace</template>
+            <el-menu-item index="3-1">item one</el-menu-item>
+            <el-menu-item index="3-2">item two</el-menu-item>
+            <el-menu-item index="3-3">item three</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="4">
+            <template #title>Workspace</template>
+            <el-menu-item index="4-1">item one</el-menu-item>
+            <el-menu-item index="4-2">item two</el-menu-item>
+            <el-menu-item index="4-3">item three</el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="5">
+            <template #title>Workspace</template>
+            <el-menu-item index="5-1">item one</el-menu-item>
+            <el-menu-item index="5-2">item two</el-menu-item>
+            <el-menu-item index="5-3">item three</el-menu-item>
+          </el-sub-menu>
+        </el-menu>
+
+        <el-menu
+          unique-opened
+          :ellipsis="false"
+          menu-trigger="click"
+          class="el-menu-demo hidden-md-and-down"
           mode="horizontal"
         >
           <el-sub-menu index="1">
@@ -78,6 +118,7 @@
 
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
   font-size: 12px;
+  /* padding: 0; */
 }
 
 .bottom-header

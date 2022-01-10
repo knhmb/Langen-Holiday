@@ -25,13 +25,16 @@
             <el-menu-item index="2-2">item two</el-menu-item>
             <el-menu-item index="2-3">item three</el-menu-item>
           </el-sub-menu>
-          <img
-            class="whats-app-logo"
-            src="../../assets/icon-whatsapp.png"
-            alt=""
-          />
-          <span>WhatsApp:</span>
-          <span class="number">+852 5396 2553</span>
+          <div class="contact">
+            <img
+              class="whats-app-logo"
+              src="../../assets/icon-whatsapp.png"
+              alt=""
+            />
+
+            <span>WhatsApp:</span>
+            <span class="number">+852 5396 2553</span>
+          </div>
         </el-menu>
       </el-col>
       <!-- <el-col :span=""></el-col> -->
@@ -111,6 +114,11 @@
 .top-header .whats-app-logo ~ span {
   margin-left: 0.5rem;
   font-size: 12px;
+}
+
+.top-header .contact {
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 1024px) {

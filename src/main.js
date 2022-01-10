@@ -7,6 +7,7 @@ import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
 
 import Home from "./pages/Home.vue";
+import Search from "./pages/Search.vue";
 
 import BaseContainer from "./ui/BaseContainer.vue";
 
@@ -17,6 +18,7 @@ const router = createRouter({
   routes: [
     { path: "/", redirect: "/home" },
     { path: "/home", component: Home },
+    { path: "/search", component: Search },
   ],
 });
 
