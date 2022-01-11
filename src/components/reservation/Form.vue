@@ -6,6 +6,7 @@
         <el-col :span="12">
           <el-form-item label="First Name:">
             <el-input
+              size="large"
               v-model="input3"
               placeholder="Please input"
               class="input-with-select"
@@ -27,6 +28,7 @@
         <el-col :span="12">
           <el-form-item label="First Name:">
             <el-input
+              size="large"
               v-model="input3"
               placeholder="Please input"
               class="input-with-select"
@@ -49,16 +51,16 @@
       <el-row>
         <el-col>
           <el-form-item label="Name:">
-            <el-input></el-input>
+            <el-input size="large"></el-input>
           </el-form-item>
           <el-form-item label="Name:">
-            <el-input></el-input>
+            <el-input size="large"></el-input>
           </el-form-item>
           <el-form-item label="Name:">
-            <el-input></el-input>
+            <el-input size="large"></el-input>
           </el-form-item>
           <el-form-item label="Name:">
-            <el-input type="textarea" rows="5"></el-input>
+            <el-input type="textarea" rows="8"></el-input>
           </el-form-item>
         </el-col>
       </el-row>

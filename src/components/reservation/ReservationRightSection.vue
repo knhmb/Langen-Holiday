@@ -31,20 +31,83 @@
             </el-col>
           </el-row>
         </div>
+        <div class="price-single">
+          <el-row>
+            <el-col :span="8">
+              <p>Number:</p>
+            </el-col>
+            <el-col :span="16">
+              <p>2</p>
+            </el-col>
+            <el-col :span="8">
+              <p>Price:</p>
+            </el-col>
+            <el-col :span="16">
+              <p>HK$200.00</p>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="total-price">
+          <el-row>
+            <el-col :span="12">
+              <p>Number:</p>
+            </el-col>
+            <el-col :span="10">
+              <p class="end">HK$1480.00</p>
+            </el-col>
+            <el-col :span="12">
+              <p>Price:</p>
+            </el-col>
+            <el-col :span="10">
+              <p class="end">HK$1480.00</p>
+            </el-col>
+            <el-col :span="12">
+              <p>Price:</p>
+            </el-col>
+            <el-col :span="10">
+              <p class="end">HK$0.00</p>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="tax">
+          <el-row>
+            <el-col :span="8">
+              <p>Tax:</p>
+            </el-col>
+            <el-col :span="16">
+              <p>HK$200.00</p>
+            </el-col>
+          </el-row>
+        </div>
       </div>
     </el-card>
+    <el-row>
+      <el-col>
+        <el-button>Done</el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <style>
+.reservation .right-section {
+  margin-bottom: 2rem;
+}
+
 .reservation .right-section .el-card .image {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
+.reservation .right-section .el-card .tax {
+  padding-bottom: 1rem;
+}
+
 .reservation .right-section .el-card .title,
-.reservation .right-section .el-card .days-of-stay {
+.reservation .right-section .el-card .days-of-stay,
+.reservation .right-section .el-card .price-single,
+.reservation .right-section .el-card .total-price {
   border-bottom: 1px solid #999;
   padding-bottom: 1rem;
 }
@@ -54,7 +117,10 @@
   color: #999;
 }
 
-.reservation .right-section .el-card .days-of-stay {
+.reservation .right-section .el-card .days-of-stay,
+.reservation .right-section .el-card .price-single,
+.reservation .right-section .el-card .total-price,
+.reservation .right-section .el-card .tax {
   padding-top: 1rem;
 }
 
@@ -62,8 +128,30 @@
   margin-bottom: 0.5rem;
 }
 
-.reservation .right-section .el-card .days-of-stay p {
+.reservation .right-section .el-card .days-of-stay p,
+.reservation .right-section .el-card .price-single p,
+.reservation .right-section .el-card .total-price p,
+.reservation .right-section .el-card .tax p {
   /* font-size: 14px; */
   color: #999;
+}
+
+.reservation .right-section .el-card .total-price .el-col {
+  margin-bottom: 1rem;
+}
+
+.reservation .right-section .el-card .total-price .end {
+  color: orange;
+  font-size: 24px;
+  text-align: end;
+}
+
+.reservation .right-section .el-button--default {
+  background-color: orange;
+  border-color: orange;
+  color: #fff;
+  margin-top: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 </style>
