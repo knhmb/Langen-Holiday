@@ -5,37 +5,37 @@
       <div>
         <p>item</p>
         <el-row>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-wifi.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-bodywash.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-shampoo.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-dryer.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-tv.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-terrace.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-grill.png" alt="" />
@@ -45,12 +45,12 @@
       <div class="not-provided-services">
         <p>item</p>
         <el-row>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-cross.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-towel.png" alt="" />
           </el-col>
-          <el-col class="items" :span="3">
+          <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-cross.png" alt="" />
             <span>wifi</span>
             <img src="../../assets/icon-shoes.png" alt="" />
@@ -60,7 +60,7 @@
       <div class="beds">
         <p>Beds</p>
         <el-row>
-          <el-col :span="3" class="items">
+          <el-col :sm="24" :md="3" :lg="3" class="items">
             <span>Bed x1</span>
             <img src="../../assets/icon-bed.png" alt="" />
           </el-col>

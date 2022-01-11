@@ -6,6 +6,8 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
 
+import { SetupCalendar } from "v-calendar";
+
 import Home from "./pages/Home.vue";
 import Search from "./pages/Search.vue";
 
@@ -28,6 +30,7 @@ const router = createRouter({
 app.component("base-container", BaseContainer);
 
 app.use(ElementPlus);
+app.use(SetupCalendar, {});
 app.use(router);
 
 app.mount("#app");

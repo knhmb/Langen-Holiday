@@ -98,4 +98,39 @@ export default {
   position: absolute;
   right: 0;
 }
+
+@media screen and (max-width: 1024px) {
+  .comment .el-row .alert::after {
+    right: 3.8%;
+    top: 25%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .comment .el-row .alert::after {
+    right: 3.8%;
+    top: 27%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .comment .el-row .alert::after {
+    right: 5.8%;
+    top: 34%;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .comment .el-row .alert::after {
+    right: 8.8%;
+    top: 36%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .comment .el-row .alert::after {
+    right: 9.8%;
+    top: 40%;
+  }
+}
 </style>

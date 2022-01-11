@@ -3,10 +3,10 @@
     <div class="date-selection">
       <h2>Date Selected</h2>
       <el-row justify="space-around">
-        <el-col :span="15">
+        <el-col :sm="24" :lg="15">
           <date-picker></date-picker>
         </el-col>
-        <el-col :span="4">
+        <el-col class="date-btns" :sm="24" :lg="4">
           <el-button class="yellow">Add</el-button>
           <el-button class="grey">Add</el-button>
         </el-col>
@@ -53,6 +53,20 @@ export default {
   display: block;
   margin-top: 0.5rem;
   width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .date-selection .date-btns {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+  }
+  .date-selection .grey,
+  .date-selection .yellow {
+    width: 30%;
+    text-align: center;
+  }
 }
 </style>
 

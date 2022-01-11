@@ -2,10 +2,10 @@
   <base-container>
     <div class="booking-info">
       <el-row class="heading">
-        <el-col :span="4">
+        <el-col :sm="24" :md="4" :lg="4">
           <h1>Details</h1>
         </el-col>
-        <el-col :span="17">
+        <el-col :sm="24" :md="17" :lg="17">
           <el-rate
             v-model="value"
             disabled
@@ -15,7 +15,7 @@
           >
           </el-rate>
         </el-col>
-        <el-col :span="3">
+        <el-col :sm="3" :md="3" :lg="3">
           <el-button>Save</el-button>
         </el-col>
         <el-col>
@@ -73,5 +73,23 @@ export default {
   font-size: 30px;
   color: #aaa;
   margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .booking-info .el-rate {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .booking-info .el-rate {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .booking-info .heading .el-col {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

@@ -1,5 +1,12 @@
 <template>
-  <Calendar :columns="2" color="orange" :attributes="attrs"> </Calendar>
+  <Calendar
+    :columns="layout.columns"
+    :rows="layout.rows"
+    :is-expanded="layout.isExpanded"
+    color="orange"
+    :attributes="attrs"
+  >
+  </Calendar>
 </template>
 
 <script>
@@ -108,6 +115,24 @@ export default {
       ],
     };
   },
+  computed: {
+    layout() {
+      return this.$screens({
+        // Default layout for mobile
+        default: {
+          columns: 1,
+          rows: 2,
+          isExpanded: true,
+        },
+        // Override for large screens
+        lg: {
+          columns: 2,
+          rows: 1,
+          isExpanded: true,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -162,5 +187,25 @@ export default {
 
 .date-selection .vc-arrows-container.title-center .vc-arrow.is-right {
   right: -10%;
+}
+
+@media screen and (max-width: 768px) {
+  .date-selection .vc-arrows-container.title-center .vc-arrow.is-left {
+    left: -12%;
+  }
+
+  .date-selection .vc-arrows-container.title-center .vc-arrow.is-right {
+    right: -12%;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .date-selection .vc-arrows-container.title-center .vc-arrow.is-left {
+    left: -15%;
+  }
+
+  .date-selection .vc-arrows-container.title-center .vc-arrow.is-right {
+    right: -15%;
+  }
 }
 </style>
