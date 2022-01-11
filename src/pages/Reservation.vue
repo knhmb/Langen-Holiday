@@ -26,5 +26,6 @@ export default {
 <style scoped>
 .reservation {
   color: #999;
+  margin-top: 2rem;
 }
 </style>

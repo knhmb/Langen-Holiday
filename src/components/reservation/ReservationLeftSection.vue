@@ -33,9 +33,9 @@ export default {
 </script>
 
 <style scoped>
-.reservation .left-section {
+/* .reservation .left-section {
   margin-top: 2rem;
-}
+} */
 
 .reservation .left-section h1 {
   margin-bottom: 1rem;

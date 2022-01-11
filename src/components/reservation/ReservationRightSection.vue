@@ -83,6 +83,12 @@
     </el-card>
     <el-row>
       <el-col>
+        <label>Name:</label>
+        <el-input size="large"></el-input>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
         <el-button>Done</el-button>
       </el-col>
     </el-row>
@@ -92,6 +98,21 @@
 <style>
 .reservation .right-section {
   margin-bottom: 2rem;
+}
+
+.reservation .right-section label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.reservation .right-section .el-input {
+  box-shadow: 0px 2px 5px #c6c6c6;
+  border-radius: 2px;
+}
+
+.reservation .right-section .el-input .el-input__inner {
+  border: none;
 }
 
 .reservation .right-section .el-card .image {
