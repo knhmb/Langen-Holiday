@@ -84,7 +84,7 @@
               </div>
               <div class="body">
                 <div class="grey">
-                  <el-row :gutter="50">
+                  <el-row :gutter="30">
                     <el-col :span="5">
                       <img
                         class="whats-img"
@@ -99,7 +99,7 @@
                   </el-row>
                 </div>
                 <div class="grey">
-                  <el-row :gutter="50">
+                  <el-row :gutter="30">
                     <el-col :span="5">
                       <img
                         class="whats-img"
@@ -174,6 +174,7 @@ export default {
   right: 0;
   bottom: 0;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .contact-us-list {
@@ -217,6 +218,7 @@ export default {
 .contact-us-list .body .grey p {
   margin: 0;
   color: #999;
+  padding: 0;
   /* font-size: 14px; */
 }
 
@@ -227,6 +229,10 @@ export default {
 
 .reservation .list .el-card {
   border: none;
+}
+
+.reservation .list .el-card .el-card__body {
+  margin-bottom: 2rem;
 }
 
 .reservation .list h1 {
@@ -246,6 +252,7 @@ export default {
 .reservation .list p {
   color: #999;
   margin-bottom: 1rem;
+  padding-left: 2rem;
 }
 
 .reservation .el-checkbox {
@@ -267,6 +274,7 @@ export default {
 
 .reservation .el-checkbox .el-checkbox__label {
   color: #999;
+  white-space: normal;
 }
 
 .reservation .el-button--default.submit {
@@ -275,5 +283,29 @@ export default {
   border-color: orange;
   color: #fff;
   margin-top: 2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .contact-us-list {
+    top: -7.5rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .contact-us-list {
+    top: -3rem;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .contact-us-list {
+    top: -3rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .contact-us-list {
+    top: 1.5rem;
+  }
 }
 </style>

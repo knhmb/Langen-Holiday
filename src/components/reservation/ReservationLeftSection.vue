@@ -1,7 +1,7 @@
 <template>
   <base-container>
     <el-row :gutter="70">
-      <el-col :span="12">
+      <el-col :sm="24" :lg="12">
         <div class="left-section">
           <h1>Reservation</h1>
           <p>
@@ -13,7 +13,7 @@
           <Form />
         </div>
       </el-col>
-      <el-col :span="12">
+      <el-col :sm="24" :lg="12">
         <reservation-right-section></reservation-right-section>
       </el-col>
     </el-row>
