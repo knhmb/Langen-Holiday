@@ -10,8 +10,8 @@ import { SetupCalendar } from "v-calendar";
 
 import Home from "./pages/Home.vue";
 import Search from "./pages/Search.vue";
-
 import BookingDetails from "./pages/BookingDetails.vue";
+import Reservation from "./pages/Reservation.vue";
 
 import BaseContainer from "./ui/BaseContainer.vue";
 
@@ -24,6 +24,7 @@ const router = createRouter({
     { path: "/home", component: Home },
     { path: "/search", component: Search },
     { path: "/booking-details", component: BookingDetails },
+    { path: "/reservation", component: Reservation },
   ],
 });
 

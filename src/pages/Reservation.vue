@@ -1,0 +1,27 @@
+<template>
+  <top-header></top-header>
+  <section class="reservation">
+    <reservation-left-section></reservation-left-section>
+  </section>
+  <the-footer></the-footer>
+</template>
+
+<script>
+import TopHeader from "../components/header/TopHeader.vue";
+import TheFooter from "../components/TheFooter.vue";
+import ReservationLeftSection from "../components/reservation/ReservationLeftSection.vue";
+
+export default {
+  components: {
+    TopHeader,
+    TheFooter,
+    ReservationLeftSection,
+  },
+};
+</script>
+
+<style scoped>
+.reservation {
+  color: #999;
+}
+</style>
