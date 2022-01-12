@@ -57,11 +57,15 @@
 }
 .top-header {
   padding: 2rem 8rem 0 8rem;
-  /* overflow-x: hidden; */
-  /* position: absolute; */
-  /* min-width: 600px; */
-  /* min-width: 300px; */
 }
+
+/* .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
+  content: "";
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #737373;
+  margin-left: 0.5rem;
+} */
 
 .top-header .logo {
   width: 100px;
@@ -89,8 +93,25 @@
   align-items: center;
 }
 
+.top-header .el-icon.el-sub-menu__icon-arrow {
+  display: none;
+}
+
 .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
   font-size: 12px;
+  position: relative;
+  /* margin-right: 0.5rem; */
+}
+
+.top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::before {
+  content: "";
+  position: absolute;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #737373;
+  margin-left: 0.5rem;
+  right: 29px;
+  /* padding-left: 0.5rem; */
 }
 
 .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
@@ -98,7 +119,7 @@
   background: black;
   height: 21px;
   width: 1px;
-  margin-left: 1rem;
+  margin-left: 1.5rem;
 }
 
 .top-header
@@ -121,6 +142,13 @@
   align-items: center;
 }
 
+@media screen and (max-width: 768px) {
+  .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::before {
+    /* display: none; */
+    right: 0;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .top-header .logo-content,
   .top-header .logo-content + .el-col {
@@ -133,6 +161,7 @@
     display: block;
     width: 200px;
   }
+
   .top-header {
     padding: 0;
     /* padding-top: 1rem;
@@ -158,7 +187,8 @@
   }
   .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
     padding: 0;
-    padding-right: 0.5rem;
+    padding-right: 1.1rem;
+    margin-right: 5px;
   }
 
   .top-header .whats-app-logo {

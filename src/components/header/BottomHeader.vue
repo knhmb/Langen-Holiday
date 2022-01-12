@@ -97,6 +97,10 @@
   overflow-x: hidden;
 }
 
+.bottom-header .el-icon.el-sub-menu__icon-arrow {
+  display: none;
+}
+
 .bottom-header .logo {
   width: 115px;
 }
@@ -119,6 +123,14 @@
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
   font-size: 12px;
   /* padding: 0; */
+}
+
+.bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
+  content: "";
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #737373;
+  margin-left: 0.5rem;
 }
 
 .bottom-header
@@ -149,6 +161,12 @@
 
 .bottom-header .el-button span {
   margin: 0;
+}
+
+@media screen and (max-width: 1199px) {
+  .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1024px) {

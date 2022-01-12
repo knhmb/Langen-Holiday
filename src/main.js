@@ -13,6 +13,8 @@ import Search from "./pages/Search.vue";
 import BookingDetails from "./pages/BookingDetails.vue";
 import Reservation from "./pages/Reservation.vue";
 import TermsAndConditions from "./pages/TermsAndConditions.vue";
+import Payment from "./pages/Payment.vue";
+import ContactUs from "./pages/ContactUs.vue";
 
 import BaseContainer from "./ui/BaseContainer.vue";
 
@@ -27,6 +29,8 @@ const router = createRouter({
     { path: "/booking-details", component: BookingDetails },
     { path: "/reservation", component: Reservation },
     { path: "/terms-and-conditions", component: TermsAndConditions },
+    { path: "/payment", component: Payment },
+    { path: "/contact-us", component: ContactUs },
   ],
 });
 
