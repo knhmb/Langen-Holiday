@@ -1,6 +1,6 @@
 <template>
   <base-container>
-    <h2>Booking <span>Details:</span></h2>
+    <h2>渡假屋 <span>搜尋結果 :</span></h2>
     <el-row justify="space-between">
       <div class="left-section">
         <el-col :sm="24" :lg="5">
@@ -51,13 +51,14 @@ export default {
 <style>
 .search .left-section {
   margin-bottom: 1rem;
+  color: #333333;
 }
 .search h2 {
-  color: orange;
+  color: #fd9a1a;
 }
 
 .search span {
-  color: grey;
+  color: #8d8d8d;
   font-size: 16px;
 }
 
@@ -76,6 +77,7 @@ export default {
 .search .left-section .el-checkbox--default .el-checkbox__label {
   font-size: 14px;
   font-weight: 400;
+  color: #333333;
 }
 
 .search .left-section .el-checkbox .el-checkbox__inner {

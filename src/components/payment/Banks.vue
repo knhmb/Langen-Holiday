@@ -1,19 +1,19 @@
 <template>
   <base-container>
     <div class="banks">
-      <h2>Banks</h2>
+      <h2>付款方式</h2>
       <div class="all-bank">
         <el-row class="single-bank">
           <el-col :span="24">
-            <p class="bank-title">1. Bank</p>
+            <p class="bank-title">1.香港銀行入賬號碼</p>
           </el-col>
           <el-col class="bank-image" :sm="24" :md="8">
             <img src="../../assets/bank-hsbc.png" alt="" />
           </el-col>
           <el-col class="bank-info" :sm="24" :md="16">
-            <p>Name : Lorem ipsum dolor, sit amet</p>
-            <p>Company : Langen Holiday Company</p>
-            <p>Number : 047-880430838</p>
+            <p>銀行名稱：匯豐銀行</p>
+            <p>戶口名稱：LANGEN HOLIDAY COMPANY</p>
+            <p>戶口號碼：047-880430-838</p>
           </el-col>
         </el-row>
         <el-row class="single-bank">
@@ -21,22 +21,22 @@
             <img src="../../assets/bank-bochk.png" alt="" />
           </el-col>
           <el-col :sm="24" class="bank-info" :md="16">
-            <p>Name : Lorem ipsum dolor, sit amet</p>
-            <p>Company : Langen Holiday Company</p>
-            <p>Number : 047-880430838</p>
+            <p>銀行名稱：中國銀行</p>
+            <p>戶口名稱：LANGEN HOLIDAY COMPANY</p>
+            <p>戶口號碼：012-706-1032-8273</p>
           </el-col>
         </el-row>
       </div>
       <div class="all-bank second">
         <el-row class="single-bank">
           <el-col :span="24">
-            <p class="bank-title">2. Bank</p>
+            <p class="bank-title">2.轉數快FPS 或 支付寶 或 PAYME 付款</p>
           </el-col>
           <el-col class="bank-image" :sm="24" :md="8">
             <img src="../../assets/payment-fps.png" alt="" />
           </el-col>
           <el-col class="bank-info" :sm="24" :md="16">
-            <p>ID : 9742909</p>
+            <p>識別碼 ID : 9742909</p>
           </el-col>
         </el-row>
         <el-row class="single-bank">
@@ -44,7 +44,7 @@
             <img src="../../assets/payment-alipay.png" alt="" />
           </el-col>
           <el-col class="bank-info" :sm="24" :md="16">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>如客人使用支付寶電子錢包付款，請先聯絡本公司</p>
           </el-col>
         </el-row>
         <el-row class="single-bank tall">
@@ -52,31 +52,25 @@
             <img src="../../assets/payme-payme.png" alt="" />
           </el-col>
           <el-col class="bank-info payme" :sm="24" :md="16">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>你可以通過PAYME掃一掃付款</p>
+            <img src="https://i.stack.imgur.com/WVxGw.png" alt="" />
           </el-col>
         </el-row>
       </div>
       <div class="all-bank third">
         <el-row class="single-bank">
           <el-col :span="24">
-            <p class="bank-title">3. Bank</p>
+            <p class="bank-title">3.僅在中國境內付款時使用</p>
           </el-col>
           <el-col class="bank-image" :sm="24" :md="8">
             <img src="../../assets/bank-icbc.png" alt="" />
           </el-col>
           <el-col class="bank-info" :sm="24" :md="16">
-            <p>
-              Name: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-            <p>
-              Name: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-            <p>Number : 6222-0236-0200-4507661</p>
+            <p>銀行名稱：中國工商銀行</p>
+            <p>帳戶名稱：歐珮妍</p>
+            <p>戶口號碼：6222-0236-0200-4507661</p>
             <p class="space">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              提示: 於國內任何工商銀行分行辦理入帳手續，款項可即時到帳!!
             </p>
           </el-col>
         </el-row>
@@ -110,8 +104,10 @@
 
 .banks h2 {
   font-size: 24px;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #8d8d8d;
   padding-bottom: 0.5rem;
+  letter-spacing: 4.5px;
+  color: #8d8d8d;
 }
 
 .banks .single-bank {
@@ -125,6 +121,8 @@
 .banks .single-bank .bank-title {
   margin-bottom: 1.5rem;
   margin-top: 1rem;
+  letter-spacing: 3px;
+  color: #8d8d8d;
 }
 
 .banks .single-bank img {
@@ -143,6 +141,8 @@
 
 .banks .single-bank .bank-info p {
   margin-left: 6rem;
+  letter-spacing: 2.2px;
+  color: #8d8d8d;
 }
 
 .banks .single-bank .bank-info::before {
@@ -157,8 +157,12 @@
   content: "";
   position: absolute;
   background-color: black;
-  height: 155px;
+  height: 190px;
   width: 1px;
+}
+
+.banks .single-bank .bank-info.payme img {
+  margin-left: 6rem;
 }
 
 .banks .all-bank.third .single-bank {
@@ -188,7 +192,8 @@
   .banks .single-bank .bank-info::before {
     display: none;
   }
-  .banks .single-bank .bank-info p {
+  .banks .single-bank .bank-info p,
+  .banks .single-bank .bank-info.payme img {
     margin-left: 0;
     margin-top: 0.5rem;
   }

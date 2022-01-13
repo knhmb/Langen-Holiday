@@ -1,42 +1,27 @@
 <template>
-  <el-carousel trigger="click" height="418px" arrow="always">
+  <el-carousel
+    indicator-position="none"
+    trigger="click"
+    height="735px"
+    arrow="always"
+  >
     <el-carousel-item v-for="item in 4" :key="item">
-      <img
-        src="https://image.shutterstock.com/z/stock-vector-editable-template-for-carousel-post-in-social-network-design-background-for-social-media-vector-1847884783.jpg"
-        alt=""
-        class="carousel-img"
-      />
+      <img src="../../assets/img-houseinfo1.jpg" alt="" class="carousel-img" />
     </el-carousel-item>
   </el-carousel>
   <div class="img-collection hidden-md-and-down">
     <el-row :gutter="5">
       <el-col :sm="24" :lg="6">
-        <img
-          src="https://www.italianbark.com/wp-content/uploads/2018/01/hotel-room-design-trends-italianbark-interior-design-blog.jpg"
-          alt=""
-          class="room-imgs"
-        />
+        <img src="../../assets/img-houseinfo2.jpg" alt="" class="room-imgs" />
       </el-col>
       <el-col :sm="24" :lg="6">
-        <img
-          src="https://www.italianbark.com/wp-content/uploads/2018/01/hotel-room-design-trends-italianbark-interior-design-blog.jpg"
-          alt=""
-          class="room-imgs"
-        />
+        <img src="../../assets/img-houseinfo3.jpg" alt="" class="room-imgs" />
       </el-col>
       <el-col :sm="24" :lg="6">
-        <img
-          src="https://www.italianbark.com/wp-content/uploads/2018/01/hotel-room-design-trends-italianbark-interior-design-blog.jpg"
-          alt=""
-          class="room-imgs"
-        />
+        <img src="../../assets/img-houseinfo4.jpg" alt="" class="room-imgs" />
       </el-col>
       <el-col :sm="24" :lg="6">
-        <img
-          src="https://www.italianbark.com/wp-content/uploads/2018/01/hotel-room-design-trends-italianbark-interior-design-blog.jpg"
-          alt=""
-          class="room-imgs"
-        />
+        <img src="../../assets/img-houseinfo5.jpg" alt="" class="room-imgs" />
       </el-col>
     </el-row>
   </div>
@@ -48,8 +33,8 @@
 }
 .booking-details .el-carousel .carousel-img {
   width: 100%;
-  /* height: 100%; */
-  object-fit: contain;
+  height: 100%;
+  /* object-fit: fill; */
 }
 
 .booking-details .el-carousel .el-carousel__arrow {

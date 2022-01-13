@@ -2,7 +2,7 @@
   <section class="top-places">
     <base-container>
       <h1>
-        Top 5 Places
+        TOP 5 超人氣住宿
         <img src="../../assets/icon-top5.png" class="places-icon" alt="" />
       </h1>
     </base-container>
@@ -35,8 +35,8 @@ export default {
   text-align: center;
   margin: 0;
   font-size: 2rem;
-  color: orange;
-  letter-spacing: 0.3rem;
+  color: #fd9a1a;
+  letter-spacing: 9.6px;
   text-transform: uppercase;
   /* display: inline-block; */
   margin-bottom: 4rem;

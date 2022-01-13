@@ -1,10 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px' }">
     <div class="card-img">
-      <img
-        src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-        class="image"
-      />
+      <img :src="image" class="image" />
       <img class="ranks" :src="icon" alt="" />
     </div>
 
@@ -12,7 +9,14 @@
       <el-row>
         <el-col :span="14">
           <span>{{ name }}</span>
-          <span class="small">{{ description }}</span>
+          <span class="small"
+            ><img
+              class="location-icon"
+              src="../../assets/icon-location.png"
+              alt=""
+            />
+            {{ description }}</span
+          >
           <span class="discount">{{ discount }}</span>
           <span class="price">{{ price }}</span>
           <el-rate
@@ -25,8 +29,9 @@
           </el-rate>
         </el-col>
         <el-col :span="10"
-          ><span style="text-align: end; display: block">icon</span></el-col
-        >
+          ><span class="bookmark-icon"
+            ><img @click="toggleBookmark" :src="bookmarkIcon" alt="" /></span
+        ></el-col>
       </el-row>
     </div>
   </el-card>
@@ -42,11 +47,22 @@ export default {
     "rateValue",
     "rateText",
     "icon",
+    "image",
   ],
   data() {
     return {
       value: 4,
+      bookmarkIcon: require("../../assets/icon-bookmark-on.png"),
     };
+  },
+  methods: {
+    toggleBookmark() {
+      if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
+        this.bookmarkIcon = require("../../assets/icon-bookmark-off.png");
+      } else {
+        this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
+      }
+    },
   },
 };
 </script>
@@ -73,10 +89,28 @@ export default {
 
 .places-carousel span {
   display: block;
+  color: #8d8d8d;
+}
+
+.places-carousel .bookmark-icon {
+  text-align: end;
+  display: block;
+}
+
+.places-carousel .location-icon {
+  width: 15px;
+  margin-right: 0.2rem;
+}
+
+.places-carousel .bookmark-icon img {
+  width: 40px;
+  cursor: pointer;
 }
 
 .places-carousel .small {
   font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .places-carousel .discount {

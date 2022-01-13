@@ -146,7 +146,7 @@ export default {
 }
 
 .date-selection .vc-header {
-  background-color: grey;
+  background-color: #8d8d8d;
 }
 
 .date-selection .vc-weeks {
@@ -156,7 +156,7 @@ export default {
 }
 
 .date-selection .vc-weekday {
-  background-color: #c6c6c6;
+  background-color: #e6e6e6;
   color: black;
 }
 
@@ -177,7 +177,7 @@ export default {
 .date-selection .vc-arrows-container.title-center .vc-arrow.is-right {
   position: relative;
   border-radius: 100%;
-  background-color: orange;
+  background-color: #fd9a1a;
   color: #fff;
 }
 

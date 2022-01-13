@@ -10,31 +10,31 @@
           mode="horizontal"
         >
           <el-sub-menu index="1">
-            <template #title>Workspace</template>
+            <template #title>長洲渡假屋</template>
             <el-menu-item index="1-1">item one</el-menu-item>
             <el-menu-item index="1-2">item two</el-menu-item>
             <el-menu-item index="1-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
-            <template #title>Workspace</template>
+            <template #title>大嶼山渡假屋</template>
             <el-menu-item index="2-1">item one</el-menu-item>
             <el-menu-item index="2-2">item two</el-menu-item>
             <el-menu-item index="2-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="3">
-            <template #title>Workspace</template>
+            <template #title>南丫島渡假屋</template>
             <el-menu-item index="3-1">item one</el-menu-item>
             <el-menu-item index="3-2">item two</el-menu-item>
             <el-menu-item index="3-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="4">
-            <template #title>Workspace</template>
+            <template #title>精選酒店推介</template>
             <el-menu-item index="4-1">item one</el-menu-item>
             <el-menu-item index="4-2">item two</el-menu-item>
             <el-menu-item index="4-3">item three</el-menu-item>
           </el-sub-menu>
-          <el-sub-menu index="5">
-            <template #title>Workspace</template>
+          <el-sub-menu class="last-sub-menu" index="5">
+            <template #title>日間/晚間住宿</template>
             <el-menu-item index="5-1">item one</el-menu-item>
             <el-menu-item index="5-2">item two</el-menu-item>
             <el-menu-item index="5-3">item three</el-menu-item>
@@ -49,31 +49,31 @@
           mode="horizontal"
         >
           <el-sub-menu index="1">
-            <template #title>Workspace</template>
+            <template #title>長洲渡假屋</template>
             <el-menu-item index="1-1">item one</el-menu-item>
             <el-menu-item index="1-2">item two</el-menu-item>
             <el-menu-item index="1-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
-            <template #title>Workspace</template>
+            <template #title>大嶼山渡假屋</template>
             <el-menu-item index="2-1">item one</el-menu-item>
             <el-menu-item index="2-2">item two</el-menu-item>
             <el-menu-item index="2-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="3">
-            <template #title>Workspace</template>
+            <template #title>南丫島渡假屋</template>
             <el-menu-item index="3-1">item one</el-menu-item>
             <el-menu-item index="3-2">item two</el-menu-item>
             <el-menu-item index="3-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="4">
-            <template #title>Workspace</template>
+            <template #title>精選酒店推介</template>
             <el-menu-item index="4-1">item one</el-menu-item>
             <el-menu-item index="4-2">item two</el-menu-item>
             <el-menu-item index="4-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="5">
-            <template #title>Workspace</template>
+            <template #title>日間/晚間住宿</template>
             <el-menu-item index="5-1">item one</el-menu-item>
             <el-menu-item index="5-2">item two</el-menu-item>
             <el-menu-item index="5-3">item three</el-menu-item>
@@ -81,7 +81,7 @@
         </el-menu>
       </el-col>
       <el-col :sm="24" :lg="2">
-        <el-button>Login</el-button>
+        <el-button>登入</el-button>
       </el-col>
     </el-row>
   </div>
@@ -122,6 +122,7 @@
 
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
   font-size: 12px;
+  color: #8d8d8d;
   /* padding: 0; */
 }
 
@@ -150,8 +151,8 @@
 
 .bottom-header .el-button {
   width: 100%;
-  background-color: orange;
-  border-color: orange;
+  background-color: #fd9a1a;
+  border-color: #fd9a1a;
   color: #fff;
 }
 
@@ -164,9 +165,9 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
+  /* .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
     display: none;
-  }
+  } */
 }
 
 @media screen and (max-width: 1024px) {
@@ -197,6 +198,22 @@
 
   .bottom-header .el-button {
     margin-top: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
+    padding: 0;
+    padding-right: 0.17rem;
+    /* margin-right: 3px; */
+  }
+
+  .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
+    content: "";
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #737373;
+    /* margin-left: 0.5rem; */
   }
 }
 </style>

@@ -2,18 +2,18 @@
   <section class="footer">
     <base-container>
       <div class="footer-content">
-        <el-row :gutter="270">
-          <el-col :sm="24" :lg="8">
-            <span>About</span>
-            <span>About</span>
-            <span>About</span>
-            <span>About</span>
+        <el-row justify="space-between">
+          <el-col :sm="24" :lg="11">
+            <span>聯絡我們</span>
+            <span>付款方法</span>
+            <span>條例與細則</span>
+            <span>成為合作伙伴</span>
           </el-col>
-          <el-col :sm="24" :lg="8">
+          <el-col :sm="24" :lg="6">
             <span>About</span>
             <img class="payment" src="../assets/footer-payment.png" alt="" />
           </el-col>
-          <el-col :sm="24" :lg="8">
+          <el-col :sm="24" :lg="5">
             <span>About</span>
             <img
               class="social-media"
@@ -21,7 +21,7 @@
               alt=""
             />
           </el-col>
-          <el-col :sm="24" :lg="8">
+          <el-col :sm="24" :lg="5">
             <p>Copyright &copy; 2005-2021 About All Right Reserve</p>
           </el-col>
         </el-row>
@@ -43,8 +43,9 @@
 }
 
 .footer-content span {
-  color: #fff;
-  margin-right: 2rem;
+  margin-right: 1rem;
+  letter-spacing: 4.4px;
+  color: #ffffff;
 }
 
 .footer-content .payment {
@@ -75,7 +76,7 @@
 
 @media screen and (max-width: 768px) {
   .footer-content span {
-    font-size: 12px;
+    font-size: 8px;
   }
 }
 </style>

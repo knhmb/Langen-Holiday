@@ -7,62 +7,78 @@
       />
       <div style="padding: 14px">
         <div class="title">
-          <p>Hotel Bedroom</p>
+          <p>白沙灣渡假酒店</p>
         </div>
         <div class="days-of-stay">
           <el-row>
             <el-col :span="8">
-              <p>Days:</p>
+              <p class="info">人數:</p>
             </el-col>
             <el-col :span="16">
-              <p>5</p>
+              <p class="data">5</p>
             </el-col>
             <el-col :span="8">
-              <p>Days:</p>
+              <p class="info">寵物:</p>
             </el-col>
             <el-col :span="16">
-              <p>5</p>
+              <p class="data">2</p>
             </el-col>
             <el-col :span="8">
-              <p>Date:</p>
+              <p class="info">入住日期:</p>
             </el-col>
             <el-col :span="16">
-              <p>2021/12/03 - 2021/12/31</p>
+              <p class="data">2021年5月22日 - 2021年5月23日</p>
             </el-col>
           </el-row>
         </div>
         <div class="price-single">
           <el-row>
             <el-col :span="8">
-              <p>Number:</p>
+              <p class="info">原價:</p>
             </el-col>
             <el-col :span="16">
-              <p>2</p>
+              <p class="data">HK$1280.00</p>
             </el-col>
             <el-col :span="8">
-              <p>Price:</p>
+              <p class="info">折扣:</p>
             </el-col>
             <el-col :span="16">
-              <p>HK$200.00</p>
+              <p class="data">HK$0.00</p>
+            </el-col>
+          </el-row>
+        </div>
+        <div class="price-per-item">
+          <el-row>
+            <el-col :span="8">
+              <p class="info">寵物留宿:</p>
+            </el-col>
+            <el-col :span="16">
+              <p class="data">2</p>
+            </el-col>
+            <el-col :span="8">
+              <p class="info">寵物留宿附加費:</p>
+            </el-col>
+            <el-col :span="16">
+              <p class="data">HK$200.00</p>
             </el-col>
           </el-row>
         </div>
         <div class="total-price">
           <el-row>
             <el-col :span="12">
-              <p>Number:</p>
+              <p class="info">總價格(已包含稅款及服務費):</p>
             </el-col>
             <el-col :span="10">
               <p class="end">HK$1480.00</p>
             </el-col>
             <el-col :span="12">
-              <p>Price:</p>
+              <p class="info">現需繳付:</p>
             </el-col>
             <el-col :span="10">
               <p class="end">HK$1480.00</p>
             </el-col>
             <el-col :span="12">
-              <p>Price:</p>
+              <p class="info">入住時需繳付:</p>
             </el-col>
             <el-col :span="10">
               <p class="end">HK$0.00</p>
@@ -72,10 +88,10 @@
         <div class="tax">
           <el-row>
             <el-col :span="8">
-              <p>Tax:</p>
+              <p class="info">按金:</p>
             </el-col>
             <el-col :span="16">
-              <p>HK$200.00</p>
+              <p class="data">HK$200.00</p>
             </el-col>
           </el-row>
         </div>
@@ -83,13 +99,13 @@
     </el-card>
     <el-row>
       <el-col>
-        <label>Name:</label>
+        <label class="input-label">折扣代碼:</label>
         <el-input size="large"></el-input>
       </el-col>
     </el-row>
     <el-row>
       <el-col>
-        <el-button>Done</el-button>
+        <el-button>使用折扣代碼</el-button>
       </el-col>
     </el-row>
   </div>
@@ -106,9 +122,22 @@
   margin-bottom: 0.3rem;
 }
 
+.reservation .right-section .info,
+.reservation .right-section .data {
+  color: #8d8d8d;
+}
+
+.reservation .right-section .info {
+  letter-spacing: 2.2px;
+}
+
+.reservation .right-section .data {
+  letter-spacing: 1.1px;
+}
+
 .reservation .right-section .el-input {
-  box-shadow: 0px 2px 5px #c6c6c6;
-  border-radius: 2px;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .reservation .right-section .el-input .el-input__inner {
@@ -128,20 +157,23 @@
 .reservation .right-section .el-card .title,
 .reservation .right-section .el-card .days-of-stay,
 .reservation .right-section .el-card .price-single,
-.reservation .right-section .el-card .total-price {
-  border-bottom: 1px solid #999;
+.reservation .right-section .el-card .total-price,
+.reservation .right-section .el-card .price-per-item {
+  border-bottom: 1px solid #8d8d8d;
   padding-bottom: 1rem;
 }
 
 .reservation .right-section .el-card .title p {
   font-size: 24px;
-  color: #999;
+  letter-spacing: 3.3px;
+  color: #8d8d8d;
 }
 
 .reservation .right-section .el-card .days-of-stay,
 .reservation .right-section .el-card .price-single,
 .reservation .right-section .el-card .total-price,
-.reservation .right-section .el-card .tax {
+.reservation .right-section .el-card .tax,
+.reservation .right-section .el-card .price-per-item {
   padding-top: 1rem;
 }
 
@@ -152,9 +184,10 @@
 .reservation .right-section .el-card .days-of-stay p,
 .reservation .right-section .el-card .price-single p,
 .reservation .right-section .el-card .total-price p,
-.reservation .right-section .el-card .tax p {
+.reservation .right-section .el-card .tax p,
+.reservation .right-section .el-card .price-per-item {
   /* font-size: 14px; */
-  color: #999;
+  color: #8d8d8d;
 }
 
 .reservation .right-section .el-card .total-price .el-col {
@@ -162,17 +195,25 @@
 }
 
 .reservation .right-section .el-card .total-price .end {
-  color: orange;
+  letter-spacing: 0px;
+  color: #fd9a1a;
   font-size: 24px;
   text-align: end;
 }
 
 .reservation .right-section .el-button--default {
-  background-color: orange;
-  border-color: orange;
+  background-color: #fd9a1a;
+  border-color: #fd9a1a;
   color: #fff;
   margin-top: 0.5rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  letter-spacing: 2.2px;
+  border-radius: 5px;
+}
+
+.reservation .input-label {
+  letter-spacing: 2.2px;
+  color: #8d8d8d;
 }
 </style>

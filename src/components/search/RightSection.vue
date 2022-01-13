@@ -7,43 +7,43 @@
           :class="{ selected: isActive === '1' }"
           class="pill"
         >
-          option
+          樂程推薦
         </div>
       </el-col>
-      <el-col :sm="12" :md="3" :lg="3">
+      <el-col :sm="12" :md="3" :lg="4">
         <div
           @click="setOption('2')"
           :class="{ selected: isActive === '2' }"
           class="pill"
         >
-          option
+          價錢 - 由低至高
         </div>
       </el-col>
-      <el-col :sm="12" :md="3" :lg="3">
+      <el-col :sm="12" :md="3" :lg="4">
         <div
           @click="setOption('3')"
           :class="{ selected: isActive === '3' }"
           class="pill"
         >
-          option
+          價錢 - 由高至低
         </div>
       </el-col>
-      <el-col :sm="12" :md="3" :lg="3">
+      <el-col :sm="12" :md="3" :lg="4">
         <div
           @click="setOption('4')"
           :class="{ selected: isActive === '4' }"
           class="pill"
         >
-          option
+          評價 - 由低至高
         </div>
       </el-col>
-      <el-col :sm="12" :md="3" :lg="3">
+      <el-col :sm="12" :md="3" :lg="4">
         <div
           @click="setOption('5')"
           :class="{ selected: isActive === '5' }"
           class="pill"
         >
-          option
+          評價 - 由高至低
         </div>
       </el-col>
     </el-row>
@@ -62,6 +62,7 @@
           :price="service.price"
           :rate-value="service.rateValue"
           :rate-text="service.rateText"
+          :image="service.image"
         />
       </el-col>
     </el-row>
@@ -92,8 +93,9 @@ export default {
 
 <style scoped>
 .pill {
-  background-color: #eee;
-  color: rgb(0, 0, 0);
+  background-color: #f7f7f7;
+  color: #8d8d8d;
+  font-size: 14px;
   text-align: center;
   border-radius: 50px;
   padding: 3px 0 6px 0;
@@ -103,12 +105,12 @@ export default {
 }
 
 .pill:hover {
-  background-color: orange;
+  background-color: #fd9a1a;
   color: #fff;
 }
 
 .pill.selected {
-  background-color: orange;
+  background-color: #fd9a1a;
   color: #fff;
 }
 </style>

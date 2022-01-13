@@ -14,13 +14,13 @@
           mode="horizontal"
         >
           <el-sub-menu index="1">
-            <template #title>Workspace</template>
+            <template #title>熱線電話</template>
             <el-menu-item index="1-1">item one</el-menu-item>
             <el-menu-item index="1-2">item two</el-menu-item>
             <el-menu-item index="1-3">item three</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
-            <template #title>Workspace</template>
+            <template #title>聯絡與付款</template>
             <el-menu-item index="2-1">item one</el-menu-item>
             <el-menu-item index="2-2">item two</el-menu-item>
             <el-menu-item index="2-3">item three</el-menu-item>
@@ -32,8 +32,8 @@
               alt=""
             />
 
-            <span>WhatsApp:</span>
-            <span class="number">+852 5396 2553</span>
+            <span>WhatsApp查詢: +852 5396 2553</span>
+            <!-- <span class="number">+852 5396 2553</span> -->
           </div>
         </el-menu>
       </el-col>
@@ -57,6 +57,7 @@
 }
 .top-header {
   padding: 2rem 8rem 0 8rem;
+  color: #8d8d8d;
 }
 
 /* .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
@@ -100,6 +101,7 @@
 .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
   font-size: 12px;
   position: relative;
+  color: #8d8d8d;
   /* margin-right: 0.5rem; */
 }
 

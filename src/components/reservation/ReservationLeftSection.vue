@@ -3,12 +3,9 @@
     <el-row :gutter="70">
       <el-col :sm="24" :lg="12">
         <div class="left-section">
-          <h1>Reservation</h1>
+          <h1>預訂查詢</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-            dolorem eaque repellendus quas soluta aliquam eligendi assumenda
-            similique, perspiciatis ipsa, iste laudantium adipisci ipsam ducimus
-            aut eos consectetur minima aliquid!
+            讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有，片衣代可度和全農不嚴分，慢構醫有：推少過它自，路具經上多然我直子名對空成沒一問論處客完環人以告節以可的……好出點之就會親工。
           </p>
           <Form />
         </div>
@@ -40,12 +37,14 @@ export default {
 .reservation .left-section h1 {
   margin-bottom: 1rem;
   font-size: 32px;
-  color: #999;
+  letter-spacing: 6.6px;
+  color: #8d8d8d;
 }
 
 .reservation .left-section p {
-  color: #999;
   text-align: justify;
   margin-bottom: 2rem;
+  letter-spacing: 4.6px;
+  color: #8d8d8d;
 }
 </style>

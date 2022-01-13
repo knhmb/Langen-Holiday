@@ -1,44 +1,63 @@
 <template>
   <base-container>
     <div class="service-detail">
-      <h3>Service</h3>
+      <h3>基本資料</h3>
       <el-row :gutter="30">
         <el-col :sm="24" :lg="12">
           <el-row :gutter="30" class="service-info">
             <el-col :span="12">
               <div class="separation">
-                <span>Type:</span>
-                <span>Test</span>
+                <span>地區:</span>
+                <span
+                  ><img
+                    style="width: 15px"
+                    src="../../assets/icon-location.png"
+                    alt=""
+                  />
+                  西貢</span
+                >
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>Type:</span>
-                <span>Test</span>
+                <span>樓層:</span>
+                <span>2</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>Type:</span>
-                <span>Test</span>
+                <span>服務類別:</span>
+                <span>渡假屋</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>Type:</span>
-                <span>Test</span>
+                <span>景觀:</span>
+                <span>海景</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>Type:</span>
-                <span>Test</span>
+                <span>面積:</span>
+                <span>400 soft</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>Type:</span>
-                <span>Test</span>
+                <span>入住時間:</span>
+                <span>15:00</span>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="separation no-border">
+                <span>可住人數:</span>
+                <span>4</span>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="separation no-border">
+                <span>退房時間:</span>
+                <span>12:00</span>
               </div>
             </el-col>
           </el-row>
@@ -71,7 +90,8 @@ export default {
 .service-detail h3 {
   font-size: 24px;
   margin-bottom: 1rem;
-  color: orange;
+  letter-spacing: 4px;
+  color: #fd9a1a;
 }
 
 .service-detail .service-info {
@@ -82,9 +102,14 @@ export default {
   justify-content: space-between;
   border-bottom: 1px solid #aaa;
   padding-bottom: 0.3rem;
-  color: #aaa;
   font-size: 14px;
   margin-bottom: 0.5rem;
+  letter-spacing: 2.2px;
+  color: #8d8d8d;
+}
+
+.service-detail .separation.no-border {
+  border-bottom: none;
 }
 
 @media screen and (max-width: 768px) {

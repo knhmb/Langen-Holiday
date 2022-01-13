@@ -1,10 +1,10 @@
 <template>
   <div class="form">
-    <h2>Form Details</h2>
+    <h2>填寫你的詳細資料</h2>
     <el-form label-position="top" ref="formRef" label-width="120px">
       <el-row :gutter="10">
         <el-col :sm="24" :lg="12">
-          <el-form-item label="First Name:">
+          <el-form-item label="中文姓名 (與證件相同)：">
             <el-input
               size="large"
               v-model="input3"
@@ -26,7 +26,7 @@
           </el-form-item>
         </el-col>
         <el-col :sm="24" :lg="12">
-          <el-form-item label="First Name:">
+          <el-form-item label="英文姓名 (與證件相同)：">
             <el-input
               size="large"
               v-model="input3"
@@ -50,16 +50,16 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-form-item label="Name:">
+          <el-form-item label="電郵地址：">
             <el-input size="large"></el-input>
           </el-form-item>
-          <el-form-item label="Name:">
+          <el-form-item label="再次輸入電郵地址：">
             <el-input size="large"></el-input>
           </el-form-item>
-          <el-form-item label="Name:">
+          <el-form-item label="電話號碼：">
             <el-input size="large"></el-input>
           </el-form-item>
-          <el-form-item label="Name:">
+          <el-form-item label="特別要求：">
             <el-input type="textarea" rows="8"></el-input>
           </el-form-item>
         </el-col>
@@ -80,14 +80,20 @@ export default {
 </script>
 
 <style>
+.reservation .left-section .form h2 {
+  letter-spacing: 4.5px;
+  color: #8d8d8d;
+}
+
 .reservation .left-section .form .el-form .el-form-item__label {
   padding: 0;
-  color: #999;
+  letter-spacing: 2.2px;
+  color: #8d8d8d;
 }
 
 .reservation .left-section .form .el-form .el-form-item__content {
-  box-shadow: 0px 2px 5px #c6c6c6;
-  border-radius: 2px;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .reservation .left-section .form .el-form .el-input-group__prepend,

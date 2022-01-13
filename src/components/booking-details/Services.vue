@@ -1,9 +1,9 @@
 <template>
   <base-container>
     <div class="services-provided">
-      <h2>Services</h2>
+      <h2>設施</h2>
       <div>
-        <p>item</p>
+        <p>免費</p>
         <el-row>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
@@ -43,7 +43,7 @@
         </el-row>
       </div>
       <div class="not-provided-services">
-        <p>item</p>
+        <p>免費</p>
         <el-row>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-cross.png" alt="" />
@@ -58,7 +58,7 @@
         </el-row>
       </div>
       <div class="beds">
-        <p>Beds</p>
+        <p>床</p>
         <el-row>
           <el-col :sm="24" :md="3" :lg="3" class="items">
             <span>Bed x1</span>
@@ -75,11 +75,14 @@
   margin-top: 2rem;
   border-bottom: 1px solid #aaa;
   padding-bottom: 2rem;
+  letter-spacing: 2.2px;
+  color: #8d8d8d;
 }
 
 .services-provided h2 {
-  color: orange;
   margin-bottom: 0.5rem;
+  letter-spacing: 4px;
+  color: #fd9a1a;
 }
 
 .services-provided p {
@@ -108,7 +111,8 @@
 
 .services-provided .beds p {
   margin-top: 2rem;
-  color: orange;
+  letter-spacing: 4px;
+  color: #fd9a1a;
   font-size: 20px;
 }
 </style>

@@ -1,15 +1,18 @@
 <template>
   <base-container>
     <div class="comment">
-      <h2>Comment</h2>
+      <h2>最新評價</h2>
       <el-row
         ><el-col class="alert" :span="23">
           <el-alert :closable="false" type="warning">
-            <el-rate :colors="colors" v-model="value" disabled></el-rate>
+            <el-rate
+              disabled-void-color="#D1D1D1"
+              :colors="colors"
+              v-model="value"
+              disabled
+            ></el-rate>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Assumenda dolores repudiandae est quos sit temporibus architecto
-              provident
+              位置方便，周邊餐館很多；交通都非常方便，可以步行到達；管理專業，居住退房都很順利
             </p>
             <img class="img-alert" src="../../assets/icon-comment.png" alt="" />
           </el-alert>
@@ -17,7 +20,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button>Review</el-button>
+          <el-button>顯示更多</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -34,7 +37,7 @@ export default {
   data() {
     return {
       value: 4,
-      colors: ["orange", "orange", "orange"],
+      colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
     };
   },
 };
@@ -47,7 +50,8 @@ export default {
 }
 
 .comment h2 {
-  color: orange;
+  letter-spacing: 4px;
+  color: #fd9a1a;
   margin-bottom: 1.5rem;
 }
 
@@ -58,8 +62,14 @@ export default {
   position: static;
 }
 
+.comment .el-alert .el-rate .el-rate__icon {
+  margin: 0;
+}
+
 .comment .el-alert p {
   font-size: 18px;
+  letter-spacing: 5.6px;
+  color: #8d8d8d;
 }
 
 .comment .el-row .el-col {
@@ -84,13 +94,14 @@ export default {
 }
 
 .comment .el-button--default {
-  background-color: darkred;
-  border-color: orange;
-  border-radius: 2px;
+  background-color: #b00100;
+  border-color: #fd9a1a;
+  border-radius: 5px;
   color: #fff;
   margin-top: 2rem;
   margin-bottom: 1rem;
   padding: 1rem 1.5rem;
+  letter-spacing: 1.4px;
 }
 
 .comment .img-cs {
@@ -123,14 +134,14 @@ export default {
 @media screen and (max-width: 414px) {
   .comment .el-row .alert::after {
     right: 8.8%;
-    top: 36%;
+    top: 32%;
   }
 }
 
 @media screen and (max-width: 375px) {
   .comment .el-row .alert::after {
     right: 9.8%;
-    top: 40%;
+    top: 36%;
   }
 }
 </style>

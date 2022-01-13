@@ -3,7 +3,7 @@
     <base-container>
       <el-row>
         <el-col class="booking-title">
-          <h1>Book</h1>
+          <h1>搜尋住宿優惠</h1>
           <img
             class="search-icon"
             src="../../assets/icon-search-jetso.png"
@@ -13,17 +13,17 @@
       </el-row>
       <el-row>
         <el-col class="form-control" :span="24">
-          <el-input v-model="input" type="text" placeholder="Test" />
+          <el-input v-model="input" type="text" placeholder="你要去哪裡？" />
           <img class="place-icon" src="../../assets/icon-place.png" alt="" />
         </el-col>
       </el-row>
       <el-row :gutter="3">
-        <el-col class="form-control" :sm="24" :lg="16">
+        <el-col class="form-control" :sm="24" :lg="15">
           <el-input
             class="calendar-input"
             v-model="input"
             type="text"
-            placeholder="Test"
+            placeholder="入住 2021年5月22日 (星期六) - 退房 2021年5月23日 (星期日)"
           />
           <img
             class="calendar-icon"
@@ -31,9 +31,12 @@
             alt=""
           />
         </el-col>
-        <el-col :sm="24" :lg="8">
+        <el-col :sm="24" :lg="9">
           <div class="select-input">
-            <el-select v-model="value" placeholder="Select">
+            <el-select
+              v-model="value"
+              placeholder="2位成人・沒有小孩入住・沒有寵物・1間房"
+            >
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -52,7 +55,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button>Book</el-button>
+          <el-button>搜尋</el-button>
         </el-col></el-row
       >
     </base-container>
@@ -71,7 +74,7 @@ export default {
 
 .<style>
 .booking {
-  background-color: orange;
+  background-color: #fd9a1a;
   margin-top: -0.6rem;
   padding: 4rem 0;
   /* overflow-x: hidden; */
@@ -87,6 +90,7 @@ export default {
   margin: 0;
   font-size: 32px;
   color: #fff;
+  letter-spacing: 9.6px;
 }
 
 .booking .booking-title {
@@ -104,10 +108,10 @@ export default {
 }
 
 .booking .calendar-input::after {
-  content: "test";
+  content: "1晚";
   position: absolute;
   color: #fff;
-  background-color: orange;
+  background-color: #fd9a1a;
   right: 5%;
   top: 50%;
   transform: translateY(-50%);
@@ -160,5 +164,7 @@ export default {
   padding: 1rem 4rem;
   border-radius: 0;
   margin-top: 1rem;
+  letter-spacing: 1.4px;
+  color: #8d8d8d;
 }
 </style>

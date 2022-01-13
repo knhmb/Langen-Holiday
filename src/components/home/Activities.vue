@@ -1,83 +1,65 @@
 <template>
   <section class="activities">
     <base-container>
-      <h1>Activites</h1>
+      <h1>隨你鍾意</h1>
       <el-row :gutter="30">
         <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
-              <img
-                src="https://media.istockphoto.com/photos/tropical-beach-background-picture-id1145474071?k=20&m=1145474071&s=612x612&w=0&h=toGQ0gUXiWY_80bra65p56ZMLJty17qMdwcFnenQKEk="
-                alt=""
-              />
+              <img src="../../assets/img-service1.jpg" alt="" />
             </div>
             <div class="card-text">
-              <p>Join Us</p>
+              <p>簡單煮食</p>
             </div>
           </div>
         </el-col>
         <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
-              <img
-                src="https://media.istockphoto.com/photos/tropical-beach-background-picture-id1145474071?k=20&m=1145474071&s=612x612&w=0&h=toGQ0gUXiWY_80bra65p56ZMLJty17qMdwcFnenQKEk="
-                alt=""
-              />
+              <img src="../../assets/img-service2.jpg" alt="" />
             </div>
             <div class="card-text">
-              <p>Join Us</p>
+              <p>簡單煮食</p>
             </div>
           </div>
         </el-col>
         <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
-              <img
-                src="https://media.istockphoto.com/photos/tropical-beach-background-picture-id1145474071?k=20&m=1145474071&s=612x612&w=0&h=toGQ0gUXiWY_80bra65p56ZMLJty17qMdwcFnenQKEk="
-                alt=""
-              />
+              <img src="../../assets/img-service3.jpg" alt="" />
             </div>
             <div class="card-text">
-              <p>Join Us</p>
+              <p>簡單煮食</p>
             </div>
           </div>
         </el-col>
         <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
-              <img
-                src="https://media.istockphoto.com/photos/tropical-beach-background-picture-id1145474071?k=20&m=1145474071&s=612x612&w=0&h=toGQ0gUXiWY_80bra65p56ZMLJty17qMdwcFnenQKEk="
-                alt=""
-              />
+              <img src="../../assets/img-service4.jpg" alt="" />
             </div>
             <div class="card-text">
-              <p>Join Us</p>
+              <p>簡單煮食</p>
             </div>
           </div>
         </el-col>
         <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
-              <img
-                src="https://media.istockphoto.com/photos/tropical-beach-background-picture-id1145474071?k=20&m=1145474071&s=612x612&w=0&h=toGQ0gUXiWY_80bra65p56ZMLJty17qMdwcFnenQKEk="
-                alt=""
-              />
+              <img src="../../assets/img-service5.jpg" alt="" />
             </div>
             <div class="card-text">
-              <p>Join Us</p>
+              <p>簡單煮食</p>
             </div>
           </div>
         </el-col>
         <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
-              <img
-                src="https://media.istockphoto.com/photos/tropical-beach-background-picture-id1145474071?k=20&m=1145474071&s=612x612&w=0&h=toGQ0gUXiWY_80bra65p56ZMLJty17qMdwcFnenQKEk="
-                alt=""
-              />
+              <img src="../../assets/img-service6.jpg" alt="" />
             </div>
             <div class="card-text">
-              <p>Join Us</p>
+              <p>簡單煮食</p>
             </div>
           </div>
         </el-col>
@@ -92,7 +74,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   padding-top: 6rem;
-  padding-bottom: 3rem;
+  padding-bottom: 4.5rem;
   margin-top: -8.9rem;
 }
 
@@ -100,7 +82,7 @@
   text-align: center;
   margin: 0;
   font-size: 2rem;
-  color: orange;
+  color: #fd9a1a;
   letter-spacing: 0.3rem;
   text-transform: uppercase;
   /* display: inline-block; */
@@ -131,7 +113,7 @@
 }
 
 .activities .card-text {
-  background-color: #ffd800;
+  background-color: #fccb24;
   margin-top: -5px;
   padding: 0.5rem 0;
   border-radius: 0 0 4px 4px;

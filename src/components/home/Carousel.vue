@@ -37,6 +37,9 @@
   transform: translate(-50%, -50%);
   text-transform: uppercase;
   text-align: center;
+  letter-spacing: 0px;
+  text-shadow: 0px 3px 6px #00000029;
+  opacity: 1;
 }
 
 .carousel .el-carousel__arrow.el-carousel__arrow--left,

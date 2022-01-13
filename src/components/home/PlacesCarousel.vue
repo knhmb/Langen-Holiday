@@ -18,6 +18,7 @@
                 :rate-value="service.rateValue"
                 :rate-text="service.rateText"
                 :icon="service.icon"
+                :image="service.image"
               />
             </el-col>
           </el-row>
@@ -43,6 +44,7 @@
                 :rate-value="service.rateValue"
                 :rate-text="service.rateText"
                 :icon="service.icon"
+                :image="service.image"
               />
             </el-col>
           </el-row>
@@ -74,33 +76,36 @@ export default {
       services: [
         {
           id: 1,
-          name: "Yummy hamburger",
-          description: "Burger",
+          name: "白沙灣渡假酒店",
+          description: "西貢",
           discount: "HK560",
           price: "HK500",
           rateValue: 4,
-          rateText: "62 points",
+          rateText: "62 則評語",
           icon: require("../../assets/icon-rank1.png"),
+          image: require("../../assets/img-house1.jpg"),
         },
         {
           id: 2,
-          name: "Yummy hamburger",
-          description: "Burger",
+          name: "沙田渡假酒店",
+          description: "沙田",
           discount: "HK560",
           price: "HK500",
           rateValue: 4,
-          rateText: "62 points",
+          rateText: "62 則評語",
           icon: require("../../assets/icon-rank2.png"),
+          image: require("../../assets/img-house2.jpg"),
         },
         {
           id: 3,
-          name: "Yummy hamburger",
-          description: "Burger",
+          name: "馬𩣑山酒店",
+          description: "馬𩣑山",
           discount: "HK560",
           price: "HK500",
           rateValue: 4,
-          rateText: "62 points",
+          rateText: "62 則評語",
           icon: require("../../assets/icon-rank3.png"),
+          image: require("../../assets/img-house3.jpg"),
         },
       ],
     };
@@ -131,7 +136,7 @@ export default {
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--left,
 .places-carousel .el-carousel__arrow.el-carousel__arrow--right {
-  background-color: orange;
+  background-color: #fd9a1a;
 }
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--left {

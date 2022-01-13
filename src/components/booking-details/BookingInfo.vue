@@ -2,24 +2,31 @@
   <base-container>
     <div class="booking-info">
       <el-row class="heading">
-        <el-col :sm="24" :md="4" :lg="4">
-          <h1>Details</h1>
+        <el-col :sm="24" :md="4" :lg="7">
+          <h1>白沙灣渡假酒店</h1>
         </el-col>
-        <el-col :sm="24" :md="17" :lg="17">
+        <el-col :sm="24" :md="17" :lg="14">
           <el-rate
             v-model="value"
             disabled
             show-score
+            :colors="colors"
             text-color="#c6c6c6"
-            score-template="{value} points"
+            score-template="{value} 則評語"
           >
           </el-rate>
         </el-col>
         <el-col :sm="3" :md="3" :lg="3">
-          <el-button>Save</el-button>
+          <el-button
+            >加入收藏
+            <img
+              class="icon-bookmark"
+              src="../../assets/icon-bookmark-off.png"
+              alt=""
+          /></el-button>
         </el-col>
         <el-col>
-          <p class="price">HK$500</p>
+          <p class="price">HK$500 <span>起</span></p>
         </el-col>
       </el-row>
     </div>
@@ -32,7 +39,8 @@ import { ref } from "vue";
 export default {
   setup() {
     const value = ref(4);
-    return { value };
+    const colors = ref(["#FD9A1A", "#FD9A1A", "#FD9A1A"]);
+    return { value, colors };
   },
 };
 </script>
@@ -46,14 +54,20 @@ export default {
 
 .booking-info h1 {
   font-size: 40px;
-  color: #aaa;
+  color: #8d8d8d;
 }
 
 .booking-info .el-button--default {
-  background-color: orange;
+  background-color: #fd9a1a;
   color: #fff;
-  border-color: orange;
+  border-color: #fd9a1a;
   width: 100%;
+}
+
+.booking-info .icon-bookmark {
+  width: 30px;
+  position: absolute;
+  right: 5px;
 }
 
 .booking-info .heading {
@@ -71,8 +85,12 @@ export default {
 
 .booking-info .price {
   font-size: 30px;
-  color: #aaa;
+  color: #8d8d8d;
   margin-top: 0.5rem;
+}
+
+.booking-info .price span {
+  font-size: 12px;
 }
 
 @media screen and (max-width: 1024px) {
