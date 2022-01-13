@@ -83,6 +83,7 @@ export default {
 .places-carousel .image {
   width: 100%;
   border-radius: 4px;
+  box-shadow: 0px 3px 6px #00000029;
   /* padding-top: 1rem;
   padding-right: 2rem; */
 }

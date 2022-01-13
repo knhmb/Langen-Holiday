@@ -180,45 +180,45 @@ export default {
   margin-top: 1rem;
 }
 
-.contact-us-list {
+.reservation .contact-us-list {
   position: absolute;
   right: 0;
   top: -10.5rem;
   max-width: 300px;
 }
 
-.contact-us-list .header {
+.reservation .contact-us-list .header {
   background-color: #fd9a1a;
   padding: 6px 12px 6px 12px;
   border-radius: 5px 5px 0px 0px;
 }
 
-.contact-us-list .header .close {
+.reservation .contact-us-list .header .close {
   text-align: end;
 }
 
-.contact-us-list .header .close .close-icon {
+.reservation .contact-us-list .header .close .close-icon {
   width: 15px;
   cursor: pointer;
 }
 
-.contact-us-list .body {
+.reservation .contact-us-list .body {
   padding: 12px;
   border: 1px solid #eee;
   background-color: #fff;
 }
 
-.contact-us-list .body .grey {
+.reservation .contact-us-list .body .grey {
   background-color: #eaeaea;
   padding: 8px;
   margin-bottom: 1rem;
 }
 
-.contact-us-list .body .grey img {
+.reservation .contact-us-list .body .grey img {
   width: 50px;
 }
 
-.contact-us-list .body .grey p {
+.reservation .contact-us-list .body .grey p {
   margin: 0;
   color: #8d8d8d;
   padding: 0;

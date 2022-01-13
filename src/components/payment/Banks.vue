@@ -53,7 +53,7 @@
           </el-col>
           <el-col class="bank-info payme" :sm="24" :md="16">
             <p>你可以通過PAYME掃一掃付款</p>
-            <img src="https://i.stack.imgur.com/WVxGw.png" alt="" />
+            <img src="../../assets/Payme-qr-code.jpeg" alt="" />
           </el-col>
         </el-row>
       </div>
@@ -75,10 +75,81 @@
           </el-col>
         </el-row>
       </div>
-      <img src="../../assets/icon-cs.png" class="cs-icon" alt="" />
+      <img
+        @click="openDialog"
+        src="../../assets/icon-cs.png"
+        class="cs-icon"
+        alt=""
+      />
+      <div v-if="isDialogOpen" class="contact-us-list">
+        <div class="header">
+          <div class="close">
+            <img
+              @click="closeDialog"
+              class="close-icon"
+              src="../../assets/icon-close.png"
+              alt=""
+            />
+          </div>
+          <p>
+            歡迎與我們聯繫！ 閣下可通過以下方式與我們聯絡，或致電 (852) 3598
+            6538查詢。
+          </p>
+        </div>
+        <div class="body">
+          <div class="grey">
+            <el-row :gutter="30">
+              <el-col :span="5">
+                <img
+                  class="whats-img"
+                  src="../../assets/icon-whatsapp.png"
+                  alt=""
+                />
+              </el-col>
+              <el-col :span="19">
+                <p>WhatsApp</p>
+                <p>(852) 5396 2553</p>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="grey">
+            <el-row :gutter="30">
+              <el-col :span="5">
+                <img
+                  class="whats-img"
+                  src="../../assets/icon-email.png"
+                  alt=""
+                />
+              </el-col>
+              <el-col :span="19">
+                <p>Email</p>
+                <p>info@langenholiday.com</p>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+      </div>
     </div>
   </base-container>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isDialogOpen: false,
+    };
+  },
+  methods: {
+    openDialog() {
+      this.isDialogOpen = true;
+    },
+    closeDialog() {
+      this.isDialogOpen = false;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .banks {
@@ -186,6 +257,65 @@
   width: 50px;
   right: 0;
   bottom: 20px;
+  cursor: pointer;
+}
+
+.banks .img-cs {
+  width: 50px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.banks .contact-us-list {
+  position: absolute;
+  right: 0;
+  top: 49.5rem;
+  max-width: 300px;
+}
+
+.banks .contact-us-list .header {
+  background-color: #fd9a1a;
+  padding: 6px 12px 6px 12px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.banks .contact-us-list .header .close {
+  text-align: end;
+}
+
+.banks .contact-us-list .header .close .close-icon {
+  width: 15px;
+  cursor: pointer;
+}
+
+.banks .contact-us-list .body {
+  padding: 12px;
+  border: 1px solid #eee;
+  background-color: #fff;
+}
+
+.banks .contact-us-list .body .grey {
+  background-color: #eaeaea;
+  padding: 8px;
+  margin-bottom: 1rem;
+}
+
+.banks .contact-us-list .body .grey img {
+  width: 50px;
+}
+
+.banks .contact-us-list .body .grey p {
+  margin: 0;
+  color: #8d8d8d;
+  padding: 0;
+  /* font-size: 14px; */
+}
+
+.banks .contact-us-list .header p {
+  text-align: center;
+  color: #fff;
+  padding: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -208,6 +338,34 @@
 
   .banks .single-bank .bank-image {
     text-align: center;
+  }
+
+  .banks .contact-us-list {
+    top: 77.5rem;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .banks .contact-us-list {
+    top: 63.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banks .contact-us-list {
+    top: 68.5rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .banks .contact-us-list {
+    top: 70.5rem;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .banks .contact-us-list {
+    top: 78rem;
   }
 }
 </style>

@@ -144,7 +144,7 @@ export default {
 }
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--right {
-  right: 5%;
+  right: 6%;
 }
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--right .el-icon,
@@ -153,9 +153,27 @@ export default {
   font-size: 24px;
 }
 
+@media screen and (min-width: 1680px) {
+  .places-carousel .el-carousel__arrow.el-carousel__arrow--left {
+    left: 3%;
+  }
+
+  .places-carousel .el-carousel__arrow.el-carousel__arrow--right {
+    right: 4%;
+  }
+
+  .places-carousel .el-carousel .el-carousel__container {
+    height: 747px !important;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .places-carousel .el-carousel__arrow.el-carousel__arrow--left {
     left: 1%;
+  }
+
+  .places-carousel .el-carousel__arrow.el-carousel__arrow--right {
+    right: 3.2%;
   }
 
   .places-carousel .swimming-img img {

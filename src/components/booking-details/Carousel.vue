@@ -5,8 +5,20 @@
     height="735px"
     arrow="always"
   >
-    <el-carousel-item v-for="item in 4" :key="item">
+    <el-carousel-item>
       <img src="../../assets/img-houseinfo1.jpg" alt="" class="carousel-img" />
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../../assets/img-houseinfo2.jpg" alt="" class="carousel-img" />
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../../assets/img-houseinfo3.jpg" alt="" class="carousel-img" />
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../../assets/img-houseinfo4.jpg" alt="" class="carousel-img" />
+    </el-carousel-item>
+    <el-carousel-item>
+      <img src="../../assets/img-houseinfo5.jpg" alt="" class="carousel-img" />
     </el-carousel-item>
   </el-carousel>
   <div class="img-collection hidden-md-and-down">

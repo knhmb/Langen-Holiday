@@ -12,6 +12,7 @@
           menu-trigger="click"
           class="el-menu-demo"
           mode="horizontal"
+          unique-opened
         >
           <el-sub-menu index="1">
             <template #title>熱線電話</template>

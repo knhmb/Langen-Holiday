@@ -72,10 +72,81 @@
           <p>info@langenholiday.com</p>
         </el-col>
       </el-row>
-      <img src="../../assets/icon-cs.png" class="icon-cs" alt="" />
+      <img
+        @click="openDialog"
+        src="../../assets/icon-cs.png"
+        class="icon-cs"
+        alt=""
+      />
+      <div v-if="isDialogOpen" class="contact-us-list">
+        <div class="header">
+          <div class="close">
+            <img
+              @click="closeDialog"
+              class="close-icon"
+              src="../../assets/icon-close.png"
+              alt=""
+            />
+          </div>
+          <p>
+            歡迎與我們聯繫！ 閣下可通過以下方式與我們聯絡，或致電 (852) 3598
+            6538查詢。
+          </p>
+        </div>
+        <div class="body">
+          <div class="grey">
+            <el-row :gutter="30">
+              <el-col :span="5">
+                <img
+                  class="whats-img"
+                  src="../../assets/icon-whatsapp.png"
+                  alt=""
+                />
+              </el-col>
+              <el-col :span="19">
+                <p>WhatsApp</p>
+                <p>(852) 5396 2553</p>
+              </el-col>
+            </el-row>
+          </div>
+          <div class="grey">
+            <el-row :gutter="30">
+              <el-col :span="5">
+                <img
+                  class="whats-img"
+                  src="../../assets/icon-email.png"
+                  alt=""
+                />
+              </el-col>
+              <el-col :span="19">
+                <p>Email</p>
+                <p>info@langenholiday.com</p>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+      </div>
     </div>
   </base-container>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isDialogOpen: false,
+    };
+  },
+  methods: {
+    openDialog() {
+      this.isDialogOpen = true;
+    },
+    closeDialog() {
+      this.isDialogOpen = false;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .contact-info {
@@ -109,11 +180,100 @@
   position: absolute;
   right: 0;
   bottom: 20px;
+  cursor: pointer;
+}
+
+.contact-info .contact-us-list {
+  position: absolute;
+  right: 0;
+  top: 1.5rem;
+  max-width: 300px;
+}
+
+.contact-info .contact-us-list .el-row {
+  margin-top: 0.5rem;
+}
+
+.contact-info .contact-us-list .header {
+  background-color: #fd9a1a;
+  padding: 6px 12px 6px 12px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.contact-info .contact-us-list .header .close {
+  text-align: end;
+}
+
+.contact-info .contact-us-list .header .close .close-icon {
+  width: 15px;
+  cursor: pointer;
+}
+
+.contact-info .contact-us-list .body {
+  padding: 12px;
+  border: 1px solid #eee;
+  background-color: #fff;
+}
+
+.contact-info .contact-us-list .body .grey {
+  background-color: #eaeaea;
+  padding: 8px 8px;
+  margin-bottom: 1rem;
+}
+
+.contact-info .contact-us-list .body .grey .el-row {
+  align-items: center;
+}
+
+.contact-info .contact-us-list .body .grey img {
+  width: 50px;
+}
+
+.contact-info .contact-us-list .body .grey p {
+  margin: 0;
+  color: #8d8d8d;
+  padding: 0;
+  font-size: 14px;
+  word-break: break-all;
+  /* font-size: 14px; */
+}
+
+.contact-info .contact-us-list .header p {
+  text-align: center;
+  color: #fff;
+  padding: 0;
 }
 
 @media screen and (max-width: 991px) {
   .contact-info .el-row .el-col {
     margin-bottom: 1rem;
+  }
+
+  .contact-info .contact-us-list {
+    top: 21.5rem;
+  }
+}
+@media screen and (max-width: 820px) {
+  .contact-info .contact-us-list {
+    top: 21.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contact-info .contact-us-list {
+    top: 21.5rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .contact-info .contact-us-list {
+    top: 21.5rem;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .contact-info .contact-us-list {
+    top: 23rem;
   }
 }
 
