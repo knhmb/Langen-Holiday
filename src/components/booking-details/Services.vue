@@ -12,32 +12,32 @@
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
-            <span>wifi</span>
+            <span>沐浴露</span>
             <img src="../../assets/icon-bodywash.png" alt="" />
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
-            <span>wifi</span>
+            <span>洗頭水</span>
             <img src="../../assets/icon-shampoo.png" alt="" />
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
-            <span>wifi</span>
+            <span>風筒</span>
             <img src="../../assets/icon-dryer.png" alt="" />
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
-            <span>wifi</span>
+            <span>電視</span>
             <img src="../../assets/icon-tv.png" alt="" />
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
-            <span>wifi</span>
+            <span>露台</span>
             <img src="../../assets/icon-terrace.png" alt="" />
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-check.png" alt="" />
-            <span>wifi</span>
+            <span>燒烤</span>
             <img src="../../assets/icon-grill.png" alt="" />
           </el-col>
         </el-row>
@@ -47,12 +47,12 @@
         <el-row>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-cross.png" alt="" />
-            <span>wifi</span>
+            <span>毛巾(+$20.0)</span>
             <img src="../../assets/icon-towel.png" alt="" />
           </el-col>
           <el-col class="items" :sm="24" :md="3" :lg="3">
             <img src="../../assets/icon-cross.png" alt="" />
-            <span>wifi</span>
+            <span>拖鞋(+10.0)</span>
             <img src="../../assets/icon-shoes.png" alt="" />
           </el-col>
         </el-row>
@@ -61,7 +61,7 @@
         <p>床</p>
         <el-row>
           <el-col :sm="24" :md="3" :lg="3" class="items">
-            <span>Bed x1</span>
+            <span>雙人床 x 1</span>
             <img src="../../assets/icon-bed.png" alt="" />
           </el-col>
         </el-row>

@@ -127,4 +127,17 @@
   width: 30%;
   margin-top: 3rem;
 }
+
+@media screen and (max-width: 991px) {
+  .total-price p,
+  .calculated-add-on p,
+  .add-ons .el-checkbox .el-checkbox__label,
+  .add-ons p {
+    font-size: 12px;
+  }
+
+  .total-price .final-price {
+    font-size: 18px;
+  }
+}
 </style>

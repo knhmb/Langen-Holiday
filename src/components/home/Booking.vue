@@ -167,4 +167,14 @@ export default {
   letter-spacing: 1.4px;
   color: #8d8d8d;
 }
+
+@media screen and (max-width: 991px) {
+  .booking h1 {
+    font-size: 24px;
+  }
+
+  .booking .el-button--default {
+    padding: 0 4rem;
+  }
+}
 </style>

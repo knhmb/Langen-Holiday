@@ -121,4 +121,10 @@ export default {
   font-size: 40px;
   margin-top: 1rem;
 }
+
+@media screen and (max-width: 768px) {
+  .service-detail .box-card .card-header span {
+    font-size: 14px;
+  }
+}
 </style>

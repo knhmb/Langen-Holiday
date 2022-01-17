@@ -19,11 +19,12 @@
         <el-col :sm="3" :md="3" :lg="3">
           <el-button
             >加入收藏
-            <img
+            <!-- <img
               class="icon-bookmark"
               src="../../assets/icon-bookmark-off.png"
               alt=""
-          /></el-button>
+          /> -->
+          </el-button>
         </el-col>
         <el-col>
           <p class="price">HK$500 <span>起</span></p>
@@ -108,6 +109,10 @@ export default {
   .booking-info .heading .el-col {
     display: flex;
     justify-content: center;
+  }
+
+  .booking-info h1 {
+    font-size: 32px;
   }
 }
 </style>

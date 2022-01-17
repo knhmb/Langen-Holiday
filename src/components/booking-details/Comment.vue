@@ -236,6 +236,10 @@ export default {
     right: 3.8%;
     top: 27%;
   }
+
+  .comment .el-button--default {
+    padding: 0 1.5rem;
+  }
 }
 
 @media screen and (max-width: 540px) {
