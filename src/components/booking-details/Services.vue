@@ -45,12 +45,12 @@
       <div class="not-provided-services">
         <p>免費</p>
         <el-row>
-          <el-col class="items" :sm="24" :md="3" :lg="3">
+          <el-col class="items" :sm="24" :md="4" :lg="4">
             <img src="../../assets/icon-cross.png" alt="" />
             <span>毛巾(+$20.0)</span>
             <img src="../../assets/icon-towel.png" alt="" />
           </el-col>
-          <el-col class="items" :sm="24" :md="3" :lg="3">
+          <el-col class="items" :sm="24" :md="4" :lg="4">
             <img src="../../assets/icon-cross.png" alt="" />
             <span>拖鞋(+10.0)</span>
             <img src="../../assets/icon-shoes.png" alt="" />
