@@ -6,22 +6,6 @@
         <img class="brand-name" src="../../assets/brand-name.png" alt="" />
       </el-col>
       <el-col :sm="24" :lg="15">
-        <!-- <div class="top-nav">
-          <ul>
-            <li>熱線電話</li>
-            <li>聯絡與付款</li>
-            <div class="contact">
-              <img
-                class="whats-app-logo"
-                src="../../assets/icon-whatsapp.png"
-                alt=""
-              />
-
-              <span>WhatsApp查詢: +852 5396 2553</span>
-            </div>
-          </ul>
-          <div class="my-sub-menu"></div>
-        </div> -->
         <el-menu
           :ellipsis="false"
           menu-trigger="click"
@@ -88,6 +72,11 @@
 
             <span>WhatsApp查詢: +852 5396 2553</span>
           </div>
+          <img
+            class="facebook-icon"
+            src="../../assets/icon-facebook.svg"
+            alt=""
+          />
         </el-menu>
       </el-col>
     </el-row>
@@ -248,6 +237,20 @@ export default {
   align-items: center;
 }
 
+.top-header .contact::after {
+  content: "";
+  background: black;
+  height: 21px;
+  width: 1px;
+  margin-left: 1rem;
+}
+
+.top-header .facebook-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::before {
     /* display: none; */
@@ -269,16 +272,9 @@ export default {
   }
 
   .top-header {
-    padding: 0;
-    /* padding-top: 1rem;
-    padding-left: 0.5rem; */
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
   }
-  /* .top-header .el-row .el-col .el-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  } */
 
   .top-header .logo {
     width: 50px;
@@ -306,6 +302,10 @@ export default {
   }
   .top-header .logo-content {
     justify-content: center;
+  }
+
+  .top-header .contact span {
+    font-size: 0.7rem;
   }
 }
 </style>
