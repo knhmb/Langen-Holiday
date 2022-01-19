@@ -48,35 +48,130 @@
           class="el-menu-demo hidden-md-and-down"
           mode="horizontal"
         >
-          <el-sub-menu index="1">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 3 }"
+            index="1"
+            @click="closeDropdown"
+          >
             <template #title>長洲渡假屋</template>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-            <el-menu-item index="1-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 7 }"
+              @click="selectedSubMenu(7)"
+              index="1-1"
+              >item one</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+              @click="selectedSubMenu(8)"
+              index="1-2"
+              >item two</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 9 }"
+              @click="selectedSubMenu(9)"
+              index="1-3"
+              >item three</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="2">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 4 }"
+            index="2"
+            @click="closeDropdown"
+          >
             <template #title>大嶼山渡假屋</template>
-            <el-menu-item index="2-1">item one</el-menu-item>
-            <el-menu-item index="2-2">item two</el-menu-item>
-            <el-menu-item index="2-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 10 }"
+              @click="selectedSubMenu(10)"
+              index="2-1"
+              >item one</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 11 }"
+              @click="selectedSubMenu(11)"
+              index="2-2"
+              >item two</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 12 }"
+              @click="selectedSubMenu(12)"
+              index="2-3"
+              >item three</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="3">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 5 }"
+            index="3"
+            @click="closeDropdown"
+          >
             <template #title>南丫島渡假屋</template>
-            <el-menu-item index="3-1">item one</el-menu-item>
-            <el-menu-item index="3-2">item two</el-menu-item>
-            <el-menu-item index="3-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 13 }"
+              @click="selectedSubMenu(13)"
+              index="3-1"
+              >item one</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 14 }"
+              @click="selectedSubMenu(14)"
+              index="3-2"
+              >item two</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 15 }"
+              @click="selectedSubMenu(15)"
+              index="3-3"
+              >item three</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="4">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 6 }"
+            index="4"
+            @click="closeDropdown"
+          >
             <template #title>精選酒店推介</template>
-            <el-menu-item index="4-1">item one</el-menu-item>
-            <el-menu-item index="4-2">item two</el-menu-item>
-            <el-menu-item index="4-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 16 }"
+              @click="selectedSubMenu(16)"
+              index="4-1"
+              >item one</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 17 }"
+              @click="selectedSubMenu(17)"
+              index="4-2"
+              >item two</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 18 }"
+              @click="selectedSubMenu(18)"
+              index="4-3"
+              >item three</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="5">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 7 }"
+            index="5"
+            @click="closeDropdown"
+          >
             <template #title>日間/晚間住宿</template>
-            <el-menu-item index="5-1">item one</el-menu-item>
-            <el-menu-item index="5-2">item two</el-menu-item>
-            <el-menu-item index="5-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 19 }"
+              @click="selectedSubMenu(19)"
+              index="5-1"
+              >item one</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
+              @click="selectedSubMenu(20)"
+              index="5-2"
+              >item two</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
+              @click="selectedSubMenu(21)"
+              index="5-3"
+              >item three</el-menu-item
+            >
           </el-sub-menu>
         </el-menu>
       </el-col>
@@ -86,6 +181,34 @@
     </el-row>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["isActive", "isActiveSubMenuItem"],
+  emits: ["setIsActiveClass", "setIsActiveSubMenuItem"],
+  methods: {
+    closeDropdown() {
+      const li = document.querySelectorAll(".el-popper");
+      li[0].style.display = "none";
+      li[1].style.display = "none";
+    },
+    selectedSubMenu(option) {
+      if (option === 7 || option === 8 || option === 9) {
+        this.$emit("setIsActiveClass", 3);
+      } else if (option === 10 || option === 11 || option === 12) {
+        this.$emit("setIsActiveClass", 4);
+      } else if (option === 13 || option === 14 || option === 15) {
+        this.$emit("setIsActiveClass", 5);
+      } else if (option === 16 || option === 17 || option === 18) {
+        this.$emit("setIsActiveClass", 6);
+      } else if (option === 19 || option === 20 || option === 21) {
+        this.$emit("setIsActiveClass", 7);
+      }
+      this.$emit("setIsActiveSubMenuItem", option);
+    },
+  },
+};
+</script>
 
 <style>
 .bottom-header .el-row {
@@ -123,7 +246,16 @@
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
   font-size: 12px;
   color: #8d8d8d;
+  border-bottom: none;
   /* padding: 0; */
+}
+
+.bottom-header .el-menu--horizontal .el-sub-menu.is-active .el-sub-menu__title {
+  border-bottom: none;
+}
+
+.el-menu--horizontal .el-menu .el-menu-item.is-active {
+  color: black;
 }
 
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {

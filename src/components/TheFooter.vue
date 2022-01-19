@@ -10,11 +10,11 @@
             <span>成為合作伙伴</span>
           </el-col>
           <el-col :sm="24" :lg="6">
-            <span>About</span>
+            <span>付款方式</span>
             <img class="payment" src="../assets/footer-payment.png" alt="" />
           </el-col>
           <el-col :sm="24" :lg="5">
-            <span>About</span>
+            <span>關注我們</span>
             <img
               class="social-media"
               src="../assets/footer-social-media.png"
@@ -22,7 +22,7 @@
             />
           </el-col>
           <el-col :sm="24" :lg="5">
-            <p>Copyright &copy; 2005-2021 About All Right Reserve</p>
+            <p>Copyright © 2005 - 2021 樂程假期公司 All Right Reserve</p>
           </el-col>
         </el-row>
       </div>
