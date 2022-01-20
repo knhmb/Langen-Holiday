@@ -62,6 +62,9 @@
           <el-form-item label="特別要求：">
             <el-input type="textarea" rows="8"></el-input>
           </el-form-item>
+          <p>
+            建議盡早提出特別要求,但最終仍需視乎實際情況作出安排,請注意無法保證能達成你的要求。
+          </p>
         </el-col>
       </el-row>
     </el-form>
@@ -83,6 +86,13 @@ export default {
 .reservation .left-section .form h2 {
   letter-spacing: 4.5px;
   color: #8d8d8d;
+}
+
+.reservation .left-section .form p {
+  letter-spacing: 1.8px;
+  color: #8d8d8d;
+  font-size: 10px;
+  margin-bottom: 1rem;
 }
 
 .reservation .left-section .form .el-form .el-form-item__label {

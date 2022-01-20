@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="icon-warning" transform="translate(-3071 -9872)">
+    <g id="Rectangle_918" data-name="Rectangle 918" transform="translate(3071 9872)" fill="#fa0" stroke="#fa0" stroke-width="4">
+      <rect width="48" height="48" rx="24" stroke="none"/>
+      <rect x="2" y="2" width="44" height="44" rx="22" fill="none"/>
+    </g>
+    <rect id="Rectangle_919" data-name="Rectangle 919" width="6" height="21" rx="3" transform="translate(3092 9881)" fill="#fff"/>
+    <rect id="Rectangle_920" data-name="Rectangle 920" width="6" height="6" rx="3" transform="translate(3092 9905)" fill="#fff"/>
+  </g>
+</svg>

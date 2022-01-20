@@ -1,6 +1,7 @@
 <template>
   <base-container>
     <div class="service-detail">
+      <Alert />
       <h3>基本資料</h3>
       <el-row :gutter="30">
         <el-col :sm="24" :lg="12">
@@ -72,10 +73,12 @@
 
 <script>
 import ServiceDetailRight from "./ServiceDetailRight.vue";
+import Alert from "./Alert.vue";
 
 export default {
   components: {
     ServiceDetailRight,
+    Alert,
   },
 };
 </script>
