@@ -2,7 +2,7 @@
   <div class="register">
     <el-form label-position="top">
       <el-row :gutter="10">
-        <el-col :span="12">
+        <el-col :sm="24" :md="12">
           <el-form-item label="中文姓名 (與證件相同)">
             <el-input v-model="value" placeholder="Please input">
               <template #prepend>
@@ -15,7 +15,7 @@
             </el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :sm="24" :md="12">
           <el-form-item label="英文姓名 (與證件相同)">
             <el-input placeholder="Please input">
               <template #prepend>
@@ -34,25 +34,30 @@
             <el-button class="inner-btn">獲取驗證碼</el-button>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :sm="24" :md="12">
           <el-form-item label="電郵驗證碼">
             <el-input></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :sm="24" :md="12">
           <el-form-item label="電話號碼">
             <el-input></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :sm="24" :md="12">
           <el-form-item label="密碼">
-            <el-input v-model="password" :type="passwordType1"></el-input>
+            <el-input
+              class="post-icon"
+              v-model="password"
+              :type="passwordType1"
+            ></el-input>
             <img @click="switchIcon('password')" :src="iconEye1" alt="" />
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :sm="24" :md="12">
           <el-form-item label="確認密碼">
             <el-input
+              class="post-icon"
               v-model="confirmPassword"
               :type="passwordType2"
             ></el-input>
@@ -160,6 +165,15 @@ export default {
   .el-dialog
   .register
   .el-form
+  .el-input.post-icon
+  .el-input__inner {
+  padding-right: 2rem;
+}
+
+.bottom-header
+  .el-dialog
+  .register
+  .el-form
   .select-trigger
   .el-input.el-input--default.el-input--suffix {
   box-shadow: none;
@@ -186,9 +200,13 @@ export default {
   cursor: pointer;
 }
 
+.bottom-header .el-dialog .register .el-form .el-form-item__label,
+.bottom-header .el-dialog .register .checkbox-label {
+  color: #8d8d8d;
+}
+
 .bottom-header .el-dialog .register .checkbox-label {
   font-size: 12px;
-  color: #8d8d8d;
 }
 
 .bottom-header .el-dialog .register .checkbox-label span {
@@ -231,5 +249,17 @@ export default {
 
 .bottom-header .el-dialog .register .el-form .login-link span:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .bottom-header .el-dialog .register .el-form .inner-btn {
+    margin: 0;
+    font-size: 12px;
+    width: 30%;
+  }
+
+  .bottom-header .el-dialog .register .checkbox-label {
+    font-size: 10px;
+  }
 }
 </style>

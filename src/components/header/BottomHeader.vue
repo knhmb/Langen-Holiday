@@ -188,8 +188,10 @@
         v-if="dialogTitle === '登入'"
         @closeDialog="dialogFormVisible = false"
         @toggleRegisterForm="switchForm"
+        @toggleForgotPassword="switchForm"
       />
-      <Register v-else @toggleLogin="switchForm" />
+      <Register v-else-if="dialogTitle === '註冊'" @toggleLogin="switchForm" />
+      <forgot-password @toggleLoginForm="switchForm" v-else></forgot-password>
       <!-- <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">Cancel</el-button>
@@ -205,6 +207,7 @@
 <script>
 import Login from "../Login.vue";
 import Register from "../Register.vue";
+import ForgotPassword from "../ForgotPassword.vue";
 
 export default {
   props: ["isActive", "isActiveSubMenuItem"],
@@ -212,10 +215,11 @@ export default {
   components: {
     Login,
     Register,
+    ForgotPassword,
   },
   data() {
     return {
-      dialogFormVisible: true,
+      dialogFormVisible: false,
       dialogTitle: "登入",
     };
   },
@@ -318,7 +322,7 @@ export default {
 }
 
 .bottom-header .el-button.login-btn {
-  width: 100%;
+  /* width: 100%; */
   background-color: #fd9a1a;
   border-color: #fd9a1a;
   color: #fff;

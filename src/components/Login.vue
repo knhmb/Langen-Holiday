@@ -24,7 +24,7 @@
           <el-checkbox label="記住我"></el-checkbox>
         </el-col>
         <el-col class="form-col" :span="12">
-          <p class="forgot-password">忘記密碼?</p>
+          <p @click="forgotPassword" class="forgot-password">忘記密碼?</p>
         </el-col>
         <el-col class="form-col">
           <el-button @click.prevent="loginForm">登入</el-button>
@@ -65,6 +65,9 @@ export default {
     },
     toggleRegister() {
       this.$emit("toggleRegisterForm", { title: "註冊", formType: "regsiter" });
+    },
+    forgotPassword() {
+      this.$emit("toggleForgotPassword", { title: "忘記密碼" });
     },
   },
 };
