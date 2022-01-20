@@ -15,6 +15,7 @@ import Reservation from "./pages/Reservation.vue";
 import TermsAndConditions from "./pages/TermsAndConditions.vue";
 import Payment from "./pages/Payment.vue";
 import ContactUs from "./pages/ContactUs.vue";
+import Join from "./pages/Join.vue";
 
 import BaseContainer from "./ui/BaseContainer.vue";
 
@@ -31,6 +32,7 @@ const router = createRouter({
     { path: "/terms-and-conditions", component: TermsAndConditions },
     { path: "/payment", component: Payment },
     { path: "/contact-us", component: ContactUs },
+    { path: "/join", component: Join },
   ],
 });
 
