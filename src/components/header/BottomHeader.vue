@@ -176,16 +176,49 @@
         </el-menu>
       </el-col>
       <el-col :sm="24" :lg="2">
-        <el-button>登入</el-button>
+        <el-button class="login-btn" @click="dialogFormVisible = true"
+          >登入</el-button
+        >
       </el-col>
     </el-row>
+
+    <!-- Dialog -->
+    <el-dialog v-model="dialogFormVisible" :title="dialogTitle">
+      <Login
+        v-if="dialogTitle === '登入'"
+        @closeDialog="dialogFormVisible = false"
+        @toggleRegisterForm="switchForm"
+      />
+      <Register v-else @toggleLogin="switchForm" />
+      <!-- <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="dialogFormVisible = false"
+            >Confirm</el-button
+          >
+        </span>
+      </template> -->
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import Login from "../Login.vue";
+import Register from "../Register.vue";
+
 export default {
   props: ["isActive", "isActiveSubMenuItem"],
   emits: ["setIsActiveClass", "setIsActiveSubMenuItem"],
+  components: {
+    Login,
+    Register,
+  },
+  data() {
+    return {
+      dialogFormVisible: true,
+      dialogTitle: "登入",
+    };
+  },
   methods: {
     closeDropdown() {
       const li = document.querySelectorAll(".el-popper");
@@ -205,6 +238,9 @@ export default {
         this.$emit("setIsActiveClass", 7);
       }
       this.$emit("setIsActiveSubMenuItem", option);
+    },
+    switchForm(option) {
+      this.dialogTitle = option.title;
     },
   },
 };
@@ -281,19 +317,37 @@ export default {
   font-size: 12px;
 }
 
-.bottom-header .el-button {
+.bottom-header .el-button.login-btn {
   width: 100%;
   background-color: #fd9a1a;
   border-color: #fd9a1a;
   color: #fff;
 }
 
-.bottom-header .el-button:hover {
+.bottom-header .el-button.login-btn:hover {
   background-color: rgba(255, 166, 0, 0.857);
 }
 
 .bottom-header .el-button span {
   margin: 0;
+}
+
+.bottom-header .el-dialog {
+  min-width: 300px;
+  max-width: 500px;
+  /* width: fit-content; */
+}
+
+.bottom-header .el-dialog .el-col {
+  display: block;
+}
+
+.bottom-header .el-dialog .el-dialog__title {
+  font-weight: bold;
+}
+
+.bottom-header .el-dialog .login .form-col {
+  display: block;
 }
 
 @media screen and (max-width: 1199px) {
