@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <g id="icon-profile-comment-off" transform="translate(-11371 -5918)">
+    <rect id="Rectangle_882" data-name="Rectangle 882" width="48" height="48" transform="translate(11371 5918)" fill="#fff" opacity="0"/>
+    <path id="icon-commentrecord" d="M8,16a4,4,0,0,1,4-4H36a4,4,0,0,1,4,4V30a4,4,0,0,1-4,4H19.887l-2.021,3.5a1,1,0,0,1-1.732,0L14.113,34H12a4,4,0,0,1-4-4Zm10,7a2,2,0,1,1-2-2A2,2,0,0,1,18,23Zm8,0a2,2,0,1,1-2-2A2,2,0,0,1,26,23Zm6,2a2,2,0,1,0-2-2A2,2,0,0,0,32,25Z" transform="translate(11371 5918)" fill="#ccc" fill-rule="evenodd"/>
+  </g>
+</svg>
