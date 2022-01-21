@@ -6,6 +6,10 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import { SetupCalendar } from "v-calendar";
 
 import BaseContainer from "./ui/BaseContainer.vue";
@@ -15,6 +19,9 @@ const app = createApp(App);
 
 app.component("base-container", BaseContainer);
 app.component("base-card", BaseCard);
+app.component("font-awesome-icon", FontAwesomeIcon);
+
+library.add(faTrashAlt, faEdit);
 
 app.use(ElementPlus);
 app.use(SetupCalendar, {});

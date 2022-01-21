@@ -21,8 +21,12 @@
         </div>
       </el-col>
     </el-row>
-    <not-rated v-if="isSelected === 'not-rated'"></not-rated>
-    <Reviewed v-else />
+    <not-rated
+      @submitReview="addReview"
+      :rates="rates"
+      v-if="isSelected === 'not-rated'"
+    ></not-rated>
+    <Reviewed :rates="rates" v-else />
   </div>
 </template>
 
@@ -38,11 +42,46 @@ export default {
   data() {
     return {
       isSelected: "not-rated",
+      reviewId: 1,
+      rates: [
+        {
+          id: 1,
+          title: "白沙灣渡假酒店",
+          description: "白沙灣渡假酒店",
+          noOfPeople: 5,
+          pets: 2,
+          checkInDate: "2021年5月22日 15:00",
+          checkOutDate: "2021年5月22日 12:00",
+          image: require("../assets/img-houseinfo4.jpg"),
+          reviewed: [],
+        },
+        {
+          id: 2,
+          title: "白沙灣渡假酒店",
+          description: "白沙灣渡假酒店",
+          noOfPeople: 5,
+          pets: 2,
+          checkInDate: "2021年5月22日 15:00",
+          checkOutDate: "2021年5月22日 12:00",
+          image: require("../assets/img-house3.jpg"),
+          reviewed: [],
+        },
+      ],
     };
   },
   methods: {
     setOption(option) {
       this.isSelected = option;
+    },
+    addReview({ id, review, rating }) {
+      const selectedRate = this.rates.find((rate) => rate.id === id);
+      selectedRate.reviewed.push({
+        id: this.reviewId++,
+        title: selectedRate.title,
+        desc: review,
+        rate: rating,
+        image: selectedRate.image,
+      });
     },
   },
 };
