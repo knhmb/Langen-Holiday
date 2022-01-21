@@ -9,10 +9,12 @@ import "element-plus/theme-chalk/display.css";
 import { SetupCalendar } from "v-calendar";
 
 import BaseContainer from "./ui/BaseContainer.vue";
+import BaseCard from "./ui/BaseCard.vue";
 
 const app = createApp(App);
 
 app.component("base-container", BaseContainer);
+app.component("base-card", BaseCard);
 
 app.use(ElementPlus);
 app.use(SetupCalendar, {});

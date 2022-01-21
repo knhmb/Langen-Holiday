@@ -2,13 +2,15 @@
   <the-header></the-header>
   <base-container>
     <section class="edit-profile">
-      <el-row>
+      <el-row :gutter="30">
         <el-col :span="5">
           <div class="profile-menu">
             <img src="../assets/member-avatar.svg" alt="" />
             <p>chan tai man</p>
             <ul>
-              <li
+              <router-link
+                tag="li"
+                :to="{ name: 'personal-information' }"
                 @click="setOption('member')"
                 :class="{ 'is-active': isActive === 'member' }"
                 @mouseover="hover('member')"
@@ -16,8 +18,11 @@
               >
                 <img :src="iconMember" alt="" />
                 個人資料
-              </li>
-              <li
+              </router-link>
+              <router-link
+                ref="changePassword"
+                tag="li"
+                :to="{ name: 'change-password' }"
                 @click="setOption('password')"
                 :class="{ 'is-active': isActive === 'password' }"
                 @mouseover="hover('password')"
@@ -25,8 +30,10 @@
               >
                 <img :src="iconPassword" alt="" />
                 修改密碼
-              </li>
-              <li
+              </router-link>
+              <router-link
+                tag="li"
+                :to="{ name: 'personal-information' }"
                 @click="setOption('bookmark')"
                 :class="{ 'is-active': isActive === 'bookmark' }"
                 @mouseover="hover('bookmark')"
@@ -34,8 +41,10 @@
               >
                 <img :src="iconBookmark" alt="" />
                 我的收藏
-              </li>
-              <li
+              </router-link>
+              <router-link
+                tag="li"
+                :to="{ name: 'personal-information' }"
                 @click="setOption('comment')"
                 :class="{ 'is-active': isActive === 'comment' }"
                 @mouseover="hover('comment')"
@@ -43,8 +52,10 @@
               >
                 <img :src="iconComment" alt="" />
                 評價記錄
-              </li>
-              <li
+              </router-link>
+              <router-link
+                tag="li"
+                :to="{ name: 'personal-information' }"
                 @click="setOption('booking')"
                 :class="{ 'is-active': isActive === 'booking' }"
                 @mouseover="hover('booking')"
@@ -52,11 +63,13 @@
               >
                 <img :src="iconBooking" alt="" />
                 預約記錄
-              </li>
+              </router-link>
             </ul>
           </div>
         </el-col>
-        <el-col :span="16"></el-col>
+        <el-col :span="19">
+          <router-view></router-view>
+        </el-col>
       </el-row>
     </section>
   </base-container>
@@ -87,6 +100,7 @@ export default {
       isBookingClicked: false,
     };
   },
+  computed: {},
   methods: {
     hover(option) {
       if (option === "member") {
@@ -138,6 +152,7 @@ export default {
         this.isBookmarkClicked = false;
         this.isCommentClicked = false;
         this.isBookingClicked = false;
+        console.log(this.$refs);
       } else if (option === "bookmark") {
         this.iconMember = require("../assets/icon-profile-member-off.svg");
         this.iconPassword = require("../assets/icon-profile-password-off.svg");
@@ -208,22 +223,32 @@ export default {
   width: 100%;
 }
 
-.edit-profile .profile-menu ul li {
+/* .edit-profile .profile-menu ul li {
   display: flex;
   align-items: center;
   margin-top: 1rem;
   color: #b3b3b3;
   cursor: pointer;
   justify-content: center;
+} */
+
+.edit-profile .profile-menu ul a {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  color: #b3b3b3;
+  cursor: pointer;
+  justify-content: center;
+  text-decoration: none;
 }
 
-.edit-profile .profile-menu ul li:hover,
-.edit-profile .profile-menu ul li.is-active {
+.edit-profile .profile-menu ul a:hover,
+.edit-profile .profile-menu ul a.router-link-exact-active {
   background-color: #fd9a1a;
   color: #fff;
 }
 
-.edit-profile .profile-menu ul li img {
+.edit-profile .profile-menu ul a img {
   width: 32px;
   margin-right: 1rem;
 }

@@ -9,6 +9,9 @@ import Payment from "./pages/Payment.vue";
 import ContactUs from "./pages/ContactUs.vue";
 import Join from "./pages/Join.vue";
 import EditProfile from "./pages/EditProfile.vue";
+import PersonalInformation from "./pages/PersonalInformation.vue";
+import ManageProfileEdit from "./pages/ManageProfileEdit.vue";
+import ChangePassword from "./pages/ChangePassword.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,7 +25,27 @@ const router = createRouter({
     { path: "/payment", component: Payment },
     { path: "/contact-us", component: ContactUs },
     { path: "/join", component: Join },
-    { path: "/edit-profile", component: EditProfile },
+    {
+      path: "/edit-profile",
+      component: EditProfile,
+      children: [
+        {
+          path: "",
+          component: PersonalInformation,
+          name: "personal-information",
+        },
+        {
+          path: "manage-profile",
+          component: ManageProfileEdit,
+          name: "manage-profile",
+        },
+        {
+          path: "change-password",
+          component: ChangePassword,
+          name: "change-password",
+        },
+      ],
+    },
   ],
 });
 
