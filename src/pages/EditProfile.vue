@@ -20,7 +20,6 @@
                 個人資料
               </router-link>
               <router-link
-                ref="changePassword"
                 tag="li"
                 :to="{ name: 'change-password' }"
                 @click="setOption('password')"
@@ -33,7 +32,7 @@
               </router-link>
               <router-link
                 tag="li"
-                :to="{ name: 'personal-information' }"
+                :to="{ name: 'places' }"
                 @click="setOption('bookmark')"
                 :class="{ 'is-active': isActive === 'bookmark' }"
                 @mouseover="hover('bookmark')"
@@ -44,7 +43,7 @@
               </router-link>
               <router-link
                 tag="li"
-                :to="{ name: 'personal-information' }"
+                :to="{ name: 'evaluation-record' }"
                 @click="setOption('comment')"
                 :class="{ 'is-active': isActive === 'comment' }"
                 @mouseover="hover('comment')"
@@ -152,7 +151,6 @@ export default {
         this.isBookmarkClicked = false;
         this.isCommentClicked = false;
         this.isBookingClicked = false;
-        console.log(this.$refs);
       } else if (option === "bookmark") {
         this.iconMember = require("../assets/icon-profile-member-off.svg");
         this.iconPassword = require("../assets/icon-profile-password-off.svg");
@@ -188,6 +186,12 @@ export default {
         this.isBookingClicked = true;
       }
     },
+  },
+  created() {
+    // if (this.$refs.myMember.activeClass) {
+    //   this.iconMember = require("../assets/icon-profile-member-on.svg");
+    //   console.log(this.$refs.myMember.activeClass);
+    // }
   },
 };
 </script>
