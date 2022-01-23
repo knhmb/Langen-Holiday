@@ -26,7 +26,7 @@
       :rates="rates"
       v-if="isSelected === 'not-rated'"
     ></not-rated>
-    <Reviewed :rates="rates" v-else />
+    <Reviewed @removeItem="deleteItem" :rates="rates" v-else />
   </div>
 </template>
 
@@ -43,6 +43,7 @@ export default {
     return {
       isSelected: "not-rated",
       reviewId: 1,
+      arr: [],
       rates: [
         {
           id: 1,
@@ -81,7 +82,20 @@ export default {
         desc: review,
         rate: rating,
         image: selectedRate.image,
+        itemId: id,
       });
+    },
+    deleteItem(id) {
+      // console.log(id);
+      let selectedRate = this.rates.find((rate) => rate.id === id.id);
+      // selectedRate.reviewed[0].splice(0 ,)
+      selectedRate.reviewed.filter((r) => r.id !== id.reviewId);
+      // console.log(dummy);
+      // console.log(selectedRate);
+      // this.rates = this.rates.filter((rate) => rate.id === id.id);
+      // this.rates = this.rates[0].reviewed.filter(
+      //   (rate) => rate.id === id.reviewId
+      // );
     },
   },
 };

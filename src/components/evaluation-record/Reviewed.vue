@@ -1,6 +1,10 @@
 <template>
   <div class="reviewed">
-    <div class="review-card" v-for="review in reviewed" :key="review.id">
+    <div
+      class="review-card"
+      v-for="(review, index) in reviewed"
+      :key="review.id"
+    >
       <el-row v-if="review[0]">
         <el-col :span="5">
           <img :src="review[0].image" alt="" />
@@ -18,7 +22,11 @@
                     icon="edit"
                     @click="edit(review[0].id)"
                   />
-                  <font-awesome-icon class="trash-icon" icon="trash-alt" />
+                  <font-awesome-icon
+                    class="trash-icon"
+                    icon="trash-alt"
+                    @click="deleteItem({ id: review[0].id, index: index })"
+                  />
                   <!-- <el-button>評價</el-button> -->
                 </el-col>
               </el-row>
@@ -42,7 +50,7 @@
     </div>
 
     <!-- Dialog -->
-    <!-- <el-dialog v-model="dialogFormVisible" title="白沙灣渡假酒店">
+    <el-dialog v-model="dialogFormVisible" title="白沙灣渡假酒店">
       <el-form label-position="top">
         <el-row>
           <el-col>
@@ -65,13 +73,13 @@
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="addReview(selectedId)" class="submit"
+            <el-button @click.prevent="updateItem(selectedId)" class="submit"
               >提交</el-button
             >
           </el-col>
         </el-row>
       </el-form>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 
@@ -82,11 +90,40 @@ export default {
     return {
       reviewed: [],
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
+      dialogFormVisible: false,
+      rate: "",
+      review: "",
+      updatedReview: "",
+      selectedId: null,
     };
   },
   methods: {
     edit(id) {
       console.log(id);
+      this.selectedId = id;
+      const item = this.reviewed.find((rate) => rate[0].id === id);
+      this.rate = item[0].rate;
+      this.review = item[0].desc;
+
+      console.log(item);
+      this.dialogFormVisible = true;
+    },
+    updateItem(id) {
+      const singleItem = {
+        rate: this.rate,
+        desc: this.review,
+      };
+      console.log(singleItem);
+
+      const data = this.reviewed.findIndex((p) => p[0].id === id);
+      Object.assign(this.reviewed[data][0], singleItem);
+
+      this.dialogFormVisible = false;
+    },
+    deleteItem({ id, index }) {
+      console.log(this.reviewed);
+      console.log(id);
+      this.reviewed.splice(index, 1);
     },
   },
   created() {
@@ -163,11 +200,11 @@ export default {
   margin-top: 1rem;
 }
 
-.evaluation .review-card .el-dialog {
+.evaluation .reviewed .el-dialog {
   max-width: 400px;
 }
 
-.evaluation .review-card .el-dialog .el-dialog__title {
+.evaluation .reviewed .el-dialog .el-dialog__title {
   text-align: center;
   display: block;
   border-bottom: 1px solid #eee;
@@ -177,49 +214,49 @@ export default {
   color: #3e3e3e;
 }
 
-.evaluation .review-card .el-dialog .el-icon.el-dialog__close {
+.evaluation .reviewed .el-dialog .el-icon.el-dialog__close {
   display: none;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-row .el-col {
+.evaluation .reviewed .el-dialog .el-form .el-row .el-col {
   display: flex;
   justify-content: center;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-form-item__label {
+.evaluation .reviewed .el-dialog .el-form .el-form-item__label {
   text-align: center;
   color: #8d8d8d;
 }
 
-.evaluation .review-card .el-rate .el-icon.el-rate__icon {
+.evaluation .reviewed .el-rate .el-icon.el-rate__icon {
   font-size: 1.5rem;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-col.default {
+.evaluation .reviewed .el-dialog .el-form .el-col.default {
   display: block;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-textarea {
+.evaluation .reviewed .el-dialog .el-form .el-textarea {
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-textarea .el-textarea__inner {
+.evaluation .reviewed .el-dialog .el-form .el-textarea .el-textarea__inner {
   border: none;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-button {
+.evaluation .reviewed .el-dialog .el-form .el-button {
   border-radius: 5px;
   letter-spacing: 2.2px;
   padding: 0 2rem;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-button.cancel {
+.evaluation .reviewed .el-dialog .el-form .el-button.cancel {
   border-color: #707070;
   color: #707070;
 }
 
-.evaluation .review-card .el-dialog .el-form .el-button.submit {
+.evaluation .reviewed .el-dialog .el-form .el-button.submit {
   background-color: #fd9a1a;
   border-color: #fd9a1a;
   color: #fff;
