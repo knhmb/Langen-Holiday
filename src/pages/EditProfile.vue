@@ -3,7 +3,7 @@
   <base-container>
     <section class="edit-profile">
       <el-row :gutter="30">
-        <el-col :sm="24" :lg="5">
+        <el-col :sm="24" :lg="6">
           <div class="profile-menu">
             <img src="../assets/member-avatar.svg" alt="" />
             <p>chan tai man</p>
@@ -66,7 +66,7 @@
             </ul>
           </div>
         </el-col>
-        <el-col :sm="24" :lg="19">
+        <el-col :sm="24" :lg="18">
           <router-view></router-view>
         </el-col>
       </el-row>
