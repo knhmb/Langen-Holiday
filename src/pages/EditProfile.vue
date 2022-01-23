@@ -3,7 +3,7 @@
   <base-container>
     <section class="edit-profile">
       <el-row :gutter="30">
-        <el-col :span="5">
+        <el-col :sm="24" :lg="5">
           <div class="profile-menu">
             <img src="../assets/member-avatar.svg" alt="" />
             <p>chan tai man</p>
@@ -66,7 +66,7 @@
             </ul>
           </div>
         </el-col>
-        <el-col :span="19">
+        <el-col :sm="24" :lg="19">
           <router-view></router-view>
         </el-col>
       </el-row>
@@ -209,6 +209,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 200px;
 }
 
 .edit-profile .profile-menu img {
@@ -255,5 +256,22 @@ export default {
 .edit-profile .profile-menu ul a img {
   width: 32px;
   margin-right: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .edit-profile .profile-menu {
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .edit-profile {
+    padding: 0;
+  }
+  .edit-profile .profile-menu {
+    padding: 0;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
 }
 </style>

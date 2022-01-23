@@ -79,6 +79,12 @@ export default {
   padding: 0 1rem;
 }
 
+@media screen and (max-width: 768px) {
+  .edit-profile .manage-profile-edit .el-form .el-input {
+    width: 100%;
+  }
+}
+
 /* .manage-profile-edit .el-button:hover {
   background-color: #fd9a1a;
   color: #fff;

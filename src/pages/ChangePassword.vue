@@ -76,4 +76,10 @@ export default {
   background-color: #999;
   border-color: #999;
 }
+
+@media screen and (max-width: 768px) {
+  .edit-profile .change-password .el-form .el-input {
+    width: 100%;
+  }
+}
 </style>

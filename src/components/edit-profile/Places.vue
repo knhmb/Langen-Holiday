@@ -2,7 +2,7 @@
   <div class="places">
     <h3>我的收藏</h3>
     <el-row :gutter="10">
-      <el-col v-for="service in services" :key="service.id" :span="12">
+      <el-col v-for="service in services" :key="service.id" :sm="24" :lg="12">
         <Card
           :name="service.name"
           :description="service.description"

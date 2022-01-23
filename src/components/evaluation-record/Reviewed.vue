@@ -6,10 +6,10 @@
       :key="review.id"
     >
       <el-row v-if="review[0]">
-        <el-col :span="5">
+        <el-col :sm="24" :lg="5">
           <img :src="review[0].image" alt="" />
         </el-col>
-        <el-col :span="19">
+        <el-col :sm="24" :lg="19">
           <div class="card-content">
             <div class="head">
               <el-row>
@@ -25,7 +25,13 @@
                   <font-awesome-icon
                     class="trash-icon"
                     icon="trash-alt"
-                    @click="deleteItem({ id: review[0].id, index: index })"
+                    @click="
+                      deleteItem({
+                        id: review[0].id,
+                        index: index,
+                        itemId: review[0].itemId,
+                      })
+                    "
                   />
                   <!-- <el-button>評價</el-button> -->
                 </el-col>
@@ -120,10 +126,11 @@ export default {
 
       this.dialogFormVisible = false;
     },
-    deleteItem({ id, index }) {
-      console.log(this.reviewed);
-      console.log(id);
-      this.reviewed.splice(index, 1);
+    deleteItem({ id, index, itemId }) {
+      // console.log(this.reviewed);
+      // console.log(id);
+      this.$emit("removeItem", { id: id, index: index, itemId: itemId });
+      // this.reviewed.splice(index, 1);
     },
   },
   created() {
@@ -201,6 +208,7 @@ export default {
 }
 
 .evaluation .reviewed .el-dialog {
+  min-width: 350px;
   max-width: 400px;
 }
 

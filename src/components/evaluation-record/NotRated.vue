@@ -2,10 +2,10 @@
   <div class="not-rated">
     <div class="comment-card" v-for="rate in rates" :key="rate.id">
       <el-row>
-        <el-col :span="5">
+        <el-col :sm="24" :lg="5">
           <img :src="rate.image" alt="" />
         </el-col>
-        <el-col :span="19">
+        <el-col :sm="24" :lg="19">
           <div class="card-content">
             <div class="head">
               <el-row>
@@ -206,6 +206,7 @@ export default {
 }
 
 .evaluation .not-rated .el-dialog {
+  min-width: 350px;
   max-width: 400px;
 }
 

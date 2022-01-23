@@ -11,4 +11,10 @@
   background-color: #fff;
   padding: 3rem;
 }
+
+@media screen and (max-width: 768px) {
+  /* .card {
+    padding: 3rem 0;
+  } */
+}
 </style>

@@ -2,7 +2,7 @@
   <div class="evaluation">
     <h3>評價記錄</h3>
     <el-row>
-      <el-col :span="5">
+      <el-col :sm="24" :lg="5">
         <div
           :class="{ 'is-active': isSelected === 'not-rated' }"
           @click="setOption('not-rated')"
@@ -11,7 +11,7 @@
           未評價預約
         </div>
       </el-col>
-      <el-col :span="5">
+      <el-col :sm="24" :lg="5">
         <div
           :class="{ 'is-active': isSelected === 'reviewed' }"
           @click="setOption('reviewed')"
@@ -85,17 +85,12 @@ export default {
         itemId: id,
       });
     },
-    deleteItem(id) {
-      // console.log(id);
-      let selectedRate = this.rates.find((rate) => rate.id === id.id);
-      // selectedRate.reviewed[0].splice(0 ,)
-      selectedRate.reviewed.filter((r) => r.id !== id.reviewId);
-      // console.log(dummy);
-      // console.log(selectedRate);
-      // this.rates = this.rates.filter((rate) => rate.id === id.id);
-      // this.rates = this.rates[0].reviewed.filter(
-      //   (rate) => rate.id === id.reviewId
-      // );
+    deleteItem({ id, itemId }) {
+      console.log(id, index, itemId);
+      let selectedRate = this.rates.find((rate) => rate.id === itemId);
+      let index = selectedRate.reviewed.findIndex((rate) => rate.id === id);
+      selectedRate.reviewed.splice(index, 1);
+      console.log(selectedRate.reviewed);
     },
   },
 };
