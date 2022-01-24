@@ -79,7 +79,6 @@ export default {
       const popper = document.querySelectorAll(".el-popper");
       const li = document.querySelectorAll(".el-sub-menu");
       const innerLi = document.querySelectorAll(".el-menu-item");
-      console.log(innerLi);
       popper[8].style.display = "none";
       popper[9].style.display = "none";
       popper[10].style.display = "none";

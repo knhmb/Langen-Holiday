@@ -3,41 +3,139 @@
     <el-row>
       <el-col :sm="24" :lg="22">
         <el-menu
+          text-color="#8d8d8d"
+          active-text-color="#8d8d8d"
           unique-opened
           :ellipsis="true"
           menu-trigger="click"
           class="el-menu-demo hidden-lg-and-up"
           mode="horizontal"
         >
-          <el-sub-menu index="1">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 3 }"
+            index="1"
+            @click="closeDropdown"
+          >
             <template #title>長洲渡假屋</template>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-            <el-menu-item index="1-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
+              @click="selectedSubMenu(4)"
+              index="1-1"
+              >市政大樓</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 5 }"
+              @click="selectedSubMenu(5)"
+              index="1-2"
+              >東灣東堤</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 6 }"
+              @click="selectedSubMenu(6)"
+              index="1-3"
+              >西堤海景樓</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 7 }"
+              @click="selectedSubMenu(7)"
+              index="1-4"
+              >景點介紹</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="2">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 4 }"
+            index="2"
+            @click="closeDropdown"
+          >
             <template #title>大嶼山渡假屋</template>
-            <el-menu-item index="2-1">item one</el-menu-item>
-            <el-menu-item index="2-2">item two</el-menu-item>
-            <el-menu-item index="2-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+              @click="selectedSubMenu(8)"
+              index="2-1"
+              >梅窩</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 9 }"
+              @click="selectedSubMenu(9)"
+              index="2-2"
+              >貝澳</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 10 }"
+              @click="selectedSubMenu(10)"
+              index="2-3"
+              >塘福</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 11 }"
+              @click="selectedSubMenu(11)"
+              index="2-4"
+              >大澳</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 12 }"
+              @click="selectedSubMenu(12)"
+              index="2-5"
+              >景點介紹</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="3">
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 5 }"
+            index="3"
+            @click="closeDropdown"
+          >
             <template #title>南丫島渡假屋</template>
-            <el-menu-item index="3-1">item one</el-menu-item>
-            <el-menu-item index="3-2">item two</el-menu-item>
-            <el-menu-item index="3-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 13 }"
+              @click="selectedSubMenu(13)"
+              index="3-1"
+              >模達灣</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 14 }"
+              @click="selectedSubMenu(14)"
+              index="3-2"
+              >沙埔舊村</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 15 }"
+              @click="selectedSubMenu(15)"
+              index="3-3"
+              >榕樹灣</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 16 }"
+              @click="selectedSubMenu(16)"
+              index="3-4"
+              >景點介紹</el-menu-item
+            >
           </el-sub-menu>
-          <el-sub-menu index="4">
-            <template #title>精選酒店推介</template>
-            <el-menu-item index="4-1">item one</el-menu-item>
-            <el-menu-item index="4-2">item two</el-menu-item>
-            <el-menu-item index="4-3">item three</el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu class="last-sub-menu" index="5">
+
+          <el-menu-item
+            @click="selectedSubMenu(19)"
+            :class="{ 'my-active': isActive === 7 }"
+            index="4"
+            >精選酒店推介</el-menu-item
+          >
+
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 6 }"
+            index="5"
+            @click="closeDropdown"
+          >
             <template #title>日間/晚間住宿</template>
-            <el-menu-item index="5-1">item one</el-menu-item>
-            <el-menu-item index="5-2">item two</el-menu-item>
-            <el-menu-item index="5-3">item three</el-menu-item>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 17 }"
+              @click="selectedSubMenu(17)"
+              index="5-1"
+              >日間住宿</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 18 }"
+              @click="selectedSubMenu(18)"
+              index="5-2"
+              >晚間住宿</el-menu-item
+            >
           </el-sub-menu>
         </el-menu>
 
