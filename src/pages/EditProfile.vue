@@ -9,6 +9,8 @@
             <p>chan tai man</p>
             <ul>
               <router-link
+                active-class="router-link-exact-active"
+                ref="myLi"
                 tag="li"
                 :to="{ name: 'personal-information' }"
                 @click="setOption('member')"
@@ -86,6 +88,7 @@ export default {
   },
   data() {
     return {
+      el: "",
       iconMember: require("../assets/icon-profile-member-off.svg"),
       iconPassword: require("../assets/icon-profile-password-off.svg"),
       iconBookmark: require("../assets/icon-profile-bookmark-off.svg"),
@@ -128,6 +131,7 @@ export default {
       }
     },
     setOption(option) {
+      console.log(this.el);
       this.isActive = option;
       if (option === "member") {
         this.iconMember = require("../assets/icon-profile-member-on.svg");
@@ -187,11 +191,10 @@ export default {
       }
     },
   },
-  created() {
-    // if (this.$refs.myMember.activeClass) {
-    //   this.iconMember = require("../assets/icon-profile-member-on.svg");
-    //   console.log(this.$refs.myMember.activeClass);
-    // }
+  mounted() {
+    this.el = this.$refs.myLi;
+
+    console.log(this.el);
   },
 };
 </script>

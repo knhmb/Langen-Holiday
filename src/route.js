@@ -33,7 +33,7 @@ const router = createRouter({
       component: EditProfile,
       children: [
         {
-          path: "",
+          path: "personal-information",
           component: PersonalInformation,
           name: "personal-information",
         },

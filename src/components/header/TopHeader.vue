@@ -2,8 +2,18 @@
   <div class="top-header">
     <el-row>
       <el-col class="logo-content" :sm="24" :lg="9">
-        <img src="../../assets/logo.png" class="logo" alt="" />
-        <img class="brand-name" src="../../assets/brand-name.png" alt="" />
+        <img
+          @click="$router.push('/')"
+          src="../../assets/logo.png"
+          class="logo"
+          alt=""
+        />
+        <img
+          @click="$router.push('/')"
+          class="brand-name"
+          src="../../assets/brand-name.png"
+          alt=""
+        />
       </el-col>
       <el-col :sm="24" :lg="15">
         <el-menu
@@ -130,6 +140,10 @@ export default {
 
 .top-header .logo {
   width: 100px;
+}
+
+.top-header img {
+  cursor: pointer;
 }
 
 .top-header .brand-name {
