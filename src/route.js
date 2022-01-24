@@ -14,6 +14,7 @@ import ManageProfileEdit from "./pages/ManageProfileEdit.vue";
 import ChangePassword from "./pages/ChangePassword.vue";
 import Places from "./components/edit-profile/Places.vue";
 import EvaluationRecord from "./pages/EvaluationRecord.vue";
+import AppointmentRecord from "./pages/AppointmentRecord.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -55,6 +56,11 @@ const router = createRouter({
           path: "evaluation-record",
           component: EvaluationRecord,
           name: "evaluation-record",
+        },
+        {
+          path: "appointment-record",
+          component: AppointmentRecord,
+          name: "appointment-record",
         },
       ],
     },

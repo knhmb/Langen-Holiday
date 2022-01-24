@@ -54,7 +54,7 @@
               </router-link>
               <router-link
                 tag="li"
-                :to="{ name: 'personal-information' }"
+                :to="{ name: 'appointment-record' }"
                 @click="setOption('booking')"
                 :class="{ 'is-active': isActive === 'booking' }"
                 @mouseover="hover('booking')"

@@ -26,7 +26,26 @@
       :rates="rates"
       v-if="isSelected === 'not-rated'"
     ></not-rated>
-    <Reviewed @removeItem="deleteItem" :rates="rates" v-else />
+    <Reviewed @removeItem="assignValues" :rates="rates" v-else />
+
+    <div class="delete-dialog">
+      <el-dialog v-model="dialogVisible" title="刪除評價" width="30%">
+        <span>評價一但刪除，即無法恢復！ 確定要刪除此評價嗎？</span>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button class="cancel" @click="dialogVisible = false"
+              >返回</el-button
+            >
+            <el-button
+              class="delete"
+              type="primary"
+              @click="deleteItem({ id: id, itemId: itemId })"
+              >刪除</el-button
+            >
+          </span>
+        </template>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
@@ -42,7 +61,10 @@ export default {
   data() {
     return {
       isSelected: "not-rated",
+      dialogVisible: false,
       reviewId: 1,
+      id: null,
+      itemId: null,
       arr: [],
       rates: [
         {
@@ -85,18 +107,23 @@ export default {
         itemId: id,
       });
     },
+    assignValues({ id, itemId }) {
+      this.dialogVisible = true;
+      this.id = id;
+      this.itemId = itemId;
+    },
     deleteItem({ id, itemId }) {
-      console.log(id, index, itemId);
       let selectedRate = this.rates.find((rate) => rate.id === itemId);
       let index = selectedRate.reviewed.findIndex((rate) => rate.id === id);
       selectedRate.reviewed.splice(index, 1);
+      this.dialogVisible = false;
       console.log(selectedRate.reviewed);
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .evaluation h3 {
   color: #333;
 }
@@ -115,6 +142,51 @@ export default {
 .evaluation .pill:hover,
 .evaluation .pill.is-active {
   background-color: #fd9a1a;
+  color: #fff;
+}
+
+.evaluation .delete-dialog .el-dialog {
+  min-width: 350px;
+}
+
+.evaluation .delete-dialog .el-dialog .el-dialog__header .el-dialog__title {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 1.4px;
+  color: #3e3e3e;
+}
+
+.evaluation .delete-dialog .el-dialog .el-dialog__header .el-dialog__headerbtn {
+  display: none;
+}
+
+.evaluation .delete-dialog .el-dialog .el-dialog__body span {
+  display: block;
+  text-align: center;
+  color: #666666;
+  font-size: 16px;
+}
+
+.evaluation .delete-dialog .el-dialog .el-dialog__footer {
+  text-align: center;
+}
+
+.evaluation .delete-dialog .el-dialog .el-button.cancel,
+.evaluation .delete-dialog .el-dialog .el-button.delete {
+  border-radius: 5px;
+  padding: 0 2rem;
+}
+
+.evaluation .delete-dialog .el-dialog .el-button.cancel {
+  border-color: #707070;
+  color: #707070;
+}
+
+.evaluation .delete-dialog .el-dialog .el-button.delete {
+  background-color: #e63737;
+  border-color: #e63737;
   color: #fff;
 }
 </style>
