@@ -7,6 +7,8 @@
       </el-col>
       <el-col :sm="24" :lg="15">
         <el-menu
+          text-color="#8d8d8d"
+          active-text-color="#8d8d8d"
           :ellipsis="false"
           menu-trigger="click"
           class="el-menu-demo"
@@ -20,47 +22,33 @@
           >
             <template #title>熱線電話</template>
             <el-menu-item
+              class="top-menu-item"
               :class="{ 'inner-active': isActiveSubMenuItem === 1 }"
               @click="selectedSubMenu(1)"
               index="1-1"
-              >item one</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 2 }"
-              @click="selectedSubMenu(2)"
-              index="1-2"
-              >item two</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 3 }"
-              @click="selectedSubMenu(3)"
-              index="1-3"
-              >item three</el-menu-item
+              >3598 6538</el-menu-item
             >
           </el-sub-menu>
           <el-sub-menu
+            class="top-menu-item"
             :class="{ 'my-active': isActive === 2 }"
             index="2"
             @click="closeDropdown"
           >
             <template #title>聯絡與付款</template>
             <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
-              @click="selectedSubMenu(4)"
+              class="top-menu-item"
+              :class="{ 'inner-active': isActiveSubMenuItem === 2 }"
+              @click="selectedSubMenu(2)"
               index="2-1"
-              >item one</el-menu-item
+              >聯絡我們</el-menu-item
             >
             <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 5 }"
-              @click="selectedSubMenu(5)"
+              class="top-menu-item"
+              :class="{ 'inner-active': isActiveSubMenuItem === 3 }"
+              @click="selectedSubMenu(3)"
               index="2-2"
-              >item two</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 6 }"
-              @click="selectedSubMenu(6)"
-              index="2-3"
-              >item three</el-menu-item
+              >付款方法</el-menu-item
             >
           </el-sub-menu>
           <div class="contact">
@@ -90,6 +78,8 @@ export default {
     closeDropdown() {
       const popper = document.querySelectorAll(".el-popper");
       const li = document.querySelectorAll(".el-sub-menu");
+      const innerLi = document.querySelectorAll(".el-menu-item");
+      console.log(innerLi);
       popper[8].style.display = "none";
       popper[9].style.display = "none";
       popper[10].style.display = "none";
@@ -101,11 +91,27 @@ export default {
       li[5].classList.remove("is-opened");
       li[6].classList.remove("is-opened");
       li[7].classList.remove("is-opened");
+
+      innerLi[18].classList.remove("is-active");
+      innerLi[19].classList.remove("is-active");
+      innerLi[20].classList.remove("is-active");
+      innerLi[21].classList.remove("is-active");
+      innerLi[22].classList.remove("is-active");
+      innerLi[23].classList.remove("is-active");
+      innerLi[24].classList.remove("is-active");
+      innerLi[25].classList.remove("is-active");
+      innerLi[26].classList.remove("is-active");
+      innerLi[27].classList.remove("is-active");
+      innerLi[28].classList.remove("is-active");
+      innerLi[29].classList.remove("is-active");
+      innerLi[30].classList.remove("is-active");
+      innerLi[31].classList.remove("is-active");
+      innerLi[32].classList.remove("is-active");
     },
     selectedSubMenu(option) {
-      if (option === 1 || option === 2 || option === 3) {
+      if (option === 1) {
         this.$emit("setIsActiveClass", 1);
-      } else if (option === 4 || option === 5 || option === 6) {
+      } else if (option === 2 || option === 3) {
         this.$emit("setIsActiveClass", 2);
       }
       this.$emit("setIsActiveSubMenuItem", option);
@@ -122,14 +128,6 @@ export default {
   padding: 2rem 8rem 0 8rem;
   color: #8d8d8d;
 }
-
-/* .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
-  content: "";
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #737373;
-  margin-left: 0.5rem;
-} */
 
 .top-header .logo {
   width: 100px;
@@ -249,6 +247,11 @@ export default {
   width: 20px;
   height: 20px;
   margin-left: 1rem;
+}
+
+.top-header .el-menu--horizontal > .el-sub-menu.is-active .el-sub-menu__title {
+  border-bottom: none;
+  color: #8d8d8d;
 }
 
 @media screen and (max-width: 768px) {

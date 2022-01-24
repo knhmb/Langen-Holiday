@@ -42,6 +42,8 @@
         </el-menu>
 
         <el-menu
+          text-color="#8d8d8d"
+          active-text-color="#8d8d8d"
           unique-opened
           :ellipsis="false"
           menu-trigger="click"
@@ -55,22 +57,28 @@
           >
             <template #title>長洲渡假屋</template>
             <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
+              @click="selectedSubMenu(4)"
+              index="1-1"
+              >市政大樓</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 5 }"
+              @click="selectedSubMenu(5)"
+              index="1-2"
+              >東灣東堤</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 6 }"
+              @click="selectedSubMenu(6)"
+              index="1-3"
+              >西堤海景樓</el-menu-item
+            >
+            <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 7 }"
               @click="selectedSubMenu(7)"
-              index="1-1"
-              >item one</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-              @click="selectedSubMenu(8)"
-              index="1-2"
-              >item two</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 9 }"
-              @click="selectedSubMenu(9)"
-              index="1-3"
-              >item three</el-menu-item
+              index="1-4"
+              >景點介紹</el-menu-item
             >
           </el-sub-menu>
           <el-sub-menu
@@ -80,22 +88,34 @@
           >
             <template #title>大嶼山渡假屋</template>
             <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+              @click="selectedSubMenu(8)"
+              index="2-1"
+              >梅窩</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 9 }"
+              @click="selectedSubMenu(9)"
+              index="2-2"
+              >貝澳</el-menu-item
+            >
+            <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 10 }"
               @click="selectedSubMenu(10)"
-              index="2-1"
-              >item one</el-menu-item
+              index="2-3"
+              >塘福</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 11 }"
               @click="selectedSubMenu(11)"
-              index="2-2"
-              >item two</el-menu-item
+              index="2-4"
+              >大澳</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 12 }"
               @click="selectedSubMenu(12)"
-              index="2-3"
-              >item three</el-menu-item
+              index="2-5"
+              >景點介紹</el-menu-item
             >
           </el-sub-menu>
           <el-sub-menu
@@ -108,69 +128,52 @@
               :class="{ 'inner-active': isActiveSubMenuItem === 13 }"
               @click="selectedSubMenu(13)"
               index="3-1"
-              >item one</el-menu-item
+              >模達灣</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 14 }"
               @click="selectedSubMenu(14)"
               index="3-2"
-              >item two</el-menu-item
+              >沙埔舊村</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 15 }"
               @click="selectedSubMenu(15)"
               index="3-3"
-              >item three</el-menu-item
+              >榕樹灣</el-menu-item
             >
-          </el-sub-menu>
-          <el-sub-menu
-            :class="{ 'my-active': isActive === 6 }"
-            index="4"
-            @click="closeDropdown"
-          >
-            <template #title>精選酒店推介</template>
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 16 }"
               @click="selectedSubMenu(16)"
-              index="4-1"
-              >item one</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 17 }"
-              @click="selectedSubMenu(17)"
-              index="4-2"
-              >item two</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 18 }"
-              @click="selectedSubMenu(18)"
-              index="4-3"
-              >item three</el-menu-item
+              index="3-4"
+              >景點介紹</el-menu-item
             >
           </el-sub-menu>
-          <el-sub-menu
+
+          <el-menu-item
+            @click="selectedSubMenu(19)"
             :class="{ 'my-active': isActive === 7 }"
+            index="4"
+            >精選酒店推介</el-menu-item
+          >
+
+          <el-sub-menu
+            :class="{ 'my-active': isActive === 6 }"
             index="5"
             @click="closeDropdown"
           >
             <template #title>日間/晚間住宿</template>
             <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 19 }"
-              @click="selectedSubMenu(19)"
+              :class="{ 'inner-active': isActiveSubMenuItem === 17 }"
+              @click="selectedSubMenu(17)"
               index="5-1"
-              >item one</el-menu-item
+              >日間住宿</el-menu-item
             >
             <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
-              @click="selectedSubMenu(20)"
+              :class="{ 'inner-active': isActiveSubMenuItem === 18 }"
+              @click="selectedSubMenu(18)"
               index="5-2"
-              >item two</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
-              @click="selectedSubMenu(21)"
-              index="5-3"
-              >item three</el-menu-item
+              >晚間住宿</el-menu-item
             >
           </el-sub-menu>
         </el-menu>
@@ -192,14 +195,6 @@
       />
       <Register v-else-if="dialogTitle === '註冊'" @toggleLogin="switchForm" />
       <forgot-password @toggleLoginForm="switchForm" v-else></forgot-password>
-      <!-- <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false"
-            >Confirm</el-button
-          >
-        </span>
-      </template> -->
     </el-dialog>
   </div>
 </template>
@@ -230,15 +225,26 @@ export default {
       li[1].style.display = "none";
     },
     selectedSubMenu(option) {
-      if (option === 7 || option === 8 || option === 9) {
+      if (option === 4 || option === 5 || option === 6 || option === 7) {
         this.$emit("setIsActiveClass", 3);
-      } else if (option === 10 || option === 11 || option === 12) {
+      } else if (
+        option === 8 ||
+        option === 9 ||
+        option === 10 ||
+        option === 11 ||
+        option === 12
+      ) {
         this.$emit("setIsActiveClass", 4);
-      } else if (option === 13 || option === 14 || option === 15) {
+      } else if (
+        option === 13 ||
+        option === 14 ||
+        option === 15 ||
+        option === 16
+      ) {
         this.$emit("setIsActiveClass", 5);
-      } else if (option === 16 || option === 17 || option === 18) {
+      } else if (option === 17 || option === 18) {
         this.$emit("setIsActiveClass", 6);
-      } else if (option === 19 || option === 20 || option === 21) {
+      } else if (option === 19) {
         this.$emit("setIsActiveClass", 7);
       }
       this.$emit("setIsActiveSubMenuItem", option);
@@ -354,10 +360,17 @@ export default {
   display: block;
 }
 
-@media screen and (max-width: 1199px) {
-  /* .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
-    display: none;
-  } */
+.bottom-header .el-menu--horizontal > .el-menu-item.is-active {
+  border-bottom: none;
+  color: #8d8d8d;
+}
+
+.bottom-header
+  .el-menu--horizontal
+  > .el-sub-menu.is-active
+  .el-sub-menu__title {
+  border-bottom: none;
+  color: #8d8d8d;
 }
 
 @media screen and (max-width: 1024px) {
@@ -378,8 +391,6 @@ export default {
 
   .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
     padding: 0;
-    /* padding-left: 1rem; */
-    /* margin-right: 2.5rem; */
   }
 
   .bottom-header .el-col {
@@ -395,7 +406,6 @@ export default {
   .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
     padding: 0;
     padding-right: 0.17rem;
-    /* margin-right: 3px; */
   }
 
   .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::after {
@@ -403,7 +413,6 @@ export default {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid #737373;
-    /* margin-left: 0.5rem; */
   }
 }
 </style>
