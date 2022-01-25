@@ -119,8 +119,7 @@
       <el-row>
         <el-col>
           <el-checkbox
-            label="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id,
-                nesciunt unde dolore asperiores"
+            label="我同意本頁顯示的金額，也同意注意事項，取消政策和惡劣天氣安排以及網站使用條款"
             size="large"
           ></el-checkbox>
         </el-col>
