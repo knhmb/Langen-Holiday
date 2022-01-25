@@ -1,5 +1,5 @@
 <template>
-  <the-header></the-header>
+  <!-- <the-header></the-header> -->
   <section class="booking-details">
     <Carousel />
     <booking-info></booking-info>
@@ -10,12 +10,12 @@
     <read-more></read-more>
     <Comment />
   </section>
-  <the-footer></the-footer>
+  <!-- <the-footer></the-footer> -->
 </template>
 
 <script>
-import TheHeader from "../components/header/TheHeader.vue";
-import TheFooter from "../components/TheFooter.vue";
+// import TheHeader from "../components/header/TheHeader.vue";
+// import TheFooter from "../components/TheFooter.vue";
 import Carousel from "../components/booking-details/Carousel.vue";
 import BookingInfo from "../components/booking-details/BookingInfo.vue";
 import ServiceDetail from "../components/booking-details/ServiceDetail.vue";
@@ -27,8 +27,8 @@ import Comment from "../components/booking-details/Comment.vue";
 
 export default {
   components: {
-    TheHeader,
-    TheFooter,
+    // TheHeader,
+    // TheFooter,
     Carousel,
     BookingInfo,
     ServiceDetail,

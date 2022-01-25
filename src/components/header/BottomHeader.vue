@@ -249,7 +249,10 @@
           </el-sub-menu>
 
           <el-menu-item
-            @click="selectedSubMenu(19)"
+            @click="
+              selectedSubMenu(19);
+              closeDropdown();
+            "
             :class="{ 'my-active': isActive === 7 }"
             index="4"
             >精選酒店推介</el-menu-item
@@ -360,8 +363,13 @@ export default {
     return {
       dialogFormVisible: false,
       dialogTitle: "登入",
-      loggedIn: false,
+      // loggedIn: false,
     };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
   },
   methods: {
     closeDropdown() {
@@ -398,11 +406,13 @@ export default {
       this.dialogTitle = option.title;
     },
     logout() {
-      this.loggedIn = false;
+      this.$store.dispatch("auth/logout");
+      this.$router.replace("/");
+      // this.loggedIn = false;
     },
     login(event) {
       this.dialogFormVisible = event.closeDialog;
-      this.loggedIn = event.login;
+      // this.loggedIn = event.login;
     },
   },
 };

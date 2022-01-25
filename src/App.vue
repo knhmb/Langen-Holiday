@@ -1,6 +1,25 @@
 <template>
+  <the-header v-if="headerVisible"></the-header>
   <router-view></router-view>
+  <the-footer></the-footer>
 </template>
+
+<script>
+import TheHeader from "./components/header/TheHeader.vue";
+import TheFooter from "./components/TheFooter.vue";
+
+export default {
+  components: {
+    TheHeader,
+    TheFooter,
+  },
+  computed: {
+    headerVisible() {
+      return this.$store.getters.headerVisible;
+    },
+  },
+};
+</script>
 
 
 <style>

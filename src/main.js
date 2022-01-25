@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./route.js";
+import store from "./store/store";
 
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -26,5 +27,6 @@ library.add(faTrashAlt, faEdit);
 app.use(ElementPlus);
 app.use(SetupCalendar, {});
 app.use(router);
+app.use(store);
 
 app.mount("#app");

@@ -84,38 +84,50 @@
 <script>
 export default {
   props: ["isActive", "isActiveSubMenuItem"],
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters["auth/isLoggedIn"];
+    },
+    headerVisible() {
+      return this.$store.getters.headerVisible;
+    },
+  },
   methods: {
     closeDropdown() {
       const popper = document.querySelectorAll(".el-popper");
       const li = document.querySelectorAll(".el-sub-menu");
       const innerLi = document.querySelectorAll(".el-menu-item");
-      popper[8].style.display = "none";
-      popper[9].style.display = "none";
-      popper[10].style.display = "none";
-      popper[11].style.display = "none";
-      popper[12].style.display = "none";
+      console.log(popper);
+      if (this.headerVisible) {
+        popper[7].style.display = "none";
+        popper[8].style.display = "none";
+        popper[9].style.display = "none";
+        popper[10].style.display = "none";
+        // popper[11].style.display = "none";
+        this.isLoggedIn === true ? (popper[12].style.display = "none") : "";
 
-      li[3].classList.remove("is-opened");
-      li[4].classList.remove("is-opened");
-      li[5].classList.remove("is-opened");
-      li[6].classList.remove("is-opened");
-      li[7].classList.remove("is-opened");
+        li[3].classList.remove("is-opened");
+        li[4].classList.remove("is-opened");
+        li[5].classList.remove("is-opened");
+        li[6].classList.remove("is-opened");
+        li[7].classList.remove("is-opened");
 
-      innerLi[18].classList.remove("is-active");
-      innerLi[19].classList.remove("is-active");
-      innerLi[20].classList.remove("is-active");
-      innerLi[21].classList.remove("is-active");
-      innerLi[22].classList.remove("is-active");
-      innerLi[23].classList.remove("is-active");
-      innerLi[24].classList.remove("is-active");
-      innerLi[25].classList.remove("is-active");
-      innerLi[26].classList.remove("is-active");
-      innerLi[27].classList.remove("is-active");
-      innerLi[28].classList.remove("is-active");
-      innerLi[29].classList.remove("is-active");
-      innerLi[30].classList.remove("is-active");
-      innerLi[31].classList.remove("is-active");
-      innerLi[32].classList.remove("is-active");
+        innerLi[18].classList.remove("is-active");
+        innerLi[19].classList.remove("is-active");
+        innerLi[20].classList.remove("is-active");
+        innerLi[21].classList.remove("is-active");
+        innerLi[22].classList.remove("is-active");
+        innerLi[23].classList.remove("is-active");
+        innerLi[24].classList.remove("is-active");
+        innerLi[25].classList.remove("is-active");
+        innerLi[26].classList.remove("is-active");
+        innerLi[27].classList.remove("is-active");
+        innerLi[28].classList.remove("is-active");
+        innerLi[29].classList.remove("is-active");
+        innerLi[30].classList.remove("is-active");
+        innerLi[31].classList.remove("is-active");
+        innerLi[32].classList.remove("is-active");
+      }
     },
     selectedSubMenu(option) {
       if (option === 1) {

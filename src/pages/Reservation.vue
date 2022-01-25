@@ -4,21 +4,27 @@
     <reservation-left-section></reservation-left-section>
     <List />
   </section>
-  <the-footer></the-footer>
+  <!-- <the-footer></the-footer> -->
 </template>
 
 <script>
 import TopHeader from "../components/header/TopHeader.vue";
-import TheFooter from "../components/TheFooter.vue";
+// import TheFooter from "../components/TheFooter.vue";
 import ReservationLeftSection from "../components/reservation/ReservationLeftSection.vue";
 import List from "../components/reservation/List.vue";
 
 export default {
   components: {
     TopHeader,
-    TheFooter,
+    // TheFooter,
     ReservationLeftSection,
     List,
+  },
+  created() {
+    this.$store.dispatch("hideHeader", false);
+  },
+  beforeUnmount() {
+    this.$store.dispatch("displayHeader", true);
   },
 };
 </script>

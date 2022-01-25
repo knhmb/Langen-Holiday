@@ -1,5 +1,5 @@
 <template>
-  <the-header></the-header>
+  <!-- <the-header></the-header> -->
   <section class="join">
     <Banner />
     <base-container>
@@ -7,20 +7,20 @@
       <Form />
     </base-container>
   </section>
-  <the-footer></the-footer>
+  <!-- <the-footer></the-footer> -->
 </template>
 
 <script>
-import TheHeader from "../components/header/TheHeader.vue";
-import TheFooter from "../components/TheFooter.vue";
+// import TheHeader from "../components/header/TheHeader.vue";
+// import TheFooter from "../components/TheFooter.vue";
 import Header from "../components/join/Header.vue";
 import Banner from "../components/join/Banner.vue";
 import Form from "../components/join/JoinForm.vue";
 
 export default {
   components: {
-    TheHeader,
-    TheFooter,
+    // TheHeader,
+    // TheFooter,
     Header,
     Banner,
     Form,
