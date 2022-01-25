@@ -39,7 +39,8 @@ export default {
   },
   methods: {
     submit() {
-      this.$router.push("/edit-profile");
+      // this.$router.push("/edit-profile");
+      this.$emit("managed", false);
     },
   },
 };

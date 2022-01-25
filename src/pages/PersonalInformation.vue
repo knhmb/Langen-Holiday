@@ -1,5 +1,5 @@
 <template>
-  <div class="personal-information">
+  <div v-if="!isProfileEdit" class="personal-information">
     <h3>個人資料</h3>
     <base-card>
       <el-row>
@@ -21,13 +21,29 @@
       </el-row>
     </base-card>
   </div>
+
+  <manage-profile-edit
+    @managed="isProfileEdit = $event"
+    v-if="isProfileEdit"
+  ></manage-profile-edit>
 </template>
 
 <script>
+import ManageProfileEdit from "./ManageProfileEdit.vue";
+
 export default {
+  components: {
+    ManageProfileEdit,
+  },
+  data() {
+    return {
+      isProfileEdit: false,
+    };
+  },
   methods: {
     editProfile() {
-      this.$router.push({ name: "manage-profile" });
+      // this.$router.push({ name: "manage-profile" });
+      this.isProfileEdit = true;
     },
   },
 };

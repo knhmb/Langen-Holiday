@@ -10,7 +10,7 @@ import ContactUs from "./pages/ContactUs.vue";
 import Join from "./pages/Join.vue";
 import EditProfile from "./pages/EditProfile.vue";
 import PersonalInformation from "./pages/PersonalInformation.vue";
-import ManageProfileEdit from "./pages/ManageProfileEdit.vue";
+// import ManageProfileEdit from "./pages/ManageProfileEdit.vue";
 import ChangePassword from "./pages/ChangePassword.vue";
 import Places from "./components/edit-profile/Places.vue";
 import EvaluationRecord from "./pages/EvaluationRecord.vue";
@@ -37,11 +37,11 @@ const router = createRouter({
           component: PersonalInformation,
           name: "personal-information",
         },
-        {
-          path: "manage-profile",
-          component: ManageProfileEdit,
-          name: "manage-profile",
-        },
+        // {
+        //   path: "manage-profile",
+        //   component: ManageProfileEdit,
+        //   name: "manage-profile",
+        // },
         {
           path: "change-password",
           component: ChangePassword,
