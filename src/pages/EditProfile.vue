@@ -1,5 +1,4 @@
 <template>
-  <!-- <the-header></the-header> -->
   <base-container>
     <section class="edit-profile">
       <el-row :gutter="30">
@@ -72,20 +71,13 @@
       </el-row>
     </section>
   </base-container>
-  <!-- <the-footer></the-footer> -->
 </template>
 
 <script>
-// import TheHeader from "../components/header/TheHeader.vue";
-// import TheFooter from "../components/TheFooter.vue";
-
 export default {
-  components: {
-    // TheHeader,
-    // TheFooter,
-  },
   data() {
     return {
+      currentPath: null,
       iconMember: require("../assets/icon-profile-member-off.svg"),
       iconPassword: require("../assets/icon-profile-password-off.svg"),
       iconBookmark: require("../assets/icon-profile-bookmark-off.svg"),
@@ -131,7 +123,11 @@ export default {
     },
     setOption(option) {
       this.isActive = option;
-      if (option === "member") {
+    },
+  },
+  watch: {
+    $route(to) {
+      if (to.path === "/edit-profile/personal-information") {
         this.iconMember = require("../assets/icon-profile-member-on.svg");
         this.iconPassword = require("../assets/icon-profile-password-off.svg");
         this.iconBookmark = require("../assets/icon-profile-bookmark-off.svg");
@@ -142,7 +138,7 @@ export default {
         this.isBookmarkClicked = false;
         this.isCommentClicked = false;
         this.isBookingClicked = false;
-      } else if (option === "password") {
+      } else if (to.path === "/edit-profile/change-password") {
         this.iconMember = require("../assets/icon-profile-member-off.svg");
         this.iconPassword = require("../assets/icon-profile-password-on.svg");
         this.iconBookmark = require("../assets/icon-profile-bookmark-off.svg");
@@ -153,7 +149,7 @@ export default {
         this.isBookmarkClicked = false;
         this.isCommentClicked = false;
         this.isBookingClicked = false;
-      } else if (option === "bookmark") {
+      } else if (to.path === "/edit-profile/places") {
         this.iconMember = require("../assets/icon-profile-member-off.svg");
         this.iconPassword = require("../assets/icon-profile-password-off.svg");
         this.iconBookmark = require("../assets/icon-profile-bookmark-on.svg");
@@ -164,7 +160,7 @@ export default {
         this.isBookmarkClicked = true;
         this.isCommentClicked = false;
         this.isBookingClicked = false;
-      } else if (option === "comment") {
+      } else if (to.path === "/edit-profile/evaluation-record") {
         this.iconMember = require("../assets/icon-profile-member-off.svg");
         this.iconPassword = require("../assets/icon-profile-password-off.svg");
         this.iconBookmark = require("../assets/icon-profile-bookmark-off.svg");
@@ -175,14 +171,14 @@ export default {
         this.isBookmarkClicked = false;
         this.isCommentClicked = true;
         this.isBookingClicked = false;
-      } else if (option === "booking") {
+      } else if (to.path === "/edit-profile/appointment-record") {
         this.iconMember = require("../assets/icon-profile-member-off.svg");
         this.iconPassword = require("../assets/icon-profile-password-off.svg");
         this.iconBookmark = require("../assets/icon-profile-bookmark-off.svg");
         this.iconComment = require("../assets/icon-profile-comment-off.svg");
         this.iconBooking = require("../assets/icon-profile-bookging-on.svg");
         this.isMemberClicked = false;
-        this.isPasswordClicked = false;
+        this.isPasswordClicked = true;
         this.isBookmarkClicked = false;
         this.isCommentClicked = false;
         this.isBookingClicked = true;
@@ -190,20 +186,20 @@ export default {
     },
   },
   created() {
-    console.log(this.$route);
-    if (this.$route.path === "/edit-profile/personal-information") {
+    this.currentPath = this.$route.path;
+    if (this.currentPath === "/edit-profile/personal-information") {
       this.iconMember = require("../assets/icon-profile-member-on.svg");
       this.isMemberClicked = true;
-    } else if (this.$route.path === "/edit-profile/change-password") {
+    } else if (this.currentPath === "/edit-profile/change-password") {
       this.iconPassword = require("../assets/icon-profile-password-on.svg");
       this.isPasswordClicked = true;
-    } else if (this.$route.path === "/edit-profile/places") {
+    } else if (this.currentPath === "/edit-profile/places") {
       this.iconBookmark = require("../assets/icon-profile-bookmark-on.svg");
       this.isBookmarkClicked = true;
-    } else if (this.$route.path === "/edit-profile/evaluation-record") {
+    } else if (this.currentPath === "/edit-profile/evaluation-record") {
       this.iconComment = require("../assets/icon-profile-comment-on.svg");
       this.isCommentClicked = true;
-    } else if (this.$route.path === "/edit-profile/appointment-record") {
+    } else if (this.currentPath === "/edit-profile/appointment-record") {
       this.iconBooking = require("../assets/icon-profile-bookging-on.svg");
       this.isBookingClicked = true;
     }
