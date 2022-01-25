@@ -61,7 +61,7 @@ export default {
       }
     },
     loginForm() {
-      this.$emit("closeDialog", false);
+      this.$emit("closeDialog", { closeDialog: false, login: true });
     },
     toggleRegister() {
       this.$emit("toggleRegisterForm", { title: "註冊", formType: "regsiter" });

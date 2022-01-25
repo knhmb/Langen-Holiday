@@ -274,9 +274,55 @@
               >晚間住宿</el-menu-item
             >
           </el-sub-menu>
+
+          <el-sub-menu
+            v-if="loggedIn"
+            :class="{ 'my-active': isActive === 8 }"
+            class="edit-profile-menu"
+            index="6"
+            @click="closeDropdown"
+          >
+            <template #title>會員中心</template>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
+              @click="$router.push({ name: 'personal-information' })"
+              index="6-1"
+              >個人資料</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
+              @click="$router.push({ name: 'change-password' })"
+              index="6-2"
+              >修改密碼</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
+              @click="$router.push({ name: 'places' })"
+              index="6-3"
+              >我的收藏</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
+              @click="$router.push({ name: 'evaluation-record' })"
+              index="6-4"
+              >評價記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
+              @click="$router.push({ name: 'appointment-record' })"
+              index="6-5"
+              >預約記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
+              @click="logout"
+              index="6-6"
+              >登出</el-menu-item
+            >
+          </el-sub-menu>
         </el-menu>
       </el-col>
-      <el-col :sm="24" :lg="2">
+      <el-col v-if="!loggedIn" :sm="24" :lg="2">
         <el-button class="login-btn" @click="dialogFormVisible = true"
           >登入</el-button
         >
@@ -287,7 +333,7 @@
     <el-dialog v-model="dialogFormVisible" :title="dialogTitle">
       <Login
         v-if="dialogTitle === '登入'"
-        @closeDialog="dialogFormVisible = false"
+        @closeDialog="login"
         @toggleRegisterForm="switchForm"
         @toggleForgotPassword="switchForm"
       />
@@ -314,6 +360,7 @@ export default {
     return {
       dialogFormVisible: false,
       dialogTitle: "登入",
+      loggedIn: false,
     };
   },
   methods: {
@@ -349,6 +396,13 @@ export default {
     },
     switchForm(option) {
       this.dialogTitle = option.title;
+    },
+    logout() {
+      this.loggedIn = false;
+    },
+    login(event) {
+      this.dialogFormVisible = event.closeDialog;
+      this.loggedIn = event.login;
     },
   },
 };
@@ -469,6 +523,11 @@ export default {
   .el-sub-menu__title {
   border-bottom: none;
   color: #8d8d8d;
+}
+
+.bottom-header .el-sub-menu.edit-profile-menu .el-sub-menu__title {
+  color: #fd9a1a !important;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 1024px) {

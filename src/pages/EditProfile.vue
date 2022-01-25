@@ -101,7 +101,10 @@ export default {
   },
   methods: {
     hover(option) {
-      if (option === "member") {
+      if (
+        option === "member" &&
+        this.iconMember !== require("../assets/icon-profile-member-on.svg")
+      ) {
         this.iconMember = require("../assets/icon-profile-member-on.svg");
       } else if (option === "password") {
         this.iconPassword = require("../assets/icon-profile-password-on.svg");
@@ -185,6 +188,25 @@ export default {
         this.isBookingClicked = true;
       }
     },
+  },
+  created() {
+    console.log(this.$route);
+    if (this.$route.path === "/edit-profile/personal-information") {
+      this.iconMember = require("../assets/icon-profile-member-on.svg");
+      this.isMemberClicked = true;
+    } else if (this.$route.path === "/edit-profile/change-password") {
+      this.iconPassword = require("../assets/icon-profile-password-on.svg");
+      this.isPasswordClicked = true;
+    } else if (this.$route.path === "/edit-profile/places") {
+      this.iconBookmark = require("../assets/icon-profile-bookmark-on.svg");
+      this.isBookmarkClicked = true;
+    } else if (this.$route.path === "/edit-profile/evaluation-record") {
+      this.iconComment = require("../assets/icon-profile-comment-on.svg");
+      this.isCommentClicked = true;
+    } else if (this.$route.path === "/edit-profile/appointment-record") {
+      this.iconBooking = require("../assets/icon-profile-bookging-on.svg");
+      this.isBookingClicked = true;
+    }
   },
 };
 </script>
