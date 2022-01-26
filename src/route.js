@@ -15,6 +15,7 @@ import ChangePassword from "./pages/ChangePassword.vue";
 import Places from "./components/edit-profile/Places.vue";
 import EvaluationRecord from "./pages/EvaluationRecord.vue";
 import AppointmentRecord from "./pages/AppointmentRecord.vue";
+import CheungChauIsland from "./pages/CheungChauIsland.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -28,6 +29,7 @@ const router = createRouter({
     { path: "/payment", component: Payment },
     { path: "/contact-us", component: ContactUs },
     { path: "/join", component: Join },
+    { path: "/cheung-chau-island", component: CheungChauIsland },
     {
       path: "/edit-profile",
       component: EditProfile,

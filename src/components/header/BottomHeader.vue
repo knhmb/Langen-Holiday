@@ -501,7 +501,7 @@ export default {
 }
 
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {
-  font-size: 12px;
+  font-size: 14px;
   color: #8d8d8d;
   border-bottom: none;
   /* padding: 0; */

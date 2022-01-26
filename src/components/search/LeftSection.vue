@@ -1,5 +1,5 @@
 <template>
-  <Carousel />
+  <!-- <Carousel /> -->
   <base-container>
     <h2>渡假屋 <span>搜尋結果 :</span></h2>
     <el-row :gutter="20">
@@ -67,11 +67,11 @@
               </div>
             </el-col>
           </el-row>
-          <p>入住時段</p>
+          <!-- <p>入住時段</p>
           <el-checkbox-group v-model="time">
             <el-checkbox label="9:00 - 13:00" />
             <el-checkbox label="13:00 - 21:00" />
-          </el-checkbox-group>
+          </el-checkbox-group> -->
           <p>地點</p>
           <div class="location">
             <el-checkbox-group v-model="location">
@@ -125,13 +125,13 @@
 <script>
 import Calendar from "./Calendar.vue";
 import RightSection from "./RightSection.vue";
-import Carousel from "./Carousel.vue";
+// import Carousel from "./Carousel.vue";
 
 export default {
   components: {
     Calendar,
     RightSection,
-    Carousel,
+    // Carousel,
   },
   data() {
     return {

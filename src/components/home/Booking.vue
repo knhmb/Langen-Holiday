@@ -19,17 +19,24 @@
       </el-row>
       <el-row :gutter="3">
         <el-col class="form-control" :sm="24" :lg="15">
-          <el-input
+          <el-date-picker
+            v-model="datePicker"
+            type="daterange"
+            start-placeholder="入住 2021年5月22日 (星期六)"
+            end-placeholder="退房 2021年5月23日 (星期日)"
+          >
+          </el-date-picker>
+          <!-- <el-input
             class="calendar-input"
             v-model="input"
             type="text"
             placeholder="入住 2021年5月22日 (星期六) - 退房 2021年5月23日 (星期日)"
-          />
-          <img
+          /> -->
+          <!-- <img
             class="calendar-icon"
             src="../../assets/icon-calendar.png"
             alt=""
-          />
+          /> -->
         </el-col>
         <el-col :sm="24" :lg="9">
           <div class="select-input">
@@ -67,6 +74,7 @@ export default {
   data() {
     return {
       input: "",
+      datePicker: "",
     };
   },
 };
@@ -102,6 +110,25 @@ export default {
   margin-left: 0.5rem;
 }
 
+.booking
+  .el-date-editor.el-range-editor.el-input__inner.el-date-editor--daterange.el-range-editor--default {
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 0;
+  border-color: #fd9a1a;
+}
+
+.booking
+  .el-date-editor.el-range-editor.el-input__inner.el-date-editor--daterange.el-range-editor--default
+  .el-range-input {
+  padding: 20px 0;
+}
+
+.booking .el-range-editor--default .el-icon.el-input__icon.el-range__icon {
+  font-size: 20px;
+  color: #b00100;
+}
+
 .booking .calendar-input,
 .booking .el-select {
   /* position: relative; */
@@ -119,10 +146,18 @@ export default {
   border-radius: 6px;
 }
 
+.booking .el-select__popper.el-popper.is-light.is-pure {
+  display: none;
+}
+
 .booking .el-input .el-input__inner {
   border-radius: 0px;
   padding: 20px 55px;
-  border-color: orange;
+  border-color: #fd9a1a;
+}
+
+.booking .el-input .el-input__inner[placeholder] {
+  color: red;
 }
 
 .booking .form-control {
@@ -130,7 +165,7 @@ export default {
 }
 
 .booking .el-input .el-input__inner:focus {
-  border-color: orange;
+  border-color: #fd9a1a;
 }
 
 .booking .place-icon,
@@ -167,6 +202,10 @@ export default {
   letter-spacing: 1.4px;
   color: #8d8d8d;
 }
+
+/* .booking .el-button--default:hover {
+  background-color: #fff5ea;
+} */
 
 @media screen and (max-width: 991px) {
   .booking h1 {
