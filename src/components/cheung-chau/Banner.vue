@@ -6,11 +6,11 @@
 
 <style scoped>
 .banner {
-  margin-bottom: 2rem;
+  margin: 1rem 0;
   position: relative;
 }
 
-.banner img {
+/* .banner img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -65,5 +65,5 @@
     font-size: 0.6rem;
     margin-top: 0.5rem;
   }
-}
+} */
 </style>

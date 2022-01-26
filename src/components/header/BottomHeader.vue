@@ -429,6 +429,7 @@ export default {
     selectedSubMenu(option) {
       if (option === 4 || option === 5 || option === 6 || option === 7) {
         this.$emit("setIsActiveClass", 3);
+        this.$router.push("/cheung-chau-island");
       } else if (
         option === 8 ||
         option === 9 ||
@@ -437,6 +438,7 @@ export default {
         option === 12
       ) {
         this.$emit("setIsActiveClass", 4);
+        this.$router.push("/lantau-island");
       } else if (
         option === 13 ||
         option === 14 ||

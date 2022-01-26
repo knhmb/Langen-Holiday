@@ -43,11 +43,11 @@ export default {
 
 <style>
 .my-active {
-  border-bottom: 2px solid #fd9a1a !important;
+  /* border-bottom: 2px solid #fd9a1a !important; */
 }
 
 .inner-active {
-  color: #fd9a1a !important;
+  /* color: #fd9a1a !important; */
 }
 </style>
 
