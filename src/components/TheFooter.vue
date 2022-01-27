@@ -4,10 +4,24 @@
       <div class="footer-content">
         <el-row justify="space-between">
           <el-col :sm="24" :lg="11">
-            <span>聯絡我們</span>
-            <span>付款方法</span>
-            <span>條例與細則</span>
-            <span>成為合作伙伴</span>
+            <div class="links">
+              <router-link to="/contact-us" custom v-slot="{ href, navigate }">
+                <span @click="navigate" :href="href">聯絡我們</span>
+              </router-link>
+              <router-link to="/payment" custom v-slot="{ href, navigate }">
+                <span @click="navigate" :href="href">付款方法</span>
+              </router-link>
+              <router-link
+                to="/terms-and-conditions"
+                custom
+                v-slot="{ href, navigate }"
+              >
+                <span @click="navigate" :href="href">條例與細則</span>
+              </router-link>
+              <router-link to="/join" custom v-slot="{ href, navigate }">
+                <span @click="navigate" :href="href">成為合作伙伴</span>
+              </router-link>
+            </div>
           </el-col>
           <el-col :sm="24" :lg="6">
             <span>付款方式</span>
@@ -40,6 +54,14 @@
 .footer-content {
   border-top: 1px solid #eee;
   padding-top: 1.5rem;
+}
+
+.footer-content .links span {
+  cursor: pointer;
+}
+
+.footer-content .links span:hover {
+  text-decoration: underline;
 }
 
 .footer-content span {

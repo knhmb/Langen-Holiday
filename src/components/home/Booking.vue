@@ -449,6 +449,7 @@ export default {
 }
 
 .booking .el-button--default {
+  background-color: #fff5ea;
   padding: 1rem 4rem;
   border-radius: 0;
   margin-top: 1rem;

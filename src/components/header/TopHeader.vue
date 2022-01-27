@@ -62,19 +62,27 @@
             >
           </el-sub-menu>
           <div class="contact">
-            <img
-              class="whats-app-logo"
-              src="../../assets/icon-whatsapp.png"
-              alt=""
-            />
-
-            <span>WhatsApp查詢: +852 5396 2553</span>
+            <a
+              href="//api.whatsapp.com/send?phone=85253962553&text=From Langen Holiday"
+              target="_blank"
+              ><img
+                class="whats-app-logo"
+                src="../../assets/icon-whatsapp.png"
+                alt=""
+            /></a>
+            <a
+              href="//api.whatsapp.com/send?phone=85253962553&text=From Langen Holiday"
+              target="_blank"
+            >
+              <span>WhatsApp查詢: +852 5396 2553</span>
+            </a>
           </div>
-          <img
-            class="facebook-icon"
-            src="../../assets/icon-facebook.svg"
-            alt=""
-          />
+          <a href="https://www.facebook.com/langenholiday" target="_blank">
+            <img
+              class="facebook-icon"
+              src="../../assets/icon-facebook.svg"
+              alt=""
+          /></a>
         </el-menu>
       </el-col>
     </el-row>
@@ -132,8 +140,12 @@ export default {
     selectedSubMenu(option) {
       if (option === 1) {
         this.$emit("setIsActiveClass", 1);
-      } else if (option === 2 || option === 3) {
+      } else if (option === 2) {
         this.$emit("setIsActiveClass", 2);
+        this.$router.push("/contact-us");
+      } else if (option === 3) {
+        this.$emit("setIsActiveClass", 2);
+        this.$router.push("/join");
       }
       this.$emit("setIsActiveSubMenuItem", option);
     },
@@ -184,6 +196,16 @@ export default {
 .top-header .top-nav ul li,
 .top-header .top-nav .contact {
   margin-left: 2rem;
+}
+
+.top-header .top-nav .contact {
+  cursor: pointer;
+}
+
+.top-header .contact a {
+  color: #8d8d8d;
+  text-decoration: none;
+  font-size: 12px;
 }
 
 .top-header .top-nav ul li {

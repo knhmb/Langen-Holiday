@@ -7,9 +7,9 @@
             <el-input v-model="value" placeholder="Please input">
               <template #prepend>
                 <el-select placeholder="先生" style="width: 70px">
-                  <el-option label="Restaurant" value="1"></el-option>
-                  <el-option label="Order No." value="2"></el-option>
-                  <el-option label="Tel" value="3"></el-option>
+                  <el-option label="先生" value="1"></el-option>
+                  <el-option label="小姐" value="2"></el-option>
+                  <el-option label="女士" value="3"></el-option>
                 </el-select>
               </template>
             </el-input>
@@ -20,9 +20,9 @@
             <el-input placeholder="Please input">
               <template #prepend>
                 <el-select placeholder="Mr." style="width: 70px">
-                  <el-option label="Restaurant" value="1"></el-option>
-                  <el-option label="Order No." value="2"></el-option>
-                  <el-option label="Tel" value="3"></el-option>
+                  <el-option label="Mr" value="1"></el-option>
+                  <el-option label="Miss" value="2"></el-option>
+                  <el-option label="Ms" value="3"></el-option>
                 </el-select>
               </template>
             </el-input>
@@ -132,6 +132,10 @@ export default {
 </script>
 
 <style>
+.bottom-header .register {
+  letter-spacing: 2.2px;
+}
+
 .bottom-header .el-dialog .register .el-form .el-input-group--prepend {
   box-shadow: 0px 3px 6px #00000029;
 }
@@ -165,6 +169,15 @@ export default {
   .el-dialog
   .register
   .el-form
+  .el-input
+  .el-input__inner::placeholder {
+  letter-spacing: 2.2px;
+}
+
+.bottom-header
+  .el-dialog
+  .register
+  .el-form
   .el-input.post-icon
   .el-input__inner {
   padding-right: 2rem;
@@ -186,6 +199,8 @@ export default {
   position: absolute;
   right: 0;
   border-radius: 5px;
+  font-family: "Noto Sans HK", sans-serif;
+  letter-spacing: 2.2px;
 }
 
 .bottom-header .el-dialog .register .el-form .input-btn .el-input__inner {
@@ -206,7 +221,7 @@ export default {
 }
 
 .bottom-header .el-dialog .register .checkbox-label {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .bottom-header .el-dialog .register .checkbox-label span {
@@ -234,6 +249,8 @@ export default {
   border-color: #fd9a1a;
   color: #fff;
   width: 100%;
+  font-family: "Noto Sans HK", sans-serif;
+  letter-spacing: 2.2px;
 }
 
 .bottom-header .el-dialog .register .el-form .login-link {

@@ -22,6 +22,13 @@ import HotelRecommendations from "./pages/HotelRecommendations.vue";
 import DayTime from "./pages/DayTime.vue";
 
 const router = createRouter({
+  scrollBehavior(_, _2, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
   history: createWebHistory(),
   routes: [
     { path: "/", redirect: "/home" },
