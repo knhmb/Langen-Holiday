@@ -8,18 +8,18 @@
             <el-input
               size="large"
               v-model="input3"
-              placeholder="Please input"
+              placeholder="e.g. 陳大文"
               class="input-with-select"
             >
               <template #prepend>
                 <el-select
                   v-model="select"
-                  placeholder="Mr."
-                  style="width: 70px"
+                  placeholder="先生"
+                  style="width: 80px"
                 >
-                  <el-option label="Restaurant" value="1"></el-option>
-                  <el-option label="Order No." value="2"></el-option>
-                  <el-option label="Tel" value="3"></el-option>
+                  <el-option label="先生" value="1"></el-option>
+                  <el-option label="小姐" value="2"></el-option>
+                  <el-option label="女士" value="3"></el-option>
                 </el-select>
               </template>
             </el-input>
@@ -30,18 +30,18 @@
             <el-input
               size="large"
               v-model="input3"
-              placeholder="Please input"
+              placeholder="e.g. Chan Tai Man"
               class="input-with-select"
             >
               <template #prepend>
                 <el-select
                   v-model="select"
                   placeholder="Mr."
-                  style="width: 70px"
+                  style="width: 80px"
                 >
-                  <el-option label="Restaurant" value="1"></el-option>
-                  <el-option label="Order No." value="2"></el-option>
-                  <el-option label="Tel" value="3"></el-option>
+                  <el-option label="Mr" value="1"></el-option>
+                  <el-option label="Miss" value="2"></el-option>
+                  <el-option label="Ms" value="3"></el-option>
                 </el-select>
               </template>
             </el-input>
