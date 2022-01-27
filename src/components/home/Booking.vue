@@ -19,13 +19,17 @@
       </el-row>
       <el-row :gutter="3">
         <el-col @click="isOpen = false" class="form-control" :sm="24" :lg="15">
-          <el-date-picker
+          <date-picker
+            @dropdownToggle="toggleDropdown"
+            :isDateOpen="isDateOpen"
+          ></date-picker>
+          <!-- <el-date-picker
             v-model="datePicker"
             type="daterange"
             start-placeholder="入住 2021年5月22日 (星期六)"
             end-placeholder="退房 2021年5月23日 (星期日)"
           >
-          </el-date-picker>
+          </el-date-picker> -->
           <!-- <el-input
             class="calendar-input"
             v-model="input"
@@ -154,13 +158,20 @@
 </template>
 
 <script>
+import DatePicker from "./DatePicker.vue";
+
 export default {
+  components: {
+    DatePicker,
+  },
   data() {
     return {
       input: "",
       datePicker: "",
       isSelected: "no",
       isOpen: false,
+      date: new Date(),
+      isDateOpen: false,
     };
   },
   methods: {
@@ -169,6 +180,11 @@ export default {
     },
     openDropdown() {
       this.isOpen = !this.isOpen;
+      this.isDateOpen = false;
+    },
+    toggleDropdown(event) {
+      this.isDateOpen = event;
+      this.isOpen = false;
     },
   },
   computed: {
@@ -293,9 +309,9 @@ export default {
   height: 42px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   cursor: pointer;
-  /* padding: 20px 35px; */
+  padding: 20px 55px;
 }
 
 .booking .select-input::after {
@@ -310,6 +326,7 @@ export default {
 .booking .select-input .individual-booking {
   position: absolute;
   bottom: -263px;
+  left: 0;
   width: 100%;
   background-color: #fff;
   box-shadow: 0px 3px 6px #00000028;

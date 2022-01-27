@@ -26,6 +26,7 @@ library.add(faTrashAlt, faEdit);
 
 app.use(ElementPlus);
 app.use(SetupCalendar, {});
+
 app.use(router);
 app.use(store);
 
