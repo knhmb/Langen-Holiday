@@ -5,7 +5,7 @@
     <el-row :gutter="20">
       <el-col :sm="24" :lg="6">
         <div class="left-section">
-          <p>Date</p>
+          <p>入住日期</p>
           <Calendar />
           <!-- <el-row>
             <el-col :span="12">

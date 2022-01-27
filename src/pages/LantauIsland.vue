@@ -2,18 +2,18 @@
   <section class="lantau-island">
     <banner>
       <img src="../assets/banner-LantauIsland.jpg" alt="" />
-      <h3>長洲</h3>
+      <h3>大嶼山</h3>
       <p>
-        長洲位於香港島之西南海域，面積約3平方公里人口雖只有3至4萬人，卻為本港各離島之冠。島民大部份世代而居，故相處融洽、民風簡樸、互助互愛。而且環境優美，空氣清新，設施齊備，交通便利，是香港人假日的好去處。
+        大嶼山位於珠江口，是本港最大的一個島嶼，面積約144平方公里，近年因島上迪士尼樂園開幕而聞名中外。其實此島尚有很多知名的地方，如梅窩銀礦灣，大澳水鄉，寶蓮寺大佛及香港國際機場等均令各地遊人慕名而至。
       </p>
     </banner>
     <base-container>
       <div class="search">
-        <h2>渡假屋 <span>搜尋結果 :</span></h2>
+        <!-- <h2>渡假屋 <span>搜尋結果 :</span></h2> -->
         <el-row :gutter="20">
           <el-col :sm="24" :lg="6">
             <div class="left-section">
-              <p>Date</p>
+              <p>入住日期</p>
               <Calendar />
               <el-row>
                 <el-col>

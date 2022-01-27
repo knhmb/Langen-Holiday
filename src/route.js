@@ -17,6 +17,9 @@ import EvaluationRecord from "./pages/EvaluationRecord.vue";
 import AppointmentRecord from "./pages/AppointmentRecord.vue";
 import CheungChauIsland from "./pages/CheungChauIsland.vue";
 import LantauIsland from "./pages/LantauIsland.vue";
+import LammaIsland from "./pages/LammaIsland.vue";
+import HotelRecommendations from "./pages/HotelRecommendations.vue";
+import DayTime from "./pages/DayTime.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -32,6 +35,9 @@ const router = createRouter({
     { path: "/join", component: Join },
     { path: "/cheung-chau-island", component: CheungChauIsland },
     { path: "/lantau-island", component: LantauIsland },
+    { path: "/lamma-island", component: LammaIsland },
+    { path: "/hotel-recommendations", component: HotelRecommendations },
+    { path: "/day-time", component: DayTime },
     {
       path: "/edit-profile",
       component: EditProfile,

@@ -446,10 +446,13 @@ export default {
         option === 16
       ) {
         this.$emit("setIsActiveClass", 5);
+        this.$router.push("/lamma-island");
       } else if (option === 17 || option === 18) {
         this.$emit("setIsActiveClass", 6);
+        this.$router.push("/day-time");
       } else if (option === 19) {
         this.$emit("setIsActiveClass", 7);
+        this.$router.push("/hotel-recommendations");
       }
       this.$emit("setIsActiveSubMenuItem", option);
     },

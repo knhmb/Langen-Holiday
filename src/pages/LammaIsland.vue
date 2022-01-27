@@ -1,10 +1,10 @@
 <template>
-  <section class="cheung-chau-island">
+  <section class="lamma-island">
     <banner>
-      <img src="../assets/banner-CheungChau.jpg" alt="" />
-      <h3>長洲</h3>
+      <img src="../assets/banner-LammaIsland.jpg" alt="" />
+      <h3>南丫島</h3>
       <p>
-        長洲位於香港島之西南海域，面積約3平方公里人口雖只有3至4萬人，卻為本港各離島之冠。島民大部份世代而居，故相處融洽、民風簡樸、互助互愛。而且環境優美，空氣清新，設施齊備，交通便利，是香港人假日的好去處。
+        南丫島位於香港島西南，面積約十三點六平方公里，是香港境內的第三大島嶼，由於島上風光明媚，有不少洋人聚居於此，令島上生活文化溶合了中西兩方面的特色。
       </p>
     </banner>
     <base-container>
@@ -66,10 +66,10 @@
               <p>地點</p>
               <div class="location">
                 <el-checkbox-group v-model="location">
-                  <el-checkbox label="長洲" />
-                  <el-checkbox label="市政大樓" />
-                  <el-checkbox label="東灣東堤" />
-                  <el-checkbox label="西堤海景樓" />
+                  <el-checkbox label="南丫島" />
+                  <el-checkbox label="模達灣" />
+                  <el-checkbox label="沙埔舊村" />
+                  <el-checkbox label="榕樹灣" />
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
@@ -120,29 +120,29 @@ export default {
 
 
 <style>
-.cheung-chau-island {
+.lamma-island {
   margin-bottom: 2rem;
 }
 
-.cheung-chau-island .search .left-section {
+.lamma-island .search .left-section {
   margin-bottom: 1rem;
   color: #333333;
 }
-.cheung-chau-island .search h2 {
+.lamma-island .search h2 {
   color: #fd9a1a;
 }
 
-.cheung-chau-island .search span {
+.lamma-island .search span {
   color: #8d8d8d;
   font-size: 16px;
 }
 
-.cheung-chau-island .search .left-section p {
+.lamma-island .search .left-section p {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.cheung-chau-island .search .left-section .range {
+.lamma-island .search .left-section .range {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -150,131 +150,122 @@ export default {
   margin-bottom: 0.5rem;
 }
 
-.cheung-chau-island .search .left-section .range img {
+.lamma-island .search .left-section .range img {
   width: 25px;
   height: 25px;
   cursor: pointer;
 }
 
-.cheung-chau-island .search .left-section .range span {
+.lamma-island .search .left-section .range span {
   margin: 0 1.9rem;
 }
 
-.cheung-chau-island .search .left-section .pet-option {
+.lamma-island .search .left-section .pet-option {
   background-color: #f5f5f5;
   text-align: center;
   border-radius: 18px;
 }
 
-.cheung-chau-island .search .left-section .pet-option .el-col {
+.lamma-island .search .left-section .pet-option .el-col {
   border-radius: 18px;
 }
 
-.cheung-chau-island .search .left-section .pet-option .el-col p {
+.lamma-island .search .left-section .pet-option .el-col p {
   margin: 0;
   padding: 0.3rem 0;
   color: #999;
   cursor: pointer;
 }
 
-.cheung-chau-island .search .is-active-option {
+.lamma-island .search .is-active-option {
   background-color: #fd9a1a;
 }
 
-.cheung-chau-island
-  .search
-  .left-section
-  .pet-option
-  .el-col.is-active-option
-  p {
+.lamma-island .search .left-section .pet-option .el-col.is-active-option p {
   color: #fff;
 }
 
-.cheung-chau-island .search .left-section .location {
+.lamma-island .search .left-section .location {
   border: none;
   /* border-bottom: 1px solid #d8d8d8; */
   padding-bottom: 0.5rem;
 }
 
-.cheung-chau-island .search .left-section .el-checkbox--default {
+.lamma-island .search .left-section .el-checkbox--default {
   display: flex;
   align-items: center;
   margin: 0;
   margin-bottom: -0.4rem;
 }
 
-.cheung-chau-island
-  .search
-  .left-section
-  .el-checkbox--default
-  .el-checkbox__label {
+.lamma-island .search .left-section .el-checkbox--default .el-checkbox__label {
   font-size: 14px;
   font-weight: 400;
   color: #333333;
 }
 
-.cheung-chau-island .search .left-section .el-checkbox .el-checkbox__inner {
+.lamma-island .search .left-section .el-checkbox .el-checkbox__inner {
   border-radius: 0;
   width: 16px;
   height: 16px;
 }
 
-.cheung-chau-island .banner {
+.lamma-island .banner {
   margin-bottom: 2rem;
   position: relative;
 }
 
-.cheung-chau-island .banner img {
+.lamma-island .banner img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.cheung-chau-island .banner p,
-.cheung-chau-island .banner h3 {
+.lamma-island .banner p,
+.lamma-island .banner h3 {
   position: absolute;
   left: 4rem;
   color: #fff;
 }
 
-.cheung-chau-island .banner h3 {
+.lamma-island .banner h3 {
   top: 60%;
   font-size: 2rem;
 }
 
-.cheung-chau-island .banner p {
+.lamma-island .banner p {
   top: 75%;
   max-width: 700px;
 }
 
 @media screen and (max-width: 820px) {
-  .cheung-chau-island .banner p,
-  .cheung-chau-island .banner h3 {
+  .lamma-island .banner p,
+  .lamma-island .banner h3 {
     left: 1rem;
   }
 
-  .cheung-chau-island .banner h3 {
+  .lamma-island .banner h3 {
     top: 45%;
   }
 
-  .cheung-chau-island .banner p {
+  .lamma-island .banner p {
     top: 65%;
     max-width: 650px;
   }
 }
 
 @media screen and (max-width: 540px) {
-  .cheung-chau-island .banner p,
-  .cheung-chau-island .banner h3 {
+  .lamma-island .banner p,
+  .lamma-island .banner h3 {
     left: 1rem;
   }
 
-  .cheung-chau-island .banner h3 {
+  .lamma-island .banner h3 {
     top: 30%;
     font-size: 1rem;
   }
 
-  .cheung-chau-island .banner p {
+  .lamma-island .banner p {
     top: 45%;
     font-size: 0.6rem;
     margin-top: 0.5rem;
