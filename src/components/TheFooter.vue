@@ -23,17 +23,28 @@
               </router-link>
             </div>
           </el-col>
-          <el-col :sm="24" :lg="6">
+          <el-col class="payment-method" :sm="24" :lg="6">
             <span>付款方式</span>
             <img class="payment" src="../assets/footer-payment.png" alt="" />
           </el-col>
-          <el-col :sm="24" :lg="5">
+          <el-col class="social" :sm="24" :lg="5">
             <span>關注我們</span>
-            <img
+            <div class="social-media">
+              <a href="https://www.facebook.com/langenholiday" target="_blank">
+                <img src="../assets/icon-facebook.png" alt="" />
+              </a>
+              <a
+                href="https://instagram.com/langenholiday?utm_medium=copy_link"
+                target="_blank"
+              >
+                <img src="../assets/icon-ig.png" alt="" />
+              </a>
+            </div>
+            <!-- <img
               class="social-media"
               src="../assets/footer-social-media.png"
               alt=""
-            />
+            /> -->
           </el-col>
           <el-col :sm="24" :lg="5">
             <p>Copyright © 2005 - 2021 樂程假期公司 All Right Reserve</p>
@@ -70,16 +81,34 @@
   color: #ffffff;
 }
 
+.footer-content .payment-method,
+.footer-content .social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer-content .payment {
   width: 250px;
   margin-top: 0.7rem;
   display: block;
 }
 
+.footer-content .social span {
+  margin: 0;
+}
+
 .footer-content .social-media {
-  width: 50px;
+  width: 100%;
+  text-align: center;
   margin-top: 0.7rem;
-  display: block;
+}
+
+.footer-content .social-media img {
+  width: 25px;
+  display: inline;
+  margin-right: 0.5rem;
+  cursor: pointer;
 }
 
 .footer-content p {
