@@ -39,8 +39,21 @@
             </el-col>
             <el-col :span="12">
               <div class="separation">
+                <span>房間類型:</span>
+                <span>家庭套房</span>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <div class="separation">
                 <span>面積:</span>
-                <span>400 soft</span>
+                <span>400 呎</span>
+              </div>
+            </el-col>
+
+            <el-col :span="12">
+              <div class="separation">
+                <span>可住人數:</span>
+                <span>6</span>
               </div>
             </el-col>
             <el-col :span="12">
@@ -51,8 +64,8 @@
             </el-col>
             <el-col :span="12">
               <div class="separation no-border">
-                <span>可住人數:</span>
-                <span>4</span>
+                <span>竉物留宿:</span>
+                <span>可以</span>
               </div>
             </el-col>
             <el-col :span="12">

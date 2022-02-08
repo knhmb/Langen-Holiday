@@ -22,10 +22,37 @@
           <el-button class="small-btn">1晚</el-button>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :span="24">
-          <label class="date" style="display: block">人數</label>
-          <el-select class="m-2" placeholder="5">
+      <el-row :gutter="20">
+        <el-col>
+          <p class="date">人數</p>
+        </el-col>
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block">成人</label>
+          <el-select class="m-2" placeholder="2">
+            <el-option> </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block">兒童</label>
+          <el-select class="m-2" placeholder="3">
+            <el-option> </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block">兒童1 年齡</label>
+          <el-select class="m-2" placeholder="8">
+            <el-option> </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block">兒童2 年齡</label>
+          <el-select class="m-2" placeholder="9">
+            <el-option> </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block">兒童3 年齡</label>
+          <el-select class="m-2" placeholder="10">
             <el-option> </el-option>
           </el-select>
         </el-col>
@@ -68,6 +95,14 @@ export default {
 .service-detail .el-card .text.item .el-row {
   align-items: center;
   position: relative;
+}
+
+.service-detail .el-card .text.item .el-col {
+  margin-bottom: 0.5rem;
+}
+
+.service-detail .el-card .text.item .el-col .el-select {
+  width: 100%;
 }
 
 .service-detail .el-card .text.item {
