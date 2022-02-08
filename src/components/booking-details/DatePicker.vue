@@ -1,116 +1,124 @@
 <template>
-  <Calendar
+  <date-picker
     :columns="layout.columns"
     :rows="layout.rows"
     :is-expanded="layout.isExpanded"
     color="orange"
+    :model-config="modelConfig"
+    v-model="dateSelected"
     :attributes="attrs"
+    is-range
   >
-  </Calendar>
+  </date-picker>
+  <p>{{ dateSelected }}</p>
 </template>
 
 <script>
-import { Calendar } from "v-calendar";
+import { DatePicker } from "v-calendar";
 
 export default {
   components: {
-    Calendar,
+    DatePicker,
   },
   data() {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
     return {
+      modelConfig: {
+        type: "string",
+        mask: "YYYY-MM-DD", // Uses 'iso' if missing
+      },
       attrs: [
         {
           highlight: true,
           dates: new Date(year, month, 12),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, month, 13),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, month, 14),
-          popover: { label: 800 },
+          // popover: { label: 800 },
         },
         {
           highlight: true,
           dates: new Date(year, month, 15),
-          popover: { label: 800 },
+          // popover: { label: 800 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 9),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 10),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 11),
-          popover: { label: 800 },
+          // popover: { label: 800 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 12),
-          popover: { label: 800 },
+          // popover: { label: 800 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 13),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 14),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 15),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 16),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 17),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 18),
-          popover: { label: 800 },
+          // popover: { label: 800 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 19),
-          popover: { label: 800 },
+          // popover: { label: 800 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 20),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 21),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
         {
           highlight: true,
           dates: new Date(year, 1, 22),
-          popover: { label: 500 },
+          // popover: { label: 500 },
         },
       ],
     };
@@ -131,6 +139,14 @@ export default {
           isExpanded: true,
         },
       });
+    },
+    dateSelected: {
+      get() {
+        return this.$store.getters.dateSelected;
+      },
+      set(value) {
+        this.$store.dispatch("changeDate", value);
+      },
     },
   },
 };

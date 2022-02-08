@@ -13,10 +13,10 @@
       </el-row>
       <el-row>
         <el-col :span="10">
-          <span class="date-delivery">2021年5月22日 (星期六)</span>
+          <span class="date-delivery">{{ dateSelected.start }}</span>
         </el-col>
         <el-col :span="10">
-          <span class="date-delivery">2021年5月23日 (星期日)</span>
+          <span class="date-delivery">{{ dateSelected.end }}</span>
         </el-col>
         <el-col class="my-btn" :span="4">
           <el-button class="small-btn">1晚</el-button>
@@ -73,6 +73,11 @@ import AddOns from "./AddOns.vue";
 export default {
   components: {
     AddOns,
+  },
+  computed: {
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
   },
 };
 </script>

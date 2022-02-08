@@ -8,6 +8,7 @@ const store = createStore({
   state() {
     return {
       headerVisible: true,
+      dateSelected: "",
     };
   },
   getters,
