@@ -389,7 +389,11 @@
         @toggleRegisterForm="switchForm"
         @toggleForgotPassword="switchForm"
       />
-      <Register v-else-if="dialogTitle === '註冊'" @toggleLogin="switchForm" />
+      <Register
+        @closeDialog="login"
+        v-else-if="dialogTitle === '註冊'"
+        @toggleLogin="switchForm"
+      />
       <forgot-password @toggleLoginForm="switchForm" v-else></forgot-password>
     </el-dialog>
   </div>

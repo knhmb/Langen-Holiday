@@ -1,64 +1,80 @@
 <template>
   <div class="register">
-    <el-form label-position="top">
+    <el-form
+      ref="ruleForm"
+      :model="ruleForm"
+      :rules="rules"
+      label-position="top"
+    >
       <el-row :gutter="10">
         <el-col :sm="24" :md="12">
-          <el-form-item label="中文姓名 (與證件相同)">
-            <el-input v-model="value" placeholder="Please input">
+          <el-form-item prop="chineseName" label="中文姓名 (與證件相同)">
+            <el-input v-model="ruleForm.chineseName" placeholder="Please input">
               <template #prepend>
-                <el-select placeholder="先生" style="width: 70px">
-                  <el-option label="先生" value="1"></el-option>
-                  <el-option label="小姐" value="2"></el-option>
-                  <el-option label="女士" value="3"></el-option>
+                <el-select
+                  v-model="ruleForm.chineseSurName"
+                  placeholder="先生"
+                  style="width: 70px"
+                >
+                  <el-option label="先生" value="先生"></el-option>
+                  <el-option label="小姐" value="小姐"></el-option>
+                  <el-option label="女士" value="女士"></el-option>
                 </el-select>
               </template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="英文姓名 (與證件相同)">
-            <el-input placeholder="Please input">
+          <el-form-item prop="englishName" label="英文姓名 (與證件相同)">
+            <el-input v-model="ruleForm.englishName" placeholder="Please input">
               <template #prepend>
-                <el-select placeholder="Mr." style="width: 70px">
-                  <el-option label="Mr" value="1"></el-option>
-                  <el-option label="Miss" value="2"></el-option>
-                  <el-option label="Ms" value="3"></el-option>
+                <el-select
+                  v-model="ruleForm.englishSurName"
+                  placeholder="Mr."
+                  style="width: 70px"
+                >
+                  <el-option label="Mr" value="Mr"></el-option>
+                  <el-option label="Miss" value="Miss"></el-option>
+                  <el-option label="Ms" value="Ms"></el-option>
                 </el-select>
               </template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item label="電郵地址">
-            <el-input class="input-btn" v-model="email"></el-input>
+          <el-form-item prop="email" label="電郵地址">
+            <el-input
+              class="input-btn"
+              v-model.trim="ruleForm.email"
+            ></el-input>
             <el-button class="inner-btn">獲取驗證碼</el-button>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="電郵驗證碼">
-            <el-input></el-input>
+          <el-form-item prop="emailVerificationCode" label="電郵驗證碼">
+            <el-input v-model="ruleForm.emailVerificationCode"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="電話號碼">
-            <el-input></el-input>
+          <el-form-item prop="phoneNumber" label="電話號碼">
+            <el-input v-model="ruleForm.phoneNumber"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="密碼">
+          <el-form-item prop="password" label="密碼">
             <el-input
               class="post-icon"
-              v-model="password"
+              v-model="ruleForm.password"
               :type="passwordType1"
             ></el-input>
             <img @click="switchIcon('password')" :src="iconEye1" alt="" />
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="確認密碼">
+          <el-form-item prop="confirmPassword" label="確認密碼">
             <el-input
               class="post-icon"
-              v-model="confirmPassword"
+              v-model="ruleForm.confirmPassword"
               :type="passwordType2"
             ></el-input>
             <img
@@ -69,8 +85,8 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item>
-            <el-checkbox></el-checkbox>
+          <el-form-item prop="terms">
+            <el-checkbox v-model="ruleForm.terms"></el-checkbox>
             <span class="checkbox-label"
               >我已詳閱並同意 <span>使用者條款</span>&
               <span>隱私權保護政策</span></span
@@ -78,7 +94,7 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-button class="register-btn">註冊</el-button>
+          <el-button @click="register" class="register-btn">註冊</el-button>
         </el-col>
         <el-col>
           <p class="login-link">
@@ -91,20 +107,141 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Please enter the password"));
+      } else {
+        if (this.ruleForm.confirmPassword !== "") {
+          this.$refs.ruleForm.validateField("confirmPassword");
+        }
+        callback();
+      }
+    };
+
+    const validateConfirmPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("Please enter the password again"));
+      } else {
+        if (value !== this.ruleForm.password) {
+          callback(new Error("Password and confirm password do not match"));
+        } else {
+          callback();
+        }
+      }
+    };
+
     return {
-      value: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      ruleForm: {
+        englishSurName: "",
+        chineseSurName: "",
+        chineseName: "",
+        englishName: "",
+        email: "",
+        emailVerificationCode: "",
+        phoneNumber: "",
+        terms: [],
+        password: "",
+        confirmPassword: "",
+      },
       passwordType1: "password",
       passwordType2: "password",
       iconEye1: require("../assets/icon-eyeoff.svg"),
       iconEye2: require("../assets/icon-eyeoff.svg"),
+      rules: {
+        englishName: [
+          {
+            required: true,
+            message: "Name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        englishSurName: [
+          {
+            required: true,
+            message: "Pick a surname",
+            trigger: "change",
+          },
+        ],
+        chineseName: [
+          {
+            required: true,
+            message: "Name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        chineseSurName: [
+          {
+            required: true,
+            message: "Pick a surname",
+            trigger: "change",
+          },
+        ],
+        email: [
+          {
+            required: true,
+            type: "email",
+            trigger: "blur",
+          },
+        ],
+        emailVerificationCode: [
+          {
+            required: true,
+            message: "Please enter verification code",
+            trigger: "blur",
+          },
+        ],
+        phoneNumber: [
+          {
+            required: true,
+            message: "Please enter a phone number",
+            trigger: "change",
+          },
+        ],
+        terms: [
+          {
+            required: true,
+            message: "Terms and conditions must be checked",
+            trigger: "change",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            validator: validatePass,
+            trigger: "blur",
+          },
+          {
+            min: 6,
+            message: "Password must be atleat 6 characters",
+          },
+        ],
+        confirmPassword: [
+          {
+            required: true,
+            validator: validateConfirmPass,
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
+    resetFields() {
+      this.englishSurName = "";
+      this.chineseSurName = "";
+      this.chineseName = "";
+      this.englishName = "";
+      this.email = "";
+      this.emailVerificationCode = "";
+      this.phoneNumber = "";
+      this.terms = false;
+      this.password = "";
+      this.confirmPassword = "";
+    },
     switchIcon(option) {
       if (option === "password") {
         if (this.iconEye1 === require("../assets/icon-eyeon.svg")) {
@@ -126,6 +263,47 @@ export default {
     },
     toggleLoginForm() {
       this.$emit("toggleLogin", { title: "登入" });
+    },
+    async submitData() {
+      const data = {
+        email: this.email,
+        password: this.password,
+        username: this.englishName,
+        displayName: this.englishName,
+        givenName: "Francis",
+        lastName: "Wong",
+        phoneNo: this.phoneNumber,
+        isAgreePrivacyNotice: null,
+        isAgreeRecvPromo: null,
+        memberRegistration: true,
+      };
+
+      try {
+        await this.$store.dispatch("auth/register", data);
+        this.$emit("closeDialog", { closeDialog: false });
+        this.resetFields();
+      } catch (error) {
+        ElNotification({
+          title: "Error",
+          message: error.message,
+          type: "error",
+        });
+      }
+    },
+    async register() {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.submitData();
+        } else {
+          // alert("Error");
+          ElNotification({
+            title: "Error",
+            message: "Please check your inputs",
+            type: "error",
+          });
+          return false;
+        }
+      });
     },
   },
 };

@@ -62,7 +62,16 @@ export default {
     },
     loginForm() {
       this.$emit("closeDialog", { closeDialog: false });
-      this.$store.dispatch("auth/login");
+      const data = {
+        username: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("auth/login", data);
+      this.resetFields();
+    },
+    resetFields() {
+      this.email = "";
+      this.password = "";
     },
     toggleRegister() {
       this.$emit("toggleRegisterForm", { title: "註冊", formType: "regsiter" });
