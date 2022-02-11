@@ -80,6 +80,13 @@ const router = createRouter({
           name: "appointment-record",
         },
       ],
+      beforeEnter(to, from, next) {
+        if (localStorage.getItem("accessToken")) {
+          next();
+        } else {
+          next("/");
+        }
+      },
     },
   ],
 });

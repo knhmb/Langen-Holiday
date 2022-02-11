@@ -1,16 +1,30 @@
 <template>
   <div class="login">
-    <el-form label-position="top">
+    <el-form
+      ref="ruleForm"
+      :model="ruleForm"
+      :rules="rules"
+      label-position="top"
+    >
       <el-row>
         <el-col class="form-col">
-          <el-form-item label="電郵地址" :label-width="formLabelWidth">
-            <el-input v-model="email"> </el-input>
+          <el-form-item
+            prop="email"
+            label="電郵地址"
+            :label-width="formLabelWidth"
+          >
+            <el-input v-model="ruleForm.email"></el-input>
             <img src="../assets/icon-loginname.svg" alt="" />
           </el-form-item>
         </el-col>
         <el-col class="form-col">
-          <el-form-item label="密碼" :label-width="formLabelWidth">
-            <el-input v-model="password" :type="passwordInputType"> </el-input>
+          <el-form-item
+            prop="password"
+            label="密碼"
+            :label-width="formLabelWidth"
+          >
+            <el-input v-model="ruleForm.password" :type="passwordInputType">
+            </el-input>
             <img src="../assets/icon-password.svg" alt="" />
             <img
               @click="switchIcon"
@@ -27,7 +41,7 @@
           <p @click="forgotPassword" class="forgot-password">忘記密碼?</p>
         </el-col>
         <el-col class="form-col">
-          <el-button @click.prevent="loginForm">登入</el-button>
+          <el-button @click.prevent="login">登入</el-button>
         </el-col>
         <el-col class="form-col">
           <p class="register-link">
@@ -40,14 +54,34 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     return {
+      ruleForm: {
+        email: "",
+        password: "",
+      },
       formLabelWidth: "120px",
-      email: "",
-      password: "",
       eyeIcon: require("../assets/icon-eyeoff.svg"),
       passwordInputType: "password",
+      rules: {
+        email: [
+          {
+            required: true,
+            message: "Username cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: "Password cannot be empty",
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -60,14 +94,36 @@ export default {
         this.passwordInputType = "text";
       }
     },
-    loginForm() {
-      this.$emit("closeDialog", { closeDialog: false });
+    async loginForm() {
       const data = {
-        username: this.email,
-        password: this.password,
+        username: this.ruleForm.email,
+        password: this.ruleForm.password,
       };
-      this.$store.dispatch("auth/login", data);
-      this.resetFields();
+      try {
+        await this.$store.dispatch("auth/login", data);
+        this.$emit("closeDialog", { closeDialog: false });
+        this.resetFields();
+      } catch (error) {
+        ElNotification({
+          title: "Error",
+          message: error.message,
+          type: "error",
+        });
+      }
+    },
+    async login() {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.loginForm();
+        } else {
+          ElNotification({
+            title: "Error",
+            message: "Please check your inputs",
+            type: "error",
+          });
+          return false;
+        }
+      });
     },
     resetFields() {
       this.email = "";

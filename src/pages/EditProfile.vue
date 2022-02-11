@@ -5,7 +5,7 @@
         <el-col :sm="24" :lg="6">
           <div class="profile-menu">
             <img src="../assets/member-avatar.svg" alt="" />
-            <p>chan tai man</p>
+            <p v-if="profileName">{{ profileName }}</p>
             <ul>
               <router-link
                 tag="li"
@@ -89,6 +89,7 @@ export default {
       isBookmarkClicked: false,
       isCommentClicked: false,
       isBookingClicked: false,
+      profileName: null,
     };
   },
   methods: {
@@ -203,6 +204,9 @@ export default {
       this.iconBooking = require("../assets/icon-profile-bookging-on.svg");
       this.isBookingClicked = true;
     }
+
+    const user = JSON.parse(localStorage.getItem("userData"));
+    this.profileName = user.username;
   },
 };
 </script>

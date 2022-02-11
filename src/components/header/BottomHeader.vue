@@ -465,7 +465,7 @@ export default {
     },
     logout() {
       this.$store.dispatch("auth/logout");
-      this.$router.replace("/");
+      // this.$router.replace("/");
       // this.loggedIn = false;
     },
     login(event) {

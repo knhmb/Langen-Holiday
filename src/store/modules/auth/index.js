@@ -7,6 +7,8 @@ export default {
   state() {
     return {
       isLoggedIn: false,
+      userId: null,
+      token: null,
     };
   },
   getters,
