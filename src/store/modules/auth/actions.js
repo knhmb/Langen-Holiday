@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../../route.js";
 
 export default {
   async login(context, payload) {
@@ -27,13 +28,12 @@ export default {
   },
   logout(context) {
     const refreshToken = localStorage.getItem("refreshToken");
-    console.log(refreshToken);
-    const data = {
-      authorization: refreshToken,
-    };
     axios
-      .delete("/api/authenticate", data, {
+      .delete("/api/authenticate", {
         headers: {
+          authorization: refreshToken,
+        },
+        data: {
           authorization: refreshToken,
         },
       })
@@ -43,6 +43,7 @@ export default {
         localStorage.removeItem("refreshToken");
 
         context.commit("LOGOUT");
+        router.replace("/");
       })
       .catch((err) => {
         console.log(err);
