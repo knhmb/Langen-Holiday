@@ -27,6 +27,18 @@
                 <p>寵物:</p>
                 <p>{{ rate.pets }}</p>
               </el-col>
+              <el-col :span="8">
+                <p>兒童1年齡:</p>
+                <p>8</p>
+              </el-col>
+              <el-col :span="8">
+                <p>兒童2年齡:</p>
+                <p>9</p>
+              </el-col>
+              <el-col :span="8">
+                <p>兒童3年齡:</p>
+                <p>10</p>
+              </el-col>
             </el-row>
           </div>
           <div class="days-of-stay">
@@ -41,6 +53,16 @@
               </el-col>
             </el-row>
           </div>
+          <div class="total-price-with-tax">
+            <el-row>
+              <el-col>
+                <p>總價格(已包含稅款及服務費):</p>
+              </el-col>
+              <el-col>
+                <p class="price-after-tax">HK$1480.00</p>
+              </el-col>
+            </el-row>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -52,11 +74,23 @@
         <el-row>
           <el-col :span="12">
             <p>人數:</p>
-            <p>5</p>
+            <p>2位成人 + 3位兒童</p>
           </el-col>
           <el-col :span="12">
             <p>寵物:</p>
             <p>2</p>
+          </el-col>
+          <el-col :span="8">
+            <p>兒童1年齡:</p>
+            <p>8</p>
+          </el-col>
+          <el-col :span="8">
+            <p>兒童2年齡:</p>
+            <p>9</p>
+          </el-col>
+          <el-col :span="8">
+            <p>兒童3年齡:</p>
+            <p>10</p>
           </el-col>
         </el-row>
       </div>
@@ -150,7 +184,7 @@ export default {
           id: 1,
           title: "白沙灣渡假酒店",
           description: "香港新界西貢區白沙灣",
-          noOfPeople: 5,
+          noOfPeople: "2位成人 + 3位兒童",
           pets: 2,
           checkInDate: "2021年5月22日 15:00",
           checkOutDate: "2021年5月22日 12:00",
@@ -160,7 +194,7 @@ export default {
           id: 2,
           title: "白沙灣渡假酒店",
           description: "香港新界西貢區白沙灣",
-          noOfPeople: 5,
+          noOfPeople: "2位成人 + 3位兒童",
           pets: 2,
           checkInDate: "2021年5月22日 15:00",
           checkOutDate: "2021年5月22日 12:00",
@@ -225,22 +259,35 @@ export default {
   padding: 0 2rem;
 }
 
+.edit-profile .appointment-record .number-of-individuals .el-col {
+  margin-bottom: 0.5rem;
+}
+
 .edit-profile .appointment-record .number-of-individuals,
-.edit-profile .appointment-record .days-of-stay {
+.edit-profile .appointment-record .days-of-stay,
+.edit-profile .appointment-record .total-price-with-tax {
   margin-top: 1rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 0.5rem;
 }
 
-.edit-profile .appointment-record .days-of-stay {
+.edit-profile .appointment-record .total-price-with-tax {
   border: none;
 }
 
 .edit-profile .appointment-record .number-of-individuals p,
-.edit-profile .appointment-record .days-of-stay p {
+.edit-profile .appointment-record .days-of-stay p,
+.edit-profile .appointment-record .total-price-with-tax p {
   letter-spacing: 0.8px;
   color: #8d8d8d;
   font-size: 14px;
+}
+
+.edit-profile .appointment-record .total-price-with-tax .price-after-tax {
+  letter-spacing: 0px;
+  color: #fd9a1a;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .edit-profile .appointment-record-dialog .el-dialog {
@@ -267,6 +314,10 @@ export default {
   letter-spacing: 0.8px;
   color: #8d8d8d;
   font-size: 12px;
+}
+
+.edit-profile .appointment-record-dialog .number-of-individuals .el-col {
+  margin-bottom: 0.5rem;
 }
 
 .edit-profile .appointment-record-dialog .number-of-individuals,

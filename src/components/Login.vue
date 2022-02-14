@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <el-form
+      hide-required-asterisk
       ref="ruleForm"
       :model="ruleForm"
       :rules="rules"
