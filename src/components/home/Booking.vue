@@ -66,12 +66,14 @@
                     <el-col :span="12">
                       <div class="range">
                         <img
+                          @click="decreaseNumberOfPopulation"
                           class="plus-icon"
                           src="../../assets/icon--.svg"
                           alt=""
                         />
-                        <span>4</span>
+                        <span>{{ numberOfLivingPopulation }}</span>
                         <img
+                          @click="increaseNumberOfPopulation"
                           class="plus-icon"
                           src="../../assets/icon-+.svg"
                           alt=""
@@ -84,12 +86,14 @@
                     <el-col :span="12">
                       <div class="range">
                         <img
+                          @click="decreaseRoom"
                           class="plus-icon"
                           src="../../assets/icon--.svg"
                           alt=""
                         />
-                        <span>2</span>
+                        <span>{{ numberOfRooms }}</span>
                         <img
+                          @click="increaseRoom"
                           class="plus-icon"
                           src="../../assets/icon-+.svg"
                           alt=""
@@ -124,7 +128,7 @@
                   </el-row>
                 </div>
                 <div class="submit-btn">
-                  <el-button>套用</el-button>
+                  <el-button @click="isOpen = false">套用</el-button>
                 </div>
               </div>
             </transition>
@@ -172,6 +176,8 @@ export default {
       isOpen: false,
       date: new Date(),
       isDateOpen: false,
+      numberOfLivingPopulation: 4,
+      numberOfRooms: 2,
     };
   },
   methods: {
@@ -185,6 +191,24 @@ export default {
     toggleDropdown(event) {
       this.isDateOpen = event;
       this.isOpen = false;
+    },
+    increaseNumberOfPopulation() {
+      this.numberOfLivingPopulation++;
+    },
+    decreaseNumberOfPopulation() {
+      if (this.numberOfLivingPopulation <= 0) {
+        return;
+      }
+      this.numberOfLivingPopulation--;
+    },
+    increaseRoom() {
+      this.numberOfRooms++;
+    },
+    decreaseRoom() {
+      if (this.numberOfRooms <= 0) {
+        return;
+      }
+      this.numberOfRooms--;
     },
   },
   computed: {

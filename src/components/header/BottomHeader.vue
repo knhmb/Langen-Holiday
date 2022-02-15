@@ -375,9 +375,7 @@
         </el-menu>
       </el-col>
       <el-col v-if="!loggedIn" :sm="24" :lg="2">
-        <el-button class="login-btn" @click="dialogFormVisible = true"
-          >登入</el-button
-        >
+        <el-button class="login-btn" @click="openDialog">登入</el-button>
       </el-col>
     </el-row>
 
@@ -425,6 +423,10 @@ export default {
     },
   },
   methods: {
+    openDialog() {
+      this.dialogFormVisible = true;
+      this.dialogTitle = "登入";
+    },
     closeDropdown() {
       const li = document.querySelectorAll(".el-popper");
       li[0].style.display = "none";

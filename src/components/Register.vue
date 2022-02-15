@@ -88,7 +88,7 @@
           <el-form-item prop="terms">
             <el-checkbox v-model="ruleForm.terms"></el-checkbox>
             <span class="checkbox-label"
-              >我已詳閱並同意 <span>使用者條款</span>&
+              >我已詳閱並同意 <span @click="navigateTC">使用者條款</span>&
               <span>隱私權保護政策</span></span
             >
           </el-form-item>
@@ -183,13 +183,13 @@ export default {
         email: [
           {
             required: true,
-            type: "email",
+            // type: "email",
             trigger: "blur",
           },
         ],
         emailVerificationCode: [
           {
-            required: true,
+            // required: true,
             message: "Please enter verification code",
             trigger: "blur",
           },
@@ -231,16 +231,16 @@ export default {
   },
   methods: {
     resetFields() {
-      this.englishSurName = "";
-      this.chineseSurName = "";
-      this.chineseName = "";
-      this.englishName = "";
-      this.email = "";
-      this.emailVerificationCode = "";
-      this.phoneNumber = "";
-      this.terms = false;
-      this.password = "";
-      this.confirmPassword = "";
+      this.ruleForm.englishSurName = "";
+      this.ruleForm.chineseSurName = "";
+      this.ruleForm.chineseName = "";
+      this.ruleForm.englishName = "";
+      this.ruleForm.email = "";
+      this.ruleForm.emailVerificationCode = "";
+      this.ruleForm.phoneNumber = "";
+      this.ruleForm.terms = false;
+      this.ruleForm.password = "";
+      this.ruleForm.confirmPassword = "";
     },
     switchIcon(option) {
       if (option === "password") {
@@ -264,17 +264,21 @@ export default {
     toggleLoginForm() {
       this.$emit("toggleLogin", { title: "登入" });
     },
+    navigateTC() {
+      this.$router.push("/terms-and-conditions");
+      this.$emit("closeDialog", { closeDialog: false });
+    },
     async submitData() {
       const data = {
-        email: this.email,
-        password: this.password,
-        username: this.englishName,
-        displayName: this.englishName,
+        email: this.ruleForm.email,
+        password: this.ruleForm.password,
+        username: this.ruleForm.email,
+        displayName: this.ruleForm.englishName,
         givenName: "Francis",
         lastName: "Wong",
-        phoneNo: this.phoneNumber,
-        isAgreePrivacyNotice: null,
-        isAgreeRecvPromo: null,
+        phoneNo: this.ruleForm.phoneNumber,
+        isAgreePrivacyNotice: true,
+        isAgreeRecvPromo: true,
         memberRegistration: true,
       };
 
@@ -405,6 +409,7 @@ export default {
 .bottom-header .el-dialog .register .checkbox-label span {
   color: #fd9a1a;
   margin-right: 0.5rem;
+  cursor: pointer;
 }
 
 .bottom-header .el-dialog .register .el-form .el-checkbox__input,

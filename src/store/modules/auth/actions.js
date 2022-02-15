@@ -7,6 +7,7 @@ export default {
       .post("/api/authenticate", payload)
       .then((response) => {
         console.log(response.data);
+        console.log(response);
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("userData", JSON.stringify(response.data.item));
@@ -16,12 +17,17 @@ export default {
           userId: response.data.item.id,
         });
 
-        const dummy = localStorage.getItem("userData");
-        console.log(JSON.parse(dummy));
+        // const dummy = localStorage.getItem("userData");
+        // console.log(JSON.parse(dummy));
       })
       .catch((err) => {
-        if (err.response.data.statusCode === "401") {
-          const error = new Error("Username or password is invalid");
+        if (err.response.data.message === "error.account.invalid-username") {
+          const error = new Error("Username is invalid");
+          throw error;
+        } else if (
+          err.response.data.message === "error.account.invalid-password"
+        ) {
+          const error = new Error("Password is invalid");
           throw error;
         }
       });
@@ -56,9 +62,7 @@ export default {
         console.log(response);
       })
       .catch((err) => {
-        if (
-          err.response.data.trace === "error.account.username-already-exist"
-        ) {
+        if (err.response.data.statusCode === 400) {
           const error = new Error("Username Already Exists!");
           throw error;
         }

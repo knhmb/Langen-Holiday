@@ -1,31 +1,52 @@
 <template>
   <div class="date-picker" @click.self="toggleDropDown">
-    <img src="../../assets/icon-calendar.png" alt="" />
-    <p>入住 2021年5月22日 (星期六)</p>
+    <img @click="toggleDropDown" src="../../assets/icon-calendar.png" alt="" />
+    <el-button class="inner-btn" @click="dateDiff">1晚</el-button>
+    <p>
+      {{ range === "" ? checkInPlaceholder : range.start }}
+    </p>
     <span>-</span>
-    <p>退房 2021年5月23日 (星期日)</p>
+    <p>{{ range === "" ? checkOutPlaceholder : range.end }}</p>
     <transition name="slide-fade">
       <div v-if="isDateOpen" class="date-picker_input">
         <p>入住日期</p>
         <DatePicker
+          :model-config="modelConfig"
           @dayclick="onDayClick"
           :columns="layout.columns"
           :rows="layout.rows"
           :is-expanded="layout.isExpanded"
           color="orange"
+          is-range
           :attributes="attributes"
+          v-model="range"
         >
         </DatePicker>
         <div class="date-picker-btn">
-          <el-button>套用</el-button>
+          <el-button @click="closeDropdown">套用</el-button>
         </div>
       </div>
     </transition>
+
+    <el-dialog v-model="dialogVisible" title="Number of Nights" width="30%">
+      <span>{{
+        dateDifference === "" ? "No Date has been Selected" : dateDifference
+      }}</span>
+      <!-- <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="dialogVisible = false"
+            >Confirm</el-button
+          >
+        </span>
+      </template> -->
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { DatePicker } from "v-calendar";
+import moment from "moment";
 
 export default {
   props: ["isDateOpen"],
@@ -35,6 +56,15 @@ export default {
   data() {
     return {
       days: [],
+      range: "",
+      checkInPlaceholder: "入住 2021年5月22日 (星期六)",
+      checkOutPlaceholder: "退房 2021年5月23日 (星期日)",
+      modelConfig: {
+        type: "string",
+        mask: "YYYY-MM-DD", // Uses 'iso' if missing
+      },
+      dateDifference: "",
+      dialogVisible: false,
       //   isOpen: false,
     };
   },
@@ -80,6 +110,29 @@ export default {
     toggleDropDown() {
       this.$emit("dropdownToggle", !this.isDateOpen);
     },
+    closeDropdown() {
+      this.$emit("dropdownToggle", false);
+      if (this.range) {
+        this.$emit("numberOfDays", {
+          start: this.range.start,
+          end: this.range.end,
+        });
+      } else {
+        console.log("error");
+      }
+    },
+    dateDiff() {
+      if (this.range) {
+        let startDate = moment(this.range.start);
+        let endDate = moment(this.range.end);
+        let duration = moment.duration(endDate.diff(startDate));
+        let days = duration.asDays();
+        this.dateDifference = Math.round(days);
+        this.dialogVisible = true;
+      } else {
+        this.dialogVisible = true;
+      }
+    },
   },
 };
 </script>
@@ -106,6 +159,18 @@ export default {
   transform: translateY(-50%);
 }
 
+.booking .date-picker .el-button.inner-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 10%;
+  padding: 0.2rem 1rem;
+  background-color: #fd9a1a;
+  border: 1px solid #fd9a1a;
+  color: #fff;
+  border-radius: 5px;
+  letter-spacing: 1.1px;
+}
+
 .booking .date-picker .placeholder {
   position: absolute;
   display: flex;
@@ -124,7 +189,7 @@ export default {
   color: #8d8d8d;
 }
 
-.booking .date-picker::after {
+/* .booking .date-picker::after {
   content: "1晚";
   position: absolute;
   background-color: #fd9a1a;
@@ -134,7 +199,7 @@ export default {
   padding: 0.2rem 1rem;
   border-radius: 5px;
   cursor: pointer;
-}
+} */
 
 .booking .date-picker .date-picker_input {
   background-color: #fff;
