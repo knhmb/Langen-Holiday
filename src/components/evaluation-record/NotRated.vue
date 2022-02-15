@@ -28,6 +28,18 @@
                   <p>寵物:</p>
                   <p>{{ rate.pets }}</p>
                 </el-col>
+                <el-col :span="8">
+                  <p>兒童1年齡:</p>
+                  <p>8</p>
+                </el-col>
+                <el-col :span="8">
+                  <p>兒童2年齡:</p>
+                  <p>9</p>
+                </el-col>
+                <el-col :span="8">
+                  <p>兒童3年齡::</p>
+                  <p>10</p>
+                </el-col>
               </el-row>
             </div>
             <div class="days-of-stay">
@@ -185,6 +197,10 @@ export default {
   color: #fff;
   text-align: end;
   padding: 0 2rem;
+}
+
+.evaluation .comment-card .number-of-individuals .el-col {
+  margin-bottom: 0.5rem;
 }
 
 .evaluation .comment-card .number-of-individuals,

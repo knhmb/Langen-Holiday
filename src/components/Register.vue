@@ -88,8 +88,13 @@
           <el-form-item prop="terms">
             <el-checkbox v-model="ruleForm.terms"></el-checkbox>
             <span class="checkbox-label"
-              >我已詳閱並同意 <span @click="navigateTC">使用者條款</span>&
-              <span>隱私權保護政策</span></span
+              >我已詳閱並同意
+              <span @click="navigateTC('/terms-and-conditions')"
+                >使用者條款</span
+              >&
+              <span @click="navigateTC('/privacy-and-policy')"
+                >隱私權保護政策</span
+              ></span
             >
           </el-form-item>
         </el-col>
@@ -264,8 +269,8 @@ export default {
     toggleLoginForm() {
       this.$emit("toggleLogin", { title: "登入" });
     },
-    navigateTC() {
-      this.$router.push("/terms-and-conditions");
+    navigateTC(path) {
+      this.$router.push(path);
       this.$emit("closeDialog", { closeDialog: false });
     },
     async submitData() {

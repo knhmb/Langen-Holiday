@@ -4,7 +4,11 @@
     <base-card>
       <el-row>
         <el-col>
-          <label>姓名</label>
+          <label>中文姓名 (與證件相同)</label>
+          <p>陳大文</p>
+        </el-col>
+        <el-col>
+          <label>英文姓名 (與證件相同)</label>
           <p>Chan Tai Man</p>
         </el-col>
         <el-col>

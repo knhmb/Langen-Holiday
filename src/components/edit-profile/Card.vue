@@ -76,9 +76,11 @@ export default {
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
 }
+
 .edit-profile .bookmark-card .image {
   width: 100%;
-  /* object-fit: contain; */
+  height: 200px;
+  object-fit: cover;
 }
 
 .edit-profile .bookmark-card .location-icon {

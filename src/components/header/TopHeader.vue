@@ -40,6 +40,7 @@
             >
           </el-sub-menu>
           <el-sub-menu
+            popper-class="contact-payment"
             class="top-menu-item"
             :class="{ 'my-active': isActive === 2 }"
             index="2"
@@ -299,6 +300,10 @@ export default {
 .top-header .el-menu--horizontal > .el-sub-menu.is-active .el-sub-menu__title {
   border-bottom: none;
   color: #8d8d8d;
+}
+
+.el-menu--horizontal.contact-payment li {
+  font-size: 12px;
 }
 
 @media screen and (max-width: 768px) {

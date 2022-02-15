@@ -20,6 +20,7 @@ import LantauIsland from "./pages/LantauIsland.vue";
 import LammaIsland from "./pages/LammaIsland.vue";
 import HotelRecommendations from "./pages/HotelRecommendations.vue";
 import DayTime from "./pages/DayTime.vue";
+import PrivacyPolicy from "./pages/PrivacyPolicy.vue";
 
 const router = createRouter({
   scrollBehavior(_, _2, savedPosition) {
@@ -45,6 +46,7 @@ const router = createRouter({
     { path: "/lamma-island", component: LammaIsland },
     { path: "/hotel-recommendations", component: HotelRecommendations },
     { path: "/day-time", component: DayTime },
+    { path: "/privacy-and-policy", component: PrivacyPolicy },
     {
       path: "/edit-profile",
       component: EditProfile,

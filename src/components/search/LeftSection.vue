@@ -28,9 +28,19 @@
             </el-col>
             <el-col :span="12">
               <div class="range">
-                <img class="plus-icon" src="../../assets/icon--.svg" alt="" />
-                <span>4</span>
-                <img class="plus-icon" src="../../assets/icon-+.svg" alt="" />
+                <img
+                  @click="decreaseNumberOfPopulation"
+                  class="plus-icon"
+                  src="../../assets/icon--.svg"
+                  alt=""
+                />
+                <span>{{ numberOfLivingPopulation }}</span>
+                <img
+                  @click="increaseNumberOfPopulation"
+                  class="plus-icon"
+                  src="../../assets/icon-+.svg"
+                  alt=""
+                />
               </div>
             </el-col>
 
@@ -39,9 +49,19 @@
             </el-col>
             <el-col :span="12">
               <div class="range">
-                <img class="plus-icon" src="../../assets/icon--.svg" alt="" />
-                <span>2</span>
-                <img class="plus-icon" src="../../assets/icon-+.svg" alt="" />
+                <img
+                  @click="decreaseRoom"
+                  class="plus-icon"
+                  src="../../assets/icon--.svg"
+                  alt=""
+                />
+                <span>{{ numberOfRooms }}</span>
+                <img
+                  @click="increaseRoom"
+                  class="plus-icon"
+                  src="../../assets/icon-+.svg"
+                  alt=""
+                />
               </div>
             </el-col>
 
@@ -139,11 +159,31 @@ export default {
       location: [],
       isSelected: "pet",
       roomType: [],
+      numberOfLivingPopulation: 4,
+      numberOfRooms: 2,
     };
   },
   methods: {
     setOption(option) {
       this.isSelected = option;
+    },
+    increaseNumberOfPopulation() {
+      this.numberOfLivingPopulation++;
+    },
+    decreaseNumberOfPopulation() {
+      if (this.numberOfLivingPopulation <= 0) {
+        return;
+      }
+      this.numberOfLivingPopulation--;
+    },
+    increaseRoom() {
+      this.numberOfRooms++;
+    },
+    decreaseRoom() {
+      if (this.numberOfRooms <= 0) {
+        return;
+      }
+      this.numberOfRooms--;
     },
   },
 };

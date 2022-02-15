@@ -25,9 +25,19 @@
                 </el-col>
                 <el-col :span="12">
                   <div class="range">
-                    <img class="plus-icon" src="../assets/icon--.svg" alt="" />
-                    <span>4</span>
-                    <img class="plus-icon" src="../assets/icon-+.svg" alt="" />
+                    <img
+                      @click="decreaseNumberOfPopulation"
+                      class="plus-icon"
+                      src="../assets/icon--.svg"
+                      alt=""
+                    />
+                    <span>{{ numberOfLivingPopulation }}</span>
+                    <img
+                      @click="increaseNumberOfPopulation"
+                      class="plus-icon"
+                      src="../assets/icon-+.svg"
+                      alt=""
+                    />
                   </div>
                 </el-col>
 
@@ -36,9 +46,19 @@
                 </el-col>
                 <el-col :span="12">
                   <div class="range">
-                    <img class="plus-icon" src="../assets/icon--.svg" alt="" />
-                    <span>2</span>
-                    <img class="plus-icon" src="../assets/icon-+.svg" alt="" />
+                    <img
+                      @click="decreaseRoom"
+                      class="plus-icon"
+                      src="../assets/icon--.svg"
+                      alt=""
+                    />
+                    <span>{{ numberOfRooms }}</span>
+                    <img
+                      @click="increaseRoom"
+                      class="plus-icon"
+                      src="../assets/icon-+.svg"
+                      alt=""
+                    />
                   </div>
                 </el-col>
 
@@ -134,6 +154,7 @@
 import Calendar from "../components/search/Calendar.vue";
 import RightSection from "../components/search/RightSection.vue";
 import Banner from "../components/cheung-chau/Banner.vue";
+import RangeMixin from "../mixins/range.js";
 
 export default {
   components: {
@@ -141,6 +162,7 @@ export default {
     RightSection,
     Banner,
   },
+  mixins: [RangeMixin],
   data() {
     return {
       time: [],
