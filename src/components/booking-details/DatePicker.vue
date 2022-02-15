@@ -10,7 +10,6 @@
     is-range
   >
   </date-picker>
-  <p>{{ dateSelected }}</p>
 </template>
 
 <script>

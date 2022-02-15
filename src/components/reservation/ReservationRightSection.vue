@@ -15,7 +15,25 @@
               <p class="info">人數:</p>
             </el-col>
             <el-col :span="16">
-              <p class="data">5</p>
+              <p class="data">2位成人 + 3位兒童</p>
+            </el-col>
+            <el-col :span="8">
+              <p class="info">兒童1年齡:</p>
+            </el-col>
+            <el-col :span="16">
+              <p class="data">8</p>
+            </el-col>
+            <el-col :span="8">
+              <p class="info">兒童2年齡:</p>
+            </el-col>
+            <el-col :span="16">
+              <p class="data">9</p>
+            </el-col>
+            <el-col :span="8">
+              <p class="info">兒童3年齡:</p>
+            </el-col>
+            <el-col :span="16">
+              <p class="data">10</p>
             </el-col>
             <el-col :span="8">
               <p class="info">寵物:</p>
