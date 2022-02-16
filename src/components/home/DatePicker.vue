@@ -1,7 +1,10 @@
 <template>
   <div class="date-picker" @click.self="toggleDropDown">
     <img @click="toggleDropDown" src="../../assets/icon-calendar.png" alt="" />
-    <el-button class="inner-btn" @click="dateDiff">1晚</el-button>
+    <el-button class="inner-btn" @click="dateDiff"
+      >{{ dateDifference === "" ? "1" : dateDifference }}晚</el-button
+    >
+
     <p>
       {{ range === "" ? checkInPlaceholder : range.start }}
     </p>
@@ -18,8 +21,8 @@
           :is-expanded="layout.isExpanded"
           color="orange"
           is-range
-          :attributes="attributes"
           v-model="range"
+          @click="assignDateDifference"
         >
         </DatePicker>
         <div class="date-picker-btn">
@@ -67,6 +70,11 @@ export default {
       dialogVisible: false,
       //   isOpen: false,
     };
+  },
+  watch: {
+    // dateDifference(oldVal, newVal) {
+    //   this.dateDifference = newVal;
+    // },
   },
   computed: {
     layout() {
@@ -123,14 +131,19 @@ export default {
     },
     dateDiff() {
       if (this.range) {
+        this.assignDateDifference();
+        this.dialogVisible = true;
+      } else {
+        this.dialogVisible = true;
+      }
+    },
+    assignDateDifference() {
+      if (this.range) {
         let startDate = moment(this.range.start);
         let endDate = moment(this.range.end);
         let duration = moment.duration(endDate.diff(startDate));
         let days = duration.asDays();
         this.dateDifference = Math.round(days);
-        this.dialogVisible = true;
-      } else {
-        this.dialogVisible = true;
       }
     },
   },
