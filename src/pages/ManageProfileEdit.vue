@@ -20,7 +20,11 @@
             </el-form-item>
           </el-col>
           <el-col>
-            <el-button @click.prevent="submit">電話號碼</el-button>
+            <el-button
+              :disabled="name === '' || email === '' || telephone === ''"
+              @click.prevent="submit"
+              >電話號碼</el-button
+            >
           </el-col>
         </el-row>
       </el-form>
@@ -29,19 +33,48 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     return {
-      name: "Chan Tai Man",
+      name: "",
       email: "chantaiman@gmai.com",
       telephone: "61234678",
     };
   },
   methods: {
-    submit() {
+    async submit() {
       // this.$router.push("/edit-profile");
-      this.$emit("managed", false);
+      const userId = JSON.parse(localStorage.getItem("userData")).id;
+      const data = {
+        id: userId,
+        displayName: "chantaiman94",
+        username: this.name,
+        givenName: this.name,
+        lastName: "Tai Man",
+        phoneNo: this.telephone,
+        email: this.email,
+        isAgreeRecvPromo: false,
+      };
+      try {
+        await this.$store.dispatch("auth/updateProfile", data);
+        console.log(userId);
+        this.$emit("managed", false);
+      } catch (err) {
+        ElNotification({
+          title: "Error",
+          message: err.message,
+          type: "error",
+        });
+      }
     },
+  },
+  created() {
+    if (localStorage.getItem("userData")) {
+      this.name = JSON.parse(localStorage.getItem("userData")).username;
+    }
+    console.log(this.name);
   },
 };
 </script>

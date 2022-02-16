@@ -9,7 +9,7 @@
         </el-col>
         <el-col>
           <label>英文姓名 (與證件相同)</label>
-          <p>Chan Tai Man</p>
+          <p>{{ username }}</p>
         </el-col>
         <el-col>
           <label>電郵地址</label>
@@ -27,7 +27,7 @@
   </div>
 
   <manage-profile-edit
-    @managed="isProfileEdit = $event"
+    @managed="setNewData"
     v-if="isProfileEdit"
   ></manage-profile-edit>
 </template>
@@ -42,13 +42,32 @@ export default {
   data() {
     return {
       isProfileEdit: false,
+      currentUserData: null,
+      username: "",
     };
+  },
+  watch: {
+    username(oldVal, newVal) {
+      console.log(oldVal);
+      console.log(newVal);
+    },
   },
   methods: {
     editProfile() {
       // this.$router.push({ name: "manage-profile" });
       this.isProfileEdit = true;
     },
+    setNewData(val) {
+      this.username = JSON.parse(localStorage.getItem("userData")).username;
+      this.isProfileEdit = val;
+    },
+  },
+  created() {
+    if (localStorage.getItem("userData")) {
+      this.currentUserData = JSON.parse(localStorage.getItem("userData"));
+      this.username = JSON.parse(localStorage.getItem("userData")).username;
+    }
+    console.log(this.currentUserData);
   },
 };
 </script>

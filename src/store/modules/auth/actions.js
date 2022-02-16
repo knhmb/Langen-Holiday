@@ -70,4 +70,18 @@ export default {
     // console.log(payload);
     // context.commit("REGISTER", payload);
   },
+  async updateProfile(context, payload) {
+    await axios
+      .put("/api/account", payload)
+      .then((res) => {
+        console.log(res);
+        let oldUsername = JSON.parse(localStorage.getItem("userData"));
+        oldUsername.username = payload.username;
+        localStorage.setItem("userData", JSON.stringify(oldUsername));
+        console.log(oldUsername);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  },
 };
