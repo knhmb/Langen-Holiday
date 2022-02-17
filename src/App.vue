@@ -18,6 +18,9 @@ export default {
       return this.$store.getters.headerVisible;
     },
   },
+  created() {
+    this.$store.dispatch("auth/tryAutoLogin");
+  },
 };
 </script>
 

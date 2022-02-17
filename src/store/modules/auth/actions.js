@@ -8,9 +8,13 @@ export default {
       .then((response) => {
         console.log(response.data);
         console.log(response);
+        const now = new Date();
+        const expirationDate = new Date(now.getTime() + 900 * 1000);
+
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("userData", JSON.stringify(response.data.item));
+        localStorage.setItem("expirationDate", expirationDate);
 
         context.commit("LOGIN", {
           token: response.data.accessToken,
@@ -31,6 +35,22 @@ export default {
           throw error;
         }
       });
+  },
+  tryAutoLogin(context) {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      return;
+    }
+    const expirationDate = localStorage.getItem("expirationDate");
+    const now = new Date();
+    if (now >= expirationDate) {
+      return;
+    }
+    const userId = JSON.parse(localStorage.getItem("userData")).id;
+    context.commit("LOGIN", {
+      token: token,
+      userId: userId,
+    });
   },
   logout(context) {
     const refreshToken = localStorage.getItem("refreshToken");
