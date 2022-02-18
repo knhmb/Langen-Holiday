@@ -1,10 +1,5 @@
 <template>
-  <DatePicker
-    v-model="dummy"
-    color="orange"
-    :attributes="attributes"
-    @dayclick="onDayClick"
-  />
+  <DatePicker color="orange" :attributes="attributes" @dayclick="onDayClick" />
 </template>
 
 <script>
@@ -17,7 +12,6 @@ export default {
   data() {
     return {
       days: [],
-      dummy: "",
     };
   },
   computed: {
