@@ -3,13 +3,21 @@
     <base-container>
       <h1>隨你鍾意</h1>
       <el-row :gutter="30">
-        <el-col :sm="24" :md="12" :lg="8">
+        <el-col
+          v-for="theme in themes"
+          :key="theme.id"
+          :sm="24"
+          :md="12"
+          :lg="8"
+        >
           <div class="card">
             <div class="card-img">
-              <img src="../../assets/img-service1.jpg" alt="" />
+              <!-- <img src="../../assets/img-service1.jpg" alt="" /> -->
+              <img :src="theme.thumbnail" alt="" />
             </div>
             <div class="card-text">
-              <p>簡單煮食</p>
+              <!-- <p>簡單煮食</p> -->
+              <p>{{ theme.name }}</p>
             </div>
           </div>
         </el-col>
@@ -67,6 +75,21 @@
     </base-container>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    themes() {
+      // return this.$store.getters["dashboard/themes"];
+      return this.$store.state.dashboard.themes;
+    },
+  },
+  async created() {
+    await this.$store.dispatch("dashboard/setThemes");
+    console.log(this.themes);
+  },
+};
+</script>
 
 <style scoped>
 .activities {

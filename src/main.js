@@ -11,10 +11,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-import { SetupCalendar } from "v-calendar";
+// import { SetupCalendar } from "v-calendar";
 
 import BaseContainer from "./ui/BaseContainer.vue";
 import BaseCard from "./ui/BaseCard.vue";
+
+// import VCalendar from "v-calendar";
+import "v-calendar/dist/style.css";
 
 const app = createApp(App);
 
@@ -25,7 +28,8 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 library.add(faTrashAlt, faEdit);
 
 app.use(ElementPlus);
-app.use(SetupCalendar, {});
+// app.use(SetupCalendar, {});
+// app.use(VCalendar);
 
 app.use(router);
 app.use(store);
