@@ -21,7 +21,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :sm="24" :md="12" :lg="8">
+        <!-- <el-col :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
               <img src="../../assets/img-service2.jpg" alt="" />
@@ -70,7 +70,7 @@
               <p>簡單煮食</p>
             </div>
           </div>
-        </el-col>
+        </el-col> -->
       </el-row>
     </base-container>
   </section>

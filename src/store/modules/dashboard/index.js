@@ -8,6 +8,8 @@ export default {
     return {
       headerItems: [],
       themes: [],
+      cheungChauIslandItems: [],
+      lantauIslandItems: [],
     };
   },
   getters,

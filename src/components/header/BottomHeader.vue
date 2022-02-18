@@ -198,6 +198,34 @@
           mode="horizontal"
         >
           <el-sub-menu
+            v-for="item in headerItems"
+            :key="item.id"
+            :index="item.displayOrder"
+            @click="closeDropdown(item.slug)"
+          >
+            <template #title>{{ item.name }}</template>
+            <template v-if="item.slug === 'cheung-chau-island'">
+              <el-menu-item
+                v-for="cheung in cheungChauIslandItems"
+                :key="cheung.id"
+                :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
+                @click="selectedSubMenu(4)"
+                :index="item.id + ' - '"
+                >{{ cheung.name }}</el-menu-item
+              >
+            </template>
+            <template v-else>
+              <el-menu-item
+                v-for="launtau in lantauIslandItems"
+                :key="launtau.id"
+                :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+                @click="selectedSubMenu(8)"
+                :index="item.id + ' - '"
+                >{{ launtau.name }}</el-menu-item
+              >
+            </template>
+          </el-sub-menu>
+          <!-- <el-sub-menu
             :class="{ 'my-active': isActive === 3 }"
             index="1"
             @click="closeDropdown"
@@ -371,7 +399,7 @@
               index="6-6"
               >登出</el-menu-item
             >
-          </el-sub-menu>
+          </el-sub-menu> -->
         </el-menu>
       </el-col>
       <el-col v-if="!loggedIn" :sm="24" :lg="2">
@@ -421,16 +449,37 @@ export default {
     loggedIn() {
       return this.$store.getters["auth/isLoggedIn"];
     },
+    headerItems() {
+      return this.$store.getters["dashboard/headerItems"];
+    },
+    cheungChauIslandItems() {
+      return this.$store.getters["dashboard/cheungChauIslandItems"];
+    },
+    lantauIslandItems() {
+      return this.$store.getters["dashboard/lantauIslandItems"];
+    },
   },
   methods: {
     openDialog() {
       this.dialogFormVisible = true;
       this.dialogTitle = "登入";
     },
-    closeDropdown() {
+    closeDropdown(value) {
       const li = document.querySelectorAll(".el-popper");
       li[0].style.display = "none";
       li[1].style.display = "none";
+      if (value === "cheung-chau-island") {
+        if (this.cheungChauIslandItems.length > 0) {
+          return;
+        }
+        this.$store.dispatch("dashboard/setSubItems", value);
+      }
+      if (value === "lantau-island") {
+        if (this.lantauIslandItems.length > 0) {
+          return;
+        }
+        this.$store.dispatch("dashboard/setSubItems", value);
+      }
     },
     selectedSubMenu(option) {
       if (option === 4 || option === 5 || option === 6 || option === 7) {
@@ -474,6 +523,10 @@ export default {
       this.dialogFormVisible = event.closeDialog;
       // this.loggedIn = event.login;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setHeaderItems");
+    // this.$store.dispatch("dashboard/setSubItems");
   },
 };
 </script>
