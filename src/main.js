@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import BaseContainer from "./ui/BaseContainer.vue";
 import BaseCard from "./ui/BaseCard.vue";
 
-// import VCalendar from "v-calendar";
+import VCalendar from "v-calendar";
 import "v-calendar/dist/style.css";
 
 const app = createApp(App);
@@ -29,7 +29,7 @@ library.add(faTrashAlt, faEdit);
 
 app.use(ElementPlus);
 // app.use(SetupCalendar, {});
-// app.use(VCalendar);
+app.use(VCalendar);
 
 app.use(router);
 app.use(store);

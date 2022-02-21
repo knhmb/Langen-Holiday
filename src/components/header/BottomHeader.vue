@@ -43,7 +43,7 @@
                   v-for="lamma in lammaIslandItems"
                   :key="lamma.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(8)"
+                  @click="selectedSubMenu(14)"
                   :index="item.id + ' - ' + lamma.displayOrder"
                   >{{ lamma.name }}</el-menu-item
                 >
@@ -53,7 +53,7 @@
                   v-for="day in dayNightItems"
                   :key="day.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(8)"
+                  @click="selectedSubMenu(17)"
                   :index="item.id + ' - ' + day.displayOrder"
                   >{{ day.name }}</el-menu-item
                 >
@@ -93,7 +93,7 @@
                   v-for="cheung in cheungChauIslandItems"
                   :key="cheung.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
-                  @click="selectedSubMenu(4)"
+                  @click="$router.push('/cheung-chau-island')"
                   :index="item.id + ' - ' + cheung.displayOrder"
                   >{{ cheung.name }}</el-menu-item
                 >
@@ -103,7 +103,7 @@
                   v-for="launtau in lantauIslandItems"
                   :key="launtau.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(8)"
+                  @click="$router.push('/lantau-island')"
                   :index="item.id + ' - ' + launtau.displayOrder"
                   >{{ launtau.name }}</el-menu-item
                 >
@@ -113,7 +113,7 @@
                   v-for="lamma in lammaIslandItems"
                   :key="lamma.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(8)"
+                  @click="$router.push('/lamma-island')"
                   :index="item.id + ' - ' + lamma.displayOrder"
                   >{{ lamma.name }}</el-menu-item
                 >
@@ -123,7 +123,7 @@
                   v-for="day in dayNightItems"
                   :key="day.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(8)"
+                  @click="$router.push('/day-time')"
                   :index="item.id + ' - ' + day.displayOrder"
                   >{{ day.name }}</el-menu-item
                 >
@@ -131,8 +131,8 @@
             </el-sub-menu>
             <el-menu-item
               @click="
-                selectedSubMenu(19);
                 closeDropdown();
+                $router.push('/hotel-recommendations');
               "
               :class="{ 'my-active': isActive === 7 }"
               v-if="item.slug === 'hotel-recommendations'"
