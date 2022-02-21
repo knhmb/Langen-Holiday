@@ -52,4 +52,16 @@
   font-size: 40px;
   color: #fff;
 }
+
+@media screen and (min-width: 1357px) {
+  .carousel .el-carousel .el-carousel__container {
+    height: 700px !important;
+  }
+}
+
+@media screen and (min-width: 1680px) {
+  .carousel .el-carousel .el-carousel__container {
+    height: 787px !important;
+  }
+}
 </style>
