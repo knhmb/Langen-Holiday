@@ -197,34 +197,65 @@
           class="el-menu-demo hidden-md-and-down"
           mode="horizontal"
         >
-          <el-sub-menu
-            v-for="item in headerItems"
-            :key="item.id"
-            :index="item.displayOrder"
-            @click="closeDropdown(item.slug)"
-          >
-            <template #title>{{ item.name }}</template>
-            <template v-if="item.slug === 'cheung-chau-island'">
-              <el-menu-item
-                v-for="cheung in cheungChauIslandItems"
-                :key="cheung.id"
-                :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
-                @click="selectedSubMenu(4)"
-                :index="item.id + ' - '"
-                >{{ cheung.name }}</el-menu-item
-              >
-            </template>
-            <template v-else>
-              <el-menu-item
-                v-for="launtau in lantauIslandItems"
-                :key="launtau.id"
-                :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                @click="selectedSubMenu(8)"
-                :index="item.id + ' - '"
-                >{{ launtau.name }}</el-menu-item
-              >
-            </template>
-          </el-sub-menu>
+          <template v-for="item in headerItems" :key="item.id">
+            <el-sub-menu
+              v-if="item.slug !== 'hotel-recommendations'"
+              :index="item.displayOrder"
+              @click="closeDropdown()"
+            >
+              <template #title>{{ item.name }}</template>
+              <template v-if="item.slug === 'cheung-chau-island'">
+                <el-menu-item
+                  v-for="cheung in cheungChauIslandItems"
+                  :key="cheung.id"
+                  :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
+                  @click="selectedSubMenu(4)"
+                  :index="item.id + ' - ' + cheung.displayOrder"
+                  >{{ cheung.name }}</el-menu-item
+                >
+              </template>
+              <template v-else-if="item.slug === 'lantau-island'">
+                <el-menu-item
+                  v-for="launtau in lantauIslandItems"
+                  :key="launtau.id"
+                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+                  @click="selectedSubMenu(8)"
+                  :index="item.id + ' - ' + launtau.displayOrder"
+                  >{{ launtau.name }}</el-menu-item
+                >
+              </template>
+              <template v-else-if="item.slug === 'lamma-island'">
+                <el-menu-item
+                  v-for="lamma in lammaIslandItems"
+                  :key="lamma.id"
+                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+                  @click="selectedSubMenu(8)"
+                  :index="item.id + ' - ' + lamma.displayOrder"
+                  >{{ lamma.name }}</el-menu-item
+                >
+              </template>
+              <template v-else-if="item.slug === 'day-n-night-time'">
+                <el-menu-item
+                  v-for="day in dayNightItems"
+                  :key="day.id"
+                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
+                  @click="selectedSubMenu(8)"
+                  :index="item.id + ' - ' + day.displayOrder"
+                  >{{ day.name }}</el-menu-item
+                >
+              </template>
+            </el-sub-menu>
+            <el-menu-item
+              @click="
+                selectedSubMenu(19);
+                closeDropdown();
+              "
+              :class="{ 'my-active': isActive === 7 }"
+              v-if="item.slug === 'hotel-recommendations'"
+              :index="item.id"
+              >{{ item.name }}</el-menu-item
+            >
+          </template>
           <!-- <el-sub-menu
             :class="{ 'my-active': isActive === 3 }"
             index="1"
@@ -458,28 +489,34 @@ export default {
     lantauIslandItems() {
       return this.$store.getters["dashboard/lantauIslandItems"];
     },
+    lammaIslandItems() {
+      return this.$store.getters["dashboard/lammaIslandItems"];
+    },
+    dayNightItems() {
+      return this.$store.getters["dashboard/dayNightItems"];
+    },
   },
   methods: {
     openDialog() {
       this.dialogFormVisible = true;
       this.dialogTitle = "登入";
     },
-    closeDropdown(value) {
+    closeDropdown() {
       const li = document.querySelectorAll(".el-popper");
       li[0].style.display = "none";
       li[1].style.display = "none";
-      if (value === "cheung-chau-island") {
-        if (this.cheungChauIslandItems.length > 0) {
-          return;
-        }
-        this.$store.dispatch("dashboard/setSubItems", value);
-      }
-      if (value === "lantau-island") {
-        if (this.lantauIslandItems.length > 0) {
-          return;
-        }
-        this.$store.dispatch("dashboard/setSubItems", value);
-      }
+      // if (value === "cheung-chau-island") {
+      //   if (this.cheungChauIslandItems.length > 0) {
+      //     return;
+      //   }
+      //   this.$store.dispatch("dashboard/setSubItems", value);
+      // }
+      // if (value === "lantau-island") {
+      //   if (this.lantauIslandItems.length > 0) {
+      //     return;
+      //   }
+      //   this.$store.dispatch("dashboard/setSubItems", value);
+      // }
     },
     selectedSubMenu(option) {
       if (option === 4 || option === 5 || option === 6 || option === 7) {
@@ -526,6 +563,10 @@ export default {
   },
   created() {
     this.$store.dispatch("dashboard/setHeaderItems");
+    this.$store.dispatch("dashboard/setSubItemsCheung");
+    this.$store.dispatch("dashboard/setSubItemsLantau");
+    this.$store.dispatch("dashboard/setSubItemsLamma");
+    this.$store.dispatch("dashboard/setSubItemsDayAndNight");
     // this.$store.dispatch("dashboard/setSubItems");
   },
 };

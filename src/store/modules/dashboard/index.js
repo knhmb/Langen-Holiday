@@ -10,6 +10,8 @@ export default {
       themes: [],
       cheungChauIslandItems: [],
       lantauIslandItems: [],
+      lammaIslandItems: [],
+      dayNightItems: [],
     };
   },
   getters,

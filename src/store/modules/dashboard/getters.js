@@ -11,4 +11,10 @@ export default {
   lantauIslandItems(state) {
     return state.lantauIslandItems;
   },
+  lammaIslandItems(state) {
+    return state.lammaIslandItems;
+  },
+  dayNightItems(state) {
+    return state.dayNightItems;
+  },
 };
