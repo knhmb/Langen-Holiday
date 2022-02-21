@@ -1,0 +1,7 @@
+{
+  "username_required": "Username is required!",
+  "password_required": "Password is required!",
+  "invalid_username": "Username is invalid!",
+  "invalid_password": "Password is invalid!",
+  "username_already_exists": "Username already exists!"
+}

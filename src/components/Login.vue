@@ -71,14 +71,14 @@ export default {
         email: [
           {
             required: true,
-            message: "Username cannot be empty",
+            message: this.$t("username_required"),
             trigger: "blur",
           },
         ],
         password: [
           {
             required: true,
-            message: "Password cannot be empty",
+            message: this.$t("password_required"),
             trigger: "blur",
           },
         ],

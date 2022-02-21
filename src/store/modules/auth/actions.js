@@ -1,5 +1,8 @@
 import axios from "axios";
 import router from "../../../route.js";
+import i18n from "../../../i18n.js";
+
+const { t } = i18n.global;
 
 export default {
   async login(context, payload) {
@@ -20,18 +23,15 @@ export default {
           token: response.data.accessToken,
           userId: response.data.item.id,
         });
-
-        // const dummy = localStorage.getItem("userData");
-        // console.log(JSON.parse(dummy));
       })
       .catch((err) => {
         if (err.response.data.message === "error.account.invalid-username") {
-          const error = new Error("Username is invalid");
+          const error = new Error(t("invalid_username"));
           throw error;
         } else if (
           err.response.data.message === "error.account.invalid-password"
         ) {
-          const error = new Error("Password is invalid");
+          const error = new Error(t("invalid_password"));
           throw error;
         }
       });
@@ -83,12 +83,10 @@ export default {
       })
       .catch((err) => {
         if (err.response.data.statusCode === 400) {
-          const error = new Error("Username Already Exists!");
+          const error = new Error(t("username_already_exists"));
           throw error;
         }
       });
-    // console.log(payload);
-    // context.commit("REGISTER", payload);
   },
   async updateProfile(context, payload) {
     await axios

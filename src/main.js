@@ -19,6 +19,8 @@ import BaseCard from "./ui/BaseCard.vue";
 import VCalendar from "v-calendar";
 import "v-calendar/dist/style.css";
 
+import vueI18n from "./i18n.js";
+
 const app = createApp(App);
 
 app.component("base-container", BaseContainer);
@@ -30,6 +32,8 @@ library.add(faTrashAlt, faEdit);
 app.use(ElementPlus);
 // app.use(SetupCalendar, {});
 app.use(VCalendar);
+
+app.use(vueI18n);
 
 app.use(router);
 app.use(store);
