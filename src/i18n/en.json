@@ -3,5 +3,6 @@
   "password_required": "Password is required!",
   "invalid_username": "Username is invalid!",
   "invalid_password": "Password is invalid!",
-  "username_already_exists": "Username already exists!"
+  "username_already_exists": "Username already exists!",
+  "check_inputs": "Please Check Your Input Fields"
 }

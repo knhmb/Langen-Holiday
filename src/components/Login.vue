@@ -60,6 +60,7 @@ import { ElNotification } from "element-plus";
 export default {
   data() {
     return {
+      alert: "Wrong Answer",
       ruleForm: {
         email: "",
         password: "",
@@ -119,7 +120,7 @@ export default {
         } else {
           ElNotification({
             title: "Error",
-            message: "Please check your inputs",
+            message: this.$i18n.t("check_inputs"),
             type: "error",
           });
           return false;

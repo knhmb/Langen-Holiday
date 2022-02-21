@@ -20,6 +20,7 @@ export default {
   },
   created() {
     this.$store.dispatch("auth/tryAutoLogin");
+    localStorage.setItem("lang", "zh");
   },
 };
 </script>
