@@ -2,28 +2,40 @@
   <div class="change-password">
     <h3>修改密碼</h3>
     <base-card>
-      <el-form label-position="top">
+      <el-form
+        hide-required-asterisk
+        label-position="top"
+        ref="ruleForm"
+        :model="ruleForm"
+        :rules="rules"
+      >
         <el-row>
           <el-col>
-            <el-form-item label="修改密碼">
-              <el-input type="password" v-model="changePassword"></el-input>
+            <el-form-item label="修改密碼" prop="changePassword">
+              <el-input
+                type="password"
+                v-model="ruleForm.changePassword"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col>
-            <el-form-item label="新密碼">
-              <el-input type="password" v-model="newPassword"></el-input>
+            <el-form-item label="新密碼" prop="newPassword">
+              <el-input
+                type="password"
+                v-model="ruleForm.newPassword"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col>
-            <el-form-item label="確認新密碼">
-              <el-input type="password" v-model="confirmPassword"></el-input>
+            <el-form-item label="確認新密碼" prop="confirmPassword">
+              <el-input
+                type="password"
+                v-model="ruleForm.confirmPassword"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col>
-            <el-button
-              :disabled="!changePassword || !newPassword || !confirmPassword"
-              >修改</el-button
-            >
+            <el-button @click="changePassword">修改</el-button>
           </el-col>
         </el-row>
       </el-form>
@@ -34,11 +46,69 @@
 <script>
 export default {
   data() {
-    return {
-      changePassword: "",
-      newPassword: "",
-      confirmPassword: "",
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$i18n.t("password_required")));
+      } else {
+        if (this.ruleForm.confirmPassword !== "") {
+          this.$refs.ruleForm.validateField("confirmPassword");
+        }
+        callback();
+      }
     };
+
+    const validateConfirmPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$i18n.t("password_required")));
+      } else {
+        if (value !== this.ruleForm.password) {
+          callback(new Error(this.$i18n.t("password_dont_match")));
+        } else {
+          callback();
+        }
+      }
+    };
+    return {
+      ruleForm: {
+        changePassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      },
+      rules: {
+        changePassword: [
+          {
+            required: true,
+            message: this.$i18n.t("password_required"),
+            trigger: "blur",
+          },
+        ],
+        newPassword: [
+          {
+            required: true,
+            // message: this.$i18n.t("password_required"),
+            validator: validatePass,
+            trigger: "blur",
+          },
+        ],
+        confirmPassword: [
+          {
+            required: true,
+            // message: this.$i18n.t("password_required"),
+            validator: validateConfirmPass,
+            trigger: "blur",
+          },
+        ],
+      },
+    };
+  },
+  methods: {
+    changePassword() {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          console.log("Password Changed!");
+        }
+      });
+    },
   },
 };
 </script>

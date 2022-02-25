@@ -1,6 +1,6 @@
 {
   "username_required": "用戶名是必需的",
-  "password_required": "密碼是必需的",
+  "password_required": "請輸入密碼",
   "invalid_username": "無效的用戶名",
   "invalid_password": "密碼無效",
   "username_already_exists": "此用戶名已存在",
@@ -8,5 +8,6 @@
   "name_required": "名稱不能為空",
   "email_required": "電子郵件是必需的",
   "phone_required": "請輸入電話號碼",
-  "terms_required": "必須檢查條款和條件"
+  "terms_required": "必須檢查條款和條件",
+  "password_dont_match": "密碼和確認密碼不匹配"
 }
