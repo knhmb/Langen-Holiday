@@ -114,7 +114,7 @@ export default {
         popper[9].style.display = "none";
         popper[10].style.display = "none";
         // popper[11].style.display = "none";
-        this.isLoggedIn === true ? (popper[12].style.display = "none") : "";
+        this.isLoggedIn === true ? (popper[2].style.display = "none") : "";
 
         li[3].classList.remove("is-opened");
         li[4].classList.remove("is-opened");

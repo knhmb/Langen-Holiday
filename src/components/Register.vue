@@ -160,34 +160,35 @@ export default {
         englishName: [
           {
             required: true,
-            message: "Name cannot be empty",
+            message: this.$i18n.t("name_required"),
             trigger: "blur",
           },
         ],
         englishSurName: [
           {
             required: true,
-            message: "Pick a surname",
+            message: this.$i18n.t("name_required"),
             trigger: "change",
           },
         ],
         chineseName: [
           {
             required: true,
-            message: "Name cannot be empty",
+            message: this.$i18n.t("name_required"),
             trigger: "blur",
           },
         ],
         chineseSurName: [
           {
             required: true,
-            message: "Pick a surname",
+            message: this.$i18n.t("name_required"),
             trigger: "change",
           },
         ],
         email: [
           {
             required: true,
+            message: this.$i18n.t("email_required"),
             // type: "email",
             trigger: "blur",
           },
@@ -202,20 +203,21 @@ export default {
         phoneNumber: [
           {
             required: true,
-            message: "Please enter a phone number",
+            message: this.$i18n.t("phone_required"),
             trigger: "change",
           },
         ],
         terms: [
           {
             required: true,
-            message: "Terms and conditions must be checked",
+            message: this.$i18n.t("terms_required"),
             trigger: "change",
           },
         ],
         password: [
           {
             required: true,
+            message: this.$i18n.t("password_required"),
             validator: validatePass,
             trigger: "blur",
           },
@@ -227,6 +229,7 @@ export default {
         confirmPassword: [
           {
             required: true,
+            message: this.$i18n.t("password_required"),
             validator: validateConfirmPass,
             trigger: "blur",
           },
@@ -307,7 +310,7 @@ export default {
           // alert("Error");
           ElNotification({
             title: "Error",
-            message: "Please check your inputs",
+            message: this.$i18n.t("check_inputs"),
             type: "error",
           });
           return false;

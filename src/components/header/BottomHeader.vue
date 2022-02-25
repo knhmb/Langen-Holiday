@@ -2,6 +2,7 @@
   <div class="bottom-header">
     <el-row>
       <el-col :sm="24" :lg="22">
+        <!-- ================================================ SMALL SCREENS ======================================================== -->
         <el-menu
           text-color="#8d8d8d"
           active-text-color="#8d8d8d"
@@ -70,7 +71,54 @@
               >{{ item.name }}</el-menu-item
             >
           </template>
+          <el-sub-menu
+            v-if="loggedIn"
+            :class="{ 'my-active': isActive === 8 }"
+            class="edit-profile-menu"
+            index="6"
+            @click="closeDropdown"
+          >
+            <template #title>會員中心</template>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
+              @click="$router.push({ name: 'personal-information' })"
+              index="6-1"
+              >個人資料</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
+              @click="$router.push({ name: 'change-password' })"
+              index="6-2"
+              >修改密碼</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
+              @click="$router.push({ name: 'places' })"
+              index="6-3"
+              >我的收藏</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
+              @click="$router.push({ name: 'evaluation-record' })"
+              index="6-4"
+              >評價記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
+              @click="$router.push({ name: 'appointment-record' })"
+              index="6-5"
+              >預約記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
+              @click="logout"
+              index="6-6"
+              >登出</el-menu-item
+            >
+          </el-sub-menu>
         </el-menu>
+
+        <!-- ================================================ LARGE SCREENS ======================================================== -->
 
         <el-menu
           text-color="#8d8d8d"
@@ -140,6 +188,51 @@
               >{{ item.name }}</el-menu-item
             >
           </template>
+          <el-sub-menu
+            v-if="loggedIn"
+            :class="{ 'my-active': isActive === 8 }"
+            class="edit-profile-menu"
+            index="6"
+            @click="closeDropdown"
+          >
+            <template #title>會員中心</template>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
+              @click="$router.push({ name: 'personal-information' })"
+              index="6-1"
+              >個人資料</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
+              @click="$router.push({ name: 'change-password' })"
+              index="6-2"
+              >修改密碼</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
+              @click="$router.push({ name: 'places' })"
+              index="6-3"
+              >我的收藏</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
+              @click="$router.push({ name: 'evaluation-record' })"
+              index="6-4"
+              >評價記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
+              @click="$router.push({ name: 'appointment-record' })"
+              index="6-5"
+              >預約記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
+              @click="logout"
+              index="6-6"
+              >登出</el-menu-item
+            >
+          </el-sub-menu>
         </el-menu>
       </el-col>
       <el-col v-if="!loggedIn" :sm="24" :lg="2">
