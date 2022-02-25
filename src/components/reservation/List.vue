@@ -126,7 +126,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button class="submit">Submit</el-button>
+          <el-button class="submit">提交</el-button>
         </el-col>
       </el-row>
     </div>
@@ -291,6 +291,10 @@ export default {
   border-radius: 5px;
   color: #fff;
   margin-top: 2rem;
+  font-size: 28px;
+  font-family: Noto Sans Mono CJK TC;
+  letter-spacing: 5.6px;
+  padding: 1.5rem 0;
 }
 
 @media screen and (max-width: 1024px) {

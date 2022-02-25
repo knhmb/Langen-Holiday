@@ -1,5 +1,4 @@
 <template>
-  <!-- <the-header></the-header> -->
   <base-container>
     <section class="TC">
       <h1>網站使用條例</h1>
@@ -166,18 +165,10 @@
       </el-card>
     </section>
   </base-container>
-  <!-- <the-footer></the-footer> -->
 </template>
 
 <script>
-// import TheHeader from "../components/header/TheHeader.vue";
-// import TheFooter from "../components/TheFooter.vue";
-
 export default {
-  components: {
-    // TheHeader,
-    // TheFooter,
-  },
   data() {
     return {
       isDialogOpen: false,

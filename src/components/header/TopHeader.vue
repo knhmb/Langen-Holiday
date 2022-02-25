@@ -36,7 +36,8 @@
               :class="{ 'inner-active': isActiveSubMenuItem === 1 }"
               @click="selectedSubMenu(1)"
               index="1-1"
-              >3598 6538</el-menu-item
+            >
+              3598 6538</el-menu-item
             >
           </el-sub-menu>
           <el-sub-menu
