@@ -1,20 +1,26 @@
 <template>
   <div class="forgot-password">
     <div v-if="!stepOneComplete" class="email-conformation">
-      <el-form label-position="top">
+      <el-form
+        hide-required-asterisk
+        :model="ruleForm"
+        ref="ruleForm"
+        :rules="rules"
+        label-position="top"
+      >
         <el-row>
           <el-col>
-            <el-form-item label="電郵地址">
-              <el-input></el-input>
+            <el-form-item label="電郵地址" prop="username">
+              <el-input v-model.trim="username"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
-            <el-form-item label="電話號碼">
-              <el-input></el-input>
+            <el-form-item label="電話號碼" prop="phone">
+              <el-input v-model.number="phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
-            <el-button @click="stepOneComplete = true">下一步</el-button>
+            <el-button @click="firstStep">下一步</el-button>
           </el-col>
           <el-col>
             <p class="return" @click="toggleLoginForm">返回</p>
@@ -65,6 +71,10 @@
 export default {
   data() {
     return {
+      ruleForm: {
+        username: "",
+        phone: "",
+      },
       password: "",
       confirmPassword: "",
       passwordType1: "password",
@@ -72,6 +82,22 @@ export default {
       iconEye1: require("../assets/icon-eyeoff.svg"),
       iconEye2: require("../assets/icon-eyeoff.svg"),
       stepOneComplete: false,
+      rules: {
+        username: [
+          {
+            required: true,
+            message: this.$i18n.t("username_required"),
+            trigger: "blur",
+          },
+        ],
+        phone: [
+          {
+            required: true,
+            message: this.$i18n.t("phone_required"),
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -96,6 +122,13 @@ export default {
     },
     toggleLoginForm() {
       this.$emit("toggleLoginForm", { title: "登入" });
+    },
+    firstStep() {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.stepOneComplete = true;
+        }
+      });
     },
   },
 };
