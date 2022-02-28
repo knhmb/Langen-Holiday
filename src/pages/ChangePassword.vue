@@ -12,7 +12,10 @@
         <el-row>
           <el-col>
             <el-form-item label="修改密碼" prop="changePassword">
-              <el-input v-model="ruleForm.changePassword"></el-input>
+              <el-input
+                type="password"
+                v-model="ruleForm.changePassword"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col>
@@ -77,7 +80,7 @@ export default {
         changePassword: [
           {
             required: true,
-            message: this.$i18n.t("username_required"),
+            message: this.$i18n.t("password_required"),
             trigger: "blur",
           },
         ],
@@ -101,14 +104,16 @@ export default {
     };
   },
   methods: {
-    async changePassword() {
+    changePassword() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           console.log("Password Changed!");
           const data = {
-            username: this.ruleForm.changePassword,
+            username: JSON.parse(localStorage.getItem("userData")).username,
+            oldPassword: this.ruleForm.changePassword,
             newPassword: this.ruleForm.newPassword,
           };
+          console.log(data);
           this.$store
             .dispatch("auth/changePassword", data)
             .then(() => {

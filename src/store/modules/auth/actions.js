@@ -67,6 +67,7 @@ export default {
         localStorage.removeItem("userData");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        localStorage.removeItem("expirationDate");
 
         context.commit("LOGOUT");
         router.replace("/");
@@ -104,7 +105,7 @@ export default {
   },
   async changePassword(_, payload) {
     await axios
-      .post("/api/account/reset-password", payload)
+      .post("/api/account/change-password", payload)
       .then((res) => {
         console.log(res);
       })
