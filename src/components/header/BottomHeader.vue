@@ -366,13 +366,13 @@ export default {
       this.$router.push(
         `/cheung-chau-island/${
           name === "市政大樓"
-            ? "municipal-builiding"
+            ? "municipal-services-building"
             : name === "東灣東堤"
-            ? "east-bay-east-embankment"
+            ? "tung-wan"
             : name === "西堤海景樓"
-            ? "xidi-seaview-building"
+            ? "sai-tai"
             : name === "景點介紹"
-            ? "attractions"
+            ? "cheung-chau-recommendations"
             : name
         }`
       );
@@ -385,11 +385,11 @@ export default {
             : name === "貝澳"
             ? "pui-o"
             : name === "塘福"
-            ? "tangfu"
+            ? "tong-fuk"
             : name === "大澳"
             ? "tai-o"
             : name === "景點介紹"
-            ? "attractions"
+            ? "lantau-island-recommendations"
             : name
         }`
       );
@@ -398,21 +398,21 @@ export default {
       this.$router.push(
         `/lamma-island/${
           name === "模達灣"
-            ? "moda-bay"
+            ? "mo-tat-wan"
             : name === "沙埔舊村"
             ? "sha-po-old-village"
             : name === "榕樹灣"
             ? "yung-shue-wan"
             : name === "景點介紹"
-            ? "attractions"
+            ? "lamma-island-recommendations"
             : name
         }`
       );
     },
     navigateToDayTime(name) {
       this.$router.push(
-        `/day-time/${
-          name === "日間" ? "day-time" : name === "晚間" ? "evening" : name
+        `/day-n-night-time/${
+          name === "日間" ? "day-time" : name === "晚間" ? "night-time" : name
         }`
       );
     },

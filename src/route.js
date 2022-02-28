@@ -45,7 +45,7 @@ const router = createRouter({
     { path: "/lantau-island/:name", component: LantauIsland },
     { path: "/lamma-island/:name", component: LammaIsland },
     { path: "/hotel-recommendations", component: HotelRecommendations },
-    { path: "/day-time/:name", component: DayTime },
+    { path: "/day-n-night-time/:name", component: DayTime },
     { path: "/privacy-and-policy", component: PrivacyPolicy },
     {
       path: "/edit-profile",
