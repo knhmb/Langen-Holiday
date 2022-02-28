@@ -102,4 +102,16 @@ export default {
         console.log(err.response);
       });
   },
+  async changePassword(_, payload) {
+    await axios
+      .post("/api/account/reset-password", payload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        const error = new Error(t("invalid_username"));
+        throw error;
+      });
+  },
 };

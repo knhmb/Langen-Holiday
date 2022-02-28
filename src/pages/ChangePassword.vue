@@ -12,10 +12,7 @@
         <el-row>
           <el-col>
             <el-form-item label="修改密碼" prop="changePassword">
-              <el-input
-                type="password"
-                v-model="ruleForm.changePassword"
-              ></el-input>
+              <el-input v-model="ruleForm.changePassword"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
@@ -44,6 +41,8 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -61,7 +60,7 @@ export default {
       if (value === "") {
         callback(new Error(this.$i18n.t("password_required")));
       } else {
-        if (value !== this.ruleForm.password) {
+        if (value !== this.ruleForm.newPassword) {
           callback(new Error(this.$i18n.t("password_dont_match")));
         } else {
           callback();
@@ -78,7 +77,7 @@ export default {
         changePassword: [
           {
             required: true,
-            message: this.$i18n.t("password_required"),
+            message: this.$i18n.t("username_required"),
             trigger: "blur",
           },
         ],
@@ -102,12 +101,38 @@ export default {
     };
   },
   methods: {
-    changePassword() {
+    async changePassword() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           console.log("Password Changed!");
+          const data = {
+            username: this.ruleForm.changePassword,
+            newPassword: this.ruleForm.newPassword,
+          };
+          this.$store
+            .dispatch("auth/changePassword", data)
+            .then(() => {
+              ElNotification({
+                title: "Password Changed",
+                message: "Password Changed Successfully",
+                type: "success",
+              });
+              this.resetForm();
+            })
+            .catch((err) => {
+              ElNotification({
+                title: "Error",
+                message: err.message,
+                type: "error",
+              });
+            });
         }
       });
+    },
+    resetForm() {
+      this.ruleForm.newPassword = "";
+      this.ruleForm.confirmPassword = "";
+      this.ruleForm.changePassword = "";
     },
   },
 };
