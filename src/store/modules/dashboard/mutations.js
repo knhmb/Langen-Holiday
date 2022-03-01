@@ -1,8 +1,6 @@
 export default {
   SET_THEME(state, payload) {
-    // console.log(payload);
     state.themes = payload;
-    // console.log(state.themes);
   },
   SET_HEADER_ITEMS(state, payload) {
     state.headerItems = payload;
@@ -36,5 +34,8 @@ export default {
   },
   SET_DAYNIGHT_BANNER(state, payload) {
     state.dayNightBanner = payload;
+  },
+  SET_ROOM_TYPE(state, payload) {
+    state.roomTypes = payload;
   },
 };

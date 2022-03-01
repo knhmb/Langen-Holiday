@@ -86,10 +86,15 @@
               <p>地點</p>
               <div class="location">
                 <el-checkbox-group v-model="location">
-                  <el-checkbox label="南丫島" />
+                  <el-checkbox
+                    v-for="lamma in lammaIslandItems"
+                    :key="lamma.id"
+                    :label="lamma.name"
+                  ></el-checkbox>
+                  <!-- <el-checkbox label="南丫島" />
                   <el-checkbox label="模達灣" />
                   <el-checkbox label="沙埔舊村" />
-                  <el-checkbox label="榕樹灣" />
+                  <el-checkbox label="榕樹灣" /> -->
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
@@ -135,6 +140,9 @@ export default {
   computed: {
     lammaBanner() {
       return this.$store.getters["dashboard/lammaBanner"];
+    },
+    lammaIslandItems() {
+      return this.$store.getters["dashboard/lammaIslandItems"];
     },
   },
   methods: {

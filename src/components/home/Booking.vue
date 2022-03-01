@@ -13,7 +13,11 @@
       </el-row>
       <el-row>
         <el-col class="form-control" :span="24">
-          <el-input v-model="input" type="text" placeholder="你要去哪裡？" />
+          <el-input
+            v-model="searchHotel"
+            type="text"
+            placeholder="你要去哪裡？"
+          />
           <img class="place-icon" src="../../assets/icon-place.png" alt="" />
         </el-col>
       </el-row>
@@ -21,7 +25,9 @@
         <el-col @click="isOpen = false" class="form-control" :sm="24" :lg="15">
           <date-picker
             @dropdownToggle="toggleDropdown"
+            @numberOfDays="assignDateValues"
             :isDateOpen="isDateOpen"
+            :dateRange="range"
           ></date-picker>
           <!-- <el-date-picker
             v-model="datePicker"
@@ -107,17 +113,19 @@
                       <div class="pet-option">
                         <el-row>
                           <el-col
-                            @click="setOption('pet')"
+                            @click="setOption('true')"
                             :class="{
-                              'is-active-option': isSelected === 'pet',
+                              'is-active-option': isSelected === 'true',
                             }"
                             :span="12"
                           >
                             <p>有</p>
                           </el-col>
                           <el-col
-                            @click="setOption('no')"
-                            :class="{ 'is-active-option': isSelected === 'no' }"
+                            @click="setOption('false')"
+                            :class="{
+                              'is-active-option': isSelected === 'false',
+                            }"
                             :span="12"
                           >
                             <p>沒有</p>
@@ -154,7 +162,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button>搜尋</el-button>
+          <el-button @click="submitHotelSearch">搜尋</el-button>
         </el-col></el-row
       >
     </base-container>
@@ -172,12 +180,16 @@ export default {
     return {
       input: "",
       datePicker: "",
-      isSelected: "no",
+      isSelected: "false",
       isOpen: false,
       date: new Date(),
       isDateOpen: false,
       numberOfLivingPopulation: 4,
       numberOfRooms: 2,
+      startDate: null,
+      endDate: null,
+      searchHotel: "",
+      range: "",
     };
   },
   methods: {
@@ -209,6 +221,24 @@ export default {
         return;
       }
       this.numberOfRooms--;
+    },
+    assignDateValues(value) {
+      this.startDate = value.start.replaceAll("-", "");
+      this.endDate = value.end.replaceAll("-", "");
+      console.log(this.startDate);
+      console.log(this.endDate);
+    },
+    submitHotelSearch() {
+      const data = {
+        search: this.searchHotel.replaceAll(" ", "-"),
+        stayingDate: this.startDate + "|" + this.endDate,
+        guestQty: this.numberOfLivingPopulation,
+        roomQty: this.numberOfRooms,
+        isHavePets: this.isSelected,
+      };
+      console.log(data);
+      this.$store.dispatch("dashboard/searchHotel", data);
+      // this.range = "";
     },
   },
   computed: {

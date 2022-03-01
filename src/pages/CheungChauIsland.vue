@@ -86,19 +86,33 @@
               <p>地點</p>
               <div class="location">
                 <el-checkbox-group v-model="location">
-                  <el-checkbox label="長洲" />
-                  <el-checkbox label="市政大樓" />
-                  <el-checkbox label="東灣東堤" />
-                  <el-checkbox label="西堤海景樓" />
+                  <template v-for="cheung in headerItems" :key="cheung">
+                    <el-checkbox
+                      v-if="cheung.slug === 'cheung-chau-island'"
+                      :label="cheung.name"
+                      :true-label="cheung.slug"
+                    ></el-checkbox>
+                  </template>
+                  <template
+                    v-for="cheung in cheungChauIslandItems"
+                    :key="cheung.id"
+                  >
+                    <el-checkbox
+                      :label="cheung.name"
+                      :true-label="cheung.slug"
+                      v-if="cheung.name !== '景點介紹'"
+                    />
+                  </template>
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
               <el-checkbox-group v-model="roomType">
-                <el-checkbox label="雙人套房" />
-                <el-checkbox label="家庭套房" />
-                <el-checkbox label="一房一廳" />
-                <el-checkbox label="兩房一廳" />
-                <el-checkbox label="三房/四房一廳" />
+                <el-checkbox
+                  v-for="room in roomTypes"
+                  :key="room.id"
+                  :label="room.name"
+                  :true-label="room.slug"
+                />
               </el-checkbox-group>
             </div>
           </el-col>
@@ -136,6 +150,15 @@ export default {
     cheungBanner() {
       return this.$store.getters["dashboard/cheungBanner"];
     },
+    cheungChauIslandItems() {
+      return this.$store.getters["dashboard/cheungChauIslandItems"];
+    },
+    headerItems() {
+      return this.$store.getters["dashboard/headerItems"];
+    },
+    roomTypes() {
+      return this.$store.getters["dashboard/roomTypes"];
+    },
   },
   methods: {
     setOption(option) {
@@ -144,6 +167,7 @@ export default {
   },
   created() {
     this.$store.dispatch("dashboard/setCheungBanner");
+    this.$store.dispatch("dashboard/setRoomType");
   },
 };
 </script>

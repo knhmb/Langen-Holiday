@@ -86,20 +86,33 @@
               <p>地點</p>
               <div class="location">
                 <el-checkbox-group v-model="location">
-                  <el-checkbox label="大嶼山" />
-                  <el-checkbox label="梅窩" />
-                  <el-checkbox label="貝澳" />
-                  <el-checkbox label="塘福" />
-                  <el-checkbox label="大澳" />
+                  <template v-for="lantau in headerItems" :key="lantau.id">
+                    <el-checkbox
+                      v-if="lantau.slug === 'lantau-island'"
+                      :label="lantau.name"
+                      :true-label="lantau.slug"
+                    ></el-checkbox>
+                  </template>
+                  <template
+                    v-for="lantau in lantauIslandItems"
+                    :key="lantau.id"
+                  >
+                    <el-checkbox
+                      :label="lantau.name"
+                      :true-label="lantau.slug"
+                      v-if="lantau.name !== '景點介紹'"
+                    />
+                  </template>
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
               <el-checkbox-group v-model="roomType">
-                <el-checkbox label="雙人套房" />
-                <el-checkbox label="家庭套房" />
-                <el-checkbox label="一房一廳" />
-                <el-checkbox label="兩房一廳" />
-                <el-checkbox label="三房/四房一廳" />
+                <el-checkbox
+                  v-for="room in roomTypes"
+                  :key="room.id"
+                  :label="room.name"
+                  :true-label="room.slug"
+                ></el-checkbox>
               </el-checkbox-group>
             </div>
           </el-col>
@@ -137,6 +150,15 @@ export default {
     lantauBanner() {
       return this.$store.getters["dashboard/lantauBanner"];
     },
+    lantauIslandItems() {
+      return this.$store.getters["dashboard/lantauIslandItems"];
+    },
+    roomTypes() {
+      return this.$store.getters["dashboard/roomTypes"];
+    },
+    headerItems() {
+      return this.$store.getters["dashboard/headerItems"];
+    },
   },
   methods: {
     setOption(option) {
@@ -145,6 +167,7 @@ export default {
   },
   created() {
     this.$store.dispatch("dashboard/setLantauBanner");
+    this.$store.dispatch("dashboard/setRoomType");
   },
 };
 </script>

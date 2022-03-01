@@ -141,7 +141,7 @@
                   v-for="cheung in cheungChauIslandItems"
                   :key="cheung.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
-                  @click="navigateToCheung(cheung.name)"
+                  @click="navigateToCheung(cheung)"
                   :index="item.id + ' - ' + cheung.displayOrder"
                   >{{ cheung.name }}</el-menu-item
                 >
@@ -151,7 +151,7 @@
                   v-for="launtau in lantauIslandItems"
                   :key="launtau.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="navigateToLantau(launtau.name)"
+                  @click="navigateToLantau(launtau)"
                   :index="item.id + ' - ' + launtau.displayOrder"
                   >{{ launtau.name }}</el-menu-item
                 >
@@ -161,7 +161,7 @@
                   v-for="lamma in lammaIslandItems"
                   :key="lamma.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="navigateToLamma(lamma.name)"
+                  @click="navigateToLamma(lamma)"
                   :index="item.id + ' - ' + lamma.displayOrder"
                   >{{ lamma.name }}</el-menu-item
                 >
@@ -171,7 +171,7 @@
                   v-for="day in dayNightItems"
                   :key="day.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="navigateToDayTime(day.name)"
+                  @click="navigateToDayTime(day)"
                   :index="item.id + ' - ' + day.displayOrder"
                   >{{ day.name }}</el-menu-item
                 >
@@ -362,59 +362,17 @@ export default {
       this.dialogFormVisible = event.closeDialog;
       // this.loggedIn = event.login;
     },
-    navigateToCheung(name) {
-      this.$router.push(
-        `/cheung-chau-island/${
-          name === "市政大樓"
-            ? "municipal-services-building"
-            : name === "東灣東堤"
-            ? "tung-wan"
-            : name === "西堤海景樓"
-            ? "sai-tai"
-            : name === "景點介紹"
-            ? "cheung-chau-recommendations"
-            : name
-        }`
-      );
+    navigateToCheung(cheung) {
+      this.$router.push(`/cheung-chau-island/${cheung.slug}`);
     },
-    navigateToLantau(name) {
-      this.$router.push(
-        `/lantau-island/${
-          name === "梅窩"
-            ? "mui-wo"
-            : name === "貝澳"
-            ? "pui-o"
-            : name === "塘福"
-            ? "tong-fuk"
-            : name === "大澳"
-            ? "tai-o"
-            : name === "景點介紹"
-            ? "lantau-island-recommendations"
-            : name
-        }`
-      );
+    navigateToLantau(lantau) {
+      this.$router.push(`/lantau-island/${lantau.slug}`);
     },
-    navigateToLamma(name) {
-      this.$router.push(
-        `/lamma-island/${
-          name === "模達灣"
-            ? "mo-tat-wan"
-            : name === "沙埔舊村"
-            ? "sha-po-old-village"
-            : name === "榕樹灣"
-            ? "yung-shue-wan"
-            : name === "景點介紹"
-            ? "lamma-island-recommendations"
-            : name
-        }`
-      );
+    navigateToLamma(lamma) {
+      this.$router.push(`/lamma-island/${lamma.slug}`);
     },
-    navigateToDayTime(name) {
-      this.$router.push(
-        `/day-n-night-time/${
-          name === "日間" ? "day-time" : name === "晚間" ? "night-time" : name
-        }`
-      );
+    navigateToDayTime(day) {
+      this.$router.push(`/day-n-night-time/${day.slug}`);
     },
   },
   created() {

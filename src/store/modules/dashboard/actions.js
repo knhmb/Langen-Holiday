@@ -16,7 +16,7 @@ export default {
     axios
       .get("/api/codex?filter=codextypecode:HDRITEMCAT&sort=%2BdisplayOrder")
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         context.commit("SET_HEADER_ITEMS", res.data.items);
       })
       .catch((err) => {
@@ -26,7 +26,7 @@ export default {
   setSubItemsCheung(context) {
     axios
       .get(
-        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:cheung-chau-island&sort=%2BdisplayOrder"
+        "/api/codex?filter=codextypecode%3AHDRITEMSUBCAT%2CparentCodexSlug%3Acheung-chau-island&sort=%2BdisplayOrder"
       )
       .then((res) => {
         context.commit("SET_SUB_ITEMS_CHEUNG", res.data.items);
@@ -50,7 +50,7 @@ export default {
   setSubItemsLamma(context) {
     axios
       .get(
-        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:lamma-island&sort=%2BdisplayOrder"
+        "/api/codex?filter=codextypecode%3AHDRITEMSUBCAT%2CparentCodexSlug%3Alamma-island&sort=%2BdisplayOrder"
       )
       .then((res) => {
         context.commit("SET_SUB_ITEMS_LAMMA", res.data.items);
@@ -127,6 +127,28 @@ export default {
       .get("/api/codex?filter=slug%3Aday-n-night-time")
       .then((res) => {
         context.commit("SET_DAYNIGHT_BANNER", res.data.items);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  searchHotel(_, payload) {
+    axios
+      .post(
+        `/api/hotel?search=${payload.search}&filter=stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets} &sort=xxx&page=xx&pagesize=xxx`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  setRoomType(context) {
+    axios
+      .get("/api/codex?filter=codextypecode%3AHTLRMTYPE&sort=%2BdisplayOrder")
+      .then((res) => {
+        context.commit("SET_ROOM_TYPE", res.data.items);
       })
       .catch((err) => {
         console.log(err);

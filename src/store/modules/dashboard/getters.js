@@ -35,4 +35,7 @@ export default {
   dayNightBanner(state) {
     return state.dayNightBanner;
   },
+  roomTypes(state) {
+    return state.roomTypes;
+  },
 };

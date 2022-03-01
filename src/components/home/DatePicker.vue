@@ -52,14 +52,14 @@ import { DatePicker } from "v-calendar";
 import moment from "moment";
 
 export default {
-  props: ["isDateOpen"],
+  props: ["isDateOpen", "dateRange"],
   components: {
     DatePicker,
   },
   data() {
     return {
       days: [],
-      range: "",
+      range: this.dateRange,
       checkInPlaceholder: "入住 2021年5月22日 (星期六)",
       checkOutPlaceholder: "退房 2021年5月23日 (星期日)",
       modelConfig: {
@@ -71,11 +71,11 @@ export default {
       //   isOpen: false,
     };
   },
-  watch: {
-    // dateDifference(oldVal, newVal) {
-    //   this.dateDifference = newVal;
-    // },
-  },
+  // watch: {
+  //   dateRange(oldVal, newVal) {
+  //     console.log(oldVal, newVal);
+  //   },
+  // },
   computed: {
     layout() {
       return this.$screens({
