@@ -12,6 +12,12 @@ export default {
       lantauIslandItems: [],
       lammaIslandItems: [],
       dayNightItems: [],
+      dashboardBanner: [],
+      cheungBanner: [],
+      lantauBanner: [],
+      lammaBanner: [],
+      hotelBanner: [],
+      dayNightBanner: [],
     };
   },
   getters,

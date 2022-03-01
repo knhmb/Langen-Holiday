@@ -1,10 +1,10 @@
 <template>
   <section class="lamma-island">
-    <banner>
-      <img src="../assets/banner-LammaIsland.jpg" alt="" />
-      <h3>南丫島</h3>
+    <banner v-for="banner in lammaBanner" :key="banner.id">
+      <img :src="banner.thumbnail" alt="" />
+      <h3>{{ banner.name }}</h3>
       <p>
-        南丫島位於香港島西南，面積約十三點六平方公里，是香港境內的第三大島嶼，由於島上風光明媚，有不少洋人聚居於此，令島上生活文化溶合了中西兩方面的特色。
+        {{ banner.description }}
       </p>
     </banner>
     <base-container>
@@ -132,10 +132,18 @@ export default {
       roomType: [],
     };
   },
+  computed: {
+    lammaBanner() {
+      return this.$store.getters["dashboard/lammaBanner"];
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setLammaBanner");
   },
 };
 </script>

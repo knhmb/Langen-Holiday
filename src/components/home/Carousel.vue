@@ -2,19 +2,34 @@
   <section class="carousel">
     <el-row>
       <el-col>
-        <el-carousel trigger="click" arrow="always" height="630px">
-          <el-carousel-item v-for="item in 1" :key="item">
-            <img
-              src="../../assets/promotion-banner-sample.png"
-              class="img-carousel"
-              alt=""
-            />
+        <el-carousel
+          :autoplay="false"
+          v-if="banners.length > 0"
+          trigger="click"
+          arrow="always"
+          height="609px"
+        >
+          <el-carousel-item v-for="banner in banners" :key="banner.id">
+            <img :src="banner.thumbnail" class="img-carousel" alt="" />
           </el-carousel-item>
         </el-carousel>
       </el-col>
     </el-row>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    banners() {
+      return this.$store.getters["dashboard/dashboardBanner"];
+    },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setDashboardBanner");
+  },
+};
+</script>
 
 <style>
 .carousel .img-carousel {
@@ -53,7 +68,7 @@
   color: #fff;
 }
 
-@media screen and (min-width: 1357px) {
+/* @media screen and (min-width: 1357px) {
   .carousel .el-carousel .el-carousel__container {
     height: 700px !important;
   }
@@ -63,5 +78,5 @@
   .carousel .el-carousel .el-carousel__container {
     height: 787px !important;
   }
-}
+} */
 </style>

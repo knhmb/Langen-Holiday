@@ -17,4 +17,22 @@ export default {
   dayNightItems(state) {
     return state.dayNightItems;
   },
+  dashboardBanner(state) {
+    return state.dashboardBanner;
+  },
+  cheungBanner(state) {
+    return state.cheungBanner;
+  },
+  lantauBanner(state) {
+    return state.lantauBanner;
+  },
+  lammaBanner(state) {
+    return state.lammaBanner;
+  },
+  hotelBanner(state) {
+    return state.hotelBanner;
+  },
+  dayNightBanner(state) {
+    return state.dayNightBanner;
+  },
 };

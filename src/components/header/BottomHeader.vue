@@ -460,6 +460,7 @@ export default {
 .bottom-header .el-menu--horizontal {
   border-bottom: none;
   align-items: center;
+  background: transparent;
 }
 
 .bottom-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title {

@@ -235,7 +235,7 @@ export default {
 <style>
 .booking {
   background-color: #fd9a1a;
-  margin-top: -0.6rem;
+  /* margin-top: -0.6rem; */
   padding: 4rem 0;
   /* overflow-x: hidden; */
 }

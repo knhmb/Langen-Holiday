@@ -86,7 +86,6 @@ export default {
   },
   async created() {
     await this.$store.dispatch("dashboard/setThemes");
-    console.log(this.themes);
   },
 };
 </script>

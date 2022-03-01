@@ -1,10 +1,10 @@
 <template>
   <section class="lantau-island">
-    <banner>
-      <img src="../assets/banner-LantauIsland.jpg" alt="" />
-      <h3>大嶼山</h3>
+    <banner v-for="banner in lantauBanner" :key="banner.id">
+      <img :src="banner.thumbnail" alt="" />
+      <h3>{{ banner.name }}</h3>
       <p>
-        大嶼山位於珠江口，是本港最大的一個島嶼，面積約144平方公里，近年因島上迪士尼樂園開幕而聞名中外。其實此島尚有很多知名的地方，如梅窩銀礦灣，大澳水鄉，寶蓮寺大佛及香港國際機場等均令各地遊人慕名而至。
+        {{ banner.description }}
       </p>
     </banner>
     <base-container>
@@ -133,10 +133,18 @@ export default {
       roomType: [],
     };
   },
+  computed: {
+    lantauBanner() {
+      return this.$store.getters["dashboard/lantauBanner"];
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setLantauBanner");
   },
 };
 </script>

@@ -111,7 +111,7 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-        const error = new Error(t("invalid_username"));
+        const error = new Error(t("invalid_oldpassword"));
         throw error;
       });
   },

@@ -1,10 +1,10 @@
 <template>
   <section class="hotel-recommendations">
-    <banner>
-      <img src="../assets/banner-FeaturedHotels.jpg" alt="" />
-      <h3>香港渡假酒店之選</h3>
+    <banner v-for="banner in hotelBanner" :key="banner.id">
+      <img :src="banner.thumbnail" alt="" />
+      <h3>{{ banner.name }}</h3>
       <p>
-        吃會蝸皮里？動丁地車但雄洋玉良鼻。能久連風面犬現的林荷即帽菜圓飯書、六山坐女對進吃丟冰能；和唱幫小，己汁虎隻發土夏起習食自着至念耍燈；服幸何去足小詞身！愛寺完米，從少羊活娘葉找夏，明休且哥葉往。
+        {{ banner.description }}
       </p>
     </banner>
     <base-container>
@@ -156,10 +156,18 @@ export default {
       roomType: [],
     };
   },
+  computed: {
+    hotelBanner() {
+      return this.$store.getters["dashboard/hotelBanner"];
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setHotelBanner");
   },
 };
 </script>

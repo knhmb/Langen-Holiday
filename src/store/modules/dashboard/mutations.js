@@ -19,4 +19,22 @@ export default {
   SET_SUB_ITEMS_DAY_NIGHT(state, payload) {
     state.dayNightItems = payload;
   },
+  SET_DASHBOARD_BANNER(state, payload) {
+    state.dashboardBanner = payload;
+  },
+  SET_CHEUNG_BANNER(state, payload) {
+    state.cheungBanner = payload;
+  },
+  SET_LANTAU_BANNER(state, payload) {
+    state.lantauBanner = payload;
+  },
+  SET_LAMMA_BANNER(state, payload) {
+    state.lammaBanner = payload;
+  },
+  SET_HOTEL_BANNER(state, payload) {
+    state.hotelBanner = payload;
+  },
+  SET_DAYNIGHT_BANNER(state, payload) {
+    state.dayNightBanner = payload;
+  },
 };

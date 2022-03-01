@@ -1,10 +1,10 @@
 <template>
   <section class="cheung-chau-island">
-    <banner>
-      <img src="../assets/banner-CheungChau.jpg" alt="" />
-      <h3>長洲</h3>
+    <banner v-for="banner in cheungBanner" :key="banner.id">
+      <img :src="banner.thumbnail" alt="" />
+      <h3>{{ banner.name }}</h3>
       <p>
-        長洲位於香港島之西南海域，面積約3平方公里人口雖只有3至4萬人，卻為本港各離島之冠。島民大部份世代而居，故相處融洽、民風簡樸、互助互愛。而且環境優美，空氣清新，設施齊備，交通便利，是香港人假日的好去處。
+        {{ banner.description }}
       </p>
     </banner>
     <base-container>
@@ -132,10 +132,18 @@ export default {
       roomType: [],
     };
   },
+  computed: {
+    cheungBanner() {
+      return this.$store.getters["dashboard/cheungBanner"];
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setCheungBanner");
   },
 };
 </script>
