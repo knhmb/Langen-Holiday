@@ -86,6 +86,11 @@ export default {
   methods: {
     setOption(option) {
       this.isActive = option;
+      let value = "";
+      if (option === "1") {
+        value = "recommendation";
+      }
+      this.$emit("getRecommendation", value);
     },
   },
 };

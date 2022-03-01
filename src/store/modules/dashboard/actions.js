@@ -134,7 +134,7 @@ export default {
   },
   searchHotel(_, payload) {
     axios
-      .post(
+      .get(
         `/api/hotel?search=${payload.search}&filter=stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets} &sort=xxx&page=xx&pagesize=xxx`
       )
       .then((res) => {
@@ -154,4 +154,7 @@ export default {
         console.log(err);
       });
   },
+  // filterHotel(_, payload) {
+  //   axios.get('/api/hotel?filter=stayingDate%3A20220411%7C20220413%2CguestQty%3A2%2CroomQty%3A1%2CisHavePets%3Atrue%2Clocation%3Alamma-island%7Cmo-tat-wan%2CroomType%3Acouple-suite')
+  // },
 };
