@@ -86,24 +86,31 @@
               <p>地點</p>
               <div class="location">
                 <el-checkbox-group v-model="location">
-                  <el-checkbox
-                    v-for="lamma in lammaIslandItems"
-                    :key="lamma.id"
-                    :label="lamma.name"
-                  ></el-checkbox>
-                  <!-- <el-checkbox label="南丫島" />
-                  <el-checkbox label="模達灣" />
-                  <el-checkbox label="沙埔舊村" />
-                  <el-checkbox label="榕樹灣" /> -->
+                  <template v-for="lamma in headerItems" :key="lamma.id">
+                    <el-checkbox
+                      v-if="lamma.name === 'lamma-island'"
+                      :label="lamma.slug"
+                      >{{ lamma.name }}</el-checkbox
+                    >
+                  </template>
+
+                  <template v-for="lamma in lammaIslandItems" :key="lamma.id">
+                    <el-checkbox
+                      :label="lamma.slug"
+                      v-if="lamma.name !== '景點介紹'"
+                      >{{ lamma.name }}</el-checkbox
+                    >
+                  </template>
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
               <el-checkbox-group v-model="roomType">
-                <el-checkbox label="雙人套房" />
-                <el-checkbox label="家庭套房" />
-                <el-checkbox label="一房一廳" />
-                <el-checkbox label="兩房一廳" />
-                <el-checkbox label="三房/四房一廳" />
+                <el-checkbox
+                  v-for="room in roomTypes"
+                  :key="room.id"
+                  :label="room.slug"
+                  >{{ room.name }}
+                </el-checkbox>
               </el-checkbox-group>
             </div>
           </el-col>
@@ -144,6 +151,12 @@ export default {
     lammaIslandItems() {
       return this.$store.getters["dashboard/lammaIslandItems"];
     },
+    roomTypes() {
+      return this.$store.getters["dashboard/roomTypes"];
+    },
+    headerItems() {
+      return this.$store.getters["dashboard/headerItems"];
+    },
   },
   methods: {
     setOption(option) {
@@ -152,6 +165,7 @@ export default {
   },
   created() {
     this.$store.dispatch("dashboard/setLammaBanner");
+    this.$store.dispatch("dashboard/setRoomType");
   },
 };
 </script>

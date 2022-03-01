@@ -89,19 +89,20 @@
                   <template v-for="lantau in headerItems" :key="lantau.id">
                     <el-checkbox
                       v-if="lantau.slug === 'lantau-island'"
-                      :label="lantau.name"
-                      :true-label="lantau.slug"
-                    ></el-checkbox>
+                      :label="lantau.slug"
+                      >{{ lantau.name }}</el-checkbox
+                    >
                   </template>
                   <template
                     v-for="lantau in lantauIslandItems"
                     :key="lantau.id"
                   >
                     <el-checkbox
-                      :label="lantau.name"
-                      :true-label="lantau.slug"
+                      :label="lantau.slug"
                       v-if="lantau.name !== '景點介紹'"
-                    />
+                    >
+                      {{ lantau.name }}</el-checkbox
+                    >
                   </template>
                 </el-checkbox-group>
               </div>
@@ -110,9 +111,9 @@
                 <el-checkbox
                   v-for="room in roomTypes"
                   :key="room.id"
-                  :label="room.name"
-                  :true-label="room.slug"
-                ></el-checkbox>
+                  :label="room.slug"
+                  >{{ room.name }}</el-checkbox
+                >
               </el-checkbox-group>
             </div>
           </el-col>

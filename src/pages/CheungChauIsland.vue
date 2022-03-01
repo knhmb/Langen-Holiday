@@ -89,19 +89,19 @@
                   <template v-for="cheung in headerItems" :key="cheung">
                     <el-checkbox
                       v-if="cheung.slug === 'cheung-chau-island'"
-                      :label="cheung.name"
-                      :true-label="cheung.slug"
-                    ></el-checkbox>
+                      :label="cheung.slug"
+                      >{{ cheung.name }}</el-checkbox
+                    >
                   </template>
                   <template
                     v-for="cheung in cheungChauIslandItems"
                     :key="cheung.id"
                   >
                     <el-checkbox
-                      :label="cheung.name"
-                      :true-label="cheung.slug"
+                      :label="cheung.slug"
                       v-if="cheung.name !== '景點介紹'"
-                    />
+                      >{{ cheung.name }}</el-checkbox
+                    >
                   </template>
                 </el-checkbox-group>
               </div>
@@ -110,9 +110,9 @@
                 <el-checkbox
                   v-for="room in roomTypes"
                   :key="room.id"
-                  :label="room.name"
-                  :true-label="room.slug"
-                />
+                  :label="room.slug"
+                  >{{ room.name }}</el-checkbox
+                >
               </el-checkbox-group>
             </div>
           </el-col>
