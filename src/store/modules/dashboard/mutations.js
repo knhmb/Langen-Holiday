@@ -38,4 +38,7 @@ export default {
   SET_ROOM_TYPE(state, payload) {
     state.roomTypes = payload;
   },
+  SET_CONTACT_CONTENT(state, payload) {
+    state.contactContent = payload;
+  },
 };

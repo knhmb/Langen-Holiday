@@ -110,6 +110,9 @@ export default {
       ],
     };
   },
+  created() {
+    this.$store.dispatch("dashboard/getTopPlaces");
+  },
 };
 </script>
 

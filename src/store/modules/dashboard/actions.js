@@ -16,7 +16,7 @@ export default {
     axios
       .get("/api/codex?filter=codextypecode:HDRITEMCAT&sort=%2BdisplayOrder")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         context.commit("SET_HEADER_ITEMS", res.data.items);
       })
       .catch((err) => {
@@ -75,7 +75,7 @@ export default {
     axios
       .get("/api/codex?filter=codextypecode%3APROMOBANNER&sort=%2BdisplayOrder")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         context.commit("SET_DASHBOARD_BANNER", res.data.items);
       })
       .catch((err) => {
@@ -159,6 +159,27 @@ export default {
       .get(
         `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
       )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getContactUs(context) {
+    axios
+      .get("/api/cms-page/contact-us")
+      .then((res) => {
+        console.log(res.data.item.content);
+        context.commit("SET_CONTACT_CONTENT", res.data.item);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getTopPlaces() {
+    axios
+      .get("/api/hotel?filter=topfive%3Atrue")
       .then((res) => {
         console.log(res);
       })

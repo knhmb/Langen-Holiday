@@ -1,8 +1,12 @@
 <template>
   <base-container>
     <div class="contact-info">
-      <h2>聯絡我們</h2>
-      <el-row>
+      <h2>{{ contactContent.title }}</h2>
+      <div v-html="contactContent.content"></div>
+      <!-- <template v-for="contact in contactContent" :key="contact.id">
+        {{ contact.content }}
+      </template> -->
+      <!-- <el-row>
         <el-col :sm="24" :md="6">
           <p>地址</p>
         </el-col>
@@ -71,7 +75,7 @@
         <el-col :sm="24" :md="16">
           <p>info@langenholiday.com</p>
         </el-col>
-      </el-row>
+      </el-row> -->
       <img
         @click="openDialog"
         src="../../assets/icon-cs.png"
@@ -137,6 +141,11 @@ export default {
       isDialogOpen: false,
     };
   },
+  computed: {
+    contactContent() {
+      return this.$store.getters["dashboard/contactContent"];
+    },
+  },
   methods: {
     openDialog() {
       this.isDialogOpen = true;
@@ -144,6 +153,10 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getContactUs");
+    console.log(this.contactContent);
   },
 };
 </script>

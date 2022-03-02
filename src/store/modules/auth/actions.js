@@ -115,4 +115,16 @@ export default {
         throw error;
       });
   },
+  async forgotPassword(_, payload) {
+    await axios
+      .post("/api/account/forget-password", payload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(() => {
+        // console.log(err.response);
+        const error = new Error(t("invalid_username"));
+        throw error;
+      });
+  },
 };

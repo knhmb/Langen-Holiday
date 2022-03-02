@@ -38,4 +38,7 @@ export default {
   roomTypes(state) {
     return state.roomTypes;
   },
+  contactContent(state) {
+    return state.contactContent;
+  },
 };

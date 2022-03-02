@@ -11,12 +11,12 @@
         <el-row>
           <el-col>
             <el-form-item label="電郵地址" prop="username">
-              <el-input v-model.trim="username"></el-input>
+              <el-input v-model.trim="ruleForm.username"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="電話號碼" prop="phone">
-              <el-input v-model.number="phone"></el-input>
+              <el-input v-model.number="ruleForm.phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     return {
@@ -123,10 +125,23 @@ export default {
     toggleLoginForm() {
       this.$emit("toggleLoginForm", { title: "登入" });
     },
-    firstStep() {
+    async firstStep() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.stepOneComplete = true;
+          this.$store
+            .dispatch("auth/forgotPassword", {
+              username: this.ruleForm.username,
+            })
+            .then(() => {
+              this.stepOneComplete = true;
+            })
+            .catch((err) => {
+              ElNotification({
+                title: "Error",
+                message: err.message,
+                type: "error",
+              });
+            });
         }
       });
     },

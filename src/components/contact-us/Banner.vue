@@ -1,8 +1,18 @@
 <template>
   <div class="contact-us-banner">
-    <img src="../../assets/contactus-banner.png" alt="" />
+    <img :src="contactContent.thumbnail" alt="" />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    contactContent() {
+      return this.$store.getters["dashboard/contactContent"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .contact-us-banner {
