@@ -178,8 +178,6 @@ export default {
       this.isSelected = option;
     },
     applyRecommendation(value) {
-      // console.log(value);
-      // console.log(this.location.toString().replaceAll(",", "|"));
       const data = {
         stayingDate:
           this.range.start.replaceAll("-", "") +
@@ -193,7 +191,7 @@ export default {
         sort: value,
       };
       console.log(data);
-      // this.$store.dispatch('dasboard/filterHotel', value)
+      this.$store.dispatch("dashboard/filterHotel", data);
     },
   },
   created() {

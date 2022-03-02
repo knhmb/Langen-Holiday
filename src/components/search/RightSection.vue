@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      isActive: "1",
+      isActive: "",
       services,
     };
   },
@@ -89,6 +89,14 @@ export default {
       let value = "";
       if (option === "1") {
         value = "recommendation";
+      } else if (option === "2") {
+        value = "%2Bprice";
+      } else if (option === "3") {
+        value = "%2Dprice";
+      } else if (option === "4") {
+        value = "%2Brating";
+      } else if (option === "5") {
+        value = "%2Drating";
       }
       this.$emit("getRecommendation", value);
     },

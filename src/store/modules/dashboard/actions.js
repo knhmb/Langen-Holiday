@@ -154,7 +154,16 @@ export default {
         console.log(err);
       });
   },
-  // filterHotel(_, payload) {
-  //   axios.get('/api/hotel?filter=stayingDate%3A20220411%7C20220413%2CguestQty%3A2%2CroomQty%3A1%2CisHavePets%3Atrue%2Clocation%3Alamma-island%7Cmo-tat-wan%2CroomType%3Acouple-suite')
-  // },
+  filterHotel(_, payload) {
+    axios
+      .get(
+        `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
