@@ -50,4 +50,7 @@ export default {
   GET_JOIN_CONTENT(state, payload) {
     state.joinContent = payload;
   },
+  GET_TOP_PLACES(state, payload) {
+    state.topPlaces = payload;
+  },
 };

@@ -177,11 +177,12 @@ export default {
         console.log(err);
       });
   },
-  getTopPlaces() {
+  getTopPlaces(context) {
     axios
       .get("/api/hotel?filter=topfive%3Atrue")
       .then((res) => {
         console.log(res);
+        context.commit("GET_TOP_PLACES", res.data.items);
       })
       .catch((err) => {
         console.log(err);

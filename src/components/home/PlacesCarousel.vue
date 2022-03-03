@@ -6,19 +6,20 @@
       height="570px"
       arrow="always"
     >
-      <el-carousel-item v-for="service in services" :key="service.id">
+      <el-carousel-item v-for="place in topPlaces" :key="place.id">
         <base-container>
           <el-row :gutter="10">
             <el-col :span="24">
               <Card
-                :name="service.name"
-                :description="service.description"
-                :discount="service.discount"
-                :price="service.price"
-                :rate-value="service.rateValue"
-                :rate-text="service.rateText"
-                :icon="service.icon"
-                :image="service.image"
+                :name="place.name"
+                :description="place.location"
+                :discount="place.discountedPrice"
+                :price="place.originalPrice"
+                :rate-value="place.rating"
+                :rate-text="place.reviewsCount"
+                :icon="place.icon"
+                :image="place.thumbnail"
+                :bookmarked="place.bookmarked"
               />
             </el-col>
           </el-row>
@@ -32,19 +33,64 @@
       height="570px"
       arrow="always"
     >
-      <el-carousel-item v-for="item in 4" :key="item">
+      <!-- <el-carousel-item v-for="item in 4" :key="item">
         <base-container>
           <el-row :gutter="10">
-            <el-col v-for="service in services" :key="service.id" :span="8">
+            <el-col v-for="place in topPlaces" :key="place.id" :span="6">
               <Card
-                :name="service.name"
-                :description="service.description"
-                :discount="service.discount"
-                :price="service.price"
-                :rate-value="service.rateValue"
-                :rate-text="service.rateText"
-                :icon="service.icon"
-                :image="service.image"
+                :name="place.name"
+                :description="place.location"
+                :discount="place.discountedPrice"
+                :price="place.originalPrice"
+                :rate-value="place.rating"
+                :rate-text="place.reviewsCount"
+                :icon="place.icon"
+                :image="place.thumbnail"
+                :bookmarked="place.bookmarked"
+              />
+            </el-col>
+          </el-row>
+        </base-container>
+      </el-carousel-item> -->
+      <el-carousel-item>
+        <base-container>
+          <el-row :gutter="10">
+            <el-col :span="8" v-for="place in topPlaces" :key="place.id">
+              <Card
+                v-if="place.hotelId !== '7' && place.hotelId !== '1'"
+                :name="place.name"
+                :description="place.location"
+                :discount="place.discountedPrice"
+                :price="place.originalPrice"
+                :rate-value="place.rating"
+                :rate-text="place.reviewsCount"
+                :icon="place.icon"
+                :image="place.thumbnail"
+                :bookmarked="place.bookmarked"
+              />
+            </el-col>
+          </el-row>
+        </base-container>
+      </el-carousel-item>
+      <el-carousel-item>
+        <base-container>
+          <el-row :gutter="10">
+            <el-col :span="8" v-for="place in topPlaces" :key="place.id">
+              <Card
+                v-if="
+                  place.hotelId !== '2' &&
+                  place.hotelId !== '4' &&
+                  place.hotelId !== '5'
+                "
+                :name="place.name"
+                :description="place.location"
+                :discount="place.discountedPrice"
+                :price="place.originalPrice"
+                :rate-value="place.rating"
+                :rate-text="place.reviewsCount"
+                :icon="place.icon"
+                :image="place.thumbnail"
+                :bookmarked="place.bookmarked"
               />
             </el-col>
           </el-row>
@@ -73,42 +119,47 @@ export default {
   },
   data() {
     return {
-      services: [
-        {
-          id: 1,
-          name: "白沙灣渡假酒店",
-          description: "西貢",
-          discount: "HK560",
-          price: "HK500",
-          rateValue: 4,
-          rateText: "62 則評語",
-          icon: require("../../assets/icon-rank1.png"),
-          image: require("../../assets/img-house1.jpg"),
-        },
-        {
-          id: 2,
-          name: "沙田渡假酒店",
-          description: "沙田",
-          discount: "HK560",
-          price: "HK500",
-          rateValue: 4,
-          rateText: "62 則評語",
-          icon: require("../../assets/icon-rank2.png"),
-          image: require("../../assets/img-house2.jpg"),
-        },
-        {
-          id: 3,
-          name: "馬𩣑山酒店",
-          description: "馬𩣑山",
-          discount: "HK560",
-          price: "HK500",
-          rateValue: 4,
-          rateText: "62 則評語",
-          icon: require("../../assets/icon-rank3.png"),
-          image: require("../../assets/img-house3.jpg"),
-        },
-      ],
+      // services: [
+      //   {
+      //     id: 1,
+      //     name: "白沙灣渡假酒店",
+      //     description: "西貢",
+      //     discount: "HK560",
+      //     price: "HK500",
+      //     rateValue: 4,
+      //     rateText: "62 則評語",
+      //     icon: require("../../assets/icon-rank1.png"),
+      //     image: require("../../assets/img-house1.jpg"),
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "沙田渡假酒店",
+      //     description: "沙田",
+      //     discount: "HK560",
+      //     price: "HK500",
+      //     rateValue: 4,
+      //     rateText: "62 則評語",
+      //     icon: require("../../assets/icon-rank2.png"),
+      //     image: require("../../assets/img-house2.jpg"),
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "馬𩣑山酒店",
+      //     description: "馬𩣑山",
+      //     discount: "HK560",
+      //     price: "HK500",
+      //     rateValue: 4,
+      //     rateText: "62 則評語",
+      //     icon: require("../../assets/icon-rank3.png"),
+      //     image: require("../../assets/img-house3.jpg"),
+      //   },
+      // ],
     };
+  },
+  computed: {
+    topPlaces() {
+      return this.$store.getters["dashboard/topPlaces"];
+    },
   },
   created() {
     this.$store.dispatch("dashboard/getTopPlaces");

@@ -50,4 +50,7 @@ export default {
   joinContent(state) {
     return state.joinContent;
   },
+  topPlaces(state) {
+    return state.topPlaces;
+  },
 };

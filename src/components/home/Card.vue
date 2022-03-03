@@ -48,11 +48,15 @@ export default {
     "rateText",
     "icon",
     "image",
+    "bookmarked",
   ],
   data() {
     return {
       value: 4,
-      bookmarkIcon: require("../../assets/icon-bookmark-on.png"),
+      bookmarkIcon:
+        this.bookmarked === false
+          ? require("../../assets/icon-bookmark-off.png")
+          : require("../../assets/icon-bookmark-on.png"),
     };
   },
   methods: {
@@ -82,6 +86,8 @@ export default {
 
 .places-carousel .image {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 4px;
   box-shadow: 0px 3px 6px #00000029;
   /* padding-top: 1rem;

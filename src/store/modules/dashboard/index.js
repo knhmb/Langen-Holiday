@@ -23,6 +23,7 @@ export default {
       paymentContent: {},
       termsConditionsContent: {},
       joinContent: {},
+      topPlaces: [],
     };
   },
   getters,
