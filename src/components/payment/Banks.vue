@@ -1,8 +1,9 @@
 <template>
   <base-container>
     <div class="banks">
-      <h2>付款方式</h2>
-      <div class="all-bank">
+      <h2>{{ paymentContent.title }}</h2>
+      <div v-html="paymentContent.content"></div>
+      <!-- <div class="all-bank">
         <el-row class="single-bank">
           <el-col :span="24">
             <p class="bank-title">1.香港銀行入賬號碼</p>
@@ -74,7 +75,7 @@
             </p>
           </el-col>
         </el-row>
-      </div>
+      </div> -->
       <img
         @click="openDialog"
         src="../../assets/icon-cs.png"
@@ -140,6 +141,11 @@ export default {
       isDialogOpen: false,
     };
   },
+  computed: {
+    paymentContent() {
+      return this.$store.getters["dashboard/paymentContent"];
+    },
+  },
   methods: {
     openDialog() {
       this.isDialogOpen = true;
@@ -147,6 +153,9 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getPaymentContent");
   },
 };
 </script>

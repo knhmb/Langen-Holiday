@@ -1,10 +1,11 @@
 <template>
   <base-container>
     <section class="TC">
-      <h1>網站使用條例</h1>
+      <h1>{{ termsConditionsContent.title }}</h1>
       <el-card class="box-card">
         <el-scrollbar height="300px">
-          <p>在使用本網站之前，請謹慎閱讀以下條款與細則。</p>
+          <div v-html="termsConditionsContent.content"></div>
+          <!-- <p>在使用本網站之前，請謹慎閱讀以下條款與細則。</p>
           <p>
             一經使用本網站，表示您已接受本條款與細則之限制。亦即表示您同意並接受本條款與細則所具有的法律約束力。若您不同意本條款與細則的任何部份，則不得使用本網站。
           </p>
@@ -111,7 +112,7 @@
               如果您對本條款與細則有任何疑問或需要任何進一步資料，可電郵到
               info@langenholiday.com，我們將會儘快回覆您。
             </p>
-          </div>
+          </div> -->
         </el-scrollbar>
         <img @click="openDialog" src="../assets/icon-cs.png" alt="" />
         <div v-if="isDialogOpen" class="contact-us-list">
@@ -174,6 +175,11 @@ export default {
       isDialogOpen: false,
     };
   },
+  computed: {
+    termsConditionsContent() {
+      return this.$store.getters["dashboard/termsConditionsContent"];
+    },
+  },
   methods: {
     openDialog() {
       this.isDialogOpen = true;
@@ -181,6 +187,9 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/getTermsConditions");
   },
 };
 </script>

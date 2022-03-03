@@ -198,31 +198,31 @@
             <template #title>會員中心</template>
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
-              @click="$router.push({ name: 'personal-information' })"
+              @click="profileNavigation('personal-information')"
               index="6-1"
               >個人資料</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
-              @click="$router.push({ name: 'change-password' })"
+              @click="profileNavigation('change-password')"
               index="6-2"
               >修改密碼</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
-              @click="$router.push({ name: 'places' })"
+              @click="profileNavigation('places')"
               index="6-3"
               >我的收藏</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
-              @click="$router.push({ name: 'evaluation-record' })"
+              @click="profileNavigation('evaluation-record')"
               index="6-4"
               >評價記錄</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
-              @click="$router.push({ name: 'appointment-record' })"
+              @click="profileNavigation('appointment-record')"
               index="6-5"
               >預約記錄</el-menu-item
             >
@@ -262,6 +262,7 @@
 import Login from "../Login.vue";
 import Register from "../Register.vue";
 import ForgotPassword from "../ForgotPassword.vue";
+// import { ElNotification } from "element-plus";
 
 export default {
   props: ["isActive", "isActiveSubMenuItem"],
@@ -299,6 +300,19 @@ export default {
     },
   },
   methods: {
+    profileNavigation(value) {
+      this.$router.push({ name: value });
+      // this.$store
+      //   .dispatch("auth/checkAccessTokenValidity")
+      //   .then((res) => {
+      //     console.log(res);
+      //     console.log("Navigated!", value);
+      //     this.$router.push({ name: value });
+      //   })
+      //   .catch(() => {
+      //     console.log("Failed Access Token");
+      //   });
+    },
     openDialog() {
       this.dialogFormVisible = true;
       this.dialogTitle = "登入";
@@ -382,7 +396,7 @@ export default {
     this.$store.dispatch("dashboard/setSubItemsLamma");
     this.$store.dispatch("dashboard/setSubItemsDayAndNight");
     // this.$store.dispatch("dashboard/setSubItems");
-    console.log(this.cheungChauIslandItems);
+    // console.log(this.cheungChauIslandItems);
   },
 };
 </script>

@@ -41,4 +41,13 @@ export default {
   contactContent(state) {
     return state.contactContent;
   },
+  paymentContent(state) {
+    return state.paymentContent;
+  },
+  termsConditionsContent(state) {
+    return state.termsConditionsContent;
+  },
+  joinContent(state) {
+    return state.joinContent;
+  },
 };

@@ -20,6 +20,9 @@ export default {
       dayNightBanner: [],
       roomTypes: [],
       contactContent: [],
+      paymentContent: {},
+      termsConditionsContent: {},
+      joinContent: {},
     };
   },
   getters,

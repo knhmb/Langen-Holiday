@@ -1,9 +1,19 @@
 <template>
   <div class="banner">
-    <img src="../../assets/join-banner.jpg" alt="" />
+    <img :src="joinContent.thumbnail" alt="" />
     <h3>成為我們的合作伙伴</h3>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    joinContent() {
+      return this.$store.getters["dashboard/joinContent"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .banner {

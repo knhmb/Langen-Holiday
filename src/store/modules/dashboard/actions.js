@@ -187,4 +187,35 @@ export default {
         console.log(err);
       });
   },
+  getPaymentContent(context) {
+    axios
+      .get("/api/cms-page/payment")
+      .then((res) => {
+        console.log(res);
+        context.commit("GET_PAYMENT_CONTENT", res.data.item);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getTermsConditions(context) {
+    axios
+      .get("/api/cms-page/terms-and-conditions")
+      .then((res) => {
+        context.commit("GET_TERMSCONDITIONS", res.data.item);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  getJoinContent(context) {
+    axios
+      .get("/api/cms-page/join")
+      .then((res) => {
+        context.commit("GET_JOIN_CONTENT", res.data.item);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

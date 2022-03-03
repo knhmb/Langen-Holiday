@@ -1,8 +1,18 @@
 <template>
   <div class="payment-banner">
-    <img src="../../assets/payment-banner.png" alt="" />
+    <img :src="paymentContent.thumbnail" alt="" />
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    paymentContent() {
+      return this.$store.getters["dashboard/paymentContent"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .payment-banner {

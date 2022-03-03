@@ -8,5 +8,6 @@ export default {
     state.isLoggedIn = false;
     state.token = null;
     state.userId = null;
+    console.log("logged out");
   },
 };

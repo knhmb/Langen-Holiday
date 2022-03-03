@@ -5,6 +5,55 @@ import i18n from "../../../i18n.js";
 const { t } = i18n.global;
 
 export default {
+  async checkAccessTokenValidity() {
+    await axios
+      .get("/api/authenticate", {
+        headers: {
+          authorization: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          return;
+        }
+        return axios
+          .put("/api/authenticate", {
+            headers: {
+              authorization: localStorage.getItem("refreshToken"),
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+            const error = new Error("Token expired!, Please login again");
+            throw error;
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        const error = new Error("Access Token Invalid!");
+        throw error;
+      });
+  },
+  async checkRefreshTokenValidity() {
+    axios
+      .put("/api/authenticate", {
+        headers: {
+          authorization: localStorage.getItem("refreshToken"),
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        const error = new Error("Token expired!, Please login again");
+        throw error;
+      });
+  },
   async login(context, payload) {
     await axios
       .post("/api/authenticate", payload)
@@ -12,7 +61,8 @@ export default {
         console.log(response.data);
         console.log(response);
         const now = new Date();
-        const expirationDate = new Date(now.getTime() + 900 * 1000);
+        const expiresIn = 900;
+        const expirationDate = new Date(now.getTime() + expiresIn * 1000);
 
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);

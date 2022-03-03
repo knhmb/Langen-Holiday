@@ -41,4 +41,13 @@ export default {
   SET_CONTACT_CONTENT(state, payload) {
     state.contactContent = payload;
   },
+  GET_PAYMENT_CONTENT(state, payload) {
+    state.paymentContent = payload;
+  },
+  GET_TERMSCONDITIONS(state, payload) {
+    state.termsConditionsContent = payload;
+  },
+  GET_JOIN_CONTENT(state, payload) {
+    state.joinContent = payload;
+  },
 };
