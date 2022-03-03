@@ -55,9 +55,12 @@
       <el-carousel-item>
         <base-container>
           <el-row :gutter="10">
-            <el-col :span="8" v-for="place in topPlaces" :key="place.id">
+            <el-col
+              :span="8"
+              v-for="place in topPlaces.slice(0, 3)"
+              :key="place.id"
+            >
               <Card
-                v-if="place.hotelId !== '7' && place.hotelId !== '1'"
                 :name="place.name"
                 :description="place.location"
                 :discount="place.discountedPrice"
@@ -75,13 +78,12 @@
       <el-carousel-item>
         <base-container>
           <el-row :gutter="10">
-            <el-col :span="8" v-for="place in topPlaces" :key="place.id">
+            <el-col
+              :span="8"
+              v-for="place in topPlaces.slice(3)"
+              :key="place.id"
+            >
               <Card
-                v-if="
-                  place.hotelId !== '2' &&
-                  place.hotelId !== '4' &&
-                  place.hotelId !== '5'
-                "
                 :name="place.name"
                 :description="place.location"
                 :discount="place.discountedPrice"
