@@ -55,7 +55,15 @@
               src="../../assets/icon-people.png"
               alt=""
             />
-            <p>2位成人・沒有小孩入住・沒有寵物・1間房</p>
+            <p>
+              {{
+                numberOfLivingPopulation === ""
+                  ? "2位成人"
+                  : numberOfLivingPopulation + " 位成人"
+              }}・沒有小孩入住・{{
+                isSelected === "false" ? "沒有寵物" : isSelected
+              }}・{{ numberOfRooms === "" ? "1間房" : numberOfRooms + " 間房" }}
+            </p>
             <transition name="slide-fade">
               <div v-if="isOpen" class="individual-booking">
                 <div class="content">

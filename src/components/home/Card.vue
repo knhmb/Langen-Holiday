@@ -17,14 +17,14 @@
             />
             {{ description }}</span
           >
-          <span class="discount">{{ discount }}</span>
-          <span class="price">{{ price }}</span>
+          <span class="discount">HK${{ price }}</span>
+          <span class="price">HK${{ discount }}<small> 起</small></span>
           <el-rate
             v-model="value"
             show-score
             disabled
             text-color="#c6c6c6"
-            :score-template="rateText"
+            :score-template="rateText + '則評語'"
           >
           </el-rate>
         </el-col>
@@ -46,17 +46,25 @@ export default {
     "price",
     "rateValue",
     "rateText",
-    "icon",
     "image",
     "bookmarked",
+    "id",
   ],
   data() {
     return {
-      value: 4,
+      value: +this.rateValue,
       bookmarkIcon:
         this.bookmarked === false
           ? require("../../assets/icon-bookmark-off.png")
           : require("../../assets/icon-bookmark-on.png"),
+      icon:
+        this.id === "2"
+          ? require("../../assets/icon-rank1.png")
+          : this.id === "4"
+          ? require("../../assets/icon-rank2.png")
+          : this.id === "5"
+          ? require("../../assets/icon-rank3.png")
+          : "",
     };
   },
   methods: {
@@ -71,11 +79,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .places-carousel .el-card {
   border: none;
-  box-shadow: none;
-
+  box-shadow: none !important;
+  background: transparent;
   padding-right: 17px;
   padding-top: 25px;
 }
@@ -131,6 +139,12 @@ export default {
   font-size: 16px;
 }
 
+.places-carousel .price small {
+  letter-spacing: 2px;
+  color: #8d8d8d;
+  font-size: 12px;
+}
+
 .places-carousel .el-rate {
   height: 50px;
 }
@@ -139,8 +153,13 @@ export default {
   display: inline;
 }
 
+/* .places-carousel .el-rate__item {
+  margin-right: 1rem;
+} */
+
 .places-carousel .el-rate .el-rate__text {
   font-size: 12px;
+  margin-left: 0.5rem;
 }
 
 .places-carousel .card-img {

@@ -30,7 +30,7 @@
     <el-carousel
       class="hidden-sm-and-down"
       trigger="click"
-      height="570px"
+      height="670px"
       arrow="always"
     >
       <!-- <el-carousel-item v-for="item in 4" :key="item">
@@ -67,9 +67,9 @@
                 :price="place.originalPrice"
                 :rate-value="place.rating"
                 :rate-text="place.reviewsCount"
-                :icon="place.icon"
                 :image="place.thumbnail"
                 :bookmarked="place.bookmarked"
+                :id="place.hotelId"
               />
             </el-col>
           </el-row>
@@ -208,6 +208,10 @@ export default {
   color: #fff;
   font-size: 24px;
 }
+.places-carousel .el-carousel .el-carousel__container {
+  /* height: 890px !important; */
+  height: 100vh !important;
+}
 
 @media screen and (min-width: 1680px) {
   .places-carousel .el-carousel__arrow.el-carousel__arrow--left {
@@ -218,9 +222,15 @@ export default {
     right: 4%;
   }
 
-  .places-carousel .el-carousel .el-carousel__container {
-    height: 747px !important;
-  }
+  /* .places-carousel .el-carousel .el-carousel__container {
+    height: 890px !important;
+  } */
+}
+
+@media screen and (min-width: 2022px) {
+  /* .places-carousel .el-carousel .el-carousel__container {
+    height: 970px !important;
+  } */
 }
 
 @media screen and (max-width: 768px) {
