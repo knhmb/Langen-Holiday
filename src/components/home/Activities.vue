@@ -10,7 +10,7 @@
           :md="12"
           :lg="8"
         >
-          <div class="card">
+          <div class="card" @click="searchTheme(theme.slug)">
             <div class="card-img">
               <!-- <img src="../../assets/img-service1.jpg" alt="" /> -->
               <img :src="theme.thumbnail" alt="" />
@@ -84,6 +84,18 @@ export default {
       return this.$store.state.dashboard.themes;
     },
   },
+  methods: {
+    searchTheme(theme) {
+      this.$store
+        .dispatch("search/getSearchTheme", theme)
+        .then(() => {
+          this.$router.push("/search");
+        })
+        .catch(() => {
+          console.log("ERROR");
+        });
+    },
+  },
   async created() {
     await this.$store.dispatch("dashboard/setThemes");
   },
@@ -119,6 +131,7 @@ export default {
   border-radius: 4px;
   /* margin-bottom: 3rem; */
   box-shadow: 0px 0px 3px 0px grey;
+  cursor: pointer;
 }
 
 .activities .card .card-img {
