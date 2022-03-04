@@ -378,15 +378,19 @@ export default {
     },
     navigateToCheung(cheung) {
       this.$router.push(`/cheung-chau-island/${cheung.slug}`);
+      this.$store.dispatch("search/getSearchItems", cheung);
     },
     navigateToLantau(lantau) {
       this.$router.push(`/lantau-island/${lantau.slug}`);
+      this.$store.dispatch("search/getSearchItems", lantau);
     },
     navigateToLamma(lamma) {
       this.$router.push(`/lamma-island/${lamma.slug}`);
+      this.$store.dispatch("search/getSearchItems", lamma);
     },
     navigateToDayTime(day) {
       this.$router.push(`/day-n-night-time/${day.slug}`);
+      this.$store.dispatch("search/getSearchItems", day);
     },
   },
   created() {

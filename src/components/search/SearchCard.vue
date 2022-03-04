@@ -13,15 +13,15 @@
                 alt=""
               />{{ description }}</span
             >
-            <span class="discount">{{ discount }}</span>
-            <span class="price">{{ price }}</span>
+            <span class="discount">HK${{ price }}</span>
+            <span class="price">HK${{ discount }}<small> 起</small></span>
             <el-rate
               v-model="value"
               show-score
               disabled
               :colors="colors"
               text-color="#c6c6c6"
-              :score-template="rateText"
+              :score-template="rateText + '則評語'"
             >
             </el-rate>
           </el-col>
@@ -45,12 +45,16 @@ export default {
     "rateValue",
     "rateText",
     "image",
+    "bookmarked",
   ],
   data() {
     return {
-      value: 4,
+      value: +this.rateValue,
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
-      bookmarkIcon: require("../../assets/icon-bookmark-on.png"),
+      bookmarkIcon:
+        this.bookmarked === false
+          ? require("../../assets/icon-bookmark-off.png")
+          : require("../../assets/icon-bookmark-on.png"),
     };
   },
   methods: {
@@ -127,6 +131,7 @@ export default {
 
 .search .right-section .el-rate .el-rate__text {
   font-size: 12px;
+  margin-left: 0.5rem;
 }
 
 .search .right-section .el-rate .el-rate__icon {

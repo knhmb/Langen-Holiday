@@ -154,13 +154,16 @@ export default {
         console.log(err);
       });
   },
-  filterHotel(_, payload) {
+  filterHotel(context, payload) {
     axios
       .get(
         `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
       )
       .then((res) => {
         console.log(res);
+        context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+          root: true,
+        });
       })
       .catch((err) => {
         console.log(err);

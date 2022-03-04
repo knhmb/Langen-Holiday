@@ -14,7 +14,12 @@
           <el-col :sm="24" :lg="6">
             <div class="left-section">
               <p>入住日期</p>
-              <Calendar />
+              <DatePicker
+                :model-config="modelConfig"
+                color="orange"
+                is-range
+                v-model="range"
+              />
               <el-row>
                 <el-col>
                   <p>住宿要求</p>
@@ -68,16 +73,16 @@
                   <div class="pet-option">
                     <el-row>
                       <el-col
-                        :class="{ 'is-active-option': isSelected === 'pet' }"
+                        :class="{ 'is-active-option': isSelected === 'true' }"
                         :span="12"
                       >
-                        <p @click="setOption('pet')">有</p>
+                        <p @click="setOption('true')">有</p>
                       </el-col>
                       <el-col
-                        :class="{ 'is-active-option': isSelected === 'no' }"
+                        :class="{ 'is-active-option': isSelected === 'false' }"
                         :span="12"
                       >
-                        <p @click="setOption('no')">沒有</p>
+                        <p @click="setOption('false')">沒有</p>
                       </el-col>
                     </el-row>
                   </div>
@@ -127,7 +132,9 @@
             </div>
           </el-col>
           <el-col :sm="24" :lg="18">
-            <right-section></right-section>
+            <right-section
+              @getRecommendation="applyRecommendation"
+            ></right-section>
           </el-col>
         </el-row>
       </div>
@@ -136,14 +143,14 @@
 </template>
 
 <script>
-import Calendar from "../components/search/Calendar.vue";
 import RightSection from "../components/search/RightSection.vue";
 import Banner from "../components/cheung-chau/Banner.vue";
 import RangeMixin from "../mixins/range.js";
+import { DatePicker } from "v-calendar";
 
 export default {
   components: {
-    Calendar,
+    DatePicker,
     RightSection,
     Banner,
   },
@@ -152,8 +159,13 @@ export default {
     return {
       time: [],
       location: [],
-      isSelected: "pet",
+      isSelected: "false",
       roomType: [],
+      range: [],
+      modelConfig: {
+        type: "string",
+        mask: "YYYY-MM-DD", // Uses 'iso' if missing
+      },
     };
   },
   computed: {
@@ -164,6 +176,22 @@ export default {
   methods: {
     setOption(option) {
       this.isSelected = option;
+    },
+    applyRecommendation(value) {
+      const data = {
+        stayingDate:
+          this.range.start.replaceAll("-", "") +
+          "|" +
+          this.range.end.replaceAll("-", ""),
+        guestQty: this.numberOfLivingPopulation,
+        roomQty: this.numberOfRooms,
+        isHavePets: this.isSelected,
+        location: this.location.toString().replaceAll(",", "|"),
+        roomType: this.roomType.toString().replaceAll(",", "|"),
+        sort: value,
+      };
+      console.log(data);
+      this.$store.dispatch("dashboard/filterHotel", data);
     },
   },
   created() {

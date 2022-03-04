@@ -48,23 +48,26 @@
       </el-col>
     </el-row>
     <el-row :gutter="10" justify="space-between">
+      <!-- <template v-if="$route.path.includes('municipal-services-building')"> -->
       <el-col
-        v-for="service in services"
-        :key="service.id"
+        v-for="item in searchItems"
+        :key="item.id"
         :sm="24"
         :md="8"
         :lg="8"
       >
         <SearchCard
-          :name="service.name"
-          :description="service.description"
-          :discount="service.discount"
-          :price="service.price"
-          :rate-value="service.rateValue"
-          :rate-text="service.rateText"
-          :image="service.image"
+          :name="item.name"
+          :description="item.location"
+          :discount="item.discountedPrice"
+          :price="item.originalPrice"
+          :rate-value="item.rating"
+          :rate-text="item.reviewsCount"
+          :image="item.thumbnail"
+          :bookmarked="item.bookmarked"
         />
       </el-col>
+      <!-- </template> -->
     </el-row>
   </div>
 </template>
@@ -82,6 +85,11 @@ export default {
       isActive: "",
       services,
     };
+  },
+  computed: {
+    searchItems() {
+      return this.$store.getters["search/searchItems"];
+    },
   },
   methods: {
     setOption(option) {
