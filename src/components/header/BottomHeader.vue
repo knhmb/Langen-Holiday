@@ -262,7 +262,7 @@
 import Login from "../Login.vue";
 import Register from "../Register.vue";
 import ForgotPassword from "../ForgotPassword.vue";
-// import { ElNotification } from "element-plus";
+import { ElNotification } from "element-plus";
 
 export default {
   props: ["isActive", "isActiveSubMenuItem"],
@@ -301,17 +301,22 @@ export default {
   },
   methods: {
     profileNavigation(value) {
-      this.$router.push({ name: value });
-      // this.$store
-      //   .dispatch("auth/checkAccessTokenValidity")
-      //   .then((res) => {
-      //     console.log(res);
-      //     console.log("Navigated!", value);
-      //     this.$router.push({ name: value });
-      //   })
-      //   .catch(() => {
-      //     console.log("Failed Access Token");
-      //   });
+      // this.$router.push({ name: value });
+      this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then((res) => {
+          console.log(res);
+          this.$router.push({ name: value });
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+          console.log("Failed Access Token");
+        });
     },
     openDialog() {
       this.dialogFormVisible = true;

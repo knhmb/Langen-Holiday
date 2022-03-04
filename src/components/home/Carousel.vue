@@ -57,6 +57,10 @@ export default {
   opacity: 1;
 }
 
+.carousel .el-carousel .el-carousel__container {
+  height: 100vh !important;
+}
+
 .carousel .el-carousel__arrow.el-carousel__arrow--left,
 .carousel .el-carousel__arrow.el-carousel__arrow--right {
   background-color: transparent;

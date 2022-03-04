@@ -14,27 +14,10 @@ export default {
       })
       .then((res) => {
         console.log(res);
-        if (res.status === 200) {
-          return;
-        }
-        return axios
-          .put("/api/authenticate", {
-            headers: {
-              authorization: localStorage.getItem("refreshToken"),
-            },
-          })
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-            const error = new Error("Token expired!, Please login again");
-            throw error;
-          });
       })
       .catch((err) => {
         console.log(err);
-        const error = new Error("Access Token Invalid!");
+        const error = new Error("Access Token Or Refresh Token is Invalid!");
         throw error;
       });
   },
