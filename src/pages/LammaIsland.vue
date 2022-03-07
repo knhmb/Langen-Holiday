@@ -93,7 +93,7 @@
                 <el-checkbox-group v-model="location">
                   <template v-for="lamma in headerItems" :key="lamma.id">
                     <el-checkbox
-                      v-if="lamma.name === 'lamma-island'"
+                      v-if="lamma.slug === 'lamma-island'"
                       :label="lamma.slug"
                       >{{ lamma.name }}</el-checkbox
                     >
