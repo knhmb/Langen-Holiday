@@ -61,7 +61,7 @@
                   ? "2位成人"
                   : numberOfLivingPopulation + " 位成人"
               }}・沒有小孩入住・{{
-                isSelected === "false" ? "沒有寵物" : isSelected
+                isSelected === "false" ? "沒有寵物" : "帶寵物"
               }}・{{ numberOfRooms === "" ? "1間房" : numberOfRooms + " 間房" }}
             </p>
             <transition name="slide-fade">
@@ -245,7 +245,14 @@ export default {
         isHavePets: this.isSelected,
       };
       console.log(data);
-      this.$store.dispatch("dashboard/searchHotel", data);
+      this.$store
+        .dispatch("dashboard/searchHotel", data)
+        .then(() => {
+          this.$router.push("/search");
+        })
+        .catch(() => {
+          console.log("Error");
+        });
       // this.range = "";
     },
   },

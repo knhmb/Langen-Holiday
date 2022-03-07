@@ -17,7 +17,7 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-        const error = new Error("Access Token Or Refresh Token is Invalid!");
+        const error = new Error(t("token_invalid"));
         throw error;
       });
   },

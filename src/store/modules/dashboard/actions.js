@@ -132,13 +132,16 @@ export default {
         console.log(err);
       });
   },
-  searchHotel(_, payload) {
+  searchHotel(context, payload) {
     axios
       .get(
-        `/api/hotel?search=${payload.search}&filter=stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets} &sort=xxx&page=xx&pagesize=xxx`
+        `/api/hotel?search=${payload.search}&filter=stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets}&sort=xxx&page=xx&pagesize=xxx`
       )
       .then((res) => {
         console.log(res);
+        context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+          root: true,
+        });
       })
       .catch((err) => {
         console.log(err);
