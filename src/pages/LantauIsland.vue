@@ -105,6 +105,7 @@
                     <el-checkbox
                       :label="lantau.slug"
                       v-if="lantau.name !== '景點介紹'"
+                      :checked="$route.path.includes(lantau.slug)"
                     >
                       {{ lantau.name }}</el-checkbox
                     >

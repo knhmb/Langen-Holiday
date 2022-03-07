@@ -103,6 +103,7 @@
                     <el-checkbox
                       :label="lamma.slug"
                       v-if="lamma.name !== '景點介紹'"
+                      :checked="$route.path.includes(lamma.slug)"
                       >{{ lamma.name }}</el-checkbox
                     >
                   </template>

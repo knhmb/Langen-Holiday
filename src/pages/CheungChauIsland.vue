@@ -105,6 +105,7 @@
                     <el-checkbox
                       :label="cheung.slug"
                       v-if="cheung.name !== '景點介紹'"
+                      :checked="$route.path.includes(cheung.slug)"
                       >{{ cheung.name }}</el-checkbox
                     >
                   </template>
