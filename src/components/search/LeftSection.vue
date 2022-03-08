@@ -206,7 +206,12 @@ export default {
       roomType: [],
       numberOfLivingPopulation: 0,
       numberOfRooms: 0,
-      range: "",
+      range: {
+        start: moment(new Date()).format("YYYY-MM-DD").replaceAll("-", ""),
+        end: moment(new Date().setDate(new Date().getDate() + 1))
+          .format("YYYY-MM-DD")
+          .replaceAll("-", ""),
+      },
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD", // Uses 'iso' if missing
@@ -230,27 +235,37 @@ export default {
       return this.$store.getters["dashboard/roomTypes"];
     },
   },
+  watch: {
+    range() {
+      this.checkboxChanged();
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
+      this.checkboxChanged();
     },
     increaseNumberOfPopulation() {
       this.numberOfLivingPopulation++;
+      this.checkboxChanged();
     },
     decreaseNumberOfPopulation() {
       if (this.numberOfLivingPopulation <= 0) {
         return;
       }
       this.numberOfLivingPopulation--;
+      this.checkboxChanged();
     },
     increaseRoom() {
       this.numberOfRooms++;
+      this.checkboxChanged();
     },
     decreaseRoom() {
       if (this.numberOfRooms <= 0) {
         return;
       }
       this.numberOfRooms--;
+      this.checkboxChanged();
     },
     checkboxChanged() {
       console.log(this.location);

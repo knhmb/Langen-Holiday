@@ -10,7 +10,7 @@ export default {
       .replaceAll("-", "");
     axios
       .get(
-        `/api/hotel?filter=location%3A${payload.slug}&stayingDate%3A${today}%7C${tomorrow}`
+        `/api/hotel?filter=itemcategory%3A${payload.slug}&stayingDate%3A${today}%7C${tomorrow}`
       )
       .then((res) => {
         console.log(res);

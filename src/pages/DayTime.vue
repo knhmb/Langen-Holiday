@@ -218,7 +218,12 @@ export default {
       location: [],
       isSelected: "false",
       roomType: [],
-      range: "",
+      range: {
+        start: moment(new Date()).format("YYYY-MM-DD").replaceAll("-", ""),
+        end: moment(new Date().setDate(new Date().getDate() + 1))
+          .format("YYYY-MM-DD")
+          .replaceAll("-", ""),
+      },
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD", // Uses 'iso' if missing
@@ -245,9 +250,15 @@ export default {
       return this.$store.getters["dashboard/roomTypes"];
     },
   },
+  watch: {
+    range() {
+      this.checkboxChanged();
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
+      this.checkboxChanged();
     },
     checkboxChanged() {
       console.log(this.location);
