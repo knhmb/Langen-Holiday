@@ -31,9 +31,13 @@
       </div>
     </transition>
 
-    <el-dialog v-model="dialogVisible" title="Number of Nights" width="30%">
+    <el-dialog
+      v-model="dialogVisible"
+      :title="$i18n.t('number_of_nights')"
+      width="30%"
+    >
       <span>{{
-        dateDifference === "" ? "No Date has been Selected" : dateDifference
+        dateDifference === "" ? $i18n.t("date_unselected") : dateDifference
       }}</span>
       <!-- <template #footer>
         <span class="dialog-footer">

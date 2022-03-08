@@ -11,5 +11,7 @@
   "terms_required": "必須檢查條款和條件",
   "password_dont_match": "密碼和確認密碼不匹配",
   "invalid_oldpassword": "舊密碼不正確",
-  "token_invalid": "訪問令牌或刷新令牌無效"
+  "token_invalid": "訪問令牌或刷新令牌無效",
+  "number_of_nights": "晚數",
+  "date_unselected": "未選擇日期"
 }

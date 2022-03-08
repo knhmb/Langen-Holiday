@@ -47,7 +47,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="10" justify="space-between">
+    <el-row class="card-row" :gutter="10">
       <!-- <template v-if="$route.path.includes('municipal-services-building')"> -->
       <el-col
         v-for="item in searchItems"
@@ -133,5 +133,10 @@ export default {
 .pill.selected {
   background-color: #fd9a1a;
   color: #fff;
+}
+
+.el-row.card-row .el-col {
+  display: flex;
+  align-items: stretch;
 }
 </style>

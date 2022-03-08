@@ -4,5 +4,7 @@
   "invalid_username": "Username is invalid!",
   "invalid_password": "Password is invalid!",
   "username_already_exists": "Username already exists!",
-  "check_inputs": "Please Check Your Input Fields"
+  "check_inputs": "Please Check Your Input Fields",
+  "number_of_nights": "Number of Nights",
+  "date_unselected": "No date has been selected"
 }

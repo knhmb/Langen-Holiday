@@ -74,10 +74,13 @@ export default {
   margin-top: 1rem;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 5px;
+  /* height: 100%; */
 }
+
 .search .right-section .image {
   width: 100%;
-  /* object-fit: contain; */
+  height: 100%;
+  object-fit: cover;
 }
 
 .search .right-section .location-icon {

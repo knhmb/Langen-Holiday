@@ -139,6 +139,7 @@ import RightSection from "../components/search/RightSection.vue";
 import Banner from "../components/cheung-chau/Banner.vue";
 import RangeMixin from "../mixins/range.js";
 import { DatePicker } from "v-calendar";
+import moment from "moment";
 
 export default {
   components: {
@@ -153,7 +154,7 @@ export default {
       location: [],
       isSelected: "false",
       roomType: [],
-      range: [],
+      range: "",
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD", // Uses 'iso' if missing
@@ -179,11 +180,17 @@ export default {
       this.isSelected = option;
     },
     applyRecommendation(value) {
+      const date = new Date();
+      const formattedDate = moment(date).format("YYYY-MM-DD");
       const data = {
         stayingDate:
-          this.range.start.replaceAll("-", "") +
-          "|" +
-          this.range.end.replaceAll("-", ""),
+          this.range === ""
+            ? formattedDate +
+              "|" +
+              moment(date.setDate(date.getDate() + 1)).format("YYYY-MM-DD")
+            : this.range.start.replaceAll("-", "") +
+              "|" +
+              this.range.end.replaceAll("-", ""),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
