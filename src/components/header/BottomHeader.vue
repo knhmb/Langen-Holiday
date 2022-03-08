@@ -138,6 +138,14 @@
               <template #title>{{ item.name }}</template>
               <template v-if="item.slug === 'cheung-chau-island'">
                 <el-menu-item
+                  :style="{
+                    color: $route.path.includes(cheung.slug)
+                      ? 'black'
+                      : '#8d8d8d',
+                    fontWeight: $route.path.includes(cheung.slug)
+                      ? 'bold'
+                      : 'normal',
+                  }"
                   v-for="cheung in cheungChauIslandItems"
                   :key="cheung.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
@@ -148,6 +156,14 @@
               </template>
               <template v-else-if="item.slug === 'lantau-island'">
                 <el-menu-item
+                  :style="{
+                    color: $route.path.includes(launtau.slug)
+                      ? 'black'
+                      : '#8d8d8d',
+                    fontWeight: $route.path.includes(launtau.slug)
+                      ? 'bold'
+                      : 'normal',
+                  }"
                   v-for="launtau in lantauIslandItems"
                   :key="launtau.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
@@ -158,6 +174,14 @@
               </template>
               <template v-else-if="item.slug === 'lamma-island'">
                 <el-menu-item
+                  :style="{
+                    color: $route.path.includes(lamma.slug)
+                      ? 'black'
+                      : '#8d8d8d',
+                    fontWeight: $route.path.includes(lamma.slug)
+                      ? 'bold'
+                      : 'normal',
+                  }"
                   v-for="lamma in lammaIslandItems"
                   :key="lamma.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
@@ -168,6 +192,16 @@
               </template>
               <template v-else-if="item.slug === 'day-n-night-time'">
                 <el-menu-item
+                  :style="{
+                    color:
+                      $route.path === '/' + day.parentCodexSlug + '/' + day.slug
+                        ? 'black'
+                        : '#8d8d8d',
+                    fontWeight:
+                      $route.path === '/' + day.parentCodexSlug + '/' + day.slug
+                        ? 'bold'
+                        : 'normal',
+                  }"
                   v-for="day in dayNightItems"
                   :key="day.id"
                   :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
@@ -532,6 +566,11 @@ export default {
   color: #fd9a1a !important;
   font-weight: bold;
 }
+
+/* .el-menu--horizontal .el-menu .el-menu-item.is-active {
+  color: black !important;
+  font-weight: bold;
+} */
 
 @media screen and (max-width: 1024px) {
   .bottom-header .el-col {
