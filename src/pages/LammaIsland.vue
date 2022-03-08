@@ -90,7 +90,7 @@
               </el-row>
               <p>地點</p>
               <div class="location">
-                <el-checkbox-group v-model="location">
+                <el-checkbox-group v-model="location" @change="checkboxChanged">
                   <template v-for="lamma in headerItems" :key="lamma.id">
                     <el-checkbox
                       v-if="lamma.slug === 'lamma-island'"
@@ -110,7 +110,7 @@
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
-              <el-checkbox-group v-model="roomType">
+              <el-checkbox-group v-model="roomType" @change="checkboxChanged">
                 <el-checkbox
                   v-for="room in roomTypes"
                   :key="room.id"
@@ -176,15 +176,45 @@ export default {
     setOption(option) {
       this.isSelected = option;
     },
-    applyRecommendation(value) {
+    checkboxChanged() {
+      console.log(this.location);
       const date = new Date();
-      const formattedDate = moment(date).format("YYYY-MM-DD");
+      const formattedDate = moment(date)
+        .format("YYYY-MM-DD")
+        .replaceAll("-", "");
       const data = {
         stayingDate:
           this.range === ""
             ? formattedDate +
               "|" +
-              moment(date.setDate(date.getDate() + 1)).format("YYYY-MM-DD")
+              moment(date.setDate(date.getDate() + 1))
+                .format("YYYY-MM-DD")
+                .replaceAll("-", "")
+            : this.range.start.replaceAll("-", "") +
+              "|" +
+              this.range.end.replaceAll("-", ""),
+        guestQty: this.numberOfLivingPopulation,
+        roomQty: this.numberOfRooms,
+        isHavePets: this.isSelected,
+        location: this.location.toString().replaceAll(",", "|"),
+        roomType: this.roomType.toString().replaceAll(",", "|"),
+      };
+      console.log(data);
+      this.$store.dispatch("dashboard/filterHotel", data);
+    },
+    applyRecommendation(value) {
+      const date = new Date();
+      const formattedDate = moment(date)
+        .format("YYYY-MM-DD")
+        .replaceAll("-", "");
+      const data = {
+        stayingDate:
+          this.range === ""
+            ? formattedDate +
+              "|" +
+              moment(date.setDate(date.getDate() + 1))
+                .format("YYYY-MM-DD")
+                .replaceAll("-", "")
             : this.range.start.replaceAll("-", "") +
               "|" +
               this.range.end.replaceAll("-", ""),
@@ -196,7 +226,7 @@ export default {
         sort: value,
       };
       console.log(data);
-      this.$store.dispatch("dashboard/filterHotel", data);
+      this.$store.dispatch("dashboard/sortHotel", data);
     },
   },
   created() {

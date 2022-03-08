@@ -125,7 +125,7 @@
           active-text-color="#8d8d8d"
           unique-opened
           :ellipsis="false"
-          menu-trigger="click"
+          menu-trigger="hover"
           class="el-menu-demo hidden-md-and-down"
           mode="horizontal"
         >
@@ -133,7 +133,13 @@
             <el-sub-menu
               v-if="item.slug !== 'hotel-recommendations'"
               :index="item.displayOrder"
-              @click="closeDropdown()"
+              @click="closeDropdown(item)"
+              :style="{
+                fontWeight:
+                  $route.path === '/' + item.slug + '/' + item.slug
+                    ? 'bold'
+                    : 'normal',
+              }"
             >
               <template #title>{{ item.name }}</template>
               <template v-if="item.slug === 'cheung-chau-island'">
@@ -212,10 +218,10 @@
               </template>
             </el-sub-menu>
             <el-menu-item
-              @click="
-                closeDropdown();
-                $router.push('/hotel-recommendations');
-              "
+              :style="{
+                fontWeight: $route.path === '/' + item.slug ? 'bold' : 'normal',
+              }"
+              @click="closeDropdown(item)"
               :class="{ 'my-active': isActive === 7 }"
               v-if="item.slug === 'hotel-recommendations'"
               :index="item.id"
@@ -356,22 +362,17 @@ export default {
       this.dialogFormVisible = true;
       this.dialogTitle = "登入";
     },
-    closeDropdown() {
+    closeDropdown(item) {
       const li = document.querySelectorAll(".el-popper");
       li[0].style.display = "none";
       li[1].style.display = "none";
-      // if (value === "cheung-chau-island") {
-      //   if (this.cheungChauIslandItems.length > 0) {
-      //     return;
-      //   }
-      //   this.$store.dispatch("dashboard/setSubItems", value);
-      // }
-      // if (value === "lantau-island") {
-      //   if (this.lantauIslandItems.length > 0) {
-      //     return;
-      //   }
-      //   this.$store.dispatch("dashboard/setSubItems", value);
-      // }
+      console.log(item);
+      if (item.slug === "hotel-recommendations") {
+        this.$router.push("/hotel-recommendations");
+      } else {
+        this.$router.push(`/${item.slug}/${item.slug}`);
+      }
+      this.$store.dispatch("search/getSearchItems", item);
     },
     selectedSubMenu(option) {
       if (option === 4 || option === 5 || option === 6 || option === 7) {

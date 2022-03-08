@@ -99,44 +99,82 @@
           </el-checkbox-group> -->
           <p>地點</p>
           <div class="location">
-            <el-checkbox-group v-model="location">
-              <el-checkbox label="長洲" />
-              <el-checkbox label="市政大樓" />
-              <el-checkbox label="東灣東堤" />
-              <el-checkbox label="西堤海景樓" />
+            <el-checkbox-group v-model="location" @change="checkboxChanged">
+              <template v-for="cheung in headerItems" :key="cheung">
+                <el-checkbox
+                  v-if="cheung.slug === 'cheung-chau-island'"
+                  :label="cheung.slug"
+                  >{{ cheung.name }}</el-checkbox
+                >
+              </template>
+              <template
+                v-for="cheung in cheungChauIslandItems"
+                :key="cheung.id"
+              >
+                <el-checkbox
+                  :label="cheung.slug"
+                  v-if="cheung.name !== '景點介紹'"
+                  :checked="$route.path.includes(cheung.slug)"
+                  >{{ cheung.name }}</el-checkbox
+                >
+              </template>
             </el-checkbox-group>
           </div>
           <div class="location">
-            <el-checkbox-group v-model="location">
-              <el-checkbox label="大嶼山" />
-              <el-checkbox label="梅窩" />
-              <el-checkbox label="貝澳" />
-              <el-checkbox label="塘福" />
-              <el-checkbox label="大澳" />
+            <el-checkbox-group v-model="location" @change="checkboxChanged">
+              <template v-for="lantau in headerItems" :key="lantau.id">
+                <el-checkbox
+                  v-if="lantau.slug === 'lantau-island'"
+                  :label="lantau.slug"
+                  >{{ lantau.name }}</el-checkbox
+                >
+              </template>
+              <template v-for="lantau in lantauIslandItems" :key="lantau.id">
+                <el-checkbox
+                  :label="lantau.slug"
+                  v-if="lantau.name !== '景點介紹'"
+                  :checked="$route.path.includes(lantau.slug)"
+                >
+                  {{ lantau.name }}</el-checkbox
+                >
+              </template>
             </el-checkbox-group>
           </div>
           <div class="location">
-            <el-checkbox-group v-model="location">
-              <el-checkbox label="南丫島" />
-              <el-checkbox label="模達灣" />
-              <el-checkbox label="沙埔舊村" />
-              <el-checkbox label="榕樹灣" />
+            <el-checkbox-group v-model="location" @change="checkboxChanged">
+              <template v-for="lamma in headerItems" :key="lamma.id">
+                <el-checkbox
+                  v-if="lamma.slug === 'lamma-island'"
+                  :label="lamma.slug"
+                  >{{ lamma.name }}</el-checkbox
+                >
+              </template>
+
+              <template v-for="lamma in lammaIslandItems" :key="lamma.id">
+                <el-checkbox
+                  :label="lamma.slug"
+                  v-if="lamma.name !== '景點介紹'"
+                  :checked="$route.path.includes(lamma.slug)"
+                  >{{ lamma.name }}</el-checkbox
+                >
+              </template>
             </el-checkbox-group>
           </div>
-          <div class="location">
-            <el-checkbox-group v-model="location">
-              <el-checkbox label="港島區" />
-              <el-checkbox label="九龍區" />
-              <el-checkbox label="新界區" />
+          <div class="location un-bordered">
+            <el-checkbox-group v-model="location" @change="checkboxChanged">
+              <el-checkbox label="hong-kong-island">港島區</el-checkbox>
+              <el-checkbox label="kowloon">九龍區</el-checkbox>
+              <el-checkbox label="new-territories">新界區</el-checkbox>
             </el-checkbox-group>
           </div>
           <p>房間類型</p>
-          <el-checkbox-group v-model="roomType">
-            <el-checkbox label="雙人套房" />
-            <el-checkbox label="家庭套房" />
-            <el-checkbox label="一房一廳" />
-            <el-checkbox label="兩房一廳" />
-            <el-checkbox label="三房/四房一廳" />
+          <el-checkbox-group v-model="roomType" @change="checkboxChanged">
+            <el-checkbox
+              v-for="room in roomTypes"
+              :key="room.id"
+              :label="room.slug"
+              >{{ room.name }}
+            </el-checkbox>
           </el-checkbox-group>
         </div>
       </el-col>
@@ -175,6 +213,23 @@ export default {
       },
     };
   },
+  computed: {
+    cheungChauIslandItems() {
+      return this.$store.getters["dashboard/cheungChauIslandItems"];
+    },
+    lantauIslandItems() {
+      return this.$store.getters["dashboard/lantauIslandItems"];
+    },
+    lammaIslandItems() {
+      return this.$store.getters["dashboard/lammaIslandItems"];
+    },
+    headerItems() {
+      return this.$store.getters["dashboard/headerItems"];
+    },
+    roomTypes() {
+      return this.$store.getters["dashboard/roomTypes"];
+    },
+  },
   methods: {
     setOption(option) {
       this.isSelected = option;
@@ -197,15 +252,45 @@ export default {
       }
       this.numberOfRooms--;
     },
-    applyRecommendation(value) {
+    checkboxChanged() {
+      console.log(this.location);
       const date = new Date();
-      const formattedDate = moment(date).format("YYYY-MM-DD");
+      const formattedDate = moment(date)
+        .format("YYYY-MM-DD")
+        .replaceAll("-", "");
       const data = {
         stayingDate:
           this.range === ""
             ? formattedDate +
               "|" +
-              moment(date.setDate(date.getDate() + 1)).format("YYYY-MM-DD")
+              moment(date.setDate(date.getDate() + 1))
+                .format("YYYY-MM-DD")
+                .replaceAll("-", "")
+            : this.range.start.replaceAll("-", "") +
+              "|" +
+              this.range.end.replaceAll("-", ""),
+        guestQty: this.numberOfLivingPopulation,
+        roomQty: this.numberOfRooms,
+        isHavePets: this.isSelected,
+        location: this.location.toString().replaceAll(",", "|"),
+        roomType: this.roomType.toString().replaceAll(",", "|"),
+      };
+      console.log(data);
+      this.$store.dispatch("dashboard/filterHotel", data);
+    },
+    applyRecommendation(value) {
+      const date = new Date();
+      const formattedDate = moment(date)
+        .format("YYYY-MM-DD")
+        .replaceAll("-", "");
+      const data = {
+        stayingDate:
+          this.range === ""
+            ? formattedDate +
+              "|" +
+              moment(date.setDate(date.getDate() + 1))
+                .format("YYYY-MM-DD")
+                .replaceAll("-", "")
             : this.range.start.replaceAll("-", "") +
               "|" +
               this.range.end.replaceAll("-", ""),
@@ -217,8 +302,11 @@ export default {
         sort: value,
       };
       console.log(data);
-      this.$store.dispatch("dashboard/filterHotel", data);
+      this.$store.dispatch("dashboard/sortHotel", data);
     },
+  },
+  created() {
+    this.$store.dispatch("dashboard/setRoomType");
   },
 };
 </script>

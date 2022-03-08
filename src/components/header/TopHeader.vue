@@ -20,7 +20,7 @@
           text-color="#8d8d8d"
           active-text-color="#8d8d8d"
           :ellipsis="false"
-          menu-trigger="click"
+          menu-trigger="hover"
           class="el-menu-demo"
           mode="horizontal"
           unique-opened
