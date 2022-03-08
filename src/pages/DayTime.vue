@@ -90,7 +90,7 @@
                 </el-col>
               </el-row>
 
-              <el-row>
+              <!-- <el-row>
                 <el-col :span="24">
                   <p>Time</p>
                   <el-checkbox-group v-model="time">
@@ -98,10 +98,10 @@
                     <el-checkbox label="13:00 - 21:00" />
                   </el-checkbox-group>
                 </el-col>
-                <!-- <el-col :span="12">
+                <el-col :span="12">
                   <p style="text-align: end">arrow</p>
-                </el-col> -->
-              </el-row>
+                </el-col>
+              </el-row> -->
 
               <p>地點</p>
               <div class="location">
@@ -162,6 +162,7 @@ import { DatePicker } from "v-calendar";
 import RightSection from "../components/search/RightSection.vue";
 import Banner from "../components/cheung-chau/Banner.vue";
 import RangeMixin from "../mixins/range.js";
+import moment from "moment";
 
 export default {
   components: {
@@ -176,7 +177,7 @@ export default {
       location: [],
       isSelected: "false",
       roomType: [],
-      range: [],
+      range: "",
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD", // Uses 'iso' if missing
@@ -193,11 +194,17 @@ export default {
       this.isSelected = option;
     },
     applyRecommendation(value) {
+      const date = new Date();
+      const formattedDate = moment(date).format("YYYY-MM-DD");
       const data = {
         stayingDate:
-          this.range.start.replaceAll("-", "") +
-          "|" +
-          this.range.end.replaceAll("-", ""),
+          this.range === ""
+            ? formattedDate +
+              "|" +
+              moment(date.setDate(date.getDate() + 1)).format("YYYY-MM-DD")
+            : this.range.start.replaceAll("-", "") +
+              "|" +
+              this.range.end.replaceAll("-", ""),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,

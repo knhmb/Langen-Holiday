@@ -1,8 +1,8 @@
 export default {
   data() {
     return {
-      numberOfLivingPopulation: 4,
-      numberOfRooms: 2,
+      numberOfLivingPopulation: 0,
+      numberOfRooms: 0,
     };
   },
   methods: {

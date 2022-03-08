@@ -152,6 +152,7 @@
 import RightSection from "./RightSection.vue";
 // import Carousel from "./Carousel.vue";
 import { DatePicker } from "v-calendar";
+import moment from "moment";
 
 export default {
   components: {
@@ -165,8 +166,8 @@ export default {
       location: [],
       isSelected: "false",
       roomType: [],
-      numberOfLivingPopulation: 4,
-      numberOfRooms: 2,
+      numberOfLivingPopulation: 0,
+      numberOfRooms: 0,
       range: "",
       modelConfig: {
         type: "string",
@@ -197,11 +198,17 @@ export default {
       this.numberOfRooms--;
     },
     applyRecommendation(value) {
+      const date = new Date();
+      const formattedDate = moment(date).format("YYYY-MM-DD");
       const data = {
         stayingDate:
-          this.range.start.replaceAll("-", "") +
-          "|" +
-          this.range.end.replaceAll("-", ""),
+          this.range === ""
+            ? formattedDate +
+              "|" +
+              moment(date.setDate(date.getDate() + 1)).format("YYYY-MM-DD")
+            : this.range.start.replaceAll("-", "") +
+              "|" +
+              this.range.end.replaceAll("-", ""),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
