@@ -1,7 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px' }">
     <div class="card-img">
-      <img :src="image" class="image" />
+      <img @click="selectHotel(id)" :src="image" class="image" />
       <img class="ranks" :src="icon" alt="" />
     </div>
 
@@ -75,6 +75,12 @@ export default {
         this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
       }
     },
+    selectHotel(id) {
+      console.log(id);
+      this.$store.dispatch("booking/getHotel", id).then(() => {
+        this.$router.push("/booking-details");
+      });
+    },
   },
 };
 </script>
@@ -98,6 +104,7 @@ export default {
   object-fit: contain;
   border-radius: 4px;
   box-shadow: 0px 3px 6px #00000029;
+  cursor: pointer;
   /* padding-top: 1rem;
   padding-right: 2rem; */
 }

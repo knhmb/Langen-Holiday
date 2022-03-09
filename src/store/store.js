@@ -5,6 +5,7 @@ import actions from "./actions";
 import authModule from "./modules/auth/index";
 import dashboardModule from "./modules/dashboard/index";
 import searchModule from "./modules/search/index";
+import bookingModule from "./modules/booking/index";
 
 const store = createStore({
   state() {
@@ -20,6 +21,7 @@ const store = createStore({
     auth: authModule,
     dashboard: dashboardModule,
     search: searchModule,
+    booking: bookingModule,
   },
 });
 

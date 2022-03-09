@@ -33,25 +33,6 @@
       height="670px"
       arrow="always"
     >
-      <!-- <el-carousel-item v-for="item in 4" :key="item">
-        <base-container>
-          <el-row :gutter="10">
-            <el-col v-for="place in topPlaces" :key="place.id" :span="6">
-              <Card
-                :name="place.name"
-                :description="place.location"
-                :discount="place.discountedPrice"
-                :price="place.originalPrice"
-                :rate-value="place.rating"
-                :rate-text="place.reviewsCount"
-                :icon="place.icon"
-                :image="place.thumbnail"
-                :bookmarked="place.bookmarked"
-              />
-            </el-col>
-          </el-row>
-        </base-container>
-      </el-carousel-item> -->
       <el-carousel-item>
         <base-container>
           <el-row :gutter="10">
@@ -93,6 +74,7 @@
                 :icon="place.icon"
                 :image="place.thumbnail"
                 :bookmarked="place.bookmarked"
+                :id="place.hotelId"
               />
             </el-col>
           </el-row>

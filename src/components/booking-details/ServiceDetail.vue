@@ -15,63 +15,68 @@
                     src="../../assets/icon-location.png"
                     alt=""
                   />
-                  西貢</span
+                  {{ selectedHotel.basicInfo.location }}</span
                 >
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
                 <span>樓層:</span>
-                <span>2</span>
+                <span>{{ selectedHotel.basicInfo.floorNo }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
                 <span>服務類別:</span>
-                <span>渡假屋</span>
+                <span>{{ selectedHotel.basicInfo.serviceType }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
                 <span>景觀:</span>
-                <span>海景</span>
+                <span>{{ selectedHotel.basicInfo.hotelView }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
                 <span>房間類型:</span>
-                <span>家庭套房</span>
+                <span>{{ selectedHotel.basicInfo.roomType }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
                 <span>面積:</span>
-                <span>400 呎</span>
+                <span>{{ selectedHotel.basicInfo.size }} 呎</span>
               </div>
             </el-col>
 
             <el-col :span="12">
               <div class="separation">
                 <span>可住人數:</span>
-                <span>6</span>
+                <span>{{ selectedHotel.basicInfo.maxGuest }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
                 <span>入住時間:</span>
-                <span>15:00</span>
+                <span>{{
+                  $filters.formatTime(selectedHotel.basicInfo.checkInTime)
+                }}</span>
+                <!-- <span>{{ new Date.getTiem() }}</span> -->
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation no-border">
                 <span>竉物留宿:</span>
-                <span>可以</span>
+                <span>{{ selectedHotel.petsWelcome }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation no-border">
                 <span>退房時間:</span>
-                <span>12:00</span>
+                <span>{{
+                  $filters.formatTime(selectedHotel.basicInfo.checkOutTime)
+                }}</span>
               </div>
             </el-col>
           </el-row>
@@ -87,11 +92,22 @@
 <script>
 import ServiceDetailRight from "./ServiceDetailRight.vue";
 import Alert from "./Alert.vue";
+// import moment from "moment";
 
 export default {
   components: {
     ServiceDetailRight,
     Alert,
+  },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+    // formatTime() {
+    //   return moment(this.selectedHotel.basicInfo.checkInTime, "HH").format(
+    //     "HH:mm"
+    //   );
+    // },
   },
 };
 </script>

@@ -21,7 +21,15 @@ import "v-calendar/dist/style.css";
 
 import vueI18n from "./i18n.js";
 
+import moment from "moment";
+
 const app = createApp(App);
+
+app.config.globalProperties.$filters = {
+  formatTime(value) {
+    return moment(value, "HH").format("HH:mm");
+  },
+};
 
 app.component("base-container", BaseContainer);
 app.component("base-card", BaseCard);
