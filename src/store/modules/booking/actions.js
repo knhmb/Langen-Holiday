@@ -19,4 +19,16 @@ export default {
         console.log(err);
       });
   },
+  getDate(_, payload) {
+    axios
+      .get(
+        `/api/hotel/check-availability/${payload.hotelId}/${payload.firstDayOfCurrentMonth}/${payload.lastDayOfNextMonth}/${payload.roomQty}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

@@ -78,7 +78,7 @@ export default {
     selectHotel(id) {
       console.log(id);
       this.$store.dispatch("booking/getHotel", id).then(() => {
-        this.$router.push("/booking-details");
+        this.$router.push("/booking-details/" + id);
       });
     },
   },

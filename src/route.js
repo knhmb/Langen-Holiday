@@ -35,7 +35,7 @@ const router = createRouter({
     { path: "/", redirect: "/home" },
     { path: "/home", component: Home },
     { path: "/search", component: Search },
-    { path: "/booking-details", component: BookingDetails },
+    { path: "/booking-details/:id", component: BookingDetails },
     { path: "/reservation", component: Reservation },
     { path: "/terms-and-conditions", component: TermsAndConditions },
     { path: "/payment", component: Payment },

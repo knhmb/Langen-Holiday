@@ -6,117 +6,39 @@
     color="orange"
     :model-config="modelConfig"
     v-model="dateSelected"
-    :attributes="attrs"
+    :attributes="attributes"
     is-range
+    ref="calendar"
+    @update:fromPage="monthChanged"
+    @update:toPage="toMonth"
   >
   </date-picker>
 </template>
 
 <script>
 import { DatePicker } from "v-calendar";
+import moment from "moment";
 
 export default {
   components: {
     DatePicker,
   },
   data() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
+    // const date = new Date();
+    // const year = date.getFullYear();
+    // const month = date.getMonth();
     return {
       modelConfig: {
         type: "string",
         mask: "YYYY-MM-DD", // Uses 'iso' if missing
       },
+      firstDayOfCurrentMonth: "",
+      lastDayOfNextMonth: "",
+      availableDates: [],
       attrs: [
         {
           highlight: true,
-          dates: new Date(year, month, 12),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, month, 13),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, month, 14),
-          // popover: { label: 800 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, month, 15),
-          // popover: { label: 800 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 9),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 10),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 11),
-          // popover: { label: 800 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 12),
-          // popover: { label: 800 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 13),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 14),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 15),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 16),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 17),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 18),
-          // popover: { label: 800 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 19),
-          // popover: { label: 800 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 20),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 21),
-          // popover: { label: 500 },
-        },
-        {
-          highlight: true,
-          dates: new Date(year, 1, 22),
+          // dates: new Date(year, month, 12),
           // popover: { label: 500 },
         },
       ],
@@ -147,6 +69,61 @@ export default {
         this.$store.dispatch("changeDate", value);
       },
     },
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+    attributes() {
+      return this.selectedHotel.availableDates.map((date) => ({
+        highlight: date.available === true ? true : false,
+        dates: date.bookingDate,
+        on: [{ days: 25 }],
+        popover: {
+          label: date.price,
+        },
+      }));
+    },
+  },
+  methods: {
+    monthChanged(page) {
+      console.log("From");
+      console.log(page);
+      const currentDay = new Date(page.year, page.month - 1);
+      console.log(currentDay);
+      if (moment(currentDay).format("MM") === moment(new Date()).format("MM")) {
+        this.firstDayOfCurrentMonth = moment(new Date()).format("YYYYMMDD");
+        console.log(this.firstDayOfCurrentMonth);
+        console.log("Yes");
+      } else {
+        this.firstDayOfCurrentMonth = moment(
+          new Date(page.year, page.month - 1)
+        ).format("YYYYMMDD");
+        console.log("No");
+        console.log(this.firstDayOfCurrentMonth);
+      }
+    },
+    toMonth(page) {
+      console.log("To");
+      console.log(page);
+      const lastDay = new Date(page.year, page.month, 0);
+      this.lastDayOfNextMonth = moment(lastDay).format("YYYYMMDD");
+      console.log(this.lastDayOfNextMonth);
+
+      const data = {
+        hotelId: this.$route.params.id,
+        firstDayOfCurrentMonth: this.firstDayOfCurrentMonth,
+        lastDayOfNextMonth: this.lastDayOfNextMonth,
+        roomQty: 1,
+      };
+      console.log(data);
+
+      this.$store.dispatch("booking/getDate", data);
+    },
+  },
+  created() {
+    for (let item of this.selectedHotel.availableDates) {
+      // console.log(moment(item.bookingDate).format("YYYY-MM-DD"));
+      this.availableDates.push(moment(item.bookingDate).format("YYYY-MM-DD"));
+    }
   },
 };
 </script>
