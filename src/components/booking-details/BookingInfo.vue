@@ -21,7 +21,9 @@
           <img class="icon-bookmark" :src="iconBookmark" alt="" />
         </el-col>
         <el-col>
-          <p class="price">{{ selectedHotel.averagePrice }} <span>起</span></p>
+          <p class="price">
+            HK${{ selectedHotel.averagePrice }} <span>起</span>
+          </p>
         </el-col>
       </el-row>
     </div>

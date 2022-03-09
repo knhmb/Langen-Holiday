@@ -1,5 +1,5 @@
 <template>
-  <div class="alert">
+  <div class="alert" v-if="selectedHotel.basicInfo.specialNotice !== null">
     <el-row>
       <el-col :sm="24" :lg="3">
         <img src="../../assets/icon-warning.svg" alt="" />
@@ -7,12 +7,22 @@
       <el-col :sm="24" :lg="21">
         <h3>特別通告</h3>
         <p>
-          由於新冠肺炎疫情嚴重，本服務暫不接待隔離人士，直至另行通知，不便之處，敬情原諒。
+          {{ selectedHotel.basicInfo.specialNotice }}
         </p>
       </el-col>
     </el-row>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+  },
+};
+</script>
 
 <style scoped>
 .alert {

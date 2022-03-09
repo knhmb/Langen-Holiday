@@ -92,7 +92,6 @@
 <script>
 import ServiceDetailRight from "./ServiceDetailRight.vue";
 import Alert from "./Alert.vue";
-// import moment from "moment";
 
 export default {
   components: {
@@ -103,11 +102,6 @@ export default {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
     },
-    // formatTime() {
-    //   return moment(this.selectedHotel.basicInfo.checkInTime, "HH").format(
-    //     "HH:mm"
-    //   );
-    // },
   },
 };
 </script>
