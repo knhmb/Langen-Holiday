@@ -5,11 +5,23 @@
       <el-col :span="12">
         <el-checkbox-group v-model="services">
           <el-checkbox
-            @change="serviceChanged"
-            v-for="service in selectedHotel.addlService"
-            :key="service.id"
             :label="service.amenitiesCode"
-            >{{ service.name }}</el-checkbox
+            @change="
+              serviceChanged({
+                value: $event,
+                index: index,
+                name: service.amenitiesCode,
+              })
+            "
+            v-for="(service, index) in selectedHotel.addlService"
+            :key="service.id"
+            >{{
+              service.amenitiesCode +
+              "|" +
+              (responses["service" + index] === undefined
+                ? 1
+                : responses["service" + index])
+            }}</el-checkbox
           >
         </el-checkbox-group>
       </el-col>
@@ -25,9 +37,34 @@
     </el-row>
     <el-row>
       <el-col>
-        <el-select class="m-2" placeholder="2">
-          <el-option> </el-option>
+        <el-select
+          @change="
+            serviceChanged({
+              value: $event,
+              index: index,
+              name: service.amenitiesCode,
+            })
+          "
+          remote
+          default-first-option
+          v-model="responses['service' + index]"
+          v-for="(service, index) in selectedHotel.addlService"
+          :key="service.id"
+          :disabled="
+            services.length <= 0 ||
+            !services.toString().includes(service.amenitiesCode)
+          "
+          class="m-2"
+        >
+          <el-option
+            v-for="num in parseInt(service.quantity)"
+            :key="num"
+            :value="service.amenitiesCode + '|' + num"
+            :label="num"
+          >
+          </el-option>
         </el-select>
+        <p>{{ responses }}</p>
       </el-col>
     </el-row>
   </div>
@@ -67,8 +104,25 @@ export default {
   data() {
     return {
       services: [],
+      serviceQuantity: "",
+      serviceArray: [],
+      responses: {},
+      index: "service",
+      num: 0,
+      dummy: {
+        service0: "khaled",
+      },
     };
   },
+  // watch: {
+  //   responses: {
+  //     deep: true,
+  //     handler(oldVal, newVal) {
+  //       console.log(`oldVal ${oldVal}`);
+  //       console.log(`newVal ${newVal}`);
+  //     },
+  //   },
+  // },
   computed: {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
@@ -78,19 +132,29 @@ export default {
     },
   },
   methods: {
-    serviceChanged() {
-      console.log(this.services);
-      const formatService = this.services.toString().replaceAll(",", "|");
-      console.log(this.services.toString());
+    serviceChanged({ value, index, name }) {
+      // console.log(this.responses);
+      if (value === false) {
+        delete this.responses["service" + index];
+      } else if (value === true) {
+        this.responses["service" + index] = name + "|" + "1";
+      }
+      // console.log(this.responses);
+      const selectedServices = Object.values(this.responses);
+      // console.log(selectedServices);
+
       const data = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
         checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
         checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
-        service: formatService,
+        service: selectedServices.toString(),
       };
       console.log(data);
       // this.$store.dispatch('booking/changedService', data)
     },
+  },
+  created() {
+    console.log(this.dummy[this.index + this.num]);
   },
 };
 </script>
