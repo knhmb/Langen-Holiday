@@ -14,6 +14,13 @@ export default {
       .then((res) => {
         console.log(res);
         context.commit("SET_HOTEL", res.data.item);
+        context.commit(
+          "CHANGE_DATE",
+          { start: today, end: tomorrow },
+          {
+            root: true,
+          }
+        );
       })
       .catch((err) => {
         console.log(err);

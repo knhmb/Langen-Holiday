@@ -3,10 +3,24 @@
     <p>附加服務</p>
     <el-row class="add-on-item">
       <el-col :span="12">
-        <el-checkbox label="寵物留宿"></el-checkbox>
+        <el-checkbox-group v-model="services">
+          <el-checkbox
+            @change="serviceChanged"
+            v-for="service in selectedHotel.addlService"
+            :key="service.id"
+            :label="service.amenitiesCode"
+            >{{ service.name }}</el-checkbox
+          >
+        </el-checkbox-group>
       </el-col>
       <el-col :span="12">
-        <p class="add-on-price">+ $ 100.00</p>
+        <p
+          v-for="service in selectedHotel.addlService"
+          :key="service.id"
+          class="add-on-price"
+        >
+          + $ {{ service.unitCharge }}.00
+        </p>
       </el-col>
     </el-row>
     <el-row>
@@ -24,7 +38,9 @@
         <p>附加服務價錢:</p>
       </el-col>
       <el-col :span="12">
-        <p class="add-on-price">$200.00</p>
+        <p class="add-on-price">
+          ${{ selectedHotel.totalSelectedAddlServiceCharge }}.00
+        </p>
       </el-col>
     </el-row>
   </div>
@@ -34,13 +50,50 @@
       <el-col :span="14">
         <p>總價格(已包含稅款及服務費):</p>
       </el-col>
-      <el-col :span="10" class="final-price">HK$1480.00</el-col>
+      <el-col :span="10" class="final-price"
+        >HK${{ selectedHotel.totalPrice }}.00</el-col
+      >
       <el-col class="btn-alignment">
         <el-button>預訂</el-button>
       </el-col>
     </el-row>
   </div>
 </template>
+
+<script>
+import moment from "moment";
+
+export default {
+  data() {
+    return {
+      services: [],
+    };
+  },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
+  },
+  methods: {
+    serviceChanged() {
+      console.log(this.services);
+      const formatService = this.services.toString().replaceAll(",", "|");
+      console.log(this.services.toString());
+      const data = {
+        hotelId: this.selectedHotel.basicInfo.hotelId,
+        checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
+        checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
+        service: formatService,
+      };
+      console.log(data);
+      // this.$store.dispatch('booking/changedService', data)
+    },
+  },
+};
+</script>
 
 <style>
 .add-ons {
@@ -53,6 +106,12 @@
 .add-ons p {
   letter-spacing: 2.2px;
   color: #8d8d8d;
+  margin-bottom: 0.5rem;
+}
+
+.add-ons .el-checkbox {
+  display: block;
+  /* margin-top: 0.5rem; */
 }
 
 .add-ons .el-checkbox.is-checked .el-checkbox__inner {
@@ -88,6 +147,10 @@
 .calculated-add-on .add-on-item {
   align-items: center;
 }
+
+/* .add-ons .add-on-price {
+  margin-top: 0.5rem;
+} */
 
 .add-ons .add-on-price,
 .calculated-add-on .add-on-price {

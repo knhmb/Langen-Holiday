@@ -13,10 +13,14 @@
       </el-row>
       <el-row>
         <el-col :span="10">
-          <span class="date-delivery">{{ dateSelected.start }}</span>
+          <span class="date-delivery"
+            >{{ checkInDate }} {{ checkInDateDay }}</span
+          >
         </el-col>
         <el-col :span="10">
-          <span class="date-delivery">{{ dateSelected.end }}</span>
+          <span class="date-delivery"
+            >{{ checkOutDate }} {{ checkOutDateDay }}</span
+          >
         </el-col>
         <el-col class="my-btn" :span="4">
           <el-button class="small-btn">1晚</el-button>
@@ -28,38 +32,40 @@
         </el-col>
         <el-col :span="12">
           <label class="date-delivery" style="display: block">成人</label>
-          <el-select class="m-2" placeholder="2">
-            <el-option> </el-option>
+          <el-select v-model="numberOfAdults" class="m-2" placeholder="2">
+            <el-option
+              v-for="adult in parseInt(selectedHotel.basicInfo.maxAdult)"
+              :key="adult"
+              :label="adult"
+              :value="adult"
+            >
+            </el-option>
           </el-select>
         </el-col>
         <el-col :span="12">
           <label class="date-delivery" style="display: block">兒童</label>
-          <el-select class="m-2" placeholder="3">
-            <el-option> </el-option>
+          <el-select v-model="numberOfChildren" class="m-2" placeholder="3">
+            <el-option
+              v-for="adult in parseInt(selectedHotel.basicInfo.maxChildren)"
+              :key="adult"
+              :label="adult"
+              :value="adult"
+            >
+            </el-option>
           </el-select>
         </el-col>
-        <el-col :span="12">
-          <label class="date-delivery" style="display: block">兒童1 年齡</label>
+        <el-col v-for="child in numberOfChildren" :key="child" :span="12">
+          <label class="date-delivery" style="display: block"
+            >兒童{{ child }} 年齡</label
+          >
           <el-select class="m-2" placeholder="8">
-            <el-option> </el-option>
-          </el-select>
-        </el-col>
-        <el-col :span="12">
-          <label class="date-delivery" style="display: block">兒童2 年齡</label>
-          <el-select class="m-2" placeholder="9">
-            <el-option> </el-option>
-          </el-select>
-        </el-col>
-        <el-col :span="12">
-          <label class="date-delivery" style="display: block">兒童3 年齡</label>
-          <el-select class="m-2" placeholder="10">
-            <el-option> </el-option>
+            <el-option></el-option>
           </el-select>
         </el-col>
       </el-row>
       <el-row>
         <el-col>
-          <p class="cost">HK$1280.00</p>
+          <p class="cost">HK${{ selectedHotel.priceOfSelectedDate }}.00</p>
         </el-col>
       </el-row>
     </div>
@@ -69,14 +75,36 @@
 
 <script>
 import AddOns from "./AddOns.vue";
+import moment from "moment";
 
 export default {
   components: {
     AddOns,
   },
+  data() {
+    return {
+      numberOfAdults: null,
+      numberOfChildren: null,
+    };
+  },
   computed: {
     dateSelected() {
       return this.$store.getters.dateSelected;
+    },
+    checkInDate() {
+      return moment(this.dateSelected.start).locale("zh-cn").format("ll");
+    },
+    checkOutDate() {
+      return moment(this.dateSelected.end).locale("zh-cn").format("ll");
+    },
+    checkOutDateDay() {
+      return moment(this.dateSelected.end).locale("zh-cn").format("dddd");
+    },
+    checkInDateDay() {
+      return moment(this.dateSelected.start).locale("zh-cn").format("dddd");
+    },
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
     },
   },
 };
