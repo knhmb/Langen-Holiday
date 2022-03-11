@@ -18,7 +18,7 @@
                 :model-config="modelConfig"
                 color="orange"
                 is-range
-                v-model="range"
+                v-model="dateSelected"
               />
 
               <el-row>
@@ -189,6 +189,7 @@
           </el-col>
           <el-col :sm="24" :lg="18">
             <right-section
+              :number-of-rooms="numberOfRooms"
               @getRecommendation="applyRecommendation"
             ></right-section>
           </el-col>
@@ -249,9 +250,17 @@ export default {
     roomTypes() {
       return this.$store.getters["dashboard/roomTypes"];
     },
+    dateSelected: {
+      get() {
+        return this.$store.getters.dateSelected;
+      },
+      set(value) {
+        this.$store.dispatch("changeDate", value);
+      },
+    },
   },
   watch: {
-    range() {
+    dateSelected() {
       this.checkboxChanged();
     },
   },

@@ -38,6 +38,14 @@ export default {
     ReadMore,
     Comment,
   },
+  // computed: {
+  //   dateSelected() {
+  //     return this.$store.getters.dateSelected;
+  //   },
+  // },
+  // beforeUnmount() {
+  //   this.$store.dispatch("resetDate");
+  // },
 };
 </script>
 

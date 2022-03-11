@@ -10,7 +10,7 @@
             :model-config="modelConfig"
             color="orange"
             is-range
-            v-model="range"
+            v-model="dateSelected"
           />
           <!-- <el-row>
             <el-col :span="12">
@@ -179,7 +179,10 @@
         </div>
       </el-col>
       <el-col :sm="24" :lg="18">
-        <right-section @getRecommendation="applyRecommendation"></right-section>
+        <right-section
+          :number-of-rooms="numberOfRooms"
+          @getRecommendation="applyRecommendation"
+        ></right-section>
       </el-col>
     </el-row>
   </base-container>
@@ -234,9 +237,17 @@ export default {
     roomTypes() {
       return this.$store.getters["dashboard/roomTypes"];
     },
+    dateSelected: {
+      get() {
+        return this.$store.getters.dateSelected;
+      },
+      set(value) {
+        this.$store.dispatch("changeDate", value);
+      },
+    },
   },
   watch: {
-    range() {
+    dateSelected() {
       this.checkboxChanged();
     },
   },
@@ -275,15 +286,15 @@ export default {
         .replaceAll("-", "");
       const data = {
         stayingDate:
-          this.range === ""
+          this.dateSelected === ""
             ? formattedDate +
               "|" +
               moment(date.setDate(date.getDate() + 1))
                 .format("YYYY-MM-DD")
                 .replaceAll("-", "")
-            : this.range.start.replaceAll("-", "") +
+            : this.dateSelected.start.replaceAll("-", "") +
               "|" +
-              this.range.end.replaceAll("-", ""),
+              this.dateSelected.end.replaceAll("-", ""),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
@@ -300,15 +311,15 @@ export default {
         .replaceAll("-", "");
       const data = {
         stayingDate:
-          this.range === ""
+          this.dateSelected === ""
             ? formattedDate +
               "|" +
               moment(date.setDate(date.getDate() + 1))
                 .format("YYYY-MM-DD")
                 .replaceAll("-", "")
-            : this.range.start.replaceAll("-", "") +
+            : this.dateSelected.start.replaceAll("-", "") +
               "|" +
-              this.range.end.replaceAll("-", ""),
+              this.dateSelected.end.replaceAll("-", ""),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,

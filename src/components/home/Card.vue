@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   props: [
     "name",
@@ -77,7 +79,19 @@ export default {
     },
     selectHotel(id) {
       console.log(id);
-      this.$store.dispatch("booking/getHotel", id).then(() => {
+      const date = new Date();
+      const today = moment(date).format("YYYYMMDD");
+      const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+        "YYYYMMDD"
+      );
+
+      const data = {
+        hotelId: id,
+        checkInDate: today,
+        checkOutDate: tomorrow,
+        roomQty: 1,
+      };
+      this.$store.dispatch("booking/getHotel", data).then(() => {
         this.$router.push("/booking-details/" + id);
       });
     },

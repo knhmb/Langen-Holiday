@@ -1,6 +1,6 @@
 <template>
   <el-card :body-style="{ padding: '0px' }">
-    <img :src="image" class="image" />
+    <img :src="image" @click="selectedHotel(id)" class="image" />
     <div style="padding: 14px">
       <div class="bottom">
         <el-row>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   props: [
     "name",
@@ -46,6 +48,8 @@ export default {
     "rateText",
     "image",
     "bookmarked",
+    "id",
+    "numberOfRooms",
   ],
   data() {
     return {
@@ -57,6 +61,11 @@ export default {
           : require("../../assets/icon-bookmark-on.png"),
     };
   },
+  computed: {
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
+  },
   methods: {
     toggleBookmark() {
       if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
@@ -65,6 +74,33 @@ export default {
         this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
       }
     },
+    selectedHotel(id) {
+      const date = new Date();
+      const today = moment(date).format("YYYYMMDD");
+      const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+        "YYYYMMDD"
+      );
+
+      const data = {
+        hotelId: id,
+        checkInDate:
+          this.dateSelected === ""
+            ? today
+            : moment(this.dateSelected.start).format("YYYYMMDD"),
+        checkOutDate:
+          this.dateSelected === ""
+            ? tomorrow
+            : moment(this.dateSelected.end).format("YYYYMMDD"),
+        roomQty: this.numberOfRooms === 0 ? 1 : this.numberOfRooms,
+      };
+      console.log(data);
+      this.$store.dispatch("booking/getHotel", data).then(() => {
+        this.$router.push("/booking-details/" + id);
+      });
+    },
+  },
+  created() {
+    console.log(this.id);
   },
 };
 </script>

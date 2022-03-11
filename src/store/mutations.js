@@ -11,4 +11,7 @@ export default {
   CHANGE_SERVICE(state, payload) {
     state.responses = payload;
   },
+  RESET_DATE(state, payload) {
+    state.dateSelected = payload;
+  },
 };

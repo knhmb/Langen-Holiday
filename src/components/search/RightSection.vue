@@ -65,6 +65,8 @@
           :rate-text="item.reviewsCount"
           :image="item.thumbnail"
           :bookmarked="item.bookmarked"
+          :id="item.hotelId"
+          :number-of-rooms="numberOfRooms"
         />
       </el-col>
       <!-- </template> -->
@@ -80,6 +82,7 @@ export default {
   components: {
     SearchCard,
   },
+  props: ["numberOfRooms"],
   data() {
     return {
       isActive: "",

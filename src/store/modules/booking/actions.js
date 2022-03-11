@@ -1,22 +1,17 @@
 import axios from "axios";
-import moment from "moment";
 
 export default {
-  async getHotel(context, id) {
-    const date = new Date();
-    const today = moment(date).format("YYYY-MM-DD").replaceAll("-", "");
-    const tomorrow = moment(date.setDate(date.getDate() + 1))
-      .format("YYYY-MM-DD")
-      .replaceAll("-", "");
-
+  async getHotel(context, payload) {
     await axios
-      .get(`/api/hotel/${id}/${today}/${tomorrow}/1`)
+      .get(
+        `/api/hotel/${payload.hotelId}/${payload.checkInDate}/${payload.checkOutDate}/${payload.roomQty}`
+      )
       .then((res) => {
         console.log(res);
         context.commit("SET_HOTEL", res.data.item);
         context.commit(
           "CHANGE_DATE",
-          { start: today, end: tomorrow },
+          { start: payload.checkInDate, end: payload.checkOutDate },
           {
             root: true,
           }
