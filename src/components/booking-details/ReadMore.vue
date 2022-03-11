@@ -7,7 +7,13 @@
           <div :class="{ 'sidebar-box': hideContent1 }">
             <div class="list">
               <ul>
-                <li>
+                <template
+                  v-for="note in selectedHotel.hotelNotes"
+                  :key="note.id"
+                >
+                  <li v-if="note.isNote === true">・{{ note.details }}</li>
+                </template>
+                <!-- <li>
                   ・讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有
                 </li>
                 <li>
@@ -20,7 +26,7 @@
                 <li>
                   ・單藝重賣政跑做們林關境量連心……連蘭嗎。國動家國童火的年，包實業事希女發觀、想一爭體，成活物子被式，未不智
                 </li>
-                <li>・不親交童這備許表，唱年。</li>
+                <li>・不親交童這備許表，唱年。</li> -->
                 <!-- <li>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 </li> -->
@@ -38,7 +44,15 @@
           <div :class="{ 'sidebar-box': hideContent2 }">
             <div class="list">
               <ul>
-                <li>
+                <template
+                  v-for="note in selectedHotel.hotelNotes"
+                  :key="note.id"
+                >
+                  <li v-if="note.isCancelPolicy === true">
+                    ・{{ note.details }}
+                  </li>
+                </template>
+                <!-- <li>
                   ・讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有
                 </li>
                 <li>
@@ -51,10 +65,7 @@
                 <li>
                   ・單藝重賣政跑做們林關境量連心……連蘭嗎。國動家國童火的年，包實業事希女發觀、想一爭體，成活物子被式，未不智
                 </li>
-                <li>・不親交童這備許表，唱年。</li>
-                <!-- <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li> -->
+                <li>・不親交童這備許表，唱年。</li> -->
               </ul>
             </div>
             <div :class="{ hide: hideContent2 }"></div>
@@ -69,6 +80,14 @@
           <div :class="{ 'sidebar-box': hideContent3 }">
             <div class="list">
               <ul>
+                <template
+                  v-for="note in selectedHotel.hotelNotes"
+                  :key="note.id"
+                >
+                  <li v-if="note.isBadWeather === true">
+                    ・{{ note.details }}
+                  </li>
+                </template>
                 <li>
                   ・讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有
                 </li>
@@ -83,9 +102,6 @@
                   ・單藝重賣政跑做們林關境量連心……連蘭嗎。國動家國童火的年，包實業事希女發觀、想一爭體，成活物子被式，未不智
                 </li>
                 <li>・不親交童這備許表，唱年。</li>
-                <!-- <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li> -->
               </ul>
             </div>
             <div :class="{ hide: hideContent3 }"></div>
@@ -109,6 +125,11 @@ export default {
       hideContent2: true,
       hideContent3: true,
     };
+  },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
   },
   methods: {
     appendText(option) {
@@ -160,6 +181,7 @@ export default {
   letter-spacing: 2.2px;
   color: #8d8d8d;
   font-size: 14px;
+  margin-bottom: 0.5rem;
 }
 
 .hide {

@@ -38,4 +38,17 @@ export default {
         console.log(err);
       });
   },
+  changedService(_, payload) {
+    const checkService = payload.service === "" ? "''" : payload.service;
+    axios
+      .get(
+        `/api/hotel/enquire-price/${payload.hotelId}/${payload.checkInDate}/${payload.checkOutDate}/${checkService}`
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

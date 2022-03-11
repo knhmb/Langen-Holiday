@@ -12,6 +12,7 @@ const store = createStore({
     return {
       headerVisible: true,
       dateSelected: "",
+      responses: {},
     };
   },
   getters,

@@ -4,7 +4,13 @@
       <h2>最新評價</h2>
       <el-row
         ><el-col class="alert" :span="23">
-          <el-alert :closable="false" type="warning">
+          <el-alert
+            v-for="review in selectedHotel.reviews"
+            :key="review.id"
+            :closable="false"
+            type="warning"
+          >
+            <!-- <template> -->
             <el-rate
               disabled-void-color="#D1D1D1"
               :colors="colors"
@@ -12,8 +18,9 @@
               disabled
             ></el-rate>
             <p>
-              位置方便，周邊餐館很多；交通都非常方便，可以步行到達；管理專業，居住退房都很順利
+              {{ review.comments }}
             </p>
+            <!-- </template> -->
             <img class="img-alert" src="../../assets/icon-comment.png" alt="" />
           </el-alert>
         </el-col>
@@ -89,10 +96,15 @@
 export default {
   data() {
     return {
-      value: 4,
+      value: "",
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
       isDialogOpen: false,
     };
+  },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
   },
   methods: {
     openDialog() {
@@ -101,6 +113,11 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
+  },
+  created() {
+    for (let review of this.selectedHotel.reviews) {
+      this.value = +review.rating;
+    }
   },
 };
 </script>
@@ -121,7 +138,9 @@ export default {
   padding: 2rem;
   padding-right: 4rem;
   border-radius: 24px;
-  position: static;
+  position: relative;
+  margin-bottom: 1rem;
+  overflow: visible;
 }
 
 .comment .el-alert .el-rate .el-rate__icon {
@@ -138,12 +157,13 @@ export default {
   position: relative;
 }
 
-.comment .el-row .alert::after {
+.comment .el-row .el-alert::after {
   content: "K";
   color: #fff;
   position: absolute;
-  right: 2.8%;
-  top: 23%;
+  right: 1.5%;
+  top: 42%;
+  transform: translate(-50%, -50%);
   font-size: 40px;
 }
 
@@ -225,16 +245,16 @@ export default {
 }
 
 @media screen and (max-width: 1024px) {
-  .comment .el-row .alert::after {
-    right: 3.8%;
-    top: 25%;
+  .comment .el-row .el-alert::after {
+    right: 2.3%;
+    /* top: 25%; */
   }
 }
 
 @media screen and (max-width: 768px) {
-  .comment .el-row .alert::after {
-    right: 3.8%;
-    top: 27%;
+  .comment .el-row .el-alert::after {
+    right: 2.5%;
+    /* top: 27%; */
   }
 
   .comment .el-button--default {
@@ -243,23 +263,30 @@ export default {
 }
 
 @media screen and (max-width: 540px) {
-  .comment .el-row .alert::after {
-    right: 5.8%;
-    top: 34%;
+  .comment .el-row .el-alert::after {
+    right: 3.8%;
+    /* top: 34%; */
   }
 }
 
 @media screen and (max-width: 414px) {
-  .comment .el-row .alert::after {
-    right: 8.8%;
-    top: 32%;
+  .comment .el-row .el-alert::after {
+    right: 5%;
+    /* top: 32%; */
   }
 }
 
 @media screen and (max-width: 375px) {
-  .comment .el-row .alert::after {
-    right: 9.8%;
-    top: 36%;
+  .comment .el-row .el-alert::after {
+    right: 6%;
+    /* top: 40%; */
+  }
+}
+
+@media screen and (min-width: 1790px) {
+  .comment .el-row .el-alert::after {
+    right: 1%;
+    /* top: 40%; */
   }
 }
 </style>

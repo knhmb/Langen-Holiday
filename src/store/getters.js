@@ -5,4 +5,7 @@ export default {
   dateSelected(state) {
     return state.dateSelected;
   },
+  responses(state) {
+    return state.responses;
+  },
 };

@@ -8,4 +8,7 @@ export default {
   CHANGE_DATE(state, payload) {
     state.dateSelected = payload;
   },
+  CHANGE_SERVICE(state, payload) {
+    state.responses = payload;
+  },
 };

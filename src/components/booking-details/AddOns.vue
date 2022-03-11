@@ -15,13 +15,7 @@
             "
             v-for="(service, index) in selectedHotel.addlService"
             :key="service.id"
-            >{{
-              service.amenitiesCode +
-              "|" +
-              (responses["service" + index] === undefined
-                ? 1
-                : responses["service" + index])
-            }}</el-checkbox
+            >{{ service.name }}</el-checkbox
           >
         </el-checkbox-group>
       </el-col>
@@ -64,7 +58,6 @@
           >
           </el-option>
         </el-select>
-        <p>{{ responses }}</p>
       </el-col>
     </el-row>
   </div>
@@ -106,7 +99,7 @@ export default {
       services: [],
       serviceQuantity: "",
       serviceArray: [],
-      responses: {},
+      // responses: {},
       index: "service",
       num: 0,
       dummy: {
@@ -124,6 +117,15 @@ export default {
   //   },
   // },
   computed: {
+    responses: {
+      get() {
+        return this.$store.getters.responses;
+      },
+      set(value) {
+        this.$store.dispatch("changeService", value);
+        console.log(value);
+      },
+    },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
     },
@@ -133,13 +135,12 @@ export default {
   },
   methods: {
     serviceChanged({ value, index, name }) {
-      // console.log(this.responses);
       if (value === false) {
         delete this.responses["service" + index];
       } else if (value === true) {
         this.responses["service" + index] = name + "|" + "1";
       }
-      // console.log(this.responses);
+      console.log(this.responses);
       const selectedServices = Object.values(this.responses);
       // console.log(selectedServices);
 
@@ -150,7 +151,7 @@ export default {
         service: selectedServices.toString(),
       };
       console.log(data);
-      // this.$store.dispatch('booking/changedService', data)
+      this.$store.dispatch("booking/changedService", data);
     },
   },
   created() {

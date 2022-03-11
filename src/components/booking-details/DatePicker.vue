@@ -69,6 +69,9 @@ export default {
         this.$store.dispatch("changeDate", value);
       },
     },
+    service() {
+      return this.$store.getters.responses;
+    },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
     },
@@ -85,20 +88,20 @@ export default {
   },
   methods: {
     monthChanged(page) {
-      console.log("From");
-      console.log(page);
+      // console.log("From");
+      // console.log(page);
       const currentDay = new Date(page.year, page.month - 1);
       console.log(currentDay);
       if (moment(currentDay).format("MM") === moment(new Date()).format("MM")) {
         this.firstDayOfCurrentMonth = moment(new Date()).format("YYYYMMDD");
-        console.log(this.firstDayOfCurrentMonth);
-        console.log("Yes");
+        // console.log(this.firstDayOfCurrentMonth);
+        // console.log("Yes");
       } else {
         this.firstDayOfCurrentMonth = moment(
           new Date(page.year, page.month - 1)
         ).format("YYYYMMDD");
-        console.log("No");
-        console.log(this.firstDayOfCurrentMonth);
+        // console.log("No");
+        // console.log(this.firstDayOfCurrentMonth);
       }
     },
     toMonth(page) {
@@ -117,6 +120,28 @@ export default {
       console.log(data);
 
       this.$store.dispatch("booking/getDate", data);
+    },
+  },
+  watch: {
+    dateSelected() {
+      console.log("Date Changed");
+      console.log(this.dateSelected);
+      const selectedServices = Object.values(this.service);
+      const data = {
+        hotelId: this.selectedHotel.basicInfo.hotelId,
+        checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
+        checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
+        service: selectedServices.toString(),
+      };
+
+      if (
+        moment(this.dateSelected.start).format("YYYYMMDD") <
+        moment(this.dateSelected.end).format("YYYYMMDD")
+      ) {
+        console.log("End Date Comes Later");
+        console.log(data);
+        this.$store.dispatch("booking/changedService", data);
+      }
     },
   },
   created() {

@@ -8,4 +8,7 @@ export default {
   changeDate(context, payload) {
     context.commit("CHANGE_DATE", payload);
   },
+  changeService(context, payload) {
+    context.commit("CHANGE_SERVICE", payload);
+  },
 };
