@@ -72,7 +72,7 @@
                       <p class="head">住宿要求</p>
                     </el-col>
                     <el-col class="end" :span="12">
-                      <p class="small">清除</p>
+                      <p class="small" @click="reset">清除</p>
                     </el-col>
                     <el-col :span="12">
                       <p>入住人數</p>
@@ -192,8 +192,8 @@ export default {
       isOpen: false,
       date: new Date(),
       isDateOpen: false,
-      numberOfLivingPopulation: 4,
-      numberOfRooms: 2,
+      numberOfLivingPopulation: 0,
+      numberOfRooms: 0,
       startDate: null,
       endDate: null,
       searchHotel: "",
@@ -201,6 +201,11 @@ export default {
     };
   },
   methods: {
+    reset() {
+      this.isSelected = "false";
+      this.numberOfLivingPopulation = 0;
+      this.numberOfRooms = 0;
+    },
     setOption(option) {
       this.isSelected = option;
     },
@@ -427,6 +432,7 @@ export default {
 .booking .select-input .individual-booking .content .el-col .small {
   color: #e63737;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .booking .select-input .individual-booking .content .end {
