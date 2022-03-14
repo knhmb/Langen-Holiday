@@ -68,7 +68,9 @@
             <el-col :span="12">
               <div class="separation no-border">
                 <span>竉物留宿:</span>
-                <span>{{ selectedHotel.petsWelcome }}</span>
+                <span>{{
+                  selectedHotel.petsWelcome === true ? "可以" : "不可以"
+                }}</span>
               </div>
             </el-col>
             <el-col :span="12">

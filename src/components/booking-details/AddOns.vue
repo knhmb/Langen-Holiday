@@ -49,6 +49,7 @@
             !services.toString().includes(service.amenitiesCode)
           "
           class="m-2"
+          :placeholder="service.name"
         >
           <el-option
             v-for="num in parseInt(service.quantity)"
