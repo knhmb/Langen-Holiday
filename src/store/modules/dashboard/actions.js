@@ -180,7 +180,7 @@ export default {
         console.log(err);
       });
   },
-  filterTheme(_, payload) {
+  filterTheme(context, payload) {
     axios
       .get(
         `/api/hotel?filter=theme%3A${payload.theme}%2CstayingDate%3A${
@@ -195,9 +195,9 @@ export default {
       )
       .then((res) => {
         console.log(res);
-        // context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
-        //   root: true,
-        // });
+        context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+          root: true,
+        });
       })
       .catch((err) => {
         console.log(err);

@@ -6,10 +6,10 @@
     >
 
     <p>
-      {{ range === "" ? checkInPlaceholder : range.start }}
+      {{ "入住 " + checkInDate + " (" + checkInDateDay + ")" }}
     </p>
     <span>-</span>
-    <p>{{ range === "" ? checkOutPlaceholder : range.end }}</p>
+    <p>{{ "退房 " + checkOutDate + " (" + checkOutDateDay + ")" }}</p>
     <transition name="slide-fade">
       <div v-if="isDateOpen" class="date-picker_input">
         <p>入住日期</p>
@@ -21,7 +21,7 @@
           :is-expanded="layout.isExpanded"
           color="orange"
           is-range
-          v-model="range"
+          v-model="dateSelected"
           @click="assignDateDifference"
         >
         </DatePicker>
@@ -106,6 +106,26 @@ export default {
         dates: date,
       }));
     },
+    dateSelected: {
+      get() {
+        return this.$store.getters.dateSelected;
+      },
+      set(value) {
+        this.$store.dispatch("changeDate", value);
+      },
+    },
+    checkInDate() {
+      return moment(this.dateSelected.start).locale("zh-cn").format("ll");
+    },
+    checkOutDate() {
+      return moment(this.dateSelected.end).locale("zh-cn").format("ll");
+    },
+    checkOutDateDay() {
+      return moment(this.dateSelected.end).locale("zh-cn").format("dddd");
+    },
+    checkInDateDay() {
+      return moment(this.dateSelected.start).locale("zh-cn").format("dddd");
+    },
   },
   methods: {
     onDayClick(day) {
@@ -134,7 +154,7 @@ export default {
       }
     },
     dateDiff() {
-      if (this.range) {
+      if (this.dateSelected) {
         this.assignDateDifference();
         this.dialogVisible = true;
       } else {
@@ -142,9 +162,9 @@ export default {
       }
     },
     assignDateDifference() {
-      if (this.range) {
-        let startDate = moment(this.range.start);
-        let endDate = moment(this.range.end);
+      if (this.dateSelected) {
+        let startDate = moment(this.dateSelected.start);
+        let endDate = moment(this.dateSelected.end);
         let duration = moment.duration(endDate.diff(startDate));
         let days = duration.asDays();
         this.dateDifference = Math.round(days);
