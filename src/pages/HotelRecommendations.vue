@@ -156,9 +156,14 @@
               </div>
               <div class="location un-bordered">
                 <el-checkbox-group v-model="location" @change="checkboxChanged">
-                  <el-checkbox label="hong-kong-island">港島區</el-checkbox>
-                  <el-checkbox label="kowloon">九龍區</el-checkbox>
-                  <el-checkbox label="new-territories">新界區</el-checkbox>
+                  <el-checkbox
+                    v-for="item in lastLocation"
+                    :key="item.id"
+                    :label="item.slug"
+                    >{{ item.name }}</el-checkbox
+                  >
+                  <!-- <el-checkbox label="kowloon">九龍區</el-checkbox>
+                  <el-checkbox label="new-territories">新界區</el-checkbox> -->
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
@@ -235,6 +240,9 @@ export default {
     roomTypes() {
       return this.$store.getters["dashboard/roomTypes"];
     },
+    lastLocation() {
+      return this.$store.getters["dashboard/lastLocation"];
+    },
     dateSelected: {
       get() {
         return this.$store.getters.dateSelected;
@@ -310,6 +318,7 @@ export default {
   created() {
     this.$store.dispatch("dashboard/setHotelBanner");
     this.$store.dispatch("dashboard/setRoomType");
+    this.$store.dispatch("dashboard/setLastLocation");
   },
 };
 </script>

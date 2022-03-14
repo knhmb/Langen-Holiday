@@ -24,6 +24,7 @@ export default {
       termsConditionsContent: {},
       joinContent: {},
       topPlaces: [],
+      lastLocation: [],
     };
   },
   getters,

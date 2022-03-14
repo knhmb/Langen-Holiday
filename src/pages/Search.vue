@@ -17,6 +17,9 @@ export default {
     // TheFooter,
     LeftSection,
   },
+  created() {
+    console.log(this.$route);
+  },
 };
 </script>
 

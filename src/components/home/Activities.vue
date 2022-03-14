@@ -89,7 +89,8 @@ export default {
       this.$store
         .dispatch("search/getSearchTheme", theme)
         .then(() => {
-          this.$router.push("/search");
+          this.$router.push({ path: "/search", query: { q: theme } });
+          console.log(theme);
         })
         .catch(() => {
           console.log("ERROR");

@@ -53,4 +53,7 @@ export default {
   GET_TOP_PLACES(state, payload) {
     state.topPlaces = payload;
   },
+  SET_LAST_LOCATION(state, payload) {
+    state.lastLocation = payload;
+  },
 };

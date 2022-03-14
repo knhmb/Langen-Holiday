@@ -160,13 +160,44 @@ export default {
   filterHotel(context, payload) {
     axios
       .get(
-        `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}`
+        `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${
+          payload.guestQty
+        }%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${
+          payload.isHavePets
+        }%2C${
+          payload.location.length > 0 ? "location%3A" + payload.location : ""
+        }%2C${
+          payload.roomType.length > 0 ? "roomType%3A" + payload.roomType : ""
+        }`
       )
       .then((res) => {
         console.log(res);
         context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
           root: true,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  filterTheme(_, payload) {
+    axios
+      .get(
+        `/api/hotel?filter=theme%3A${payload.theme}%2CstayingDate%3A${
+          payload.stayingDate
+        }%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${
+          payload.roomQty
+        }%2CisHavePets%3A${payload.isHavePets}${
+          payload.location.length > 0 ? "%2Clocation%3A" + payload.location : ""
+        }${
+          payload.roomType.length > 0 ? "%2CroomType%3A" + payload.roomType : ""
+        }`
+      )
+      .then((res) => {
+        console.log(res);
+        // context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+        //   root: true,
+        // });
       })
       .catch((err) => {
         console.log(err);
@@ -235,6 +266,17 @@ export default {
         context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
           root: true,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  setLastLocation(context) {
+    axios
+      .get("/api/codex?filter=codextypecode%3ARGN")
+      .then((res) => {
+        console.log(res);
+        context.commit("SET_LAST_LOCATION", res.data.items);
       })
       .catch((err) => {
         console.log(err);

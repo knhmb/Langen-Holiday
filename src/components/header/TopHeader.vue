@@ -53,6 +53,12 @@
               :class="{ 'inner-active': isActiveSubMenuItem === 2 }"
               @click="selectedSubMenu(2)"
               index="2-1"
+              :style="{
+                color: $route.path.includes('contact-us') ? 'black' : '#8d8d8d',
+                fontWeight: $route.path.includes('contact-us')
+                  ? 'bold'
+                  : 'normal',
+              }"
               >聯絡我們</el-menu-item
             >
             <el-menu-item
@@ -60,6 +66,10 @@
               :class="{ 'inner-active': isActiveSubMenuItem === 3 }"
               @click="selectedSubMenu(3)"
               index="2-2"
+              :style="{
+                color: $route.path.includes('join') ? 'black' : '#8d8d8d',
+                fontWeight: $route.path.includes('join') ? 'bold' : 'normal',
+              }"
               >付款方法</el-menu-item
             >
           </el-sub-menu>

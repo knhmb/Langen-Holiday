@@ -53,4 +53,7 @@ export default {
   topPlaces(state) {
     return state.topPlaces;
   },
+  lastLocation(state) {
+    return state.lastLocation;
+  },
 };

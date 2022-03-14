@@ -31,4 +31,14 @@ export default {
         console.log(err);
       });
   },
+  // test() {
+  //   axios
+  //     .get(`/api/hotel?filter=theme%3Ahoteltheme-spa-suite`, {params: {filter: ''}})
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 };

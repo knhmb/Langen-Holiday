@@ -237,6 +237,10 @@ export default {
     roomTypes() {
       return this.$store.getters["dashboard/roomTypes"];
     },
+    themes() {
+      // return this.$store.getters["dashboard/themes"];
+      return this.$store.state.dashboard.themes;
+    },
     dateSelected: {
       get() {
         return this.$store.getters.dateSelected;
@@ -279,7 +283,11 @@ export default {
       this.checkboxChanged();
     },
     checkboxChanged() {
-      console.log(this.location);
+      let currentTheme = "";
+      currentTheme = this.themes.filter((theme) => {
+        return theme.slug === this.$route.query.q;
+      });
+
       const date = new Date();
       const formattedDate = moment(date)
         .format("YYYY-MM-DD")
@@ -300,9 +308,20 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
+        theme: currentTheme[0].slug,
       };
       console.log(data);
-      this.$store.dispatch("dashboard/filterHotel", data);
+
+      if (currentTheme[0].slug === this.$route.query.q) {
+        console.log("YEEESSSS");
+        this.$store.dispatch("dashboard/filterTheme", data);
+      }
+
+      // if (themesArr.includes(this.$route.query.q)) {
+      //   console.log(themesArr);
+      //   this.$store.dispatch("dashboard/filterTheme", data);
+      // }
+      // this.$store.dispatch("dashboard/filterHotel", data);
     },
     applyRecommendation(value) {
       const date = new Date();
