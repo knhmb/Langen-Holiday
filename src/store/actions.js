@@ -26,4 +26,22 @@ export default {
 
     context.commit("RESET_DATE", data);
   },
+  setIsHavePets(context, payload) {
+    context.commit("SET_IS_HAVE_PETS", payload);
+  },
+  resetIsHavePets(context) {
+    context.commit("RESET_IS_HAVE_PETS");
+  },
+  increasePopulation(context) {
+    context.commit("INCREASE_POPULATION");
+  },
+  decreasePopulation(context) {
+    context.commit("DECREASE_POPULATION");
+  },
+  increaseRooms(context) {
+    context.commit("INCREASE_ROOMS");
+  },
+  decreaseRooms(context) {
+    context.commit("DECREASE_ROOMS");
+  },
 };

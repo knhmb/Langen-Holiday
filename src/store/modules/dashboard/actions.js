@@ -135,7 +135,15 @@ export default {
   searchHotel(context, payload) {
     axios
       .get(
-        `/api/hotel?search=${payload.search}&filter=stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets}&sort=xxx&page=xx&pagesize=xxx`
+        `/api/hotel?search=${payload.search}&filter=stayingDate:${
+          payload.stayingDate
+        }${payload.guestQty === 0 ? "" : ",guestQty:" + payload.guestQty}${
+          payload.roomQty === 0 ? "" : ",roomQty:" + payload.roomQty
+        },${
+          payload.isHavePets === "false"
+            ? ""
+            : ",isHavePets:" + payload.isHavePets
+        }&sort=xxx&page=xx&pagesize=xxx`
       )
       .then((res) => {
         console.log(res);

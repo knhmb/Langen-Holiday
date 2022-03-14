@@ -200,7 +200,8 @@ export default {
       this.checkboxChanged();
     },
     checkboxChanged() {
-      console.log(this.location);
+      this.cheungChauIslandItems.filter((item) => console.log(item));
+
       const date = new Date();
       const formattedDate = moment(date)
         .format("YYYY-MM-DD")

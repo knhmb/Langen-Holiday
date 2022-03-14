@@ -188,12 +188,12 @@ export default {
     return {
       input: "",
       datePicker: "",
-      isSelected: "false",
+      // isSelected: "false",
       isOpen: false,
       date: new Date(),
       isDateOpen: false,
-      numberOfLivingPopulation: 0,
-      numberOfRooms: 0,
+      // numberOfLivingPopulation: 0,
+      // numberOfRooms: 0,
       startDate: null,
       endDate: null,
       searchHotel: "",
@@ -202,12 +202,13 @@ export default {
   },
   methods: {
     reset() {
-      this.isSelected = "false";
-      this.numberOfLivingPopulation = 0;
-      this.numberOfRooms = 0;
+      // this.isSelected = "false";
+      // this.numberOfLivingPopulation = 0;
+      // this.numberOfRooms = 0;
+      this.$store.dispatch("resetIsHavePets");
     },
     setOption(option) {
-      this.isSelected = option;
+      this.$store.dispatch("setIsHavePets", option);
     },
     openDropdown() {
       this.isOpen = !this.isOpen;
@@ -218,22 +219,22 @@ export default {
       this.isOpen = false;
     },
     increaseNumberOfPopulation() {
-      this.numberOfLivingPopulation++;
+      this.$store.commit("INCREASE_POPULATION");
     },
     decreaseNumberOfPopulation() {
       if (this.numberOfLivingPopulation <= 0) {
         return;
       }
-      this.numberOfLivingPopulation--;
+      this.$store.dispatch("decreasePopulation");
     },
     increaseRoom() {
-      this.numberOfRooms++;
+      this.$store.dispatch("increaseRooms");
     },
     decreaseRoom() {
       if (this.numberOfRooms <= 0) {
         return;
       }
-      this.numberOfRooms--;
+      this.$store.dispatch("decreaseRooms");
     },
     assignDateValues(value) {
       this.startDate = value.start.replaceAll("-", "");
@@ -244,7 +245,7 @@ export default {
     submitHotelSearch() {
       const data = {
         search: this.searchHotel.replaceAll(" ", "-"),
-        stayingDate: this.startDate + "|" + this.endDate,
+        stayingDate: this.dateSelected.start + "|" + this.dateSelected.end,
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
@@ -277,6 +278,18 @@ export default {
           isExpanded: true,
         },
       });
+    },
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
+    isSelected() {
+      return this.$store.getters.isHavePets;
+    },
+    numberOfLivingPopulation() {
+      return this.$store.getters.numberOfIndividuals;
+    },
+    numberOfRooms() {
+      return this.$store.getters.numberOfRooms;
     },
   },
 };

@@ -205,10 +205,10 @@ export default {
     return {
       time: [],
       location: [],
-      isSelected: "false",
+      // isSelected: "false",
       roomType: [],
-      numberOfLivingPopulation: 0,
-      numberOfRooms: 0,
+      // numberOfLivingPopulation: 0,
+      // numberOfRooms: 0,
       range: {
         start: moment(new Date()).format("YYYY-MM-DD").replaceAll("-", ""),
         end: moment(new Date().setDate(new Date().getDate() + 1))
@@ -249,6 +249,15 @@ export default {
         this.$store.dispatch("changeDate", value);
       },
     },
+    isSelected() {
+      return this.$store.getters.isHavePets;
+    },
+    numberOfLivingPopulation() {
+      return this.$store.getters.numberOfIndividuals;
+    },
+    numberOfRooms() {
+      return this.$store.getters.numberOfRooms;
+    },
   },
   watch: {
     dateSelected() {
@@ -257,29 +266,34 @@ export default {
   },
   methods: {
     setOption(option) {
-      this.isSelected = option;
+      // this.isSelected = option;
+      this.$store.dispatch("setIsHavePets", option);
       this.checkboxChanged();
     },
     increaseNumberOfPopulation() {
-      this.numberOfLivingPopulation++;
+      this.$store.dispatch("increasePopulation");
+      // this.numberOfLivingPopulation++;
       this.checkboxChanged();
     },
     decreaseNumberOfPopulation() {
       if (this.numberOfLivingPopulation <= 0) {
         return;
       }
-      this.numberOfLivingPopulation--;
+      // this.numberOfLivingPopulation--;
+      this.$store.dispatch("decreasePopulation");
       this.checkboxChanged();
     },
     increaseRoom() {
-      this.numberOfRooms++;
+      // this.numberOfRooms++;
+      this.$store.dispatch("increaseRooms");
       this.checkboxChanged();
     },
     decreaseRoom() {
       if (this.numberOfRooms <= 0) {
         return;
       }
-      this.numberOfRooms--;
+      // this.numberOfRooms--;
+      this.$store.dispatch("decreaseRooms");
       this.checkboxChanged();
     },
     checkboxChanged() {
@@ -287,6 +301,7 @@ export default {
       currentTheme = this.themes.filter((theme) => {
         return theme.slug === this.$route.query.q;
       });
+      console.log(currentTheme);
 
       const date = new Date();
       const formattedDate = moment(date)
@@ -308,20 +323,19 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
-        theme: currentTheme[0].slug,
+        theme: currentTheme.length > 0 ? currentTheme[0].slug : "",
       };
       console.log(data);
 
-      if (currentTheme[0].slug === this.$route.query.q) {
-        console.log("YEEESSSS");
+      if (
+        currentTheme.length > 0 &&
+        currentTheme[0].slug === this.$route.query.q
+      ) {
         this.$store.dispatch("dashboard/filterTheme", data);
+      } else {
+        this.$store.dispatch("dashboard/filterHotel", data);
+        console.log("reached");
       }
-
-      // if (themesArr.includes(this.$route.query.q)) {
-      //   console.log(themesArr);
-      //   this.$store.dispatch("dashboard/filterTheme", data);
-      // }
-      // this.$store.dispatch("dashboard/filterHotel", data);
     },
     applyRecommendation(value) {
       const date = new Date();

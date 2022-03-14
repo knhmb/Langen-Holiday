@@ -22,6 +22,9 @@ const store = createStore({
         end: tomorrow,
       },
       responses: {},
+      isHavePets: "false",
+      numberOfIndividuals: 0,
+      numberOfRooms: 0,
     };
   },
   getters,
