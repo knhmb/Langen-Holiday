@@ -312,30 +312,35 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
     applyRecommendation(value) {
-      const date = new Date();
-      const formattedDate = moment(date)
-        .format("YYYY-MM-DD")
-        .replaceAll("-", "");
+      let currentIsland = this.headerItems.filter((item) =>
+        this.$route.path.includes(item.slug)
+      );
+      let subItem = this.dayNightItems.filter((item) =>
+        this.$route.path.split("/").includes(item.slug)
+      );
+
       const data = {
         stayingDate:
-          this.range === ""
-            ? formattedDate +
-              "|" +
-              moment(date.setDate(date.getDate() + 1))
-                .format("YYYY-MM-DD")
-                .replaceAll("-", "")
-            : this.range.start.replaceAll("-", "") +
-              "|" +
-              this.range.end.replaceAll("-", ""),
+          moment(this.range.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.range.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
         sort: value,
+        slug:
+          subItem.length > 0
+            ? subItem[0].slug
+            : currentIsland.length > 0
+            ? currentIsland[0].slug
+            : "",
       };
       console.log(data);
-      this.$store.dispatch("dashboard/sortHotel", data);
+      // this.$store.dispatch("dashboard/sortHotel", data);
+      this.$store.dispatch("search/sortIslandSearch", data);
+      this.$store.dispatch("changeDate", this.range);
     },
   },
   created() {

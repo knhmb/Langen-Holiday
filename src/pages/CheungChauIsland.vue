@@ -228,31 +228,29 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
     applyRecommendation(value) {
-      // const currentDate = new Date().toJSON().slice(0, 10).replace(/-/g, "");
-      const date = new Date();
-      const formattedDate = moment(date)
-        .format("YYYY-MM-DD")
-        .replaceAll("-", "");
+      let subItem = this.cheungChauIslandItems.filter((item) =>
+        this.$route.path.split("/").includes(item.slug)
+      );
       const data = {
         stayingDate:
-          this.range === ""
-            ? formattedDate +
-              "|" +
-              moment(date.setDate(date.getDate() + 1))
-                .format("YYYY-MM-DD")
-                .replaceAll("-", "")
-            : this.range.start.replaceAll("-", "") +
-              "|" +
-              this.range.end.replaceAll("-", ""),
+          moment(this.range.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.range.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
         sort: value,
+        slug:
+          subItem.length > 0
+            ? subItem[0].slug
+            : this.cheungChauIslandItems[0].parentCodexSlug,
       };
       console.log(data);
-      this.$store.dispatch("dashboard/sortHotel", data);
+      // this.$store.dispatch("dashboard/sortHotel", data);
+      this.$store.dispatch("search/sortIslandSearch", data);
+      this.$store.dispatch("changeDate", this.range);
     },
   },
   created() {

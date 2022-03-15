@@ -89,6 +89,11 @@ export default {
       services,
     };
   },
+  watch: {
+    $route() {
+      this.isActive = "";
+    },
+  },
   computed: {
     searchItems() {
       return this.$store.getters["search/searchItems"];
@@ -110,6 +115,7 @@ export default {
         value = "%2Drating";
       }
       this.$emit("getRecommendation", value);
+      // this.isActive = "";
     },
   },
 };
