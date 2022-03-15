@@ -15,8 +15,34 @@
             "
             v-for="(service, index) in selectedHotel.addlService"
             :key="service.id"
-            >{{ service.name }}</el-checkbox
-          >
+            >{{ service.name }}
+            <el-select
+              @change="
+                serviceChanged({
+                  value: $event,
+                  index: index,
+                  name: service.amenitiesCode,
+                })
+              "
+              remote
+              default-first-option
+              v-model="responses['service' + index]"
+              :disabled="
+                services.length <= 0 ||
+                !services.toString().includes(service.amenitiesCode)
+              "
+              class="additional-services"
+              placeholder="選擇"
+            >
+              <el-option
+                v-for="num in parseInt(service.quantity)"
+                :key="num"
+                :value="service.amenitiesCode + '|' + num"
+                :label="num"
+              >
+              </el-option>
+            </el-select>
+          </el-checkbox>
         </el-checkbox-group>
       </el-col>
       <el-col :span="12">
@@ -29,7 +55,7 @@
         </p>
       </el-col>
     </el-row>
-    <el-row>
+    <!-- <el-row>
       <el-col>
         <el-select
           @change="
@@ -60,7 +86,7 @@
           </el-option>
         </el-select>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 
   <div class="calculated-add-on">
@@ -165,7 +191,7 @@ export default {
 .add-ons {
   margin-top: 1rem;
   border-bottom: 1px solid #aaa;
-  padding-bottom: 1.5rem;
+  padding-bottom: 2rem;
   color: #8d8d8d;
 }
 
@@ -178,6 +204,19 @@ export default {
 .add-ons .el-checkbox {
   display: block;
   /* margin-top: 0.5rem; */
+}
+
+.add-ons .el-checkbox:last-of-type {
+  margin-top: 2.5rem;
+}
+
+.add-ons .el-select.additional-services {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.add-ons .el-checkbox .el-checkbox__inner {
+  top: -28px;
 }
 
 .add-ons .el-checkbox.is-checked .el-checkbox__inner {
@@ -209,14 +248,13 @@ export default {
   letter-spacing: 2.2px;
 }
 
-.add-ons .add-on-item,
 .calculated-add-on .add-on-item {
   align-items: center;
 }
 
-/* .add-ons .add-on-price {
-  margin-top: 0.5rem;
-} */
+.add-ons .add-on-price:not(:first-of-type) {
+  margin-top: 2.5rem;
+}
 
 .add-ons .add-on-price,
 .calculated-add-on .add-on-price {

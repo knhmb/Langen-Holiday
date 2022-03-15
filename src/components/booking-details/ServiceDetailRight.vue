@@ -13,14 +13,48 @@
       </el-row>
       <el-row>
         <el-col :span="10">
-          <span class="date-delivery"
+          <!-- <span class="date-delivery"
             >{{ checkInDate }} {{ checkInDateDay }}</span
+          > -->
+          <v-date-picker
+            locale="zh-cn"
+            :masks="masks"
+            class="inline-block h-full"
+            v-model="startDate"
           >
+            <template v-slot="{ inputValue, togglePopover }">
+              <div class="flex items-center">
+                <input
+                  @click="togglePopover()"
+                  :value="inputValue"
+                  readonly
+                  class="date-picker-input"
+                />
+              </div>
+            </template>
+          </v-date-picker>
         </el-col>
         <el-col :span="10">
-          <span class="date-delivery"
+          <!-- <span class="date-delivery"
             >{{ checkOutDate }} {{ checkOutDateDay }}</span
+          > -->
+          <v-date-picker
+            locale="zh-cn"
+            :masks="masks"
+            class="inline-block h-full"
+            v-model="endDate"
           >
+            <template v-slot="{ inputValue, togglePopover }">
+              <div class="flex items-center">
+                <input
+                  @click="togglePopover()"
+                  :value="inputValue"
+                  readonly
+                  class="date-picker-input"
+                />
+              </div>
+            </template>
+          </v-date-picker>
         </el-col>
         <el-col class="my-btn" :span="4">
           <el-button class="small-btn">1晚</el-button>
@@ -76,16 +110,39 @@
 <script>
 import AddOns from "./AddOns.vue";
 import moment from "moment";
+import { DatePicker } from "v-calendar";
 
 export default {
   components: {
     AddOns,
+    VDatePicker: DatePicker,
   },
   data() {
     return {
       numberOfAdults: null,
       numberOfChildren: null,
+      date: new Date(),
+      startDate: new Date(),
+      endDate: new Date().setDate(new Date().getDate() + 1),
+      masks: {
+        input: "YYYY年M月DD日 WWW",
+      },
     };
+  },
+  watch: {
+    // startDate() {
+    //   const data = {
+    //     start: moment(this.startDate).format('YYYYMMDD'),
+    //     end: moment(this.endDate).format('YYYYMMDD')
+    //   }
+    // },
+    endDate() {
+      const data = {
+        start: moment(this.startDate).format("YYYYMMDD"),
+        end: moment(this.endDate).format("YYYYMMDD"),
+      };
+      this.$store.dispatch("changeDate", data);
+    },
   },
   computed: {
     dateSelected() {
@@ -105,6 +162,11 @@ export default {
     },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+  },
+  methods: {
+    dummy() {
+      console.log("clicked");
     },
   },
 };
@@ -188,6 +250,16 @@ export default {
   color: #fd9a1a;
   font-size: 40px;
   margin-top: 1rem;
+}
+
+.service-detail .el-card .date-picker-input {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  color: #8d8d8d;
+  font-size: 14px;
+  font-family: "Noto Sans HK", sans-serif;
+  letter-spacing: 1.1px;
 }
 
 @media screen and (max-width: 768px) {
