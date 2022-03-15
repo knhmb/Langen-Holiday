@@ -301,23 +301,12 @@ export default {
       currentTheme = this.themes.filter((theme) => {
         return theme.slug === this.$route.query.q;
       });
-      console.log(currentTheme);
 
-      const date = new Date();
-      const formattedDate = moment(date)
-        .format("YYYY-MM-DD")
-        .replaceAll("-", "");
       const data = {
         stayingDate:
-          this.dateSelected === ""
-            ? formattedDate +
-              "|" +
-              moment(date.setDate(date.getDate() + 1))
-                .format("YYYY-MM-DD")
-                .replaceAll("-", "")
-            : this.dateSelected.start.replaceAll("-", "") +
-              "|" +
-              this.dateSelected.end.replaceAll("-", ""),
+          moment(this.dateSelected.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.dateSelected.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
@@ -330,9 +319,6 @@ export default {
             ? this.$route.query.q
             : "",
       };
-      console.log(data);
-      console.log(this.$route.query);
-      console.log(Object.keys(this.$route.query).length > 0);
 
       if (
         currentTheme.length > 0 &&
@@ -348,30 +334,41 @@ export default {
       }
     },
     applyRecommendation(value) {
-      const date = new Date();
-      const formattedDate = moment(date)
-        .format("YYYY-MM-DD")
-        .replaceAll("-", "");
+      let currentTheme = this.themes.filter((theme) => {
+        return theme.slug === this.$route.query.q;
+      });
       const data = {
         stayingDate:
-          this.dateSelected === ""
-            ? formattedDate +
-              "|" +
-              moment(date.setDate(date.getDate() + 1))
-                .format("YYYY-MM-DD")
-                .replaceAll("-", "")
-            : this.dateSelected.start.replaceAll("-", "") +
-              "|" +
-              this.dateSelected.end.replaceAll("-", ""),
+          moment(this.dateSelected.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.dateSelected.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
         sort: value,
+        theme:
+          currentTheme.length > 0
+            ? currentTheme[0].slug
+            : Object.keys(this.$route.query).length > 0
+            ? this.$route.query.q
+            : "",
       };
       console.log(data);
-      this.$store.dispatch("dashboard/sortHotel", data);
+      if (
+        currentTheme.length > 0 &&
+        currentTheme[0].slug === this.$route.query.q
+      ) {
+        this.$store.dispatch("dashboard/sortTheme", data);
+      } else if (Object.keys(this.$route.query).length > 0) {
+        console.log("Not empty Query");
+        this.$store.dispatch("dashboard/sortSearch", data);
+      } else {
+        this.$store.dispatch("dashboard/sortHotel", data);
+        console.log("reached");
+      }
+      // this.$store.dispatch("dashboard/sortHotel", data);
     },
   },
   created() {

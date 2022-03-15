@@ -178,6 +178,29 @@ export default {
         console.log(err);
       });
   },
+  sortSearch(_, payload) {
+    axios
+      .get(
+        `/api/hotel?search=${payload.theme}&filter=stayingDate:${
+          payload.stayingDate
+        }${payload.guestQty === 0 ? "" : ",guestQty:" + payload.guestQty}${
+          payload.roomQty === 0 ? "" : ",roomQty:" + payload.roomQty
+        },${
+          payload.isHavePets === "false"
+            ? ""
+            : ",isHavePets:" + payload.isHavePets
+        }&sort=${payload.sort}&page=xx&pagesize=xxx`
+      )
+      .then((res) => {
+        console.log(res);
+        // context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+        //   root: true,
+        // });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   setRoomType(context) {
     axios
       .get("/api/codex?filter=codextypecode%3AHTLRMTYPE&sort=%2BdisplayOrder")
@@ -291,6 +314,21 @@ export default {
     axios
       .get(
         `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
+      )
+      .then((res) => {
+        console.log(res);
+        context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+          root: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  sortTheme(context, payload) {
+    axios
+      .get(
+        `/api/hotel?filter=theme%3A${payload.theme}%2CstayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
       )
       .then((res) => {
         console.log(res);
