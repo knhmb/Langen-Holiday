@@ -18,8 +18,9 @@
                 :model-config="modelConfig"
                 color="orange"
                 is-range
-                v-model="dateSelected"
-              />
+                v-model="range"
+              >
+              </DatePicker>
               <el-row>
                 <el-col>
                   <p>住宿要求</p>
@@ -156,10 +157,10 @@ export default {
       isSelected: "false",
       roomType: [],
       range: {
-        start: moment(new Date()).format("YYYY-MM-DD").replaceAll("-", ""),
-        end: moment(new Date().setDate(new Date().getDate() + 1))
-          .format("YYYY-MM-DD")
-          .replaceAll("-", ""),
+        start: moment(new Date()).format("YYYYMMDD"),
+        end: moment(new Date().setDate(new Date().getDate() + 1)).format(
+          "YYYYMMDD"
+        ),
       },
       modelConfig: {
         type: "string",
@@ -190,9 +191,12 @@ export default {
     },
   },
   watch: {
-    dateSelected() {
+    range() {
       this.checkboxChanged();
     },
+    // $route() {
+    //   this.$store.dispatch("resetDate");
+    // },
   },
   methods: {
     setOption(option) {
@@ -200,30 +204,34 @@ export default {
       this.checkboxChanged();
     },
     checkboxChanged() {
-      console.log(this.location);
-      const date = new Date();
-      const formattedDate = moment(date)
-        .format("YYYY-MM-DD")
-        .replaceAll("-", "");
+      let subItem = this.lantauIslandItems.filter((item) =>
+        this.$route.path.split("/").includes(item.slug)
+      );
+
       const data = {
         stayingDate:
-          this.range === ""
-            ? formattedDate +
-              "|" +
-              moment(date.setDate(date.getDate() + 1))
-                .format("YYYY-MM-DD")
-                .replaceAll("-", "")
-            : this.range.start.replaceAll("-", "") +
-              "|" +
-              this.range.end.replaceAll("-", ""),
+          moment(this.range.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.range.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
+        slug:
+          subItem.length > 0
+            ? subItem[0].slug
+            : this.lantauIslandItems[0].parentCodexSlug,
       };
       console.log(data);
-      this.$store.dispatch("dashboard/filterHotel", data);
+      this.$store.dispatch("search/filterIslandSearch", data);
+      this.$store.dispatch("changeDate", this.range);
+      // this.range = {
+      //   start: moment(new Date()).format("YYYYMMDD"),
+      //   end: moment(new Date().setDate(new Date().getDate() + 1)).format(
+      //     "YYYYMMDD"
+      //   ),
+      // };
     },
     applyRecommendation(value) {
       const date = new Date();

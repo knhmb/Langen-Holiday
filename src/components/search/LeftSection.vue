@@ -323,15 +323,25 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
-        theme: currentTheme.length > 0 ? currentTheme[0].slug : "",
+        theme:
+          currentTheme.length > 0
+            ? currentTheme[0].slug
+            : Object.keys(this.$route.query).length > 0
+            ? this.$route.query.q
+            : "",
       };
       console.log(data);
+      console.log(this.$route.query);
+      console.log(Object.keys(this.$route.query).length > 0);
 
       if (
         currentTheme.length > 0 &&
         currentTheme[0].slug === this.$route.query.q
       ) {
         this.$store.dispatch("dashboard/filterTheme", data);
+      } else if (Object.keys(this.$route.query).length > 0) {
+        console.log("Not empty Query");
+        this.$store.dispatch("dashboard/filterSearch", data);
       } else {
         this.$store.dispatch("dashboard/filterHotel", data);
         console.log("reached");

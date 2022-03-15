@@ -254,7 +254,10 @@ export default {
       this.$store
         .dispatch("dashboard/searchHotel", data)
         .then(() => {
-          this.$router.push("/search");
+          this.$router.push({
+            path: "/search",
+            query: data.search !== "" ? { q: data.search } : "",
+          });
         })
         .catch(() => {
           console.log("Error");

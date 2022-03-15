@@ -5,7 +5,7 @@
       <div class="bottom">
         <el-row>
           <el-col :span="18">
-            <span>{{ name }}</span>
+            <span class="hotel-name">{{ name }}</span>
             <span class="small"
               ><img
                 class="location-icon"
@@ -117,6 +117,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .search .right-section .location-icon {
@@ -138,6 +139,10 @@ export default {
   display: block;
   letter-spacing: 3px;
   color: #8d8d8d;
+}
+
+.search .right-section span.hotel-name {
+  font-size: 15px;
 }
 
 .search .right-section .small {

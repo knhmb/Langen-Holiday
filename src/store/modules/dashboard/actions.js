@@ -155,6 +155,29 @@ export default {
         console.log(err);
       });
   },
+  filterSearch(context, payload) {
+    axios
+      .get(
+        `/api/hotel?search=${payload.theme}&filter=stayingDate:${
+          payload.stayingDate
+        }${payload.guestQty === 0 ? "" : ",guestQty:" + payload.guestQty}${
+          payload.roomQty === 0 ? "" : ",roomQty:" + payload.roomQty
+        },${
+          payload.isHavePets === "false"
+            ? ""
+            : ",isHavePets:" + payload.isHavePets
+        }&sort=xxx&page=xx&pagesize=xxx`
+      )
+      .then((res) => {
+        console.log(res);
+        context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+          root: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   setRoomType(context) {
     axios
       .get("/api/codex?filter=codextypecode%3AHTLRMTYPE&sort=%2BdisplayOrder")

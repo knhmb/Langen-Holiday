@@ -18,7 +18,7 @@
                 :model-config="modelConfig"
                 color="orange"
                 is-range
-                v-model="dateSelected"
+                v-model="range"
               />
 
               <el-row>
@@ -264,11 +264,17 @@ export default {
         this.$store.dispatch("changeDate", value);
       },
     },
+    dayNightItems() {
+      return this.$store.getters["dashboard/dayNightItems"];
+    },
   },
   watch: {
-    dateSelected() {
+    range() {
       this.checkboxChanged();
     },
+    // $route() {
+    //   this.$store.dispatch("resetDate");
+    // },
   },
   methods: {
     setOption(option) {
@@ -276,30 +282,34 @@ export default {
       this.checkboxChanged();
     },
     checkboxChanged() {
-      console.log(this.location);
-      const date = new Date();
-      const formattedDate = moment(date)
-        .format("YYYY-MM-DD")
-        .replaceAll("-", "");
+      let currentIsland = this.headerItems.filter((item) =>
+        this.$route.path.includes(item.slug)
+      );
+      let subItem = this.dayNightItems.filter((item) =>
+        this.$route.path.split("/").includes(item.slug)
+      );
+
       const data = {
         stayingDate:
-          this.range === ""
-            ? formattedDate +
-              "|" +
-              moment(date.setDate(date.getDate() + 1))
-                .format("YYYY-MM-DD")
-                .replaceAll("-", "")
-            : this.range.start.replaceAll("-", "") +
-              "|" +
-              this.range.end.replaceAll("-", ""),
+          moment(this.range.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.range.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
+        slug:
+          subItem.length > 0
+            ? subItem[0].slug
+            : currentIsland.length > 0
+            ? currentIsland[0].slug
+            : "",
       };
       console.log(data);
-      this.$store.dispatch("dashboard/filterHotel", data);
+      // this.$store.dispatch("dashboard/filterHotel", data);
+      this.$store.dispatch("search/filterIslandSearch", data);
+      this.$store.dispatch("changeDate", this.range);
     },
     applyRecommendation(value) {
       const date = new Date();
@@ -332,6 +342,8 @@ export default {
     this.$store.dispatch("dashboard/setDayNightBanner");
     this.$store.dispatch("dashboard/setRoomType");
     this.$store.dispatch("dashboard/setLastLocation");
+    this.$store.dispatch("resetDate");
+    console.log(this.dayNightBanner);
   },
 };
 </script>
