@@ -15,7 +15,9 @@
               <img src="../../assets/icon-check.png" alt="" />
               <span
                 >{{ item.name }}
-                {{ item.description !== null ? item.description : "" }}</span
+                {{
+                  item.description !== null ? "(" + item.description + ")" : ""
+                }}</span
               >
               <img :src="item.thumbnail" alt="" />
             </el-col>
@@ -23,7 +25,7 @@
         </el-row>
       </div>
       <div class="not-provided-services">
-        <p>免費</p>
+        <p>收費</p>
         <el-row>
           <template v-for="item in selectedHotel.amenities" :key="item.id">
             <el-col
@@ -32,12 +34,13 @@
               :sm="12"
               :md="4"
             >
-              <img src="../../assets/icon-check.png" alt="" />
+              <img src="../../assets/icon-cross.png" alt="" />
               <span
                 >{{ item.name }}
-                {{ item.description !== null ? item.description : "" }} (+${{
-                  item.unitCharge
-                }})</span
+                {{
+                  item.description !== null ? "(" + item.description + ")" : ""
+                }}
+                (+${{ item.unitCharge }})</span
               >
               <img :src="item.thumbnail" alt="" />
             </el-col>
@@ -49,11 +52,13 @@
         <el-row>
           <template v-for="item in selectedHotel.amenities" :key="item.id">
             <el-col v-if="item.isBed === true" class="items" :sm="12" :md="4">
-              <img src="../../assets/icon-check.png" alt="" />
+              <!-- <img src="../../assets/icon-check.png" alt="" /> -->
               <span
                 >{{ item.name }}
-                {{ item.description !== null ? item.description : "" }} x
-                {{ item.quantity }}</span
+                {{
+                  item.description !== null ? "(" + item.description + ")" : ""
+                }}
+                x {{ item.quantity }}</span
               >
               <img :src="item.thumbnail" alt="" />
             </el-col>

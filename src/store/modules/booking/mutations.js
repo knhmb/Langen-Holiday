@@ -12,4 +12,7 @@ export default {
       payload.totalSelectedAddlServiceCharge;
     console.log(state.selectedHotel);
   },
+  UPDATE_DATES(state, payload) {
+    state.selectedHotel.availableDates = payload;
+  },
 };

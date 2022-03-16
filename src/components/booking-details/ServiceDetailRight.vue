@@ -20,11 +20,12 @@
             locale="zh-cn"
             :masks="masks"
             class="inline-block h-full"
-            v-model="startDate"
+            v-model="dateSelected.start"
           >
             <template v-slot="{ inputValue, togglePopover }">
               <div class="flex items-center">
                 <input
+                  mode="date"
                   @click="togglePopover()"
                   :value="inputValue"
                   readonly
@@ -42,7 +43,7 @@
             locale="zh-cn"
             :masks="masks"
             class="inline-block h-full"
-            v-model="endDate"
+            v-model="dateSelected.end"
           >
             <template v-slot="{ inputValue, togglePopover }">
               <div class="flex items-center">
@@ -127,6 +128,9 @@ export default {
       masks: {
         input: "YYYY年M月DD日 WWW",
       },
+      dummi: {
+        date: new Date(),
+      },
     };
   },
   watch: {
@@ -190,6 +194,10 @@ export default {
     dummy() {
       console.log("clicked");
     },
+  },
+  created() {
+    // this.startDate = this.dateSelected.start;
+    // console.log(this.startDate);
   },
 };
 </script>

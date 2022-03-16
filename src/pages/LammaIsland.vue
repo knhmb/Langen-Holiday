@@ -90,7 +90,7 @@
               </el-row>
               <p>地點</p>
               <div class="location">
-                <el-checkbox-group v-model="location" @change="checkboxChanged">
+                <el-checkbox-group v-model="location" @change="sortIsland">
                   <template v-for="lamma in headerItems" :key="lamma.id">
                     <el-checkbox
                       v-if="lamma.slug === 'lamma-island'"
@@ -110,7 +110,7 @@
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
-              <el-checkbox-group v-model="roomType" @change="checkboxChanged">
+              <el-checkbox-group v-model="roomType" @change="sortIsland">
                 <el-checkbox
                   v-for="room in roomTypes"
                   :key="room.id"
@@ -150,6 +150,7 @@ export default {
     return {
       time: [],
       location: [],
+      recommendation: "",
       isSelected: "false",
       roomType: [],
       range: {
@@ -188,7 +189,10 @@ export default {
   },
   watch: {
     range() {
-      this.checkboxChanged();
+      this.sortIsland();
+    },
+    recommendation() {
+      this.sortIsland();
     },
     // $route() {
     //   this.$store.dispatch("resetDate");
@@ -197,7 +201,7 @@ export default {
   methods: {
     setOption(option) {
       this.isSelected = option;
-      this.checkboxChanged();
+      this.sortIsland();
     },
     checkboxChanged() {
       let subItem = this.lammaIslandItems.filter((item) =>
@@ -225,6 +229,9 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
     applyRecommendation(value) {
+      this.recommendation = value;
+    },
+    sortIsland() {
       let subItem = this.lammaIslandItems.filter((item) =>
         this.$route.path.split("/").includes(item.slug)
       );
@@ -239,7 +246,7 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
-        sort: value,
+        sort: this.recommendation === "" ? "" : this.recommendation,
         slug:
           subItem.length > 0
             ? subItem[0].slug

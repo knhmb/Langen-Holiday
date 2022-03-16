@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import moment from "moment";
+// import moment from "moment";
 
 export default {
   props: [
@@ -76,21 +76,14 @@ export default {
     },
     selectedHotel(id) {
       const date = new Date();
-      const today = moment(date).format("YYYYMMDD");
-      const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
-        "YYYYMMDD"
-      );
+      const today = date.setDate(date.getDate());
+      const tomorrow = date.setDate(date.getDate() + 1);
 
       const data = {
         hotelId: id,
-        checkInDate:
-          this.dateSelected === ""
-            ? today
-            : moment(this.dateSelected.start).format("YYYYMMDD"),
+        checkInDate: this.dateSelected === "" ? today : this.dateSelected.start,
         checkOutDate:
-          this.dateSelected === ""
-            ? tomorrow
-            : moment(this.dateSelected.end).format("YYYYMMDD"),
+          this.dateSelected === "" ? tomorrow : this.dateSelected.end,
         roomQty: this.numberOfRooms === 0 ? 1 : this.numberOfRooms,
       };
       console.log(data);

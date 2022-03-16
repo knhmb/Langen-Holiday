@@ -3,9 +3,11 @@ import moment from "moment";
 
 export default {
   async getHotel(context, payload) {
+    const today = moment(payload.checkInDate).format("YYYYMMDD");
+    const tomorrow = moment(payload.checkOutDate).format("YYYYMMDD");
     await axios
       .get(
-        `/api/hotel/${payload.hotelId}/${payload.checkInDate}/${payload.checkOutDate}/${payload.roomQty}`
+        `/api/hotel/${payload.hotelId}/${today}/${tomorrow}/${payload.roomQty}`
       )
       .then((res) => {
         console.log(res);
@@ -22,13 +24,14 @@ export default {
         console.log(err);
       });
   },
-  getDate(_, payload) {
+  getDate(context, payload) {
     axios
       .get(
         `/api/hotel/check-availability/${payload.hotelId}/${payload.firstDayOfCurrentMonth}/${payload.lastDayOfNextMonth}/${payload.roomQty}`
       )
       .then((res) => {
         console.log(res);
+        context.commit("UPDATE_DATES", res.data.items);
       })
       .catch((err) => {
         console.log(err);

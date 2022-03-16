@@ -14,7 +14,7 @@
             <el-rate
               disabled-void-color="#D1D1D1"
               :colors="colors"
-              v-model="value"
+              :model-value="+review.rating"
               disabled
             ></el-rate>
             <p>
@@ -96,7 +96,6 @@
 export default {
   data() {
     return {
-      value: "",
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
       isDialogOpen: false,
     };
@@ -113,11 +112,6 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
-  },
-  created() {
-    for (let review of this.selectedHotel.reviews) {
-      this.value = +review.rating;
-    }
   },
 };
 </script>

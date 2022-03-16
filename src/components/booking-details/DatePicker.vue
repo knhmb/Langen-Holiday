@@ -35,6 +35,7 @@ export default {
       firstDayOfCurrentMonth: "",
       lastDayOfNextMonth: "",
       availableDates: [],
+      isDateChanged: false,
       attrs: [
         {
           highlight: true,
@@ -88,8 +89,8 @@ export default {
   },
   methods: {
     monthChanged(page) {
-      // console.log("From");
-      // console.log(page);
+      console.log("From");
+      console.log(page);
       const currentDay = new Date(page.year, page.month - 1);
       console.log(currentDay);
       if (moment(currentDay).format("MM") === moment(new Date()).format("MM")) {
@@ -105,8 +106,17 @@ export default {
       }
     },
     toMonth(page) {
+      const date = new Date();
+      const currentDate = parseInt(moment(date).format("MM")) + 1;
+      console.log(currentDate);
+
+      if (!this.isDateChanged) {
+        console.log("Same Date");
+        return;
+      }
       console.log("To");
       console.log(page);
+
       const lastDay = new Date(page.year, page.month, 0);
       this.lastDayOfNextMonth = moment(lastDay).format("YYYYMMDD");
       console.log(this.lastDayOfNextMonth);
@@ -145,9 +155,12 @@ export default {
   },
   created() {
     for (let item of this.selectedHotel.availableDates) {
-      // console.log(moment(item.bookingDate).format("YYYY-MM-DD"));
       this.availableDates.push(moment(item.bookingDate).format("YYYY-MM-DD"));
     }
+    console.log(this.selectedHotel.availableDates);
+  },
+  mounted() {
+    this.isDateChanged = true;
   },
 };
 </script>

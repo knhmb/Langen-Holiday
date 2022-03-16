@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import moment from "moment";
+// import moment from "moment";
 
 export default {
   props: [
@@ -80,10 +80,12 @@ export default {
     selectHotel(id) {
       console.log(id);
       const date = new Date();
-      const today = moment(date).format("YYYYMMDD");
-      const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
-        "YYYYMMDD"
-      );
+      const today = date.setDate(date.getDate());
+      const tomorrow = date.setDate(date.getDate() + 1);
+      // const today = moment(date).format("YYYYMMDD");
+      // const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+      //   "YYYYMMDD"
+      // );
 
       const data = {
         hotelId: id,
@@ -91,6 +93,7 @@ export default {
         checkOutDate: tomorrow,
         roomQty: 1,
       };
+      console.log(data);
       this.$store.dispatch("booking/getHotel", data).then(() => {
         this.$router.push("/booking-details/" + id);
       });

@@ -7,11 +7,13 @@ import dashboardModule from "./modules/dashboard/index";
 import searchModule from "./modules/search/index";
 import bookingModule from "./modules/booking/index";
 
-import moment from "moment";
+// import moment from "moment";
 
 const date = new Date();
-const today = moment(date).format("YYYYMMDD");
-const tomorrow = moment(date.setDate(date.getDate() + 1)).format("YYYYMMDD");
+const today = date.setDate(date.getDate());
+const tomorrow = date.setDate(date.getDate() + 1);
+// const today = moment(date).format("YYYYMMDD");
+// const tomorrow = moment(date.setDate(date.getDate() + 1)).format("YYYYMMDD");
 
 const store = createStore({
   state() {
