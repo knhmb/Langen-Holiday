@@ -8,25 +8,25 @@ export default {
   methods: {
     increaseNumberOfPopulation() {
       this.numberOfLivingPopulation++;
-      this.checkboxChanged();
+      this.sortIsland();
     },
     decreaseNumberOfPopulation() {
       if (this.numberOfLivingPopulation <= 0) {
         return;
       }
       this.numberOfLivingPopulation--;
-      this.checkboxChanged();
+      this.sortIsland();
     },
     increaseRoom() {
       this.numberOfRooms++;
-      this.checkboxChanged();
+      this.sortIsland();
     },
     decreaseRoom() {
       if (this.numberOfRooms <= 0) {
         return;
       }
       this.numberOfRooms--;
-      this.checkboxChanged();
+      this.sortIsland();
     },
   },
 };

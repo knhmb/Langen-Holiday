@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   setThemes(context) {
     axios
-      .get("/api/codex?filter=codextypecode:HTLTHEME&sort=%2BdisplayOrder")
+      .get("/api/codex?filter=codextypecode:HTLTHEME&sort=+displayOrder")
       .then((res) => {
         // console.log(res);
         context.commit("SET_THEME", res.data.items);
@@ -14,7 +14,7 @@ export default {
   },
   setHeaderItems(context) {
     axios
-      .get("/api/codex?filter=codextypecode:HDRITEMCAT&sort=%2BdisplayOrder")
+      .get("/api/codex?filter=codextypecode:HDRITEMCAT&sort=+displayOrder")
       .then((res) => {
         // console.log(res);
         context.commit("SET_HEADER_ITEMS", res.data.items);
@@ -26,7 +26,7 @@ export default {
   setSubItemsCheung(context) {
     axios
       .get(
-        "/api/codex?filter=codextypecode%3AHDRITEMSUBCAT%2CparentCodexSlug%3Acheung-chau-island&sort=%2BdisplayOrder"
+        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:cheung-chau-island&sort=+displayOrder"
       )
       .then((res) => {
         context.commit("SET_SUB_ITEMS_CHEUNG", res.data.items);
@@ -38,7 +38,7 @@ export default {
   setSubItemsLantau(context) {
     axios
       .get(
-        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:lantau-island&sort=%2BdisplayOrder"
+        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:lantau-island&sort=+displayOrder"
       )
       .then((res) => {
         context.commit("SET_SUB_ITEMS_LANTAU", res.data.items);
@@ -50,7 +50,7 @@ export default {
   setSubItemsLamma(context) {
     axios
       .get(
-        "/api/codex?filter=codextypecode%3AHDRITEMSUBCAT%2CparentCodexSlug%3Alamma-island&sort=%2BdisplayOrder"
+        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:lamma-island&sort=+displayOrder"
       )
       .then((res) => {
         context.commit("SET_SUB_ITEMS_LAMMA", res.data.items);
@@ -62,7 +62,7 @@ export default {
   setSubItemsDayAndNight(context) {
     axios
       .get(
-        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:day-n-night-time&sort=%2BdisplayOrder"
+        "/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:day-n-night-time&sort=+displayOrder"
       )
       .then((res) => {
         context.commit("SET_SUB_ITEMS_DAY_NIGHT", res.data.items);
@@ -73,7 +73,7 @@ export default {
   },
   setDashboardBanner(context) {
     axios
-      .get("/api/codex?filter=codextypecode%3APROMOBANNER&sort=%2BdisplayOrder")
+      .get("/api/codex?filter=codextypecode:PROMOBANNER&sort=+displayOrder")
       .then((res) => {
         // console.log(res);
         context.commit("SET_DASHBOARD_BANNER", res.data.items);
@@ -84,7 +84,7 @@ export default {
   },
   setCheungBanner(context) {
     axios
-      .get("/api/codex?filter=slug%3Acheung-chau-island")
+      .get("/api/codex?filter=slug:cheung-chau-island")
       .then((res) => {
         context.commit("SET_CHEUNG_BANNER", res.data.items);
       })
@@ -94,7 +94,7 @@ export default {
   },
   setLantauBanner(context) {
     axios
-      .get("/api/codex?filter=slug%3Alantau-island")
+      .get("/api/codex?filter=slug:lantau-island")
       .then((res) => {
         context.commit("SET_LANTAU_BANNER", res.data.items);
       })
@@ -104,7 +104,7 @@ export default {
   },
   setLammaBanner(context) {
     axios
-      .get("/api/codex?filter=slug%3Alamma-island")
+      .get("/api/codex?filter=slug:lamma-island")
       .then((res) => {
         context.commit("SET_LAMMA_BANNER", res.data.items);
       })
@@ -114,7 +114,7 @@ export default {
   },
   setHotelBanner(context) {
     axios
-      .get("/api/codex?filter=slug%3Ahotel-recommendations")
+      .get("/api/codex?filter=slug:hotel-recommendations")
       .then((res) => {
         context.commit("SET_HOTEL_BANNER", res.data.items);
       })
@@ -124,7 +124,7 @@ export default {
   },
   setDayNightBanner(context) {
     axios
-      .get("/api/codex?filter=slug%3Aday-n-night-time")
+      .get("/api/codex?filter=slug:day-n-night-time")
       .then((res) => {
         context.commit("SET_DAYNIGHT_BANNER", res.data.items);
       })
@@ -178,7 +178,7 @@ export default {
         console.log(err);
       });
   },
-  sortSearch(_, payload) {
+  sortSearch(context, payload) {
     axios
       .get(
         `/api/hotel?search=${payload.theme}&filter=stayingDate:${
@@ -193,9 +193,9 @@ export default {
       )
       .then((res) => {
         console.log(res);
-        // context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
-        //   root: true,
-        // });
+        context.commit("search/SET_SEARCH_ITEMS", res.data.items, {
+          root: true,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -203,7 +203,7 @@ export default {
   },
   setRoomType(context) {
     axios
-      .get("/api/codex?filter=codextypecode%3AHTLRMTYPE&sort=%2BdisplayOrder")
+      .get("/api/codex?filter=codextypecode:HTLRMTYPE&sort=+displayOrder")
       .then((res) => {
         context.commit("SET_ROOM_TYPE", res.data.items);
       })
@@ -214,15 +214,11 @@ export default {
   filterHotel(context, payload) {
     axios
       .get(
-        `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${
+        `/api/hotel?filter=stayingDate:${payload.stayingDate},guestQty:${
           payload.guestQty
-        }%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${
-          payload.isHavePets
-        }%2C${
-          payload.location.length > 0 ? "location%3A" + payload.location : ""
-        }%2C${
-          payload.roomType.length > 0 ? "roomType%3A" + payload.roomType : ""
-        }`
+        },roomQty:${payload.roomQty},isHavePets:${payload.isHavePets},${
+          payload.location.length > 0 ? "location:" + payload.location : ""
+        },${payload.roomType.length > 0 ? "roomType:" + payload.roomType : ""}`
       )
       .then((res) => {
         console.log(res);
@@ -237,14 +233,12 @@ export default {
   filterTheme(context, payload) {
     axios
       .get(
-        `/api/hotel?filter=theme%3A${payload.theme}%2CstayingDate%3A${
+        `/api/hotel?filter=theme:${payload.theme},stayingDate:${
           payload.stayingDate
-        }%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${
-          payload.roomQty
-        }%2CisHavePets%3A${payload.isHavePets}${
-          payload.location.length > 0 ? "%2Clocation%3A" + payload.location : ""
-        }${
-          payload.roomType.length > 0 ? "%2CroomType%3A" + payload.roomType : ""
+        },guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${
+          payload.isHavePets
+        }${payload.location.length > 0 ? ",location:" + payload.location : ""}${
+          payload.roomType.length > 0 ? ",roomType:" + payload.roomType : ""
         }`
       )
       .then((res) => {
@@ -270,7 +264,7 @@ export default {
   },
   getTopPlaces(context) {
     axios
-      .get("/api/hotel?filter=topfive%3Atrue")
+      .get("/api/hotel?filter=topfive:true")
       .then((res) => {
         console.log(res);
         context.commit("GET_TOP_PLACES", res.data.items);
@@ -313,7 +307,15 @@ export default {
   sortHotel(context, payload) {
     axios
       .get(
-        `/api/hotel?filter=stayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
+        `/api/hotel?filter=stayingDate:${payload.stayingDate}${
+          payload.guestQty === 0 ? "" : ",guestQty:" + payload.guestQty
+        }${payload.roomQty === 0 ? "" : ",roomQty:" + payload.roomQty}${
+          payload.isHavePets === "false"
+            ? ""
+            : ",isHavePets:" + payload.isHavePets
+        }${payload.location.length > 0 ? ",location:" + payload.location : ""}${
+          payload.roomType.length > 0 ? ",roomType:" + payload.roomType : ""
+        }&sort=${payload.sort}`
       )
       .then((res) => {
         console.log(res);
@@ -328,7 +330,7 @@ export default {
   sortTheme(context, payload) {
     axios
       .get(
-        `/api/hotel?filter=theme%3A${payload.theme}%2CstayingDate%3A${payload.stayingDate}%2CguestQty%3A${payload.guestQty}%2CroomQty%3A${payload.roomQty}%2CisHavePets%3A${payload.isHavePets}%2Clocation%3A${payload.location}%2CroomType%3A${payload.roomType}&sort=${payload.sort}`
+        `/api/hotel?filter=theme:${payload.theme},stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets},location:${payload.location},roomType:${payload.roomType}&sort=${payload.sort}`
       )
       .then((res) => {
         console.log(res);
@@ -342,7 +344,7 @@ export default {
   },
   setLastLocation(context) {
     axios
-      .get("/api/codex?filter=codextypecode%3ARGN")
+      .get("/api/codex?filter=codextypecode:RGN")
       .then((res) => {
         console.log(res);
         context.commit("SET_LAST_LOCATION", res.data.items);

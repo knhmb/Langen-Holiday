@@ -90,7 +90,7 @@
               </el-row>
               <p>地點</p>
               <div class="location">
-                <el-checkbox-group v-model="location" @change="checkboxChanged">
+                <el-checkbox-group v-model="location" @change="sortIsland">
                   <template v-for="cheung in headerItems" :key="cheung">
                     <el-checkbox
                       v-if="cheung.slug === 'cheung-chau-island'"
@@ -112,7 +112,7 @@
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
-              <el-checkbox-group v-model="roomType" @change="checkboxChanged">
+              <el-checkbox-group v-model="roomType" @change="sortIsland">
                 <el-checkbox
                   v-for="room in roomTypes"
                   :key="room.id"
@@ -152,6 +152,7 @@ export default {
   data() {
     return {
       time: [],
+      recommendation: "",
       location: [],
       isSelected: "false",
       roomType: [],
@@ -191,7 +192,11 @@ export default {
   },
   watch: {
     range() {
-      this.checkboxChanged();
+      // this.checkboxChanged();
+      this.sortIsland();
+    },
+    recommendation() {
+      this.sortIsland();
     },
     // $route() {
     //   this.$store.dispatch("resetDate");
@@ -200,7 +205,7 @@ export default {
   methods: {
     setOption(option) {
       this.isSelected = option;
-      this.checkboxChanged();
+      this.sortIsland();
     },
     checkboxChanged() {
       let subItem = this.cheungChauIslandItems.filter((item) =>
@@ -228,6 +233,32 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
     applyRecommendation(value) {
+      this.recommendation = value;
+      // let subItem = this.cheungChauIslandItems.filter((item) =>
+      //   this.$route.path.split("/").includes(item.slug)
+      // );
+      // const data = {
+      //   stayingDate:
+      //     moment(this.range.start).format("YYYYMMDD") +
+      //     "|" +
+      //     moment(this.range.end).format("YYYYMMDD"),
+      //   guestQty: this.numberOfLivingPopulation,
+      //   roomQty: this.numberOfRooms,
+      //   isHavePets: this.isSelected,
+      //   location: this.location.toString().replaceAll(",", "|"),
+      //   roomType: this.roomType.toString().replaceAll(",", "|"),
+      //   sort: value === undefined ? "" : value,
+      //   slug:
+      //     subItem.length > 0
+      //       ? subItem[0].slug
+      //       : this.cheungChauIslandItems[0].parentCodexSlug,
+      // };
+      // console.log(data);
+      // // this.$store.dispatch("dashboard/sortHotel", data);
+      // this.$store.dispatch("search/sortIslandSearch", data);
+      // this.$store.dispatch("changeDate", this.range);
+    },
+    sortIsland() {
       let subItem = this.cheungChauIslandItems.filter((item) =>
         this.$route.path.split("/").includes(item.slug)
       );
@@ -241,7 +272,7 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
-        sort: value,
+        sort: this.recommendation === "" ? "" : this.recommendation,
         slug:
           subItem.length > 0
             ? subItem[0].slug
