@@ -183,6 +183,7 @@ export default {
   },
   created() {
     console.log(this.dummy[this.index + this.num]);
+    this.$store.commit("RESET_RESPONSES");
   },
 };
 </script>

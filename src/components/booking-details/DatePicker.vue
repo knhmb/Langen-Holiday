@@ -123,26 +123,25 @@ export default {
     },
   },
   watch: {
-    dateSelected() {
-      console.log("Date Changed");
-      console.log(this.dateSelected);
-      const selectedServices = Object.values(this.service);
-      const data = {
-        hotelId: this.selectedHotel.basicInfo.hotelId,
-        checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
-        checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
-        service: selectedServices.toString(),
-      };
-
-      if (
-        moment(this.dateSelected.start).format("YYYYMMDD") <
-        moment(this.dateSelected.end).format("YYYYMMDD")
-      ) {
-        console.log("End Date Comes Later");
-        console.log(data);
-        this.$store.dispatch("booking/changedService", data);
-      }
-    },
+    // dateSelected() {
+    //   console.log("Date Changed");
+    //   console.log(this.dateSelected);
+    //   const selectedServices = Object.values(this.service);
+    //   const data = {
+    //     hotelId: this.selectedHotel.basicInfo.hotelId,
+    //     checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
+    //     checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
+    //     service: selectedServices.toString(),
+    //   };
+    //   if (
+    //     moment(this.dateSelected.start).format("YYYYMMDD") <
+    //     moment(this.dateSelected.end).format("YYYYMMDD")
+    //   ) {
+    //     console.log("End Date Comes Later");
+    //     console.log(data);
+    //     this.$store.dispatch("booking/changedService", data);
+    //   }
+    // },
   },
   created() {
     for (let item of this.selectedHotel.availableDates) {

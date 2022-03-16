@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 export default {
   async getHotel(context, payload) {
@@ -39,14 +40,35 @@ export default {
       .get(
         `/api/hotel/enquire-price/${payload.hotelId}/${1}/${
           payload.checkInDate
-        }/${payload.checkOutDate}/${checkService}`
+        }/${payload.checkOutDate}${
+          checkService === "" ? "" : "/" + checkService
+        }`
       )
       .then((res) => {
         console.log(res);
         context.commit("UPDATE_HOTEL", res.data.item);
       })
       .catch((err) => {
+        const date = new Date();
+        const today = moment(date).format("YYYYMMDD");
+        const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+          "YYYYMMDD"
+        );
         console.log(err);
+        if (err.response.data.statusCode === 400) {
+          axios
+            .get(
+              `/api/hotel/enquire-price/${
+                payload.hotelId
+              }/${1}/${today}/${tomorrow}${
+                checkService === "" ? "" : "/" + checkService
+              }`
+            )
+            .then((res) => {
+              console.log("Second API Call");
+              context.commit("UPDATE_HOTEL", res.data.item);
+            });
+        }
       });
   },
 };

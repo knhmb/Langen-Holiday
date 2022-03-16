@@ -10,7 +10,7 @@ import bookingModule from "./modules/booking/index";
 import moment from "moment";
 
 const date = new Date();
-// const today = moment(date).format("YYYYMMDD");
+const today = moment(date).format("YYYYMMDD");
 const tomorrow = moment(date.setDate(date.getDate() + 1)).format("YYYYMMDD");
 
 const store = createStore({
@@ -18,7 +18,7 @@ const store = createStore({
     return {
       headerVisible: true,
       dateSelected: {
-        start: new Date(),
+        start: today,
         end: tomorrow,
       },
       responses: {},

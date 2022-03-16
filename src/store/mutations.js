@@ -34,4 +34,7 @@ export default {
   DECREASE_ROOMS(state) {
     state.numberOfRooms--;
   },
+  RESET_RESPONSES(state) {
+    state.responses = {};
+  },
 };

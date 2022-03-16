@@ -142,9 +142,31 @@ export default {
         end: moment(this.endDate).format("YYYYMMDD"),
       };
       this.$store.dispatch("changeDate", data);
+      const selectedServices = Object.values(this.responses);
+      // console.log(selectedServices);
+
+      const serviceData = {
+        hotelId: this.selectedHotel.basicInfo.hotelId,
+        checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
+        checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
+        service: selectedServices.toString(),
+      };
+      console.log(serviceData);
+      if (
+        moment(this.dateSelected.start).format("YYYYMMDD") <
+        moment(this.dateSelected.end).format("YYYYMMDD")
+      ) {
+        console.log("End Date Comes Later");
+        console.log(data);
+        this.$store.dispatch("booking/changedService", serviceData);
+      }
+      // this.$store.dispatch("booking/changedService", serviceData);
     },
   },
   computed: {
+    responses() {
+      return this.$store.getters.responses;
+    },
     dateSelected() {
       return this.$store.getters.dateSelected;
     },
