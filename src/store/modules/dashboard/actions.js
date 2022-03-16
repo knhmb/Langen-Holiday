@@ -185,11 +185,15 @@ export default {
           payload.stayingDate
         }${payload.guestQty === 0 ? "" : ",guestQty:" + payload.guestQty}${
           payload.roomQty === 0 ? "" : ",roomQty:" + payload.roomQty
-        },${
+        }${
           payload.isHavePets === "false"
             ? ""
             : ",isHavePets:" + payload.isHavePets
-        }&sort=${payload.sort}&page=xx&pagesize=xxx`
+        }${payload.location.length > 0 ? ",location:" + payload.location : ""}${
+          payload.roomType.length > 0 ? ",roomType:" + payload.roomType : ""
+        }${
+          payload.sort === "" ? "" : "&sort=" + payload.sort
+        }&page=xx&pagesize=xxx`
       )
       .then((res) => {
         console.log(res);
@@ -315,7 +319,7 @@ export default {
             : ",isHavePets:" + payload.isHavePets
         }${payload.location.length > 0 ? ",location:" + payload.location : ""}${
           payload.roomType.length > 0 ? ",roomType:" + payload.roomType : ""
-        }&sort=${payload.sort}`
+        }${payload.sort === "" ? "" : "&sort=" + payload.sort}`
       )
       .then((res) => {
         console.log(res);
@@ -330,7 +334,17 @@ export default {
   sortTheme(context, payload) {
     axios
       .get(
-        `/api/hotel?filter=theme:${payload.theme},stayingDate:${payload.stayingDate},guestQty:${payload.guestQty},roomQty:${payload.roomQty},isHavePets:${payload.isHavePets},location:${payload.location},roomType:${payload.roomType}&sort=${payload.sort}`
+        `/api/hotel?filter=theme:${payload.theme},stayingDate:${
+          payload.stayingDate
+        }${payload.guestQty === 0 ? "" : ",guestQty:" + payload.guestQty}${
+          payload.roomQty === 0 ? "" : ",roomQty:" + payload.roomQty
+        }${
+          payload.isHavePets === "false"
+            ? ""
+            : ",isHavePets:" + payload.isHavePets
+        }${payload.location.length > 0 ? ",location:" + payload.location : ""}${
+          payload.roomType.length > 0 ? ",roomType:" + payload.roomType : ""
+        }${payload.sort === "" ? "" : "&sort=" + payload.sort}`
       )
       .then((res) => {
         console.log(res);

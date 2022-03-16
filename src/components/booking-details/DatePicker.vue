@@ -11,6 +11,12 @@
     ref="calendar"
     @update:fromPage="monthChanged"
     @update:toPage="toMonth"
+    :disabled-dates="[
+      {
+        start: null,
+        end: null,
+      },
+    ]"
   >
   </date-picker>
 </template>
@@ -89,10 +95,14 @@ export default {
   },
   methods: {
     monthChanged(page) {
-      console.log("From");
-      console.log(page);
+      if (!this.isDateChanged) {
+        console.log("Same Date");
+        return;
+      }
+      // console.log("From");
+      // console.log(page);
       const currentDay = new Date(page.year, page.month - 1);
-      console.log(currentDay);
+      // console.log(currentDay);
       if (moment(currentDay).format("MM") === moment(new Date()).format("MM")) {
         this.firstDayOfCurrentMonth = moment(new Date()).format("YYYYMMDD");
         // console.log(this.firstDayOfCurrentMonth);
@@ -106,16 +116,17 @@ export default {
       }
     },
     toMonth(page) {
-      const date = new Date();
-      const currentDate = parseInt(moment(date).format("MM")) + 1;
-      console.log(currentDate);
-
       if (!this.isDateChanged) {
         console.log("Same Date");
         return;
       }
-      console.log("To");
-      console.log(page);
+
+      // const date = new Date();
+      // const currentDate = parseInt(moment(date).format("MM")) + 1;
+      // console.log(currentDate);
+
+      // console.log("To");
+      // console.log(page);
 
       const lastDay = new Date(page.year, page.month, 0);
       this.lastDayOfNextMonth = moment(lastDay).format("YYYYMMDD");

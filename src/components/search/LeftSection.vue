@@ -99,7 +99,7 @@
           </el-checkbox-group> -->
           <p>地點</p>
           <div class="location">
-            <el-checkbox-group v-model="location" @change="checkboxChanged">
+            <el-checkbox-group v-model="location" @change="sort">
               <template v-for="cheung in headerItems" :key="cheung">
                 <el-checkbox
                   v-if="cheung.slug === 'cheung-chau-island'"
@@ -121,7 +121,7 @@
             </el-checkbox-group>
           </div>
           <div class="location">
-            <el-checkbox-group v-model="location" @change="checkboxChanged">
+            <el-checkbox-group v-model="location" @change="sort">
               <template v-for="lantau in headerItems" :key="lantau.id">
                 <el-checkbox
                   v-if="lantau.slug === 'lantau-island'"
@@ -141,7 +141,7 @@
             </el-checkbox-group>
           </div>
           <div class="location">
-            <el-checkbox-group v-model="location" @change="checkboxChanged">
+            <el-checkbox-group v-model="location" @change="sort">
               <template v-for="lamma in headerItems" :key="lamma.id">
                 <el-checkbox
                   v-if="lamma.slug === 'lamma-island'"
@@ -161,14 +161,14 @@
             </el-checkbox-group>
           </div>
           <div class="location un-bordered">
-            <el-checkbox-group v-model="location" @change="checkboxChanged">
+            <el-checkbox-group v-model="location" @change="sort">
               <el-checkbox label="hong-kong-island">港島區</el-checkbox>
               <el-checkbox label="kowloon">九龍區</el-checkbox>
               <el-checkbox label="new-territories">新界區</el-checkbox>
             </el-checkbox-group>
           </div>
           <p>房間類型</p>
-          <el-checkbox-group v-model="roomType" @change="checkboxChanged">
+          <el-checkbox-group v-model="roomType" @change="sort">
             <el-checkbox
               v-for="room in roomTypes"
               :key="room.id"
@@ -205,10 +205,8 @@ export default {
     return {
       time: [],
       location: [],
-      // isSelected: "false",
       roomType: [],
-      // numberOfLivingPopulation: 0,
-      // numberOfRooms: 0,
+      recommendation: "",
       range: {
         start: moment(new Date()).format("YYYY-MM-DD").replaceAll("-", ""),
         end: moment(new Date().setDate(new Date().getDate() + 1))
@@ -261,19 +259,22 @@ export default {
   },
   watch: {
     dateSelected() {
-      this.checkboxChanged();
+      this.sort();
+    },
+    recommendation() {
+      this.sort();
     },
   },
   methods: {
     setOption(option) {
       // this.isSelected = option;
       this.$store.dispatch("setIsHavePets", option);
-      this.checkboxChanged();
+      this.sort();
     },
     increaseNumberOfPopulation() {
       this.$store.dispatch("increasePopulation");
       // this.numberOfLivingPopulation++;
-      this.checkboxChanged();
+      this.sort();
     },
     decreaseNumberOfPopulation() {
       if (this.numberOfLivingPopulation <= 0) {
@@ -281,12 +282,12 @@ export default {
       }
       // this.numberOfLivingPopulation--;
       this.$store.dispatch("decreasePopulation");
-      this.checkboxChanged();
+      this.sort();
     },
     increaseRoom() {
       // this.numberOfRooms++;
       this.$store.dispatch("increaseRooms");
-      this.checkboxChanged();
+      this.sort();
     },
     decreaseRoom() {
       if (this.numberOfRooms <= 0) {
@@ -294,7 +295,7 @@ export default {
       }
       // this.numberOfRooms--;
       this.$store.dispatch("decreaseRooms");
-      this.checkboxChanged();
+      this.sort();
     },
     checkboxChanged() {
       let currentTheme = "";
@@ -334,6 +335,44 @@ export default {
       }
     },
     applyRecommendation(value) {
+      this.recommendation = value;
+      // let currentTheme = this.themes.filter((theme) => {
+      //   return theme.slug === this.$route.query.q;
+      // });
+      // const data = {
+      //   stayingDate:
+      //     moment(this.dateSelected.start).format("YYYYMMDD") +
+      //     "|" +
+      //     moment(this.dateSelected.end).format("YYYYMMDD"),
+      //   guestQty: this.numberOfLivingPopulation,
+      //   roomQty: this.numberOfRooms,
+      //   isHavePets: this.isSelected,
+      //   location: this.location.toString().replaceAll(",", "|"),
+      //   roomType: this.roomType.toString().replaceAll(",", "|"),
+      //   sort: value,
+      //   theme:
+      //     currentTheme.length > 0
+      //       ? currentTheme[0].slug
+      //       : Object.keys(this.$route.query).length > 0
+      //       ? this.$route.query.q
+      //       : "",
+      // };
+      // console.log(data);
+      // if (
+      //   currentTheme.length > 0 &&
+      //   currentTheme[0].slug === this.$route.query.q
+      // ) {
+      //   this.$store.dispatch("dashboard/sortTheme", data);
+      // } else if (Object.keys(this.$route.query).length > 0) {
+      //   console.log("Not empty Query");
+      //   this.$store.dispatch("dashboard/sortSearch", data);
+      // } else {
+      //   this.$store.dispatch("dashboard/sortHotel", data);
+      //   console.log("reached");
+      // }
+      // this.$store.dispatch("dashboard/sortHotel", data);
+    },
+    sort() {
       let currentTheme = this.themes.filter((theme) => {
         return theme.slug === this.$route.query.q;
       });
@@ -347,7 +386,7 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
-        sort: value,
+        sort: this.recommendation === "" ? "" : this.recommendation,
         theme:
           currentTheme.length > 0
             ? currentTheme[0].slug
@@ -368,11 +407,12 @@ export default {
         this.$store.dispatch("dashboard/sortHotel", data);
         console.log("reached");
       }
-      // this.$store.dispatch("dashboard/sortHotel", data);
     },
   },
   created() {
     this.$store.dispatch("dashboard/setRoomType");
+    this.$store.dispatch("resetDate");
+    this.$store.dispatch("resetIsHavePets");
   },
 };
 </script>

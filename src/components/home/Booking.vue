@@ -179,6 +179,7 @@
 
 <script>
 import DatePicker from "./DatePicker.vue";
+import moment from "moment";
 
 export default {
   components: {
@@ -245,7 +246,10 @@ export default {
     submitHotelSearch() {
       const data = {
         search: this.searchHotel.replaceAll(" ", "-"),
-        stayingDate: this.dateSelected.start + "|" + this.dateSelected.end,
+        stayingDate:
+          moment(this.dateSelected.start).format("YYYYMMDD") +
+          "|" +
+          moment(this.dateSelected.end).format("YYYYMMDD"),
         guestQty: this.numberOfLivingPopulation,
         roomQty: this.numberOfRooms,
         isHavePets: this.isSelected,
