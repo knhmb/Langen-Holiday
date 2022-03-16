@@ -2,6 +2,7 @@
   <div class="bottom-header">
     <el-row>
       <el-col :sm="24" :lg="22">
+        <!-- ================================================ SMALL SCREENS ======================================================== -->
         <el-menu
           text-color="#8d8d8d"
           active-text-color="#8d8d8d"
@@ -115,37 +116,82 @@
             :class="{ 'my-active': isActive === 8 }"
             class="edit-profile-menu"
             index="6"
-            @click="closeDropdown"
           >
             <template #title>會員中心</template>
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
               @click="profileNavigation('personal-information')"
               index="6-1"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/personal-information'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/personal-information'
+                    ? 'bold'
+                    : 'normal',
+              }"
               >個人資料</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
               @click="profileNavigation('change-password')"
               index="6-2"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/change-password'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/change-password'
+                    ? 'bold'
+                    : 'normal',
+              }"
               >修改密碼</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
               @click="profileNavigation('places')"
               index="6-3"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/places' ? 'black' : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/places' ? 'bold' : 'normal',
+              }"
               >我的收藏</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
               @click="profileNavigation('evaluation-record')"
               index="6-4"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/evaluation-record'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/evaluation-record'
+                    ? 'bold'
+                    : 'normal',
+              }"
               >評價記錄</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
               @click="profileNavigation('appointment-record')"
               index="6-5"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/appointment-record'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/appointment-record'
+                    ? 'bold'
+                    : 'normal',
+              }"
               >預約記錄</el-menu-item
             >
             <el-menu-item
@@ -156,121 +202,6 @@
             >
           </el-sub-menu>
         </el-menu>
-        <!-- ================================================ SMALL SCREENS ======================================================== -->
-        <!-- <el-menu
-          text-color="#8d8d8d"
-          active-text-color="#8d8d8d"
-          unique-opened
-          :ellipsis="true"
-          menu-trigger="click"
-          class="el-menu-demo hidden-lg-and-up"
-          mode="horizontal"
-        >
-          <template v-for="item in headerItems" :key="item.id">
-            <el-sub-menu
-              v-if="item.slug !== 'hotel-recommendations'"
-              :index="item.displayOrder"
-              @click="closeDropdown()"
-            >
-              <template #title>{{ item.name }}</template>
-              <template v-if="item.slug === 'cheung-chau-island'">
-                <el-menu-item
-                  v-for="cheung in cheungChauIslandItems"
-                  :key="cheung.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
-                  @click="selectedSubMenu(4)"
-                  :index="item.id + ' - ' + cheung.displayOrder"
-                  >{{ cheung.name }}</el-menu-item
-                >
-              </template>
-              <template v-else-if="item.slug === 'lantau-island'">
-                <el-menu-item
-                  v-for="launtau in lantauIslandItems"
-                  :key="launtau.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(8)"
-                  :index="item.id + ' - ' + launtau.displayOrder"
-                  >{{ launtau.name }}</el-menu-item
-                >
-              </template>
-              <template v-else-if="item.slug === 'lamma-island'">
-                <el-menu-item
-                  v-for="lamma in lammaIslandItems"
-                  :key="lamma.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(14)"
-                  :index="item.id + ' - ' + lamma.displayOrder"
-                  >{{ lamma.name }}</el-menu-item
-                >
-              </template>
-              <template v-else-if="item.slug === 'day-n-night-time'">
-                <el-menu-item
-                  v-for="day in dayNightItems"
-                  :key="day.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="selectedSubMenu(17)"
-                  :index="item.id + ' - ' + day.displayOrder"
-                  >{{ day.name }}</el-menu-item
-                >
-              </template>
-            </el-sub-menu>
-            <el-menu-item
-              @click="
-                selectedSubMenu(19);
-                closeDropdown();
-              "
-              :class="{ 'my-active': isActive === 7 }"
-              v-if="item.slug === 'hotel-recommendations'"
-              :index="item.id"
-              >{{ item.name }}</el-menu-item
-            >
-          </template>
-          <el-sub-menu
-            v-if="loggedIn"
-            :class="{ 'my-active': isActive === 8 }"
-            class="edit-profile-menu"
-            index="6"
-            @click="closeDropdown"
-          >
-            <template #title>會員中心</template>
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
-              @click="$router.push({ name: 'personal-information' })"
-              index="6-1"
-              >個人資料</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
-              @click="$router.push({ name: 'change-password' })"
-              index="6-2"
-              >修改密碼</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
-              @click="$router.push({ name: 'places' })"
-              index="6-3"
-              >我的收藏</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
-              @click="$router.push({ name: 'evaluation-record' })"
-              index="6-4"
-              >評價記錄</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
-              @click="$router.push({ name: 'appointment-record' })"
-              index="6-5"
-              >預約記錄</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
-              @click="logout"
-              index="6-6"
-              >登出</el-menu-item
-            >
-          </el-sub-menu>
-        </el-menu> -->
 
         <!-- ================================================ LARGE SCREENS ======================================================== -->
 
