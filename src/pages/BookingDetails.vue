@@ -38,6 +38,9 @@ export default {
     ReadMore,
     Comment,
   },
+  created() {
+    this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
+  },
   // computed: {
   //   dateSelected() {
   //     return this.$store.getters.dateSelected;

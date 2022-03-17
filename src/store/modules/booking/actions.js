@@ -84,4 +84,13 @@ export default {
         }
       });
   },
+  updateChildren(context, payload) {
+    context.commit("UPDATE_CHILDREN", payload);
+  },
+  updateAdults(context, payload) {
+    context.commit("UPDATE_ADULTS", payload);
+  },
+  storeChildrenAge(context, payload) {
+    context.commit("STORE_CHILDREN_AGE", payload);
+  },
 };

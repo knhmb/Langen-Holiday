@@ -11,6 +11,7 @@
             color="orange"
             is-range
             v-model="dateSelected"
+            @click="dateChanged"
           />
           <!-- <el-row>
             <el-col :span="12">
@@ -206,6 +207,7 @@ export default {
       time: [],
       location: [],
       roomType: [],
+      isDateChanged: false,
       recommendation: "",
       range: {
         start: moment(new Date()).format("YYYY-MM-DD").replaceAll("-", ""),
@@ -259,6 +261,9 @@ export default {
   },
   watch: {
     dateSelected() {
+      if (!this.isDateChanged) {
+        return;
+      }
       this.sort();
     },
     recommendation() {
@@ -266,6 +271,13 @@ export default {
     },
   },
   methods: {
+    dateChanged() {
+      if (this.isDateChanged) {
+        return;
+      }
+      this.isDateChanged = true;
+      console.log("changed");
+    },
     setOption(option) {
       // this.isSelected = option;
       this.$store.dispatch("setIsHavePets", option);

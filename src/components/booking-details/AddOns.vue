@@ -121,6 +121,7 @@
 import moment from "moment";
 
 export default {
+  props: ["childAge"],
   data() {
     return {
       services: [],
@@ -181,6 +182,7 @@ export default {
       this.$store.dispatch("booking/changedService", data);
     },
     book() {
+      this.$store.dispatch("booking/storeChildrenAge", this.childAge);
       this.$router.push({
         name: "reservation",
         params: { id: this.$route.params.id },

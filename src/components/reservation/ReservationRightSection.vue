@@ -12,15 +12,21 @@
               <p class="info">人數:</p>
             </el-col>
             <el-col :span="16">
-              <p class="data">2位成人 + 3位兒童</p>
+              <p class="data">
+                {{ numberOfAdults }}位成人 + {{ numberOfChildren }}位兒童
+              </p>
             </el-col>
-            <el-col :span="8">
-              <p class="info">兒童1年齡:</p>
-            </el-col>
-            <el-col :span="16">
-              <p class="data">8</p>
-            </el-col>
-            <el-col :span="8">
+            <template v-for="(age, key) in childrenAge[0]" :key="age">
+              <el-col :span="8">
+                <!-- <p class="info">兒童1年齡:</p> -->
+                <p class="info">{{ key }}</p>
+              </el-col>
+              <el-col :span="16">
+                <!-- <p class="data">8</p> -->
+                <p class="data">{{ age }}</p>
+              </el-col>
+            </template>
+            <!-- <el-col :span="8">
               <p class="info">兒童2年齡:</p>
             </el-col>
             <el-col :span="16">
@@ -31,7 +37,7 @@
             </el-col>
             <el-col :span="16">
               <p class="data">10</p>
-            </el-col>
+            </el-col> -->
             <el-col :span="8">
               <p class="info">寵物:</p>
             </el-col>
@@ -131,6 +137,15 @@ export default {
   computed: {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+    numberOfChildren() {
+      return this.$store.getters["booking/numberOfChildren"];
+    },
+    numberOfAdults() {
+      return this.$store.getters["booking/numberOfAdults"];
+    },
+    childrenAge() {
+      return this.$store.getters["booking/childrenAge"];
     },
   },
 };

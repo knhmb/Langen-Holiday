@@ -7,6 +7,9 @@ export default {
   state() {
     return {
       selectedHotel: [],
+      numberOfChildren: "",
+      numberOfAdults: "",
+      childrenAge: [],
     };
   },
   getters,

@@ -92,12 +92,25 @@
             </el-option>
           </el-select>
         </el-col>
-        <el-col v-for="child in numberOfChildren" :key="child" :span="12">
+        <el-col
+          v-for="(child, index) in numberOfChildren"
+          :key="child"
+          :span="12"
+        >
           <label class="date-delivery" style="display: block"
             >兒童{{ child }} 年齡</label
           >
-          <el-select class="m-2" placeholder="8">
-            <el-option></el-option>
+          <el-select
+            v-model="childAge['兒童' + (index + 1) + '年齡']"
+            class="m-2"
+            placeholder="8"
+          >
+            <el-option
+              v-for="num in 10"
+              :key="num"
+              :value="num"
+              :label="num"
+            ></el-option>
           </el-select>
         </el-col>
       </el-row>
@@ -107,7 +120,7 @@
         </el-col>
       </el-row>
     </div>
-    <add-ons></add-ons>
+    <add-ons :child-age="childAge"></add-ons>
   </el-card>
 </template>
 
@@ -124,9 +137,10 @@ export default {
   data() {
     return {
       isChangedDate: false,
-      numberOfAdults: null,
-      numberOfChildren: null,
+      // numberOfAdults: null,
+      // numberOfChildren: null,
       dateDifference: "",
+      childAge: {},
       date: new Date(),
       dummyDate: "",
       startDate: "",
@@ -214,6 +228,22 @@ export default {
     // },
   },
   computed: {
+    numberOfChildren: {
+      get() {
+        return this.$store.getters["booking/numberOfChildren"];
+      },
+      set(value) {
+        this.$store.dispatch("booking/updateChildren", value);
+      },
+    },
+    numberOfAdults: {
+      get() {
+        return this.$store.getters["booking/numberOfAdults"];
+      },
+      set(value) {
+        this.$store.dispatch("booking/updateAdults", value);
+      },
+    },
     responses() {
       return this.$store.getters.responses;
     },
