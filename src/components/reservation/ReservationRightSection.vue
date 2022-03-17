@@ -19,11 +19,11 @@
             <template v-for="(age, key) in childrenAge[0]" :key="age">
               <el-col :span="8">
                 <!-- <p class="info">兒童1年齡:</p> -->
-                <p class="info">{{ key }}</p>
+                <p class="info">{{ childrenAge.length > 0 ? key : "" }}</p>
               </el-col>
               <el-col :span="16">
                 <!-- <p class="data">8</p> -->
-                <p class="data">{{ age }}</p>
+                <p class="data">{{ childrenAge.length > 0 ? age : "" }}</p>
               </el-col>
             </template>
             <!-- <el-col :span="8">
@@ -48,7 +48,8 @@
               <p class="info">入住日期:</p>
             </el-col>
             <el-col :span="16">
-              <p class="data">2021年5月22日 - 2021年5月23日</p>
+              <p class="data">{{ checkInDate }} - {{ checkOutDate }}</p>
+              <!-- <p class="data">2021年5月22日 - 2021年5月23日</p> -->
             </el-col>
           </el-row>
         </div>
@@ -58,7 +59,7 @@
               <p class="info">原價:</p>
             </el-col>
             <el-col :span="16">
-              <p class="data">HK$1280.00</p>
+              <p class="data">HK${{ selectedHotel.priceOfSelectedDate }}.00</p>
             </el-col>
             <el-col :span="8">
               <p class="info">折扣:</p>
@@ -133,8 +134,19 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   computed: {
+    responses: {
+      get() {
+        return this.$store.getters.responses;
+      },
+      set(value) {
+        this.$store.dispatch("changeService", value);
+        console.log(value);
+      },
+    },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
     },
@@ -146,6 +158,15 @@ export default {
     },
     childrenAge() {
       return this.$store.getters["booking/childrenAge"];
+    },
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
+    checkInDate() {
+      return moment(this.dateSelected.start).locale("zh-cn").format("ll");
+    },
+    checkOutDate() {
+      return moment(this.dateSelected.end).locale("zh-cn").format("ll");
     },
   },
 };
