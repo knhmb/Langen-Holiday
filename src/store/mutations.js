@@ -7,6 +7,7 @@ export default {
   },
   CHANGE_DATE(state, payload) {
     state.dateSelected = payload;
+    console.log(state.dateSelected);
   },
   CHANGE_SERVICE(state, payload) {
     state.responses = payload;

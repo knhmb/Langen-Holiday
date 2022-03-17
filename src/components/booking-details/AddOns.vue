@@ -111,7 +111,7 @@
         >HK${{ selectedHotel.totalPrice }}.00</el-col
       >
       <el-col class="btn-alignment">
-        <el-button>預訂</el-button>
+        <el-button @click="book">預訂</el-button>
       </el-col>
     </el-row>
   </div>
@@ -179,6 +179,12 @@ export default {
       };
       console.log(data);
       this.$store.dispatch("booking/changedService", data);
+    },
+    book() {
+      this.$router.push({
+        name: "reservation",
+        params: { id: this.$route.params.id },
+      });
     },
   },
   created() {

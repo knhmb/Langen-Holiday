@@ -70,6 +70,16 @@ export default {
             .then((res) => {
               console.log("Second API Call");
               context.commit("UPDATE_HOTEL", res.data.item);
+              console.log(moment(date.setDate(date.getDate() - 1)));
+              console.log(moment(date.setDate(date.getDate() + 1)));
+              context.commit(
+                "CHANGE_DATE",
+                {
+                  start: date.setDate(date.getDate() - 1),
+                  end: date.setDate(date.getDate() + 1),
+                },
+                { root: true }
+              );
             });
         }
       });

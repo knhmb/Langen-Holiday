@@ -5,7 +5,6 @@
     :is-expanded="layout.isExpanded"
     color="orange"
     :model-config="modelConfig"
-    v-model="dateSelected"
     :attributes="attributes"
     is-range
     ref="calendar"
@@ -41,6 +40,7 @@ export default {
       firstDayOfCurrentMonth: "",
       lastDayOfNextMonth: "",
       availableDates: [],
+      modifiedDate: "",
       isDateChanged: false,
       attrs: [
         {
@@ -145,6 +145,11 @@ export default {
   },
   watch: {
     // dateSelected() {
+    //   console.log("updated");
+    //   this.modifiedDate = this.dateSelected;
+    //   console.log(this.modifiedDate);
+    // },
+    // dateSelected() {
     //   console.log("Date Changed");
     //   console.log(this.dateSelected);
     //   const selectedServices = Object.values(this.service);
@@ -169,6 +174,7 @@ export default {
       this.availableDates.push(moment(item.bookingDate).format("YYYY-MM-DD"));
     }
     console.log(this.selectedHotel.availableDates);
+    this.modifiedDate = this.dateSelected;
   },
   mounted() {
     this.isDateChanged = true;

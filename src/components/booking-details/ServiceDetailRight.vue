@@ -20,7 +20,7 @@
             locale="zh-cn"
             :masks="masks"
             class="inline-block h-full"
-            v-model="dateSelected.start"
+            v-model="startDate"
           >
             <template v-slot="{ inputValue, togglePopover }">
               <div class="flex items-center">
@@ -43,7 +43,8 @@
             locale="zh-cn"
             :masks="masks"
             class="inline-block h-full"
-            v-model="dateSelected.end"
+            v-model="endDate"
+            @click="isChangedDate = true"
           >
             <template v-slot="{ inputValue, togglePopover }">
               <div class="flex items-center">
@@ -58,7 +59,9 @@
           </v-date-picker>
         </el-col>
         <el-col class="my-btn" :span="4">
-          <el-button class="small-btn">1晚</el-button>
+          <el-button class="small-btn"
+            >{{ dateDifference === "" ? "1" : dateDifference }}晚</el-button
+          >
         </el-col>
       </el-row>
       <el-row :gutter="20">
@@ -120,11 +123,16 @@ export default {
   },
   data() {
     return {
+      isChangedDate: false,
       numberOfAdults: null,
       numberOfChildren: null,
+      dateDifference: "",
       date: new Date(),
-      startDate: new Date(),
-      endDate: new Date().setDate(new Date().getDate() + 1),
+      dummyDate: "",
+      startDate: "",
+      endDate: "",
+      // startDate: new Date(),
+      // endDate: new Date().setDate(new Date().getDate() + 1),
       masks: {
         input: "YYYY年M月DD日 WWW",
       },
@@ -134,31 +142,39 @@ export default {
     };
   },
   watch: {
-    // startDate() {
-    //   const data = {
-    //     start: moment(this.startDate).format('YYYYMMDD'),
-    //     end: moment(this.endDate).format('YYYYMMDD')
-    //   }
-    // },
+    dateSelected() {
+      console.log("KKKHSDKFSDKHFKSDHFKSHF");
+      this.startDate = this.dateSelected.start;
+      this.endDate = this.dateSelected.end;
+      this.isChangedDate = false;
+    },
     endDate() {
+      if (!this.isChangedDate) {
+        return;
+      }
+      console.log("reached changed date");
       const data = {
-        start: moment(this.startDate).format("YYYYMMDD"),
-        end: moment(this.endDate).format("YYYYMMDD"),
+        start: this.startDate,
+        end: this.endDate,
       };
+      // const data = {
+      //   start: moment(this.startDate).format("YYYYMMDD"),
+      //   end: moment(this.endDate).format("YYYYMMDD"),
+      // };
       this.$store.dispatch("changeDate", data);
       const selectedServices = Object.values(this.responses);
       // console.log(selectedServices);
 
       const serviceData = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
-        checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
-        checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
+        checkInDate: moment(this.startDate).format("YYYYMMDD"),
+        checkOutDate: moment(this.endDate).format("YYYYMMDD"),
         service: selectedServices.toString(),
       };
       console.log(serviceData);
       if (
-        moment(this.dateSelected.start).format("YYYYMMDD") <
-        moment(this.dateSelected.end).format("YYYYMMDD")
+        moment(this.startDate).format("YYYYMMDD") <
+        moment(this.endDate).format("YYYYMMDD")
       ) {
         console.log("End Date Comes Later");
         console.log(data);
@@ -166,6 +182,36 @@ export default {
       }
       // this.$store.dispatch("booking/changedService", serviceData);
     },
+    // dateSelected() {
+    //   this.assignDateDifference();
+    // },
+    // dateSelected() {
+    //   console.log("reached changed date");
+    //   const data = {
+    //     start: moment(this.startDate).format("YYYYMMDD"),
+    //     end: moment(this.endDate).format("YYYYMMDD"),
+    //   };
+    //   this.$store.dispatch("changeDate", data);
+    //   const selectedServices = Object.values(this.responses);
+    //   // console.log(selectedServices);
+
+    //   const serviceData = {
+    //     hotelId: this.selectedHotel.basicInfo.hotelId,
+    //     checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
+    //     checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
+    //     service: selectedServices.toString(),
+    //   };
+    //   console.log(serviceData);
+    //   if (
+    //     moment(this.dateSelected.start).format("YYYYMMDD") <
+    //     moment(this.dateSelected.end).format("YYYYMMDD")
+    //   ) {
+    //     console.log("End Date Comes Later");
+    //     console.log(data);
+    //     this.$store.dispatch("booking/changedService", serviceData);
+    //   }
+    //   // this.$store.dispatch("booking/changedService", serviceData);
+    // },
   },
   computed: {
     responses() {
@@ -194,10 +240,25 @@ export default {
     dummy() {
       console.log("clicked");
     },
+    assignDateDifference() {
+      console.log("executed");
+      if (this.dateSelected) {
+        let startDate = moment(this.dateSelected.start);
+        let endDate = moment(this.dateSelected.end);
+        let duration = moment.duration(endDate.diff(startDate));
+        let days = duration.asDays();
+        this.dateDifference = Math.round(days);
+      }
+    },
   },
   created() {
     // this.startDate = this.dateSelected.start;
     // console.log(this.startDate);
+    this.startDate = this.dateSelected.start;
+    this.endDate = this.dateSelected.end;
+  },
+  mounted() {
+    this.isChangedDate = true;
   },
 };
 </script>

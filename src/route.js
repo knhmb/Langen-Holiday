@@ -36,7 +36,7 @@ const router = createRouter({
     { path: "/home", component: Home },
     { path: "/search", component: Search, name: "search" },
     { path: "/booking-details/:id", component: BookingDetails },
-    { path: "/reservation", component: Reservation },
+    { path: "/reservation/:id", component: Reservation, name: "reservation" },
     { path: "/terms-and-conditions", component: TermsAndConditions },
     { path: "/payment", component: Payment },
     { path: "/contact-us", component: ContactUs },

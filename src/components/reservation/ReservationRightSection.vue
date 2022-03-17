@@ -1,13 +1,10 @@
 <template>
   <div class="right-section">
     <el-card :body-style="{ padding: '0px' }">
-      <img
-        src="https://media.istockphoto.com/photos/hotel-room-suite-with-view-picture-id627892060?k=20&m=627892060&s=612x612&w=0&h=k6QY-qWNlFbvYhas82e_MoSXceozjrhhgp-krujsoDw="
-        class="image"
-      />
+      <img :src="selectedHotel.basicInfo.thumbnail" class="image" />
       <div style="padding: 14px">
         <div class="title">
-          <p>白沙灣渡假酒店</p>
+          <p>{{ selectedHotel.basicInfo.name }}</p>
         </div>
         <div class="days-of-stay">
           <el-row>
@@ -128,6 +125,16 @@
     </el-row>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+  },
+};
+</script>
 
 <style>
 .reservation .right-section {

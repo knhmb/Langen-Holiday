@@ -1,4 +1,4 @@
-import moment from "moment";
+// import moment from "moment";
 
 export default {
   hideHeader(context, payload) {
@@ -15,10 +15,8 @@ export default {
   },
   resetDate(context) {
     const date = new Date();
-    const today = moment(date).format("YYYYMMDD");
-    const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
-      "YYYYMMDD"
-    );
+    const today = date.setDate(date.getDate());
+    const tomorrow = date.setDate(date.getDate() + 1);
     const data = {
       start: today,
       end: tomorrow,

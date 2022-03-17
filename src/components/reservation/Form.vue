@@ -1,47 +1,54 @@
 <template>
   <div class="form">
     <h2>填寫你的詳細資料</h2>
-    <el-form label-position="top" ref="formRef" label-width="120px">
+    <el-form
+      label-position="top"
+      :model="ruleForm"
+      :rules="rules"
+      ref="formRef"
+      label-width="120px"
+      hide-required-asterisk
+    >
       <el-row :gutter="10">
         <el-col :sm="24" :lg="12">
-          <el-form-item label="中文姓名 (與證件相同)：">
+          <el-form-item label="中文姓名 (與證件相同)：" prop="chineseName">
             <el-input
               size="large"
-              v-model="input3"
+              v-model="ruleForm.chineseName"
               placeholder="e.g. 陳大文"
               class="input-with-select"
             >
               <template #prepend>
                 <el-select
-                  v-model="select"
+                  v-model="ruleForm.chineseNameTitle"
                   placeholder="先生"
                   style="width: 80px"
                 >
-                  <el-option label="先生" value="1"></el-option>
-                  <el-option label="小姐" value="2"></el-option>
-                  <el-option label="女士" value="3"></el-option>
+                  <el-option label="先生" value="先生"></el-option>
+                  <el-option label="小姐" value="小姐"></el-option>
+                  <el-option label="女士" value="女士"></el-option>
                 </el-select>
               </template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :lg="12">
-          <el-form-item label="英文姓名 (與證件相同)：">
+          <el-form-item label="英文姓名 (與證件相同)：" prop="englishName">
             <el-input
               size="large"
-              v-model="input3"
+              v-model="ruleForm.englishName"
               placeholder="e.g. Chan Tai Man"
               class="input-with-select"
             >
               <template #prepend>
                 <el-select
-                  v-model="select"
+                  v-model="ruleForm.englishNameTitle"
                   placeholder="Mr."
                   style="width: 80px"
                 >
-                  <el-option label="Mr" value="1"></el-option>
-                  <el-option label="Miss" value="2"></el-option>
-                  <el-option label="Ms" value="3"></el-option>
+                  <el-option label="Mr" value="Mr"></el-option>
+                  <el-option label="Miss" value="Miss"></el-option>
+                  <el-option label="Ms" value="Ms"></el-option>
                 </el-select>
               </template>
             </el-input>
@@ -50,17 +57,21 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-form-item label="電郵地址：">
-            <el-input size="large"></el-input>
+          <el-form-item label="電郵地址：" prop="email">
+            <el-input v-model="ruleForm.email" size="large"></el-input>
           </el-form-item>
-          <el-form-item label="再次輸入電郵地址：">
-            <el-input size="large"></el-input>
+          <el-form-item label="再次輸入電郵地址：" prop="confirmEmail">
+            <el-input v-model="ruleForm.confirmEmail" size="large"></el-input>
           </el-form-item>
-          <el-form-item label="電話號碼：">
-            <el-input size="large"></el-input>
+          <el-form-item label="電話號碼：" prop="telephone">
+            <el-input v-model="ruleForm.telephone" size="large"></el-input>
           </el-form-item>
           <el-form-item label="特別要求：">
-            <el-input type="textarea" rows="8"></el-input>
+            <el-input
+              v-model="ruleForm.specialRequest"
+              type="textarea"
+              rows="8"
+            ></el-input>
           </el-form-item>
           <p>
             建議盡早提出特別要求,但最終仍需視乎實際情況作出安排,請注意無法保證能達成你的要求。
@@ -74,9 +85,81 @@
 <script>
 export default {
   data() {
+    const validateEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$i18n.t("email_required")));
+      } else {
+        if (this.ruleForm.confirmEmail !== "") {
+          this.$refs.formRef.validateField("confirmEmail");
+        }
+        callback();
+      }
+    };
+
+    const validateConfirmEmail = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$i18n.t("confirm_email")));
+      } else {
+        if (value !== this.ruleForm.email) {
+          callback(new Error(this.$i18n.t("email_matching")));
+        } else {
+          callback();
+        }
+      }
+    };
+
     return {
-      input3: "",
-      select: "",
+      ruleForm: {
+        chineseName: "",
+        englishName: "",
+        email: "",
+        confirmEmail: "",
+        telephone: "",
+        specialReuqest: "",
+        chineseNameTitle: "",
+        englishNameTitle: "",
+      },
+      rules: {
+        chineseName: [
+          {
+            required: true,
+            message: this.$i18n.t("name_required"),
+            trigger: "blur",
+          },
+        ],
+        englishName: [
+          {
+            required: true,
+            message: this.$i18n.t("name_required"),
+            trigger: "blur",
+          },
+        ],
+        email: [
+          {
+            required: true,
+            message: this.$i18n.t("email_required"),
+            validator: validateEmail,
+            trigger: "blur",
+            type: "email",
+          },
+        ],
+        confirmEmail: [
+          {
+            required: true,
+            message: this.$i18n.t("email_required"),
+            validator: validateConfirmEmail,
+            trigger: "blur",
+            type: "email",
+          },
+        ],
+        telephone: [
+          {
+            required: true,
+            message: this.$i18n.t("phone_required"),
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
 };
