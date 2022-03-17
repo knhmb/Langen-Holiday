@@ -143,7 +143,6 @@ export default {
   },
   watch: {
     dateSelected() {
-      console.log("KKKHSDKFSDKHFKSDHFKSHF");
       this.startDate = this.dateSelected.start;
       this.endDate = this.dateSelected.end;
       this.isChangedDate = false;
@@ -180,6 +179,7 @@ export default {
         console.log(data);
         this.$store.dispatch("booking/changedService", serviceData);
       }
+      this.assignDateDifference();
       // this.$store.dispatch("booking/changedService", serviceData);
     },
     // dateSelected() {
