@@ -8,20 +8,20 @@
         </div>
         <div class="days-of-stay">
           <el-row>
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="info">人數:</p>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="14">
               <p class="data">
                 {{ numberOfAdults }}位成人 + {{ numberOfChildren }}位兒童
               </p>
             </el-col>
             <template v-for="(age, key) in childrenAge[0]" :key="age">
-              <el-col :span="8">
+              <el-col :span="10">
                 <!-- <p class="info">兒童1年齡:</p> -->
                 <p class="info">{{ childrenAge.length > 0 ? key : "" }}</p>
               </el-col>
-              <el-col :span="16">
+              <el-col :span="14">
                 <!-- <p class="data">8</p> -->
                 <p class="data">{{ childrenAge.length > 0 ? age : "" }}</p>
               </el-col>
@@ -38,16 +38,16 @@
             <el-col :span="16">
               <p class="data">10</p>
             </el-col> -->
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="info">寵物:</p>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="14">
               <p class="data">2</p>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="info">入住日期:</p>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="14">
               <p class="data">{{ checkInDate }} - {{ checkOutDate }}</p>
               <!-- <p class="data">2021年5月22日 - 2021年5月23日</p> -->
             </el-col>
@@ -55,34 +55,39 @@
         </div>
         <div class="price-single">
           <el-row>
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="info">原價:</p>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="14">
               <p class="data">HK${{ selectedHotel.priceOfSelectedDate }}.00</p>
             </el-col>
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="info">折扣:</p>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="14">
               <p class="data">HK$0.00</p>
             </el-col>
           </el-row>
         </div>
         <div class="price-per-item">
           <el-row>
-            <el-col :span="8">
-              <p class="info">寵物留宿:</p>
-            </el-col>
-            <el-col :span="16">
-              <p class="data">2</p>
-            </el-col>
-            <el-col :span="8">
-              <p class="info">寵物留宿附加費:</p>
-            </el-col>
-            <el-col :span="16">
-              <p class="data">HK$200.00</p>
-            </el-col>
+            <template v-for="service in selectedServices" :key="service">
+              <el-col :span="10">
+                <!-- <p class="info">寵物留宿:</p> -->
+                <p class="info">{{ service.amenitiesCode }}:</p>
+              </el-col>
+              <el-col :span="14">
+                <!-- <p class="data">2</p> -->
+                <p class="data">{{ service.quantity }}</p>
+              </el-col>
+
+              <el-col :span="10">
+                <p class="info">寵物留宿附加費:</p>
+              </el-col>
+              <el-col :span="14">
+                <p class="data">HK${{ service.unitCharge }}.00</p>
+              </el-col>
+            </template>
           </el-row>
         </div>
         <div class="total-price">
@@ -91,28 +96,42 @@
               <p class="info">總價格(已包含稅款及服務費):</p>
             </el-col>
             <el-col :span="10">
-              <p class="end">HK$1480.00</p>
+              <!-- <p class="end">HK$1480.00</p> -->
+              <p class="end">
+                HK${{ selectedHotel.priceOfSelectedDate - 0 + amount }}.00
+              </p>
             </el-col>
             <el-col :span="12">
               <p class="info">現需繳付:</p>
             </el-col>
             <el-col :span="10">
-              <p class="end">HK$1480.00</p>
+              <!-- <p class="end">HK$1480.00</p> -->
+              <p class="end">
+                HK${{ selectedHotel.priceOfSelectedDate - 0 + amount }}.00
+              </p>
             </el-col>
             <el-col :span="12">
               <p class="info">入住時需繳付:</p>
             </el-col>
             <el-col :span="10">
-              <p class="end">HK$0.00</p>
+              <!-- <p class="end">HK$0.00</p> -->
+              <p class="end">
+                HK${{
+                  selectedHotel.priceOfSelectedDate -
+                  0 +
+                  amount -
+                  (selectedHotel.priceOfSelectedDate - 0 + amount)
+                }}.00
+              </p>
             </el-col>
           </el-row>
         </div>
         <div class="tax">
           <el-row>
-            <el-col :span="8">
+            <el-col :span="10">
               <p class="info">按金:</p>
             </el-col>
-            <el-col :span="16">
+            <el-col :span="14">
               <p class="data">HK$200.00</p>
             </el-col>
           </el-row>
@@ -137,6 +156,11 @@
 import moment from "moment";
 
 export default {
+  data() {
+    return {
+      arr: [],
+    };
+  },
   computed: {
     responses: {
       get() {
@@ -168,6 +192,23 @@ export default {
     checkOutDate() {
       return moment(this.dateSelected.end).locale("zh-cn").format("ll");
     },
+    selectedServices() {
+      return this.$store.getters["booking/selectedServices"];
+    },
+    amount() {
+      this.selectedServices.forEach((item) =>
+        // this.arr.push({ price: item.unitCharge, qty: item.quantity })
+        this.arr.push(item.unitCharge * item.quantity)
+      );
+      return this.arr
+        .map((num) => Number(num))
+        .map((item) => item)
+        .reduce((prev, next) => prev + next);
+      // return { ...this.arr };
+    },
+  },
+  mounted() {
+    console.log(this.amount);
   },
 };
 </script>

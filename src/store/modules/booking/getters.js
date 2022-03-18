@@ -11,4 +11,7 @@ export default {
   childrenAge(state) {
     return state.childrenAge;
   },
+  selectedServices(state) {
+    return state.selectedServices;
+  },
 };

@@ -31,4 +31,8 @@ export default {
     state.numberOfChildren = "";
     console.log("reset");
   },
+  STORE_SELECTED_SERVICES(state, payload) {
+    state.selectedServices = payload;
+    console.log(state.selectedServices);
+  },
 };

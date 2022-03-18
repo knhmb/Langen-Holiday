@@ -7,7 +7,16 @@
             <h1>注意事項</h1>
             <el-card class="box-card">
               <ul>
-                <li>
+                <template
+                  v-for="note in selectedHotel.hotelNotes"
+                  :key="note.id"
+                >
+                  <li v-if="note.isNote === true">
+                    •
+                    {{ note.details }}
+                  </li>
+                </template>
+                <!-- <li>
                   •
                   訂房時必須有確實人數(大小同計，訪客包括在內)，不接受之後加人或更改人數。
                 </li>
@@ -27,7 +36,7 @@
                 </li>
                 <li>• 登記入住時需繳付按金HK$200</li>
                 <li>• 入住時間：下午3時 (最遲晚上09:00前辦理入住手續）</li>
-                <li>• 房間禁止攜帶貓狗或任何寵物</li>
+                <li>• 房間禁止攜帶貓狗或任何寵物</li> -->
               </ul>
             </el-card>
           </div>
@@ -39,11 +48,20 @@
             <h1>取消政策</h1>
             <el-card class="box-card">
               <ul>
-                <li>• 不設更改/取消預訂</li>
+                <template
+                  v-for="note in selectedHotel.hotelNotes"
+                  :key="note.id"
+                >
+                  <li v-if="note.isCancelPolicy === true">
+                    •
+                    {{ note.details }}
+                  </li>
+                </template>
+                <!-- <li>• 不設更改/取消預訂</li> -->
               </ul>
-              <p>
+              <!-- <p>
                 (無論在任何情況下，客人於行程中自行取消、放棄所訂之住宿，或提早退房，所繳付之一切費用恕不退還。)
-              </p>
+              </p> -->
             </el-card>
           </div>
         </el-col>
@@ -53,7 +71,13 @@
           <div class="list">
             <h1>惡劣天氣安排</h1>
             <el-card class="box-card last">
-              <p>如在入住當天發出八號烈風或暴風信號，將作以下安排：</p>
+              <template v-for="note in selectedHotel.hotelNotes" :key="note.id">
+                <p v-if="note.isBadWeather === true">
+                  •
+                  {{ note.details }}
+                </p>
+              </template>
+              <!-- <p>如在入住當天發出八號烈風或暴風信號，將作以下安排：</p>
               <p>
                 1)
                 如信號在下午3:00後仍然懸掛，相關住宿可改至同等價值的日期入住，惟須於7天內回覆更改之入住日期。
@@ -62,7 +86,7 @@
                 2)
                 如信號已經在下午3:00之前除下，住宿安排將照常繼續，客人需如期入住。如有任何爭議，樂程假期將保留最終決定權
                 。
-              </p>
+              </p> -->
               <img @click="openDialog" src="../../assets/icon-cs.png" alt="" />
             </el-card>
             <div v-if="isDialogOpen" class="contact-us-list">
@@ -119,6 +143,7 @@
       <el-row>
         <el-col>
           <el-checkbox
+            v-model="isAgreed"
             label="我同意本頁顯示的金額，也同意注意事項，取消政策和惡劣天氣安排以及網站使用條款"
             size="large"
           ></el-checkbox>
@@ -126,7 +151,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button class="submit">提交</el-button>
+          <el-button :disabled="!isAgreed" class="submit">提交</el-button>
         </el-col>
       </el-row>
     </div>
@@ -138,7 +163,13 @@ export default {
   data() {
     return {
       isDialogOpen: false,
+      isAgreed: false,
     };
+  },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
   },
   methods: {
     openDialog() {
@@ -147,6 +178,9 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
+  },
+  created() {
+    console.log(this.selectedHotel);
   },
 };
 </script>

@@ -93,4 +93,7 @@ export default {
   storeChildrenAge(context, payload) {
     context.commit("STORE_CHILDREN_AGE", payload);
   },
+  storeSelectedServices(context, payload) {
+    context.commit("STORE_SELECTED_SERVICES", payload);
+  },
 };

@@ -132,6 +132,7 @@ export default {
     return {
       services: [],
       arr: [],
+      addlService: [],
       finalArr: [],
       serviceQuantity: "",
       serviceArray: [],
@@ -188,7 +189,21 @@ export default {
         this.arr.push({ ...item.split("|").toString().split(",") });
       });
 
-      // let dataArr = this.arr.map((item) => {
+      this.arr.filter((item) => {
+        this.finalArr.push(item[0] + "|" + item[1]);
+      });
+      let obj = {};
+
+      this.arr.filter((item) => {
+        item["amenitiesCode"] = item[0];
+        item["quantity"] = item[1];
+        item["unitCharge"] = item[2];
+        delete item[0];
+        delete item[1];
+        delete item[2];
+      });
+
+      // let dataArr = this.addlService.map((item) => {
       //   return [item[0], item];
       // }); // creates array of array
 
@@ -197,13 +212,13 @@ export default {
       // let result = [...maparr.values()]; //converting back to array from mapobject
 
       // console.log(result); //[{"name":"abc","age":27},{"name":"pqr","age":27}]
-      this.arr.filter((item) => {
-        this.finalArr.push(item[0] + "|" + item[1]);
-      });
+
+      console.log(obj);
 
       console.log("===================================");
       console.log(this.arr);
       console.log(this.finalArr);
+      console.log(this.addlService);
       console.log("===================================");
 
       const data = {
@@ -214,6 +229,7 @@ export default {
       };
       console.log(data);
       this.$store.dispatch("booking/changedService", data);
+      this.$store.dispatch("booking/storeSelectedServices", this.arr);
     },
     book() {
       this.$store.dispatch("booking/storeChildrenAge", this.childAge);

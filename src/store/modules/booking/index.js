@@ -10,6 +10,7 @@ export default {
       numberOfChildren: "",
       numberOfAdults: "",
       childrenAge: [],
+      selectedServices: [],
     };
   },
   getters,
