@@ -6,13 +6,14 @@
       <el-col :span="12">
         <el-checkbox-group v-model="services">
           <el-checkbox
-            :label="service.amenitiesCode + service.unitCharge"
+            :label="service.amenitiesCode"
             @change="
               serviceChanged({
                 value: $event,
                 index: index,
                 name: service.amenitiesCode,
                 unitCharge: service.unitCharge,
+                id: service.id,
               })
             "
             v-for="(service, index) in selectedHotel.addlService"
@@ -130,6 +131,8 @@ export default {
   data() {
     return {
       services: [],
+      arr: [],
+      finalArr: [],
       serviceQuantity: "",
       serviceArray: [],
       // responses: {},
@@ -168,54 +171,46 @@ export default {
   },
   methods: {
     serviceChanged({ value, index, name, unitCharge }) {
-      // let withUnitCharge = name + "|" + "1" + "|" + unitCharge;
-      // let withoutUnitCharge = name + "|" + "1";
-      let response = "";
+      this.finalArr = [];
+      this.arr = [];
       if (value === false) {
         delete this.responses["service" + index];
+        this.arr.splice(index, 1);
       } else if (value === true) {
         this.responses["service" + index] = name + "|" + "1" + "|" + unitCharge;
-        response = this.responses;
-        response["service" + index] = name + "|" + "1";
-        // response = name + "|" + "1";
       }
-      // const response = this.responses["service" + index].substr(
-      //   0,
-      //   this.responses["service" + index].lastIndexOf("|")
-      // );
-      // console.log(response);
-      // console.log(this.responses["service" + index]);
-      // console.log(this.responses["service" + index].split("|")[0]);
-      // console.log(this.responses["service" + index].split("|")[1]);
-      // const selectedServices = Object.values(this.responses);
-      console.log(response);
-      const selectedServices = Object.values(response);
+
+      console.log(this.responses);
+      const selectedServices = Object.values(this.responses);
       console.log(selectedServices);
-      // console.log(
-      //   selectedServices[index].substr(
-      //     0,
-      //     selectedServices[index].lastIndexOf("|")
-      //   )
-      // );
-      // console.log(selectedServices.toString().split("|")[2]);
-      let arr = [];
+
       selectedServices.filter((item) => {
-        // console.log(item.split("|").toString().split(","));
-        arr.push({ ...item.split("|").toString().split(",") });
+        this.arr.push({ ...item.split("|").toString().split(",") });
       });
-      // var afterWith = t.substr(0, t.lastIndexOf("\\") + 1);
-      console.log(unitCharge);
-      console.log(arr);
-      // this.$store.disptach("store");
-      // console.log(selectedServices.toString());
-      // console.log(selectedServices.toString().split(",")[0]);
-      // console.log(selectedServices.toString().split(",")[1]);
+
+      // let dataArr = this.arr.map((item) => {
+      //   return [item[0], item];
+      // }); // creates array of array
+
+      // let maparr = new Map(dataArr); // create key value pair from array of array
+
+      // let result = [...maparr.values()]; //converting back to array from mapobject
+
+      // console.log(result); //[{"name":"abc","age":27},{"name":"pqr","age":27}]
+      this.arr.filter((item) => {
+        this.finalArr.push(item[0] + "|" + item[1]);
+      });
+
+      console.log("===================================");
+      console.log(this.arr);
+      console.log(this.finalArr);
+      console.log("===================================");
 
       const data = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
         checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
         checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
-        service: selectedServices.toString(),
+        service: this.finalArr.toString(),
       };
       console.log(data);
       this.$store.dispatch("booking/changedService", data);
