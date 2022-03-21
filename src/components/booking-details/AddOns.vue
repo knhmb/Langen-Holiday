@@ -169,6 +169,9 @@ export default {
     dateSelected() {
       return this.$store.getters.dateSelected;
     },
+    selectedServices() {
+      return this.$store.getters["booking/selectedServices"];
+    },
   },
   methods: {
     serviceChanged({ value, index, name, unitCharge }) {
@@ -242,6 +245,8 @@ export default {
   created() {
     console.log(this.dummy[this.index + this.num]);
     this.$store.commit("RESET_RESPONSES");
+    console.log(this.selectedServices);
+    this.$store.commit("booking/RESET_SELECTED_SERVICES");
   },
 };
 </script>

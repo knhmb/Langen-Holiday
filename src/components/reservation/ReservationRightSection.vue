@@ -13,7 +13,8 @@
             </el-col>
             <el-col :span="14">
               <p class="data">
-                {{ numberOfAdults }}位成人 + {{ numberOfChildren }}位兒童
+                {{ numberOfAdults === "" ? 0 : payload }}位成人 +
+                {{ numberOfChildren === "" ? 0 : payload }}位兒童
               </p>
             </el-col>
             <template v-for="(age, key) in childrenAge[0]" :key="age">
@@ -69,7 +70,7 @@
             </el-col>
           </el-row>
         </div>
-        <div class="price-per-item">
+        <div class="price-per-item" v-if="selectedServices.length > 0">
           <el-row>
             <template v-for="service in selectedServices" :key="service">
               <el-col :span="10">
@@ -196,19 +197,25 @@ export default {
       return this.$store.getters["booking/selectedServices"];
     },
     amount() {
-      this.selectedServices.forEach((item) =>
-        // this.arr.push({ price: item.unitCharge, qty: item.quantity })
-        this.arr.push(item.unitCharge * item.quantity)
-      );
-      return this.arr
-        .map((num) => Number(num))
-        .map((item) => item)
-        .reduce((prev, next) => prev + next);
+      if (this.selectedServices.length > 0) {
+        this.selectedServices.forEach((item) =>
+          // this.arr.push({ price: item.unitCharge, qty: item.quantity })
+          this.arr.push(item.unitCharge * item.quantity)
+        );
+        return this.arr
+          .map((num) => Number(num))
+          .map((item) => item)
+          .reduce((prev, next) => prev + next);
+      } else {
+        return 0;
+      }
+
       // return { ...this.arr };
     },
   },
   mounted() {
     console.log(this.amount);
+    console.log(this.selectedServices);
   },
 };
 </script>

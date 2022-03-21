@@ -6,6 +6,7 @@ import authModule from "./modules/auth/index";
 import dashboardModule from "./modules/dashboard/index";
 import searchModule from "./modules/search/index";
 import bookingModule from "./modules/booking/index";
+import profileModule from "./modules/profile/index";
 
 // import moment from "moment";
 
@@ -37,6 +38,7 @@ const store = createStore({
     dashboard: dashboardModule,
     search: searchModule,
     booking: bookingModule,
+    profile: profileModule,
   },
 });
 

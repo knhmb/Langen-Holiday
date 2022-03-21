@@ -35,4 +35,7 @@ export default {
     state.selectedServices = payload;
     console.log(state.selectedServices);
   },
+  RESET_SELECTED_SERVICES(state) {
+    state.selectedServices = [];
+  },
 };
