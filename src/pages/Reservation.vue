@@ -1,8 +1,8 @@
 <template>
   <top-header></top-header>
   <section class="reservation">
-    <reservation-left-section></reservation-left-section>
-    <List />
+    <reservation-left-section @form="changedForm"></reservation-left-section>
+    <List :booking-info="bookingInfo" />
   </section>
   <!-- <the-footer></the-footer> -->
 </template>
@@ -19,6 +19,16 @@ export default {
     // TheFooter,
     ReservationLeftSection,
     List,
+  },
+  data() {
+    return {
+      bookingInfo: {},
+    };
+  },
+  methods: {
+    changedForm(value) {
+      this.bookingInfo = value;
+    },
   },
   created() {
     this.$store.dispatch("hideHeader", false);

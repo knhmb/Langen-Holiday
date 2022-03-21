@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-  getAccount(context) {
-    axios
+  async getAccount(context) {
+    await axios
       .get("/api/account", {
         headers: {
           authorization: localStorage.getItem("accessToken"),

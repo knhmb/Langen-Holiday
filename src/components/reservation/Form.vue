@@ -115,7 +115,7 @@ export default {
         email: "",
         confirmEmail: "",
         telephone: "",
-        specialReuqest: "",
+        specialRequest: "",
         chineseNameTitle: "",
         englishNameTitle: "",
       },
@@ -160,21 +160,31 @@ export default {
       },
     };
   },
+  watch: {
+    ruleForm: {
+      handler() {
+        console.log("form changed");
+        this.$emit("formInputChanged", this.ruleForm);
+      },
+      deep: true,
+    },
+  },
   computed: {
     user() {
       return this.$store.getters["profile/account"];
     },
   },
-  created() {
+  async created() {
     if (localStorage.getItem("accessToken")) {
       console.log("Available");
-      this.$store.dispatch("profile/getAccount");
-      this.ruleForm.chineseName = this.user.fullNameTc;
-      this.ruleForm.englishName = this.user.fullName;
-      this.ruleForm.email = this.user.username;
-      this.ruleForm.confirmEmail = this.user.username;
-      this.ruleForm.telephone = this.user.phoneNo;
-      console.log(this.user);
+      await this.$store.dispatch("profile/getAccount").then(() => {
+        this.ruleForm.chineseName = this.user.fullNameTc;
+        this.ruleForm.englishName = this.user.fullName;
+        this.ruleForm.email = this.user.username;
+        this.ruleForm.confirmEmail = this.user.username;
+        this.ruleForm.telephone = this.user.phoneNo;
+        console.log(this.user);
+      });
     } else {
       console.log("Not available");
     }

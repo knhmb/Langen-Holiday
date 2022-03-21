@@ -151,7 +151,9 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button :disabled="!isAgreed" class="submit">提交</el-button>
+          <el-button :disabled="!isAgreed" @click="reserve" class="submit"
+            >提交</el-button
+          >
         </el-col>
       </el-row>
     </div>
@@ -159,7 +161,10 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
+  props: ["bookingInfo"],
   data() {
     return {
       isDialogOpen: false,
@@ -177,6 +182,33 @@ export default {
     },
     closeDialog() {
       this.isDialogOpen = false;
+    },
+    reserve() {
+      const tempObject = { ...this.bookingInfo };
+      delete tempObject.specialRequest;
+      console.log(tempObject);
+      console.log(this.bookingInfo);
+      let str = JSON.stringify(tempObject, (k, v) => (v === null ? "" : v));
+      console.log(JSON.parse(str));
+      // tempObject
+
+      const isEmpty = Object.values(JSON.parse(str)).some(
+        (item) => item === "" || item === null
+      );
+
+      if (isEmpty) {
+        ElNotification({
+          title: "Error",
+          message: "請在上方輸入您的詳細信息",
+          type: "error",
+        });
+      } else {
+        ElNotification({
+          title: "Success",
+          message: "Booked",
+          type: "success",
+        });
+      }
     },
   },
   created() {

@@ -470,22 +470,42 @@ export default {
     },
   },
   methods: {
-    profileNavigation(value) {
+    async profileNavigation(value) {
       // this.$router.push({ name: value });
-      this.$store
+      await this.$store
         .dispatch("auth/checkAccessTokenValidity")
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.$router.push({ name: value });
         })
         .catch((err) => {
+          console.log(err);
           ElNotification({
             title: "Error",
+            message: "access token expired",
+            type: "error",
+          });
+          this.checkRefershToken();
+          // this.$store.dispatch("auth/logout");
+          // console.log("Failed Access Token");
+        });
+    },
+    async checkRefershToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          ElNotification({
+            title: "success",
+            message: "YESSS",
+            type: "success",
+          });
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "error",
             message: err.message,
             type: "error",
           });
           this.$store.dispatch("auth/logout");
-          console.log("Failed Access Token");
         });
     },
     openDialog() {

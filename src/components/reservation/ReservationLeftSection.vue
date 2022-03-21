@@ -7,7 +7,7 @@
           <p>
             {{ selectedHotel.basicInfo.stayInformation }}
           </p>
-          <Form />
+          <Form @formInputChanged="changedForm" />
         </div>
       </el-col>
       <el-col :sm="24" :lg="12">
@@ -29,6 +29,11 @@ export default {
   computed: {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+  },
+  methods: {
+    changedForm(value) {
+      this.$emit("form", value);
     },
   },
 };

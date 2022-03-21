@@ -5,6 +5,22 @@ import i18n from "../../../i18n.js";
 const { t } = i18n.global;
 
 export default {
+  // async checkAccessTokenValidity() {
+  //   await axios
+  //     .get("/api/authenticate", {
+  //       headers: {
+  //         authorization: localStorage.getItem("accessToken"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       const error = new Error(t("token_invalid"));
+  //       throw error;
+  //     });
+  // },
   async checkAccessTokenValidity() {
     await axios
       .get("/api/authenticate", {
@@ -15,14 +31,16 @@ export default {
       .then((res) => {
         console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        console.log("error");
         const error = new Error(t("token_invalid"));
         throw error;
+        // context.dispatch("checkRefreshTokenValidity");
+        // console.log("reached refresh");
       });
   },
   async checkRefreshTokenValidity() {
-    axios
+    await axios
       .put("/api/authenticate", {
         headers: {
           authorization: localStorage.getItem("refreshToken"),
