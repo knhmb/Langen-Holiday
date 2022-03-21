@@ -196,7 +196,9 @@ export default {
         (item) => item === "" || item === null
       );
 
-      if (isEmpty) {
+      console.log(Object.values(JSON.parse(str)).length <= 0);
+
+      if (isEmpty || Object.values(JSON.parse(str)).length <= 0) {
         ElNotification({
           title: "Error",
           message: "請在上方輸入您的詳細信息",

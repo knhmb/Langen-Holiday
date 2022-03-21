@@ -14,4 +14,7 @@ export default {
   selectedServices(state) {
     return state.selectedServices;
   },
+  petQty(state) {
+    return state.petQty;
+  },
 };

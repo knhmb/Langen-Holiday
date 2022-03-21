@@ -114,6 +114,19 @@
           </el-select>
         </el-col>
       </el-row>
+      <el-row :gutter="20" v-if="parseInt(selectedHotel.basicInfo.maxPets) > 0">
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block">寵物</label>
+          <el-select v-model="petQty" class="m-2" placeholder="8">
+            <el-option
+              v-for="num in parseInt(selectedHotel.basicInfo.maxPets)"
+              :key="num"
+              :label="num"
+              :value="num"
+            ></el-option>
+          </el-select>
+        </el-col>
+      </el-row>
       <el-row>
         <el-col>
           <p class="cost">HK${{ selectedHotel.priceOfSelectedDate }}.00</p>
@@ -137,16 +150,12 @@ export default {
   data() {
     return {
       isChangedDate: false,
-      // numberOfAdults: null,
-      // numberOfChildren: null,
       dateDifference: "",
       childAge: {},
       date: new Date(),
       dummyDate: "",
       startDate: "",
       endDate: "",
-      // startDate: new Date(),
-      // endDate: new Date().setDate(new Date().getDate() + 1),
       masks: {
         input: "YYYY年M月DD日 WWW",
       },
@@ -242,6 +251,14 @@ export default {
       },
       set(value) {
         this.$store.dispatch("booking/updateAdults", value);
+      },
+    },
+    petQty: {
+      get() {
+        return this.$store.getters["booking/petQty"];
+      },
+      set(value) {
+        this.$store.dispatch("booking/updatePetQty", value);
       },
     },
     responses() {

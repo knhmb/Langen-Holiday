@@ -29,6 +29,7 @@ export default {
   RESET_ADULTS_AND_CHILDREN(state) {
     state.numberOfAdults = "";
     state.numberOfChildren = "";
+    state.petQty = "";
     console.log("reset");
   },
   STORE_SELECTED_SERVICES(state, payload) {
@@ -37,5 +38,8 @@ export default {
   },
   RESET_SELECTED_SERVICES(state) {
     state.selectedServices = [];
+  },
+  UPDATE_PET_QTY(state, payload) {
+    state.petQty = payload;
   },
 };

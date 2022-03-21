@@ -96,4 +96,7 @@ export default {
   storeSelectedServices(context, payload) {
     context.commit("STORE_SELECTED_SERVICES", payload);
   },
+  updatePetQty(context, payload) {
+    context.commit("UPDATE_PET_QTY", payload);
+  },
 };

@@ -125,6 +125,7 @@
 
 <script>
 import moment from "moment";
+import { ElNotification } from "element-plus";
 
 export default {
   props: ["childAge"],
@@ -234,12 +235,45 @@ export default {
       this.$store.dispatch("booking/changedService", data);
       this.$store.dispatch("booking/storeSelectedServices", this.arr);
     },
-    book() {
+    async book() {
       this.$store.dispatch("booking/storeChildrenAge", this.childAge);
-      this.$router.push({
-        name: "reservation",
-        params: { id: this.$route.params.id },
-      });
+      if (localStorage.getItem("accessToken")) {
+        await this.$store
+          .dispatch("auth/checkAccessTokenValidity")
+          .then(() => {
+            this.$router.push({
+              name: "reservation",
+              params: { id: this.$route.params.id },
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            this.checkRefershToken();
+          });
+      } else {
+        this.$router.push({
+          name: "reservation",
+          params: { id: this.$route.params.id },
+        });
+      }
+    },
+    async checkRefershToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.$router.push({
+            name: "reservation",
+            params: { id: this.$route.params.id },
+          });
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
     },
   },
   created() {

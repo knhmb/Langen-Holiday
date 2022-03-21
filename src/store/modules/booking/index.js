@@ -11,6 +11,7 @@ export default {
       numberOfAdults: "",
       childrenAge: [],
       selectedServices: [],
+      petQty: "",
     };
   },
   getters,

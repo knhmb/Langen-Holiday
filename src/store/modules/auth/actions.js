@@ -51,7 +51,7 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-        const error = new Error("Token expired!, Please login again");
+        const error = new Error(t("token_expired"));
         throw error;
       });
   },

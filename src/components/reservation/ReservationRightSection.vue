@@ -43,7 +43,7 @@
               <p class="info">寵物:</p>
             </el-col>
             <el-col :span="14">
-              <p class="data">2</p>
+              <p class="data">{{ petQty === "" ? 0 : petQty }}</p>
             </el-col>
             <el-col :span="10">
               <p class="info">入住日期:</p>
@@ -171,6 +171,9 @@ export default {
         this.$store.dispatch("changeService", value);
         console.log(value);
       },
+    },
+    petQty() {
+      return this.$store.getters["booking/petQty"];
     },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
