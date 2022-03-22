@@ -128,8 +128,8 @@ export default {
       });
     },
     resetFields() {
-      this.email = "";
-      this.password = "";
+      this.ruleForm.email = "";
+      this.ruleForm.password = "";
     },
     toggleRegister() {
       this.$emit("toggleRegisterForm", { title: "註冊", formType: "regsiter" });

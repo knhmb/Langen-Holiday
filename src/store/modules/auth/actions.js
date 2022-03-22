@@ -161,8 +161,13 @@ export default {
       });
   },
   async changePassword(_, payload) {
+    const accessToken = localStorage.getItem("accessToken");
     await axios
-      .post("/api/account/change-password", payload)
+      .post("/api/account/change-password", payload, {
+        headers: {
+          authorization: accessToken,
+        },
+      })
       .then((res) => {
         console.log(res);
       })

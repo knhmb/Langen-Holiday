@@ -35,7 +35,7 @@
                 telephone === ''
               "
               @click.prevent="submit"
-              >電話號碼</el-button
+              >確定</el-button
             >
           </el-col>
         </el-row>
@@ -64,14 +64,24 @@ export default {
   },
   methods: {
     async submit() {
-      // this.$router.push("/edit-profile");
       // const userId = JSON.parse(localStorage.getItem("userData")).id;
       const data = {
         fullNameTc: this.chineseName,
         fullName: this.englishName,
         phoneNo: this.telephone,
       };
-      console.log(data);
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.editProfile(data);
+        })
+        .catch(() => {
+          console.log("NOT WORKING");
+          this.checkRefershToken(data);
+          console.log("NOT WORKING2");
+        });
+    },
+    async editProfile(data) {
       await this.$store
         .dispatch("auth/updateProfile", data)
         .then(() => {
@@ -84,17 +94,21 @@ export default {
             type: "error",
           });
         });
-      // try {
-      //   await this.$store.dispatch("auth/updateProfile", data);
-      //   console.log(userId);
-      //   this.$emit("managed", false);
-      // } catch (err) {
-      //   ElNotification({
-      //     title: "Error",
-      //     message: err.message,
-      //     type: "error",
-      //   });
-      // }
+    },
+    async checkRefershToken(data) {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.editProfile(data);
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
     },
     async updateProfile() {
       await this.$store.dispatch("profile/getAccount").then(() => {

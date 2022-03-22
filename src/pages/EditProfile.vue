@@ -131,12 +131,11 @@ export default {
     },
     async checkAccessToken() {
       await this.$store
-        .dispatch("profile/getAccount")
+        .dispatch("auth/checkAccessTokenValidity")
         .then(() => {
-          console.log("Worked");
+          this.$store.dispatch("profile/getAccount");
         })
         .catch(() => {
-          console.log("NOT WORKING");
           this.checkRefershToken();
           console.log("NOT WORKING2");
         });

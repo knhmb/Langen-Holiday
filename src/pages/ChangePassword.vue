@@ -11,7 +11,7 @@
       >
         <el-row>
           <el-col>
-            <el-form-item label="修改密碼" prop="changePassword">
+            <el-form-item label="現有密碼" prop="changePassword">
               <el-input
                 type="password"
                 v-model="ruleForm.changePassword"
@@ -104,35 +104,59 @@ export default {
     };
   },
   methods: {
-    changePassword() {
-      this.$refs.ruleForm.validate((valid) => {
+    async changePassword() {
+      await this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           console.log("Password Changed!");
           const data = {
-            username: JSON.parse(localStorage.getItem("userData")).username,
             oldPassword: this.ruleForm.changePassword,
             newPassword: this.ruleForm.newPassword,
           };
-          console.log(data);
           this.$store
-            .dispatch("auth/changePassword", data)
+            .dispatch("auth/checkAccessTokenValidity")
             .then(() => {
-              ElNotification({
-                title: "Password Changed",
-                message: "Password Changed Successfully",
-                type: "success",
-              });
-              this.resetForm();
+              this.updatePassword(data);
             })
-            .catch((err) => {
-              ElNotification({
-                title: "Error",
-                message: err.message,
-                type: "error",
-              });
+            .catch(() => {
+              this.checkRefershToken(data);
             });
+          console.log(data);
         }
       });
+    },
+    async updatePassword(data) {
+      this.$store
+        .dispatch("auth/changePassword", data)
+        .then(() => {
+          ElNotification({
+            title: "Password Changed",
+            message: "密碼修改成功",
+            type: "success",
+          });
+          this.resetForm();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+        });
+    },
+    async checkRefershToken(data) {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.updatePassword(data);
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
     },
     resetForm() {
       this.ruleForm.newPassword = "";
