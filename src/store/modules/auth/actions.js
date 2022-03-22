@@ -141,14 +141,20 @@ export default {
       });
   },
   async updateProfile(context, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+
     await axios
-      .put("/api/account", payload)
+      .put("/api/account", payload, {
+        headers: {
+          authorization: accessToken,
+        },
+      })
       .then((res) => {
         console.log(res);
-        let oldUsername = JSON.parse(localStorage.getItem("userData"));
-        oldUsername.username = payload.username;
-        localStorage.setItem("userData", JSON.stringify(oldUsername));
-        console.log(oldUsername);
+        // let oldUsername = JSON.parse(localStorage.getItem("userData"));
+        // oldUsername.username = payload.username;
+        // localStorage.setItem("userData", JSON.stringify(oldUsername));
+        // console.log(oldUsername);
       })
       .catch((err) => {
         console.log(err.response);

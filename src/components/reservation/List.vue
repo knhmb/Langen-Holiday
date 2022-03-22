@@ -196,8 +196,6 @@ export default {
         (item) => item === "" || item === null
       );
 
-      console.log(Object.values(JSON.parse(str)).length <= 0);
-
       if (isEmpty || Object.values(JSON.parse(str)).length <= 0) {
         ElNotification({
           title: "Error",

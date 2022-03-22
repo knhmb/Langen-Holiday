@@ -5,19 +5,19 @@
       <el-row>
         <el-col>
           <label>中文姓名 (與證件相同)</label>
-          <p>陳大文</p>
+          <p>{{ user.fullNameTc }}</p>
         </el-col>
         <el-col>
           <label>英文姓名 (與證件相同)</label>
-          <p>{{ username }}</p>
+          <p>{{ user.fullName }}</p>
         </el-col>
         <el-col>
           <label>電郵地址</label>
-          <p>chantaiman@gmai.com</p>
+          <p>{{ user.email }}</p>
         </el-col>
         <el-col>
           <label>電話號碼</label>
-          <p>61234678</p>
+          <p>{{ user.phoneNo }}</p>
         </el-col>
         <el-col>
           <el-button @click="editProfile">修改</el-button>
@@ -50,6 +50,11 @@ export default {
     username(oldVal, newVal) {
       console.log(oldVal);
       console.log(newVal);
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.getters["profile/account"];
     },
   },
   methods: {

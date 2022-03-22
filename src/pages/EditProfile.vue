@@ -5,7 +5,9 @@
         <el-col :sm="24" :lg="6">
           <div class="profile-menu">
             <img src="../assets/member-avatar.svg" alt="" />
-            <p v-if="profileName">{{ profileName }}</p>
+            <p v-if="profileName" class="username">
+              {{ user.username }}
+            </p>
             <ul>
               <router-link
                 tag="li"
@@ -74,6 +76,8 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     return {
@@ -124,6 +128,31 @@ export default {
     },
     setOption(option) {
       this.isActive = option;
+    },
+    async checkAccessToken() {
+      await this.$store
+        .dispatch("profile/getAccount")
+        .then(() => {
+          console.log("Worked");
+        })
+        .catch(() => {
+          console.log("NOT WORKING");
+          this.checkRefershToken();
+          console.log("NOT WORKING2");
+        });
+    },
+    async checkRefershToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {})
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
     },
   },
   watch: {
@@ -186,6 +215,14 @@ export default {
       }
     },
   },
+  computed: {
+    user() {
+      return this.$store.getters["profile/account"];
+    },
+  },
+  mounted() {
+    this.checkAccessToken();
+  },
   created() {
     this.currentPath = this.$route.path;
     if (this.currentPath === "/edit-profile/personal-information") {
@@ -236,6 +273,10 @@ export default {
   margin-top: 0.5rem;
   font-weight: bold;
   /* padding: 0 1rem; */
+}
+.edit-profile .profile-menu p.username {
+  word-break: break-word;
+  padding: 0 0.5rem;
 }
 
 .edit-profile .profile-menu ul {

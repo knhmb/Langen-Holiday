@@ -5,13 +5,18 @@
       <el-form label-position="top">
         <el-row>
           <el-col>
-            <el-form-item label="姓名">
-              <el-input v-model="name"></el-input>
+            <el-form-item label="中文姓名 (與證件相同)">
+              <el-input v-model="chineseName"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col>
+            <el-form-item label="英文姓名 (與證件相同)">
+              <el-input v-model="englishName"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
             <el-form-item label="電郵地址">
-              <el-input v-model="email"></el-input>
+              <el-input disabled v-model="email"></el-input>
             </el-form-item>
           </el-col>
           <el-col>
@@ -21,7 +26,14 @@
           </el-col>
           <el-col>
             <el-button
-              :disabled="name === '' || email === '' || telephone === ''"
+              :disabled="
+                chineseName === '' ||
+                chineseName === null ||
+                englishName === null ||
+                englishName === '' ||
+                email === '' ||
+                telephone === ''
+              "
               @click.prevent="submit"
               >電話號碼</el-button
             >
@@ -39,36 +51,62 @@ export default {
   data() {
     return {
       name: "",
-      email: "chantaiman@gmai.com",
-      telephone: "61234678",
+      chineseName: "",
+      englishName: "",
+      email: "",
+      telephone: "",
     };
+  },
+  computed: {
+    user() {
+      return this.$store.getters["profile/account"];
+    },
   },
   methods: {
     async submit() {
       // this.$router.push("/edit-profile");
-      const userId = JSON.parse(localStorage.getItem("userData")).id;
+      // const userId = JSON.parse(localStorage.getItem("userData")).id;
       const data = {
-        id: userId,
-        displayName: "chantaiman94",
-        username: this.name,
-        givenName: this.name,
-        lastName: "Tai Man",
+        fullNameTc: this.chineseName,
+        fullName: this.englishName,
         phoneNo: this.telephone,
-        email: this.email,
-        isAgreeRecvPromo: false,
       };
-      try {
-        await this.$store.dispatch("auth/updateProfile", data);
-        console.log(userId);
-        this.$emit("managed", false);
-      } catch (err) {
-        ElNotification({
-          title: "Error",
-          message: err.message,
-          type: "error",
+      console.log(data);
+      await this.$store
+        .dispatch("auth/updateProfile", data)
+        .then(() => {
+          this.updateProfile();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
         });
-      }
+      // try {
+      //   await this.$store.dispatch("auth/updateProfile", data);
+      //   console.log(userId);
+      //   this.$emit("managed", false);
+      // } catch (err) {
+      //   ElNotification({
+      //     title: "Error",
+      //     message: err.message,
+      //     type: "error",
+      //   });
+      // }
     },
+    async updateProfile() {
+      await this.$store.dispatch("profile/getAccount").then(() => {
+        this.$emit("managed", false);
+      });
+    },
+  },
+  mounted() {
+    this.chineseName = this.user.fullNameTc;
+    this.englishName = this.user.fullName;
+    this.email = this.user.email;
+    this.telephone = this.user.phoneNo;
   },
   created() {
     if (localStorage.getItem("userData")) {
