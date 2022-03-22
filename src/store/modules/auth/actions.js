@@ -189,4 +189,18 @@ export default {
         throw error;
       });
   },
+  async oneTimePassword(_, payload) {
+    await axios
+      .post("/api/account/otp", payload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        // console.log(JSON.parse(err.response.data));
+        console.log(err.response.data);
+        const message = JSON.parse(err.response.data.split("<br>")[1]).message;
+        const error = new Error(t(message));
+        throw error;
+      });
+  },
 };

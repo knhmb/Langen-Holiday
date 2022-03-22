@@ -47,7 +47,9 @@
               class="input-btn"
               v-model.trim="ruleForm.email"
             ></el-input>
-            <el-button class="inner-btn">獲取驗證碼</el-button>
+            <el-button @click="oneTimePassword" class="inner-btn"
+              >獲取驗證碼</el-button
+            >
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
@@ -148,7 +150,7 @@ export default {
         email: "",
         emailVerificationCode: "",
         phoneNumber: "",
-        terms: [],
+        terms: "",
         password: "",
         confirmPassword: "",
       },
@@ -189,13 +191,13 @@ export default {
           {
             required: true,
             message: this.$i18n.t("email_required"),
-            // type: "email",
+            type: "email",
             trigger: "blur",
           },
         ],
         emailVerificationCode: [
           {
-            // required: true,
+            required: true,
             message: "Please enter verification code",
             trigger: "blur",
           },
@@ -278,17 +280,16 @@ export default {
     },
     async submitData() {
       const data = {
-        email: this.ruleForm.email,
-        password: this.ruleForm.password,
-        username: this.ruleForm.email,
-        displayName: this.ruleForm.englishName,
-        givenName: "Francis",
-        lastName: "Wong",
+        fullName: this.ruleForm.englishName,
+        fullNameTc: this.ruleForm.chineseName,
         phoneNo: this.ruleForm.phoneNumber,
-        isAgreePrivacyNotice: true,
-        isAgreeRecvPromo: true,
+        email: this.ruleForm.email,
+        otp: this.ruleForm.emailVerificationCode,
+        password: this.ruleForm.password,
+        isAgreePrivacyNotice: this.ruleForm.terms,
         memberRegistration: true,
       };
+      console.log(data);
 
       try {
         await this.$store.dispatch("auth/register", data);
@@ -316,6 +317,34 @@ export default {
           return false;
         }
       });
+    },
+    async oneTimePassword() {
+      if (this.ruleForm.email === "") {
+        ElNotification({
+          title: "Error",
+          message: this.$i18n.t("email_required"),
+          type: "error",
+        });
+      } else {
+        await this.$store
+          .dispatch("auth/oneTimePassword", {
+            email: this.ruleForm.email,
+          })
+          .then(() => {
+            ElNotification({
+              title: "Success",
+              message: "代碼發送到您的電子郵件",
+              type: "success",
+            });
+          })
+          .catch((err) => {
+            ElNotification({
+              title: "Error",
+              message: err.message,
+              type: "error",
+            });
+          });
+      }
     },
   },
 };

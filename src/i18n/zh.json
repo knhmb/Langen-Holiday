@@ -17,5 +17,6 @@
   "confirm_email": "請重新輸入郵箱",
   "email_matching": "電子郵件和確認電子郵件不匹配",
   "token_expired": "令牌已過期！請重新登錄",
-  "invalid_coupon": "無效的優惠券"
+  "invalid_coupon": "無效的優惠券",
+  "error.account.send-otp-failed": "發送 OTP 失敗"
 }
