@@ -114,8 +114,8 @@ export default {
         throw error;
       });
   },
-  makeReservation() {
-    axios
+  async makeReservation() {
+    await axios
       .post("/api/reservation")
       .then((res) => {
         console.log(res);

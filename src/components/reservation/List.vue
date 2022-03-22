@@ -183,7 +183,7 @@ export default {
     closeDialog() {
       this.isDialogOpen = false;
     },
-    reserve() {
+    async reserve() {
       const tempObject = { ...this.bookingInfo };
       delete tempObject.specialRequest;
       console.log(tempObject);
@@ -205,12 +205,13 @@ export default {
           type: "error",
         });
       } else {
-        ElNotification({
-          title: "Success",
-          message: "Booked",
-          type: "success",
+        await this.$store.dispatch("booking/makeReservation").then(() => {
+          ElNotification({
+            title: "Success",
+            message: "已預訂",
+            type: "success",
+          });
         });
-        this.$store.dispatch("booking/makeReservation");
       }
     },
   },
