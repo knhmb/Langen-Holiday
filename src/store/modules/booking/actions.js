@@ -1,5 +1,8 @@
 import axios from "axios";
 import moment from "moment";
+import i18n from "../../../i18n.js";
+
+const { t } = i18n.global;
 
 export default {
   async getHotel(context, payload) {
@@ -98,5 +101,27 @@ export default {
   },
   updatePetQty(context, payload) {
     context.commit("UPDATE_PET_QTY", payload);
+  },
+  async applyCoupon(_, payload) {
+    await axios
+      .post("/api/coupon/apply-coupon", payload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        const error = new Error(t("invalid_coupon"));
+        throw error;
+      });
+  },
+  makeReservation() {
+    axios
+      .post("/api/reservation")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

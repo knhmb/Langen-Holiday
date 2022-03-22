@@ -210,6 +210,7 @@ export default {
           message: "Booked",
           type: "success",
         });
+        this.$store.dispatch("booking/makeReservation");
       }
     },
   },

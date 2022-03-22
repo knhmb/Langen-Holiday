@@ -142,12 +142,12 @@
     <el-row>
       <el-col>
         <label class="input-label">折扣代碼:</label>
-        <el-input size="large"></el-input>
+        <el-input v-model="couponCode" size="large"></el-input>
       </el-col>
     </el-row>
     <el-row>
       <el-col>
-        <el-button>使用折扣代碼</el-button>
+        <el-button @click="applyCoupon">使用折扣代碼</el-button>
       </el-col>
     </el-row>
   </div>
@@ -155,11 +155,13 @@
 
 <script>
 import moment from "moment";
+import { ElNotification } from "element-plus";
 
 export default {
   data() {
     return {
       arr: [],
+      couponCode: "",
     };
   },
   computed: {
@@ -214,6 +216,28 @@ export default {
       }
 
       // return { ...this.arr };
+    },
+  },
+  methods: {
+    async applyCoupon() {
+      const data = {
+        couponCode: this.couponCode,
+        hotelId: this.$route.params.id,
+        price: this.selectedHotel.priceOfSelectedDate,
+      };
+      console.log(data);
+      await this.$store
+        .dispatch("booking/applyCoupon", data)
+        .then(() => {
+          console.log("successful");
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+        });
     },
   },
   mounted() {
