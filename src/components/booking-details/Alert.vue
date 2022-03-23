@@ -1,5 +1,11 @@
 <template>
-  <div class="alert" v-if="selectedHotel.basicInfo.specialNotice !== null">
+  <div
+    class="alert"
+    v-if="
+      Object.keys(selectedHotel).length > 0 &&
+      selectedHotel.basicInfo.specialNotice !== null
+    "
+  >
     <el-row>
       <el-col :sm="24" :lg="3">
         <img src="../../assets/icon-warning.svg" alt="" />

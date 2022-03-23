@@ -56,5 +56,6 @@ export default {
   margin-bottom: 2rem;
   letter-spacing: 4.6px;
   color: #8d8d8d;
+  word-break: break-all;
 }
 </style>

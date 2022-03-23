@@ -1,13 +1,13 @@
 <template>
   <base-container>
-    <div class="booking-info">
+    <div class="booking-info" v-if="Object.keys(selectedHotel).length > 0">
       <el-row class="heading">
         <el-col :sm="24" :md="4" :lg="7">
           <h1>{{ selectedHotel.basicInfo.name }}</h1>
         </el-col>
         <el-col :sm="24" :md="17" :lg="14">
           <el-rate
-            v-model="value"
+            :model-value="+selectedHotel.rating"
             disabled
             show-score
             :colors="colors"

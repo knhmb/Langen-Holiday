@@ -50,12 +50,16 @@ export default {
     "rateValue",
     "rateText",
     "image",
+    "bookmarked",
   ],
   data() {
     return {
       value: 4,
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
-      bookmarkIcon: require("../../assets/icon-bookmark-on.png"),
+      bookmarkIcon:
+        this.bookmarked === true
+          ? require("../../assets/icon-bookmark-on.png")
+          : require("../../assets/icon-bookmark-off.png"),
     };
   },
   methods: {

@@ -69,6 +69,11 @@ export default {
           : "",
     };
   },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+  },
   methods: {
     toggleBookmark() {
       if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
@@ -77,7 +82,7 @@ export default {
         this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
       }
     },
-    selectHotel(id) {
+    async selectHotel(id) {
       console.log(id);
       const date = new Date();
       const today = date.setDate(date.getDate());
@@ -94,8 +99,9 @@ export default {
         roomQty: 1,
       };
       console.log(data);
-      this.$store.dispatch("booking/getHotel", data).then(() => {
+      await this.$store.dispatch("booking/getHotel", data).then(() => {
         this.$router.push("/booking-details/" + id);
+        console.log(this.selectedHotel);
       });
     },
   },

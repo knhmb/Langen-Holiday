@@ -2,7 +2,11 @@
   <base-container>
     <div class="booking-alert">
       <h2>住宿訊息</h2>
-      <el-alert type="warning" :closable="false">
+      <el-alert
+        type="warning"
+        :closable="false"
+        v-if="Object.keys(this.selectedHotel).length > 0"
+      >
         <p>{{ selectedHotel.basicInfo.stayInformation }}</p>
         <!-- <p>
           讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有，片衣代可度和全農不嚴分，慢構醫有：推少過它自，路具經上多然我直子名對空成沒一問論處客完環人以告節以可的……好出點之就會親工。

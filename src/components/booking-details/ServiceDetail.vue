@@ -3,7 +3,7 @@
     <div class="service-detail">
       <Alert />
       <h3>基本資料</h3>
-      <el-row :gutter="30">
+      <el-row :gutter="30" v-if="Object.keys(selectedHotel).length > 0">
         <el-col :sm="24" :lg="12">
           <el-row :gutter="30" class="service-info">
             <el-col :span="12">

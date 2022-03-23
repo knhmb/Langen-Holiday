@@ -24,6 +24,7 @@ import BookingAlert from "../components/booking-details/BookingAlert.vue";
 import Services from "../components/booking-details/Services.vue";
 import ReadMore from "../components/booking-details/ReadMore.vue";
 import Comment from "../components/booking-details/Comment.vue";
+import moment from "moment";
 
 export default {
   components: {
@@ -38,7 +39,32 @@ export default {
     ReadMore,
     Comment,
   },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
+  },
+  methods: {
+    async fetchHotel() {
+      const data = {
+        hotelId: this.$route.params.id,
+        checkInDate: this.dateSelected.start,
+        checkOutDate: this.dateSelected.end,
+        roomQty: 1,
+      };
+      console.log(data);
+      console.log(moment(data.checkInDate).format("YYYYMMDD"));
+      console.log(moment(data.checkOutDate).format("YYYYMMDD"));
+      await this.$store.dispatch("booking/getHotel", data).then(() => {
+        console.log(this.selectedHotel);
+      });
+    },
+  },
   created() {
+    // this.fetchHotel();
     this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
   },
   // computed: {

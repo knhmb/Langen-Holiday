@@ -8,6 +8,8 @@ import searchModule from "./modules/search/index";
 import bookingModule from "./modules/booking/index";
 import profileModule from "./modules/profile/index";
 
+import createPersistedState from "vuex-persistedstate";
+
 // import moment from "moment";
 
 const date = new Date();
@@ -17,6 +19,7 @@ const tomorrow = date.setDate(date.getDate() + 1);
 // const tomorrow = moment(date.setDate(date.getDate() + 1)).format("YYYYMMDD");
 
 const store = createStore({
+  plugins: [createPersistedState()],
   state() {
     return {
       headerVisible: true,

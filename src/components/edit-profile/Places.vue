@@ -2,6 +2,20 @@
   <div class="places">
     <h3>我的收藏</h3>
     <el-row :gutter="10">
+      <el-col v-for="item in wishlist" :key="item.id" :sm="24" :lg="12">
+        <Card
+          :name="item.name"
+          :description="item.location"
+          :discount="item.discountedPrice"
+          :price="item.originalPrice"
+          :rate-value="item.rating"
+          :rate-text="item.reviewsCount"
+          :image="item.thumbnail"
+          :bookmarked="item.bookmarked"
+        />
+      </el-col>
+    </el-row>
+    <!-- <el-row :gutter="10">
       <el-col v-for="service in services" :key="service.id" :sm="24" :lg="12">
         <Card
           :name="service.name"
@@ -13,12 +27,13 @@
           :image="service.image"
         />
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 
 <script>
 import Card from "./Card.vue";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -69,6 +84,44 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    wishlist() {
+      return this.$store.getters["profile/wishlist"];
+    },
+  },
+  methods: {
+    getWishlist() {
+      this.$store.dispatch("profile/getWishlist");
+    },
+    async checkAccessToken() {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.getWishlist();
+        })
+        .catch(() => {
+          this.checkRefershToken();
+        });
+    },
+    async checkRefershToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.getWishlist();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
+  },
+  created() {
+    this.checkAccessToken();
   },
 };
 </script>

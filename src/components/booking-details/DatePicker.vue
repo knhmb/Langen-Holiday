@@ -83,14 +83,16 @@ export default {
       return this.$store.getters["booking/selectedHotel"];
     },
     attributes() {
-      return this.selectedHotel.availableDates.map((date) => ({
-        highlight: date.available === true ? true : false,
-        dates: date.bookingDate,
-        on: [{ days: 25 }],
-        popover: {
-          label: date.price,
-        },
-      }));
+      if (Object.keys(this.selectedHotel).length > 0) {
+        return this.selectedHotel.availableDates.map((date) => ({
+          highlight: date.available === true ? true : false,
+          dates: date.bookingDate,
+          on: [{ days: 25 }],
+          popover: {
+            label: date.price,
+          },
+        }));
+      } else return false;
     },
   },
   methods: {
@@ -170,10 +172,13 @@ export default {
     // },
   },
   created() {
-    for (let item of this.selectedHotel.availableDates) {
-      this.availableDates.push(moment(item.bookingDate).format("YYYY-MM-DD"));
+    if (Object.keys(this.selectedHotel).length > 0) {
+      for (let item of this.selectedHotel.availableDates) {
+        this.availableDates.push(moment(item.bookingDate).format("YYYY-MM-DD"));
+      }
+      console.log(this.selectedHotel.availableDates);
     }
-    console.log(this.selectedHotel.availableDates);
+
     this.modifiedDate = this.dateSelected;
   },
   mounted() {
