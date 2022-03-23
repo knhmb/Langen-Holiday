@@ -120,7 +120,7 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Please enter the password"));
+        callback(new Error(this.$i18n.t("password_required")));
       } else {
         if (this.ruleForm.confirmPassword !== "") {
           this.$refs.ruleForm.validateField("confirmPassword");
@@ -131,10 +131,10 @@ export default {
 
     const validateConfirmPass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Please enter the password again"));
+        callback(new Error("請重新輸入密碼"));
       } else {
         if (value !== this.ruleForm.password) {
-          callback(new Error("Password and confirm password do not match"));
+          callback(new Error(this.$i18n.t("password_dont_match")));
         } else {
           callback();
         }
@@ -150,7 +150,7 @@ export default {
         email: "",
         emailVerificationCode: "",
         phoneNumber: "",
-        terms: "",
+        terms: false,
         password: "",
         confirmPassword: "",
       },
@@ -198,7 +198,7 @@ export default {
         emailVerificationCode: [
           {
             required: true,
-            message: "Please enter verification code",
+            message: "請輸入驗證碼",
             trigger: "blur",
           },
         ],
@@ -225,7 +225,7 @@ export default {
           },
           {
             min: 6,
-            message: "Password must be atleat 6 characters",
+            message: "密碼必須至少6個字符",
           },
         ],
         confirmPassword: [

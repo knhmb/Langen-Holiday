@@ -134,10 +134,10 @@ export default {
         console.log(response);
       })
       .catch((err) => {
-        if (err.response.data.statusCode === 400) {
-          const error = new Error(t("username_already_exists"));
-          throw error;
-        }
+        // if (err.response.data.statusCode === 400) {
+        const error = new Error(t(err.response.data.message));
+        throw error;
+        // }
       });
   },
   async updateProfile(context, payload) {

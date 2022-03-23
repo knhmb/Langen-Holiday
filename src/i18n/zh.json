@@ -18,5 +18,9 @@
   "email_matching": "電子郵件和確認電子郵件不匹配",
   "token_expired": "令牌已過期！請重新登錄",
   "invalid_coupon": "無效的優惠券",
-  "error.account.send-otp-failed": "發送 OTP 失敗"
+  "error.account.send-otp-failed": "發送 OTP 失敗",
+  "error.account.invalid-one-time-password": "一次性密碼無效",
+  "error.account.phone-already-exist": "電話已經存在",
+  "error.account.email-already-exist": "電子郵件已存在",
+  "error.account.username-already-exist": "用戶名已存在"
 }
