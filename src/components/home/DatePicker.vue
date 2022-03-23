@@ -19,6 +19,7 @@
           :columns="layout.columns"
           :rows="layout.rows"
           :is-expanded="layout.isExpanded"
+          :min-date="new Date()"
           color="orange"
           is-range
           v-model="dateSelected"

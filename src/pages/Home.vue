@@ -24,5 +24,9 @@ export default {
     Activities,
     // TheFooter,
   },
+  created() {
+    this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
+    this.$store.dispatch("resetDate");
+  },
 };
 </script>
