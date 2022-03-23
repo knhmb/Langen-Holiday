@@ -8,7 +8,7 @@
     >
       <el-carousel-item v-for="place in topPlaces" :key="place.id">
         <base-container>
-          <el-row :gutter="10">
+          <el-row :gutter="20">
             <el-col :span="24">
               <Card
                 :name="place.name"
@@ -35,8 +35,9 @@
     >
       <el-carousel-item>
         <base-container>
-          <el-row :gutter="10">
+          <el-row :gutter="20">
             <el-col
+              class="top-places-carousel"
               :span="8"
               v-for="place in topPlaces.slice(0, 3)"
               :key="place.id"
@@ -58,8 +59,9 @@
       </el-carousel-item>
       <el-carousel-item>
         <base-container>
-          <el-row :gutter="10">
+          <el-row :gutter="20">
             <el-col
+              class="top-places-carousel"
               :span="8"
               v-for="place in topPlaces.slice(3)"
               :key="place.id"
@@ -165,6 +167,10 @@ export default {
 
 .places-carousel .fish-img {
   width: 300px;
+}
+
+.places-carousel .el-row .el-col.top-places-carousel {
+  height: 350px;
 }
 
 .places-carousel .el-carousel .el-carousel__item {

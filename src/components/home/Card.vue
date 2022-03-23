@@ -1,5 +1,40 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
+  <div class="top-places-card">
+    <div class="card-img">
+      <img @click="selectHotel(id)" :src="image" class="image" />
+      <img class="ranks" :src="icon" alt="" />
+    </div>
+    <div class="bottom">
+      <el-row>
+        <el-col :span="14">
+          <span>{{ name }}</span>
+          <span class="small"
+            ><img
+              class="location-icon"
+              src="../../assets/icon-location.png"
+              alt=""
+            />
+            {{ description }}</span
+          >
+          <span class="discount">HK${{ price }}</span>
+          <span class="price">HK${{ discount }}<small> 起</small></span>
+          <el-rate
+            v-model="value"
+            show-score
+            disabled
+            text-color="#c6c6c6"
+            :score-template="rateText + '則評語'"
+          >
+          </el-rate>
+        </el-col>
+        <el-col :span="10"
+          ><span class="bookmark-icon"
+            ><img @click="toggleBookmark" :src="bookmarkIcon" alt="" /></span
+        ></el-col>
+      </el-row>
+    </div>
+  </div>
+  <!-- <el-card :body-style="{ padding: '0px' }">
     <div class="card-img">
       <img @click="selectHotel(id)" :src="image" class="image" />
       <img class="ranks" :src="icon" alt="" />
@@ -34,7 +69,7 @@
         ></el-col>
       </el-row>
     </div>
-  </el-card>
+  </el-card> -->
 </template>
 
 <script>
@@ -124,7 +159,7 @@ export default {
 .places-carousel .image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 4px;
   box-shadow: 0px 3px 6px #00000029;
   cursor: pointer;
@@ -195,6 +230,7 @@ export default {
 .places-carousel .card-img {
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .places-carousel .card-img .ranks {
@@ -205,6 +241,17 @@ export default {
 
 .places-carousel .card-img .ranks {
   right: -1rem;
+}
+
+.places-carousel .top-places-card {
+  width: 100%;
+  height: 100%;
+}
+
+.places-carousel .top-places-card .bottom {
+  border-radius: 0 0 5px 5px;
+  margin-top: 0.5rem;
+  /* padding: 0.5rem; */
 }
 
 @media screen and (max-width: 768px) {
