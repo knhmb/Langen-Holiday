@@ -41,7 +41,7 @@ export default {
       });
   },
   changedService(context, payload) {
-    const checkService = payload.service === "" ? "" : payload.service;
+    const checkService = payload.service === "" ? "-" : payload.service;
     axios
       .get(
         `/api/hotel/enquire-price/${payload.hotelId}/${1}/${

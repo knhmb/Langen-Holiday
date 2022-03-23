@@ -180,7 +180,16 @@ export default {
       this.isChangedDate = false;
     },
     startDate() {
-      this.assignDateDifference();
+      // this.assignDateDifference();
+      const data = {
+        start: this.startDate,
+        end: this.dateSelected.end,
+      };
+      // const data = {
+      //   start: moment(this.startDate).format("YYYYMMDD"),
+      //   end: moment(this.endDate).format("YYYYMMDD"),
+      // };
+      this.$store.dispatch("changeDate", data);
     },
     endDate() {
       if (!this.isChangedDate) {
@@ -335,6 +344,7 @@ export default {
   created() {
     // this.startDate = this.dateSelected.start;
     // console.log(this.startDate);
+    console.log(this.dateSelected);
     this.startDate = this.dateSelected.start;
     this.endDate = this.dateSelected.end;
     this.assignDateDifference();

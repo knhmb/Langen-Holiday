@@ -236,6 +236,17 @@ export default {
       this.$store.dispatch("booking/storeSelectedServices", this.arr);
     },
     async book() {
+      if (
+        moment(this.dateSelected.start).format("YYYYMMDD") >
+        moment(this.dateSelected.end).format("YYYYMMDD")
+      ) {
+        ElNotification({
+          title: "Error",
+          message: "退房日期不能早於入住日期。請選擇其他日期",
+          type: "error",
+        });
+        return;
+      }
       this.$store.dispatch("booking/storeChildrenAge", this.childAge);
       if (localStorage.getItem("accessToken")) {
         await this.$store
