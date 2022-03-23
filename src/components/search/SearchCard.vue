@@ -1,5 +1,37 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
+  <div class="my-card">
+    <img :src="image" @click="selectedHotel(id)" class="image" />
+    <div class="bottom">
+      <el-row>
+        <el-col :span="18">
+          <span class="hotel-name">{{ name }}</span>
+          <span class="small"
+            ><img
+              class="location-icon"
+              src="../../assets/icon-location.png"
+              alt=""
+            />{{ description }}</span
+          >
+          <span class="discount">HK${{ price }}</span>
+          <span class="price">HK${{ discount }}<small> 起</small></span>
+          <el-rate
+            v-model="value"
+            show-score
+            disabled
+            :colors="colors"
+            text-color="#c6c6c6"
+            :score-template="rateText + '則評語'"
+          >
+          </el-rate>
+        </el-col>
+        <el-col :span="6"
+          ><span class="bookmark-icon"
+            ><img @click="toggleBookmark" :src="bookmarkIcon" alt="" /></span
+        ></el-col>
+      </el-row>
+    </div>
+  </div>
+  <!-- <el-card :body-style="{ padding: '0px' }">
     <img :src="image" @click="selectedHotel(id)" class="image" />
     <div style="padding: 14px">
       <div class="bottom">
@@ -32,7 +64,7 @@
         </el-row>
       </div>
     </div>
-  </el-card>
+  </el-card> -->
 </template>
 
 <script>
@@ -108,9 +140,11 @@ export default {
 
 .search .right-section .image {
   width: 100%;
+  /* display: block; */
   height: 100%;
   object-fit: cover;
   cursor: pointer;
+  border-radius: 5px 5px 0 0;
 }
 
 .search .right-section .location-icon {
@@ -173,5 +207,21 @@ export default {
 
 .search .right-section .el-rate .el-rate__icon {
   margin: 0;
+}
+
+.search .right-section .my-card {
+  width: 100%;
+  height: 100%;
+}
+
+.search .right-section .my-card .bottom {
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 0 0 5px 5px;
+  margin-top: -4px;
+  padding: 0.5rem;
+}
+
+.search .right-section .my-card .image-content {
+  /* height: 300px; */
 }
 </style>

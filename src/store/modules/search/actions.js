@@ -43,7 +43,7 @@ export default {
         console.log(err);
       });
   },
-  sortIslandSearch(_, payload) {
+  sortIslandSearch(context, payload) {
     axios
       .get(
         `/api/hotel?filter=itemcategory:${payload.slug},stayingDate:${
@@ -60,7 +60,7 @@ export default {
       )
       .then((res) => {
         console.log(res);
-        // context.commit("SET_SEARCH_ITEMS", res.data.items);
+        context.commit("SET_SEARCH_ITEMS", res.data.items);
       })
       .catch((err) => {
         console.log(err);

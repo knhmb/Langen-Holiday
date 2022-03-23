@@ -49,26 +49,31 @@
     </el-row>
     <el-row class="card-row" :gutter="10">
       <!-- <template v-if="$route.path.includes('municipal-services-building')"> -->
-      <el-col
-        v-for="item in searchItems"
-        :key="item.id"
-        :sm="24"
-        :md="8"
-        :lg="8"
-      >
-        <SearchCard
-          :name="item.name"
-          :description="item.location"
-          :discount="item.discountedPrice"
-          :price="item.originalPrice"
-          :rate-value="item.rating"
-          :rate-text="item.reviewsCount"
-          :image="item.thumbnail"
-          :bookmarked="item.bookmarked"
-          :id="item.hotelId"
-          :number-of-rooms="numberOfRooms"
-        />
-      </el-col>
+      <template v-if="searchItems.length <= 0">
+        <p class="no-search">沒有相關搜索結果</p>
+      </template>
+      <template v-else>
+        <el-col
+          v-for="item in searchItems"
+          :key="item.id"
+          :sm="24"
+          :md="8"
+          :lg="8"
+        >
+          <SearchCard
+            :name="item.name"
+            :description="item.location"
+            :discount="item.discountedPrice"
+            :price="item.originalPrice"
+            :rate-value="item.rating"
+            :rate-text="item.reviewsCount"
+            :image="item.thumbnail"
+            :bookmarked="item.bookmarked"
+            :id="item.hotelId"
+            :number-of-rooms="numberOfRooms"
+          />
+        </el-col>
+      </template>
       <!-- </template> -->
     </el-row>
   </div>
@@ -131,6 +136,7 @@ export default {
   padding: 3px 0 6px 0;
   cursor: pointer;
   margin-top: 0.5rem;
+  margin-bottom: 1rem;
   /* width: 100px; */
 }
 
@@ -145,7 +151,13 @@ export default {
 }
 
 .el-row.card-row .el-col {
-  display: flex;
-  align-items: stretch;
+  /* display: flex;
+  align-items: stretch; */
+  height: 250px;
+  margin-bottom: 9rem;
+}
+
+p.no-search {
+  margin-top: 0.5rem;
 }
 </style>

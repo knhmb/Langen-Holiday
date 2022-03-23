@@ -16,6 +16,7 @@
               <p>入住日期</p>
               <DatePicker
                 :model-config="modelConfig"
+                :min-date="new Date()"
                 color="orange"
                 is-range
                 v-model="range"
