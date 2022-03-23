@@ -143,6 +143,7 @@
 import AddOns from "./AddOns.vue";
 import moment from "moment";
 import { DatePicker } from "v-calendar";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -183,6 +184,18 @@ export default {
     },
     endDate() {
       if (!this.isChangedDate) {
+        return;
+      }
+      if (
+        moment(this.startDate).format("YYYYMMDD") >
+        moment(this.endDate).format("YYYYMMDD")
+      ) {
+        console.log("Start Date is bigger");
+        ElNotification({
+          title: "Error",
+          message: "退房日期不能早於入住日期。請選擇其他日期",
+          type: "error",
+        });
         return;
       }
       this.assignDateDifference();
