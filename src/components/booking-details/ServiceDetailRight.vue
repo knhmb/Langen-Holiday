@@ -19,6 +19,7 @@
           <v-date-picker
             locale="zh-cn"
             :masks="masks"
+            :min-date="new Date()"
             class="inline-block h-full"
             v-model="startDate"
           >
@@ -42,6 +43,7 @@
           <v-date-picker
             locale="zh-cn"
             :masks="masks"
+            :min-date="new Date()"
             class="inline-block h-full"
             v-model="endDate"
             @click="isChangedDate = true"
@@ -165,15 +167,34 @@ export default {
     };
   },
   watch: {
+    dateDifference() {
+      if (this.dateDifference < 0) {
+        const storedData = JSON.parse(localStorage.getItem("vuex"));
+        console.log(storedData);
+      }
+    },
     dateSelected() {
       this.startDate = this.dateSelected.start;
       this.endDate = this.dateSelected.end;
       this.isChangedDate = false;
     },
+    startDate() {
+      this.assignDateDifference();
+    },
     endDate() {
       if (!this.isChangedDate) {
         return;
       }
+      this.assignDateDifference();
+      // if (this.dateDifference < 0) {
+      //   this.endDate = this.dateSelected.end;
+      //   const data = {
+      //     start: this.startDate,
+      //     end: this.endDate,
+      //   };
+      //   this.$store.dispatch("changeDate", data);
+      //   console.log("IM HEREERERERER");
+      // }
       console.log("reached changed date");
       const data = {
         start: this.startDate,
@@ -202,7 +223,7 @@ export default {
         console.log(data);
         this.$store.dispatch("booking/changedService", serviceData);
       }
-      this.assignDateDifference();
+
       // this.$store.dispatch("booking/changedService", serviceData);
     },
     // dateSelected() {
@@ -290,8 +311,8 @@ export default {
     assignDateDifference() {
       console.log("executed");
       if (this.dateSelected) {
-        let startDate = moment(this.dateSelected.start);
-        let endDate = moment(this.dateSelected.end);
+        let startDate = moment(this.startDate);
+        let endDate = moment(this.endDate);
         let duration = moment.duration(endDate.diff(startDate));
         let days = duration.asDays();
         this.dateDifference = Math.round(days);
@@ -303,6 +324,7 @@ export default {
     // console.log(this.startDate);
     this.startDate = this.dateSelected.start;
     this.endDate = this.dateSelected.end;
+    this.assignDateDifference();
   },
   mounted() {
     this.isChangedDate = true;
