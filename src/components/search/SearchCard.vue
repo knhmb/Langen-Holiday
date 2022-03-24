@@ -69,6 +69,7 @@
 
 <script>
 // import moment from "moment";
+import { ElNotification } from "element-plus";
 
 export default {
   props: [
@@ -93,17 +94,88 @@ export default {
           : require("../../assets/icon-bookmark-on.png"),
     };
   },
+  watch: {
+    bookmarked() {
+      this.bookmarkIcon =
+        this.bookmarked === false
+          ? require("../../assets/icon-bookmark-off.png")
+          : require("../../assets/icon-bookmark-on.png");
+    },
+  },
   computed: {
     dateSelected() {
       return this.$store.getters.dateSelected;
     },
   },
   methods: {
+    async removeBookmark() {
+      await this.$store
+        .dispatch("profile/removeBookmarkSearch", {
+          hotelId: this.id,
+          value: false,
+        })
+        .then(() => {})
+        .catch(() => {
+          // ElNotification({
+          //   title: "Error",
+          //   message: err.message,
+          //   type: "error",
+          // });
+        });
+    },
+    async setBookmark() {
+      await this.$store
+        .dispatch("profile/setBookmarkSearch", {
+          hotelId: this.id,
+          value: true,
+        })
+        .then(() => {})
+        .catch(() => {
+          // ElNotification({
+          //   title: "Error",
+          //   message: err.message,
+          //   type: "error",
+          // });
+        });
+    },
+    async checkAcessToken(option) {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          if (option === "remove") {
+            this.removeBookmark();
+          } else {
+            this.setBookmark();
+          }
+        })
+        .catch(() => {
+          this.checkRefreshToken(option);
+        });
+    },
+    async checkRefreshToken(option) {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          if (option === "remove") {
+            this.removeBookmark();
+          } else {
+            this.setBookmark();
+          }
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
     toggleBookmark() {
       if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
-        this.bookmarkIcon = require("../../assets/icon-bookmark-off.png");
+        this.checkAcessToken("remove");
       } else {
-        this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
+        this.checkAcessToken("set");
       }
     },
     selectedHotel(id) {

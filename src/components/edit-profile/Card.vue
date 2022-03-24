@@ -1,7 +1,7 @@
 <template>
   <div class="bookmark-card">
     <el-card :body-style="{ padding: '0px' }">
-      <img :src="image" class="image" />
+      <img @click="selectHotel" :src="image" class="image" />
       <div style="padding: 14px">
         <div class="bottom">
           <el-row>
@@ -67,6 +67,11 @@ export default {
           : require("../../assets/icon-bookmark-off.png"),
     };
   },
+  computed: {
+    selectedHotel() {
+      return this.$store.getters["booking/selectedHotel"];
+    },
+  },
   methods: {
     async removeWishlist() {
       await this.$store
@@ -112,6 +117,24 @@ export default {
         this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
       }
     },
+    async selectHotel() {
+      console.log(this.id);
+      const date = new Date();
+      const today = date.setDate(date.getDate());
+      const tomorrow = date.setDate(date.getDate() + 1);
+
+      const data = {
+        hotelId: this.id,
+        checkInDate: today,
+        checkOutDate: tomorrow,
+        roomQty: 1,
+      };
+      console.log(data);
+      await this.$store.dispatch("booking/getHotel", data).then(() => {
+        console.log(this.selectedHotel);
+        this.$router.push("/booking-details/" + this.id);
+      });
+    },
   },
 };
 </script>
@@ -127,6 +150,7 @@ export default {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .edit-profile .bookmark-card .location-icon {
