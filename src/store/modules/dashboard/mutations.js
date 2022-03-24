@@ -56,4 +56,13 @@ export default {
   SET_LAST_LOCATION(state, payload) {
     state.lastLocation = payload;
   },
+  TOGGLE_BOOKMARK(state, payload) {
+    console.log(state.topPlaces);
+
+    const hotel = state.topPlaces.find(
+      (item) => item.hotelId === payload.hotelId
+    );
+    hotel.bookmarked = payload.value;
+    console.log(state.topPlaces);
+  },
 };

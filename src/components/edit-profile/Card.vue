@@ -14,8 +14,10 @@
                   alt=""
                 />{{ description }}</span
               >
-              <span class="discount">{{ discount }}</span>
-              <span class="price">{{ price }}</span>
+              <!-- <span class="discount">{{ discount }}</span>
+              <span class="price">{{ price }}</span> -->
+              <span class="discount">HK${{ price }}</span>
+              <span class="price">HK${{ discount }}<small> 起</small></span>
               <el-rate
                 v-model="value"
                 show-score
@@ -41,6 +43,8 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   props: [
     "name",
@@ -51,6 +55,7 @@ export default {
     "rateText",
     "image",
     "bookmarked",
+    "id",
   ],
   data() {
     return {
@@ -63,9 +68,46 @@ export default {
     };
   },
   methods: {
-    toggleBookmark() {
+    async removeWishlist() {
+      await this.$store
+        .dispatch("profile/removeWishlist", { id: this.id })
+        .then(() => {
+          // ElNotification({
+          //   title: "Success",
+          //   message: "Removed",
+          //   type: "success",
+          // });
+        })
+        .catch(() => {
+          this.checkRefreshToken();
+        });
+    },
+    async checkRefreshToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.removeWishlist();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
+    async toggleBookmark() {
       if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
-        this.bookmarkIcon = require("../../assets/icon-bookmark-off.png");
+        // this.bookmarkIcon = require("../../assets/icon-bookmark-off.png");
+        await this.$store
+          .dispatch("auth/checkAccessTokenValidity")
+          .then(() => {
+            this.removeWishlist();
+          })
+          .catch(() => {
+            this.checkRefreshToken();
+          });
       } else {
         this.bookmarkIcon = require("../../assets/icon-bookmark-on.png");
       }
@@ -114,6 +156,12 @@ export default {
   display: flex;
   align-items: center;
   /* color: red; */
+}
+
+.edit-profile .bookmark-card .price small {
+  letter-spacing: 2px;
+  color: #8d8d8d;
+  font-size: 12px;
 }
 
 .edit-profile .bookmark-card .discount {

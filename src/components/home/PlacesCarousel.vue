@@ -103,45 +103,6 @@ export default {
   components: {
     Card,
   },
-  data() {
-    return {
-      // services: [
-      //   {
-      //     id: 1,
-      //     name: "白沙灣渡假酒店",
-      //     description: "西貢",
-      //     discount: "HK560",
-      //     price: "HK500",
-      //     rateValue: 4,
-      //     rateText: "62 則評語",
-      //     icon: require("../../assets/icon-rank1.png"),
-      //     image: require("../../assets/img-house1.jpg"),
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "沙田渡假酒店",
-      //     description: "沙田",
-      //     discount: "HK560",
-      //     price: "HK500",
-      //     rateValue: 4,
-      //     rateText: "62 則評語",
-      //     icon: require("../../assets/icon-rank2.png"),
-      //     image: require("../../assets/img-house2.jpg"),
-      //   },
-      //   {
-      //     id: 3,
-      //     name: "馬𩣑山酒店",
-      //     description: "馬𩣑山",
-      //     discount: "HK560",
-      //     price: "HK500",
-      //     rateValue: 4,
-      //     rateText: "62 則評語",
-      //     icon: require("../../assets/icon-rank3.png"),
-      //     image: require("../../assets/img-house3.jpg"),
-      //   },
-      // ],
-    };
-  },
   computed: {
     topPlaces() {
       return this.$store.getters["dashboard/topPlaces"];

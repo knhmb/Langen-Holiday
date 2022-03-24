@@ -12,6 +12,7 @@
           :rate-text="item.reviewsCount"
           :image="item.thumbnail"
           :bookmarked="item.bookmarked"
+          :id="item.wishlistId"
         />
       </el-col>
     </el-row>

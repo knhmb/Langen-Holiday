@@ -266,8 +266,8 @@ export default {
         console.log(err);
       });
   },
-  getTopPlaces(context) {
-    axios
+  async getTopPlaces(context) {
+    await axios
       .get("/api/hotel?filter=topfive:true")
       .then((res) => {
         console.log(res);
