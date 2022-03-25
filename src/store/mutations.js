@@ -38,4 +38,7 @@ export default {
   RESET_RESPONSES(state) {
     state.responses = {};
   },
+  TOGGLE_LOGIN_FORM(state, payload) {
+    state.dialogFormVisible = payload;
+  },
 };

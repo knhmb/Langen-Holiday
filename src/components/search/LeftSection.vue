@@ -424,8 +424,22 @@ export default {
   },
   created() {
     this.$store.dispatch("dashboard/setRoomType");
-    this.$store.dispatch("resetDate");
-    this.$store.dispatch("resetIsHavePets");
+    // this.$store.dispatch("resetDate");
+    // this.$store.dispatch("resetIsHavePets");
+
+    // const data = {
+    //   search: this.searchHotel.replaceAll(" ", "-"),
+    //   stayingDate:
+    //     moment(this.dateSelected.start).format("YYYYMMDD") +
+    //     "|" +
+    //     moment(this.dateSelected.end).format("YYYYMMDD"),
+    //   guestQty: this.numberOfLivingPopulation,
+    //   roomQty: this.numberOfRooms,
+    //   isHavePets: this.isSelected,
+    // };
+    // if (data.search === "") {
+    //   this.$store.dispatch("dashboard/searchHotel", data);
+    // }
   },
 };
 </script>

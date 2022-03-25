@@ -23,6 +23,7 @@ const store = createStore({
   state() {
     return {
       headerVisible: true,
+      dialogFormVisible: false,
       dateSelected: {
         start: today,
         end: tomorrow,

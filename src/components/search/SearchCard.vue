@@ -115,13 +115,7 @@ export default {
           value: false,
         })
         .then(() => {})
-        .catch(() => {
-          // ElNotification({
-          //   title: "Error",
-          //   message: err.message,
-          //   type: "error",
-          // });
-        });
+        .catch(() => {});
     },
     async setBookmark() {
       await this.$store
@@ -130,13 +124,7 @@ export default {
           value: true,
         })
         .then(() => {})
-        .catch(() => {
-          // ElNotification({
-          //   title: "Error",
-          //   message: err.message,
-          //   type: "error",
-          // });
-        });
+        .catch(() => {});
     },
     async checkAcessToken(option) {
       await this.$store
@@ -172,6 +160,10 @@ export default {
         });
     },
     toggleBookmark() {
+      if (!localStorage.getItem("accessToken")) {
+        this.$store.commit("TOGGLE_LOGIN_FORM", true);
+        return;
+      }
       if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
         this.checkAcessToken("remove");
       } else {

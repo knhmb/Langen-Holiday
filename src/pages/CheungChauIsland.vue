@@ -285,10 +285,21 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
   },
+  mounted() {
+    let subItem = this.cheungChauIslandItems.filter((item) =>
+      this.$route.path.split("/").includes(item.slug)
+    );
+    this.$store.dispatch("search/getSearchItems", {
+      slug:
+        subItem.length > 0
+          ? subItem[0].slug
+          : this.cheungChauIslandItems[0].parentCodexSlug,
+    });
+  },
   created() {
     this.$store.dispatch("dashboard/setCheungBanner");
     this.$store.dispatch("dashboard/setRoomType");
-    this.$store.dispatch("resetDate");
+    // this.$store.dispatch("resetDate");
   },
 };
 </script>

@@ -17,4 +17,7 @@ export default {
   numberOfRooms(state) {
     return state.numberOfRooms;
   },
+  dialogFormVisible(state) {
+    return state.dialogFormVisible;
+  },
 };

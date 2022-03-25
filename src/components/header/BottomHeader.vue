@@ -444,7 +444,7 @@ export default {
   },
   data() {
     return {
-      dialogFormVisible: false,
+      // dialogFormVisible: false,
       dialogTitle: "登入",
       navLocation: "",
       // loggedIn: false,
@@ -468,6 +468,14 @@ export default {
     },
     dayNightItems() {
       return this.$store.getters["dashboard/dayNightItems"];
+    },
+    dialogFormVisible: {
+      get() {
+        return this.$store.getters["dialogFormVisible"];
+      },
+      set(value) {
+        this.$store.commit("TOGGLE_LOGIN_FORM", value);
+      },
     },
   },
   methods: {
@@ -507,7 +515,8 @@ export default {
         });
     },
     openDialog() {
-      this.dialogFormVisible = true;
+      this.$store.commit("TOGGLE_LOGIN_FORM", true);
+      // this.dialogFormVisible = true;
       this.dialogTitle = "登入";
     },
     closeDropdown(item) {
@@ -520,7 +529,7 @@ export default {
       } else {
         this.$router.push(`/${item.slug}/${item.slug}`);
       }
-      this.$store.dispatch("search/getSearchItems", item);
+      // this.$store.dispatch("search/getSearchItems", item);
     },
     selectedSubMenu(option) {
       if (option === 4 || option === 5 || option === 6 || option === 7) {
@@ -561,24 +570,25 @@ export default {
       // this.loggedIn = false;
     },
     login(event) {
-      this.dialogFormVisible = event.closeDialog;
+      this.$store.commit("TOGGLE_LOGIN_FORM", event.closeDialog);
+      // this.dialogFormVisible = event.closeDialog;
       // this.loggedIn = event.login;
     },
     navigateToCheung(cheung) {
       this.$router.push(`/cheung-chau-island/${cheung.slug}`);
-      this.$store.dispatch("search/getSearchItems", cheung);
+      // this.$store.dispatch("search/getSearchItems", cheung);
     },
     navigateToLantau(lantau) {
       this.$router.push(`/lantau-island/${lantau.slug}`);
-      this.$store.dispatch("search/getSearchItems", lantau);
+      // this.$store.dispatch("search/getSearchItems", lantau);
     },
     navigateToLamma(lamma) {
       this.$router.push(`/lamma-island/${lamma.slug}`);
-      this.$store.dispatch("search/getSearchItems", lamma);
+      // this.$store.dispatch("search/getSearchItems", lamma);
     },
     navigateToDayTime(day) {
       this.$router.push(`/day-n-night-time/${day.slug}`);
-      this.$store.dispatch("search/getSearchItems", day);
+      // this.$store.dispatch("search/getSearchItems", day);
     },
   },
   created() {

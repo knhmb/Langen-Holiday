@@ -351,11 +351,27 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
   },
+  mounted() {
+    let currentIsland = this.headerItems.filter((item) =>
+      this.$route.path.includes(item.slug)
+    );
+    let subItem = this.dayNightItems.filter((item) =>
+      this.$route.path.split("/").includes(item.slug)
+    );
+    this.$store.dispatch("search/getSearchItems", {
+      slug:
+        subItem.length > 0
+          ? subItem[0].slug
+          : currentIsland.length > 0
+          ? currentIsland[0].slug
+          : "",
+    });
+  },
   created() {
     this.$store.dispatch("dashboard/setDayNightBanner");
     this.$store.dispatch("dashboard/setRoomType");
     this.$store.dispatch("dashboard/setLastLocation");
-    this.$store.dispatch("resetDate");
+    // this.$store.dispatch("resetDate");
     console.log(this.dayNightBanner);
   },
 };

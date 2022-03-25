@@ -183,6 +183,10 @@ export default {
         });
     },
     async toggleBookmark() {
+      if (!localStorage.getItem("accessToken")) {
+        this.$store.commit("TOGGLE_LOGIN_FORM", true);
+        return;
+      }
       if (this.bookmarkIcon === require("../../assets/icon-bookmark-on.png")) {
         this.checkAcessToken("remove");
       } else {

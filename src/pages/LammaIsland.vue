@@ -11,7 +11,7 @@
       <div class="search">
         <!-- <h2>渡假屋 <span>搜尋結果 :</span></h2> -->
         <el-row :gutter="20">
-          <el-col :sm="24" :lg="6">
+          <el-col :sm="24" :lg="6" :key="componentKey">
             <div class="left-section">
               <p>入住日期</p>
               <DatePicker
@@ -96,6 +96,7 @@
                     <el-checkbox
                       v-if="lamma.slug === 'lamma-island'"
                       :label="lamma.slug"
+                      :checked="$route.path === '/lamma-island/' + lamma.slug"
                       >{{ lamma.name }}</el-checkbox
                     >
                   </template>
@@ -104,7 +105,7 @@
                     <el-checkbox
                       :label="lamma.slug"
                       v-if="lamma.name !== '景點介紹'"
-                      :checked="$route.path.includes(lamma.slug)"
+                      :checked="$route.path === '/lamma-island/' + lamma.slug"
                       >{{ lamma.name }}</el-checkbox
                     >
                   </template>
@@ -150,6 +151,7 @@ export default {
   data() {
     return {
       time: [],
+      componentKey: 0,
       location: [],
       recommendation: "",
       isSelected: "false",
@@ -195,11 +197,16 @@ export default {
     recommendation() {
       this.sortIsland();
     },
-    // $route() {
-    //   this.$store.dispatch("resetDate");
-    // },
+    $route() {
+      // this.$store.dispatch("resetDate");
+      this.forceRerender();
+      this.sortIsland();
+    },
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     setOption(option) {
       this.isSelected = option;
       this.sortIsland();
@@ -258,6 +265,20 @@ export default {
       this.$store.dispatch("search/sortIslandSearch", data);
       this.$store.dispatch("changeDate", this.range);
     },
+    getItem() {
+      let subItem = this.lammaIslandItems.filter((item) =>
+        this.$route.path.split("/").includes(item.slug)
+      );
+      this.$store.dispatch("search/getSearchItems", {
+        slug:
+          subItem.length > 0
+            ? subItem[0].slug
+            : this.lammaIslandItems[0].parentCodexSlug,
+      });
+    },
+  },
+  mounted() {
+    this.sortIsland();
   },
   created() {
     this.$store.dispatch("dashboard/setLammaBanner");

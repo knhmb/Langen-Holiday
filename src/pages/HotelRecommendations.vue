@@ -319,6 +319,14 @@ export default {
       this.$store.dispatch("changeDate", this.range);
     },
   },
+  mounted() {
+    let currentIsland = this.headerItems.filter((item) =>
+      this.$route.path.includes(item.slug)
+    );
+    this.$store.dispatch("search/getSearchItems", {
+      slug: currentIsland[0].slug,
+    });
+  },
   created() {
     this.$store.dispatch("dashboard/setHotelBanner");
     this.$store.dispatch("dashboard/setRoomType");

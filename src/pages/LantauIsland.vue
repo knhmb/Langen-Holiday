@@ -11,7 +11,7 @@
       <div class="search">
         <!-- <h2>渡假屋 <span>搜尋結果 :</span></h2> -->
         <el-row :gutter="20">
-          <el-col :sm="24" :lg="6">
+          <el-col :sm="24" :lg="6" :key="componentKey">
             <div class="left-section">
               <p>入住日期</p>
               <DatePicker
@@ -97,6 +97,7 @@
                     <el-checkbox
                       v-if="lantau.slug === 'lantau-island'"
                       :label="lantau.slug"
+                      :checked="$route.path === '/lantau-island/' + lantau.slug"
                       >{{ lantau.name }}</el-checkbox
                     >
                   </template>
@@ -107,7 +108,7 @@
                     <el-checkbox
                       :label="lantau.slug"
                       v-if="lantau.name !== '景點介紹'"
-                      :checked="$route.path.includes(lantau.slug)"
+                      :checked="$route.path === '/lantau-island/' + lantau.slug"
                     >
                       {{ lantau.name }}</el-checkbox
                     >
@@ -154,6 +155,7 @@ export default {
   data() {
     return {
       time: [],
+      componentKey: 0,
       location: [],
       recommendation: "",
       isSelected: "false",
@@ -199,11 +201,15 @@ export default {
     recommendation() {
       this.sortIsland();
     },
-    // $route() {
-    //   this.$store.dispatch("resetDate");
-    // },
+    $route() {
+      this.forceRerender();
+      this.sortIsland();
+    },
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     setOption(option) {
       this.isSelected = option;
       this.sortIsland();
@@ -267,6 +273,9 @@ export default {
       this.$store.dispatch("search/sortIslandSearch", data);
       this.$store.dispatch("changeDate", this.range);
     },
+  },
+  mounted() {
+    this.sortIsland();
   },
   created() {
     this.$store.dispatch("dashboard/setLantauBanner");
