@@ -23,10 +23,9 @@
     </el-row>
     <not-rated
       @submitReview="addReview"
-      :rates="rates"
       v-if="isSelected === 'not-rated'"
     ></not-rated>
-    <Reviewed @removeItem="assignValues" :rates="rates" v-else />
+    <Reviewed @removeItem="assignValues" v-else />
 
     <div class="delete-dialog">
       <el-dialog v-model="dialogVisible" title="刪除評價" width="30%">
@@ -36,10 +35,7 @@
             <el-button class="cancel" @click="dialogVisible = false"
               >返回</el-button
             >
-            <el-button
-              class="delete"
-              type="primary"
-              @click="deleteItem({ id: id, itemId: itemId })"
+            <el-button class="delete" type="primary" @click="deleteItem(id)"
               >刪除</el-button
             >
           </span>
@@ -50,6 +46,7 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
 import NotRated from "../components/evaluation-record/NotRated.vue";
 import Reviewed from "../components/evaluation-record/Reviewed.vue";
 
@@ -66,31 +63,36 @@ export default {
       id: null,
       itemId: null,
       arr: [],
-      rates: [
-        {
-          id: 1,
-          title: "白沙灣渡假酒店",
-          description: "白沙灣渡假酒店",
-          noOfPeople: "2位成人 + 3位兒童",
-          pets: 2,
-          checkInDate: "2021年5月22日 15:00",
-          checkOutDate: "2021年5月22日 12:00",
-          image: require("../assets/img-houseinfo4.jpg"),
-          reviewed: [],
-        },
-        {
-          id: 2,
-          title: "白沙灣渡假酒店",
-          description: "白沙灣渡假酒店",
-          noOfPeople: "2位成人 + 3位兒童",
-          pets: 2,
-          checkInDate: "2021年5月22日 15:00",
-          checkOutDate: "2021年5月22日 12:00",
-          image: require("../assets/img-house3.jpg"),
-          reviewed: [],
-        },
-      ],
+      // rates: [
+      //   {
+      //     id: 1,
+      //     title: "白沙灣渡假酒店",
+      //     description: "白沙灣渡假酒店",
+      //     noOfPeople: "2位成人 + 3位兒童",
+      //     pets: 2,
+      //     checkInDate: "2021年5月22日 15:00",
+      //     checkOutDate: "2021年5月22日 12:00",
+      //     image: require("../assets/img-houseinfo4.jpg"),
+      //     reviewed: [],
+      //   },
+      //   {
+      //     id: 2,
+      //     title: "白沙灣渡假酒店",
+      //     description: "白沙灣渡假酒店",
+      //     noOfPeople: "2位成人 + 3位兒童",
+      //     pets: 2,
+      //     checkInDate: "2021年5月22日 15:00",
+      //     checkOutDate: "2021年5月22日 12:00",
+      //     image: require("../assets/img-house3.jpg"),
+      //     reviewed: [],
+      //   },
+      // ],
     };
+  },
+  computed: {
+    comments() {
+      return this.$store.getters["profile/hotelComments"];
+    },
   },
   methods: {
     setOption(option) {
@@ -107,18 +109,54 @@ export default {
         itemId: id,
       });
     },
-    assignValues({ id, itemId }) {
+    assignValues(id) {
       this.dialogVisible = true;
       this.id = id;
-      this.itemId = itemId;
+      // this.itemId = itemId;
     },
-    deleteItem({ id, itemId }) {
-      let selectedRate = this.rates.find((rate) => rate.id === itemId);
-      let index = selectedRate.reviewed.findIndex((rate) => rate.id === id);
-      selectedRate.reviewed.splice(index, 1);
-      this.dialogVisible = false;
-      console.log(selectedRate.reviewed);
+    async deleteItem(id) {
+      await this.$store.dispatch("profile/deleteComment", id).then(() => {
+        this.dialogVisible = false;
+        this.$store.dispatch("profile/getHotelComments");
+      });
+      // let selectedRate = this.rates.find((rate) => rate.id === itemId);
+      // let index = selectedRate.reviewed.findIndex((rate) => rate.id === id);
+      // selectedRate.reviewed.splice(index, 1);
+      // this.dialogVisible = false;
+      // console.log(selectedRate.reviewed);
     },
+    async checkAccessToken() {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.getHotelComments();
+        })
+        .catch(() => {
+          this.checkRefreshToken();
+        });
+    },
+    async checkRefreshToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.getHotelComments();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
+    getHotelComments() {
+      this.$store.dispatch("profile/getHotelComments");
+    },
+  },
+  created() {
+    console.log("comments");
+    this.checkAccessToken();
   },
 };
 </script>

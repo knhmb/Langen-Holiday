@@ -2,36 +2,30 @@
   <div class="reviewed">
     <div
       class="review-card"
-      v-for="(review, index) in reviewed"
-      :key="review.id"
+      v-for="comment in comments"
+      :key="comment.commentId"
     >
-      <el-row v-if="review[0]">
+      <el-row v-if="comment.commented === true">
         <el-col :sm="24" :lg="5">
-          <img :src="review[0].image" alt="" />
+          <img :src="comment.thumbnail" alt="" />
         </el-col>
         <el-col :sm="24" :lg="19">
           <div class="card-content">
             <div class="head">
               <el-row>
                 <el-col :span="12">
-                  <h3>{{ review[0].title }}</h3>
+                  <h3>{{ comment.hotelName }}</h3>
                 </el-col>
                 <el-col class="btn-alignment" :span="12">
                   <font-awesome-icon
                     class="edit-icon"
                     icon="edit"
-                    @click="edit(review[0].id)"
+                    @click="edit(comment.commentId)"
                   />
                   <font-awesome-icon
                     class="trash-icon"
                     icon="trash-alt"
-                    @click="
-                      deleteItem({
-                        id: review[0].id,
-                        index: index,
-                        itemId: review[0].itemId,
-                      })
-                    "
+                    @click="deleteItem(comment.commentId)"
                   />
                   <!-- <el-button>評價</el-button> -->
                 </el-col>
@@ -44,9 +38,9 @@
                     disabled-void-color="#D1D1D1"
                     :colors="colors"
                     disabled
-                    v-model="review[0].rate"
+                    :model-value="+comment.rating"
                   ></el-rate>
-                  <p>{{ review[0].desc }}</p>
+                  <p>{{ comment.comments }}</p>
                 </el-col>
               </el-row>
             </div>
@@ -56,7 +50,7 @@
     </div>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogFormVisible" title="白沙灣渡假酒店">
+    <el-dialog v-model="dialogFormVisible" :title="hotelName">
       <el-form label-position="top">
         <el-row>
           <el-col>
@@ -79,7 +73,7 @@
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="updateItem(selectedId)" class="submit"
+            <el-button @click.prevent="updateItem()" class="submit"
               >提交</el-button
             >
           </el-col>
@@ -91,57 +85,58 @@
 
 <script>
 export default {
-  props: ["rates"],
   data() {
     return {
       reviewed: [],
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
       dialogFormVisible: false,
+      commentId: null,
+      hotelName: "",
       rate: "",
       review: "",
       updatedReview: "",
       selectedId: null,
     };
   },
+  computed: {
+    comments() {
+      return this.$store.getters["profile/hotelComments"];
+    },
+  },
   methods: {
     edit(id) {
       console.log(id);
       this.selectedId = id;
-      const item = this.reviewed.find((rate) => rate[0].id === id);
-      this.rate = item[0].rate;
-      this.review = item[0].desc;
+      const item = this.comments.find((comment) => comment.commentId === id);
+      this.hotelName = item.hotelName;
+      this.rate = +item.rating;
+      this.review = item.comments;
+      this.commentId = item.commentId;
+      // this.rate = item[0].rate;
+      // this.review = item[0].desc;
 
       console.log(item);
       this.dialogFormVisible = true;
     },
-    updateItem(id) {
-      const singleItem = {
-        rate: this.rate,
-        desc: this.review,
+    async updateItem() {
+      const data = {
+        commentId: this.commentId,
+        rating: this.rate,
+        comments: this.review,
       };
-      console.log(singleItem);
+      console.log(data);
 
-      const data = this.reviewed.findIndex((p) => p[0].id === id);
-      Object.assign(this.reviewed[data][0], singleItem);
-
-      this.dialogFormVisible = false;
+      await this.$store.dispatch("profile/updateComment", data).then(() => {
+        this.dialogFormVisible = false;
+        this.$store.dispatch("profile/getHotelComments");
+      });
     },
-    deleteItem({ id, index, itemId }) {
-      // console.log(this.reviewed);
-      // console.log(id);
-      this.$emit("removeItem", { id: id, index: index, itemId: itemId });
-      // this.reviewed.splice(index, 1);
+    deleteItem(id) {
+      console.log(id);
+      this.$emit("removeItem", id);
     },
   },
   created() {
-    const arr = [];
-    for (let rate of this.rates) {
-      arr.push(rate.reviewed);
-    }
-
-    for (let a of arr) {
-      this.reviewed.push(a);
-    }
     // console.log(this.reviewed);
   },
 };

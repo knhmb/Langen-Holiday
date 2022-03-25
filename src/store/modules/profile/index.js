@@ -8,6 +8,7 @@ export default {
     return {
       account: {},
       wishlist: [],
+      hotelComments: [],
     };
   },
   getters,

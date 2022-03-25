@@ -5,4 +5,7 @@ export default {
   wishlist(state) {
     return state.wishlist;
   },
+  hotelComments(state) {
+    return state.hotelComments;
+  },
 };

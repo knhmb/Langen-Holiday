@@ -204,4 +204,68 @@ export default {
         console.log(err);
       });
   },
+  getHotelComments(context) {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .get("/api/hotel-comments", {
+        headers: {
+          authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        context.commit("SET_HOTEL_COMMENTS", res.data.items);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  async addComment(_, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+    await axios
+      .post("/api/hotel-comments", payload, {
+        headers: {
+          authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  async updateComment(_, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+    await axios
+      .put("/api/hotel-comments", payload, {
+        headers: {
+          authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  async deleteComment(_, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+    await axios
+      .delete("/api/hotel-comments", {
+        headers: {
+          authorization: accessToken,
+        },
+        data: {
+          commentId: payload,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

@@ -1,20 +1,20 @@
 <template>
   <div class="not-rated">
-    <div class="comment-card" v-for="rate in rates" :key="rate.id">
-      <el-row>
+    <div class="comment-card" v-for="rate in comments" :key="rate">
+      <el-row v-if="rate.commented === false">
         <el-col :sm="24" :lg="5">
-          <img :src="rate.image" alt="" />
+          <img :src="rate.thumbnail" alt="" />
         </el-col>
         <el-col :sm="24" :lg="19">
           <div class="card-content">
             <div class="head">
               <el-row>
                 <el-col :span="12">
-                  <h3>{{ rate.title }}</h3>
-                  <p>{{ rate.description }}</p>
+                  <h3>{{ rate.hotelName }}</h3>
+                  <p>{{ rate.hotelAddress }}</p>
                 </el-col>
                 <el-col class="btn-alignment" :span="12">
-                  <el-button @click="openDialog(rate.id)">評價</el-button>
+                  <el-button @click="openDialog(rate)">評價</el-button>
                 </el-col>
               </el-row>
             </div>
@@ -22,13 +22,27 @@
               <el-row>
                 <el-col :span="12">
                   <p>人數:</p>
-                  <p>{{ rate.noOfPeople }}</p>
+                  <p>
+                    {{ rate.adultQty }}位成人 + {{ rate.childrenQty }}位兒童
+                  </p>
                 </el-col>
                 <el-col :span="12">
                   <p>寵物:</p>
-                  <p>{{ rate.pets }}</p>
+                  <p>
+                    {{
+                      rate.petsQty === null || rate.petsQty === ""
+                        ? 0
+                        : rate.petsQty
+                    }}
+                  </p>
                 </el-col>
-                <el-col :span="8">
+                <template v-for="(age, index) in rate.childrenAge" :key="age">
+                  <el-col :span="8">
+                    <p>兒童{{ index + 1 }}年齡:</p>
+                    <p>{{ age }}</p>
+                  </el-col>
+                </template>
+                <!-- <el-col :span="8">
                   <p>兒童1年齡:</p>
                   <p>8</p>
                 </el-col>
@@ -39,18 +53,26 @@
                 <el-col :span="8">
                   <p>兒童3年齡::</p>
                   <p>10</p>
-                </el-col>
+                </el-col> -->
               </el-row>
             </div>
             <div class="days-of-stay">
               <el-row>
                 <el-col :span="12">
                   <p>入住日期:</p>
-                  <p>{{ rate.checkInDate }}</p>
+                  <p>
+                    {{ formatDate(rate.checkInDate) }}
+                    {{ rate.checkInTime.replace(/(.{2})$/, ":$1") }}
+                  </p>
+                  <p></p>
                 </el-col>
                 <el-col :span="12">
                   <p>離開日期:</p>
-                  <p>{{ rate.checkOutDate }}</p>
+                  <p>
+                    {{ formatDate(rate.checkOutDate) }}
+                    {{ rate.checkOutTime.replace(/(.{2})$/, ":$1") }}
+                  </p>
+                  <!-- <p>{{ rate.checkOutDate }}</p> -->
                 </el-col>
               </el-row>
             </div>
@@ -60,7 +82,7 @@
     </div>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogFormVisible" title="白沙灣渡假酒店">
+    <el-dialog v-model="dialogFormVisible" :title="hotelName">
       <el-form label-position="top">
         <el-row>
           <el-col>
@@ -83,7 +105,7 @@
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="addReview(selectedId)" class="submit"
+            <el-button @click.prevent="addReview()" class="submit"
               >提交</el-button
             >
           </el-col>
@@ -94,59 +116,59 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
-  props: ["rates"],
   data() {
     return {
-      selectedId: null,
-
+      hotelId: null,
+      reservationId: null,
       colors: ["#FD9A1A", "#FD9A1A", "#FD9A1A"],
       dialogFormVisible: false,
       review: "",
+      hotelName: "",
       rate: null,
-      //   rates: [
-      //     {
-      //       id: 1,
-      //       title: "白沙灣渡假酒店",
-      //       description: "白沙灣渡假酒店",
-      //       noOfPeople: 5,
-      //       pets: 2,
-      //       checkInDate: "2021年5月22日 15:00",
-      //       checkOutDate: "2021年5月22日 12:00",
-      //       image: require("../../assets/img-houseinfo4.jpg"),
-      //       reviewed: [],
-      //     },
-      //     {
-      //       id: 2,
-      //       title: "白沙灣渡假酒店",
-      //       description: "白沙灣渡假酒店",
-      //       noOfPeople: 5,
-      //       pets: 2,
-      //       checkInDate: "2021年5月22日 15:00",
-      //       checkOutDate: "2021年5月22日 12:00",
-      //       image: require("../../assets/img-house3.jpg"),
-      //       reviewed: [],
-      //     },
-      //   ],
     };
   },
+  computed: {
+    comments() {
+      return this.$store.getters["profile/hotelComments"];
+    },
+  },
   methods: {
-    openDialog(id) {
-      console.log(id);
-      this.selectedId = id;
+    formatDate(date) {
+      return moment(date).locale("zh-cn").format("ll");
+    },
+    openDialog(rate) {
+      console.log(rate);
+      this.hotelName = rate.hotelName;
+      this.hotelId = rate.hotelId;
+      this.reservationId = rate.reservationId;
       this.dialogFormVisible = true;
     },
-    addReview(id) {
-      this.$emit("submitReview", {
-        id: id,
-        review: this.review,
+    async addReview() {
+      // this.$emit("submitReview", {
+      //   id: id,
+      //   review: this.review,
+      //   rating: this.rate,
+      // });
+      const data = {
+        hotelId: this.hotelId,
+        reservationId: this.reservationId,
         rating: this.rate,
+        comments: this.review,
+      };
+      console.log(data);
+      await this.$store.dispatch("profile/addComment", data).then(() => {
+        this.review = "";
+        this.rate = null;
+        this.dialogFormVisible = false;
+        this.$store.dispatch("profile/getHotelComments");
       });
-
-      this.review = "";
-      this.rate = null;
-      this.dialogFormVisible = false;
     },
+  },
+  created() {
+    console.log(this.comments);
   },
 };
 </script>
