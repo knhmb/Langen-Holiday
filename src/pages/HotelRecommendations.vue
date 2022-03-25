@@ -11,7 +11,7 @@
       <div class="search">
         <!-- <h2>渡假屋 <span>搜尋結果 :</span></h2> -->
         <el-row :gutter="20">
-          <el-col :sm="24" :lg="6">
+          <el-col :sm="24" :lg="6" :key="componentKey">
             <div class="left-section">
               <p>入住日期</p>
               <DatePicker
@@ -208,6 +208,7 @@ export default {
     return {
       time: [],
       location: [],
+      componentKey: 0,
       recommendation: "",
       isSelected: "false",
       roomType: [],
@@ -261,11 +262,16 @@ export default {
     recommendation() {
       this.sortIsland();
     },
-    // $route() {
-    //   this.$store.dispatch("resetDate");
-    // },
+    $route() {
+      // this.$store.dispatch("resetDate");
+      this.forceRerender();
+      // this.getItem();
+    },
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     setOption(option) {
       this.isSelected = option;
       this.checkboxChanged();
@@ -318,14 +324,17 @@ export default {
       this.$store.dispatch("search/sortIslandSearch", data);
       this.$store.dispatch("changeDate", this.range);
     },
+    getItem() {
+      let currentIsland = this.headerItems.filter((item) =>
+        this.$route.path.includes(item.slug)
+      );
+      this.$store.dispatch("search/getSearchItems", {
+        slug: currentIsland[0].slug,
+      });
+    },
   },
   mounted() {
-    let currentIsland = this.headerItems.filter((item) =>
-      this.$route.path.includes(item.slug)
-    );
-    this.$store.dispatch("search/getSearchItems", {
-      slug: currentIsland[0].slug,
-    });
+    this.getItem();
   },
   created() {
     this.$store.dispatch("dashboard/setHotelBanner");

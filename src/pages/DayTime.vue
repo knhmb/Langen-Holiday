@@ -277,9 +277,9 @@ export default {
     recommendation() {
       this.sortIsland();
     },
-    // $route() {
-    //   this.$store.dispatch("resetDate");
-    // },
+    $route() {
+      this.sortIsland();
+    },
   },
   methods: {
     setOption(option) {
@@ -352,20 +352,7 @@ export default {
     },
   },
   mounted() {
-    let currentIsland = this.headerItems.filter((item) =>
-      this.$route.path.includes(item.slug)
-    );
-    let subItem = this.dayNightItems.filter((item) =>
-      this.$route.path.split("/").includes(item.slug)
-    );
-    this.$store.dispatch("search/getSearchItems", {
-      slug:
-        subItem.length > 0
-          ? subItem[0].slug
-          : currentIsland.length > 0
-          ? currentIsland[0].slug
-          : "",
-    });
+    this.sortIsland();
   },
   created() {
     this.$store.dispatch("dashboard/setDayNightBanner");
