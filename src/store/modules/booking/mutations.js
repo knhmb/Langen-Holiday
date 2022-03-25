@@ -42,4 +42,8 @@ export default {
   UPDATE_PET_QTY(state, payload) {
     state.petQty = payload;
   },
+  TOGGLE_BOOKMARK_HOTEL(state, payload) {
+    state.selectedHotel.bookmarked = payload.value;
+    // hotel.bookmarked = payload.value;
+  },
 };

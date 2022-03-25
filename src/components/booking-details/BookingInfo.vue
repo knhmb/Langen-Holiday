@@ -17,8 +17,14 @@
           </el-rate>
         </el-col>
         <el-col :sm="3" :md="3" :lg="3">
-          <el-button>加入收藏 </el-button>
-          <img class="icon-bookmark" :src="iconBookmark" alt="" />
+          <el-button
+            >加入收藏
+            <img
+              @click="toggleBookmark"
+              class="icon-bookmark"
+              :src="iconBookmark"
+              alt=""
+          /></el-button>
         </el-col>
         <el-col>
           <p class="price">
@@ -32,6 +38,7 @@
 
 <script>
 import { ref } from "vue";
+import { ElNotification } from "element-plus";
 
 export default {
   setup() {
@@ -45,9 +52,97 @@ export default {
       iconBookmark: "",
     };
   },
+  watch: {
+    selectedHotel: {
+      deep: true,
+      handler() {
+        console.log("Bookmarked now");
+        this.iconBookmark =
+          this.selectedHotel.bookmarked === false
+            ? require("../../assets/icon-bookmark-off.png")
+            : require("../../assets/icon-bookmark-on.png");
+      },
+    },
+  },
   computed: {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+  },
+  methods: {
+    async removeBookmark() {
+      await this.$store
+        .dispatch("profile/removeBookmarkHotel", {
+          hotelId: this.$route.params.id,
+          value: false,
+        })
+        .then(() => {})
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+        });
+    },
+    async setBookmark() {
+      await this.$store
+        .dispatch("profile/setBookmarkHotel", {
+          hotelId: this.$route.params.id,
+          value: true,
+        })
+        .then(() => {})
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+        });
+    },
+    async checkAcessToken(option) {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          if (option === "remove") {
+            this.removeBookmark();
+          } else {
+            this.setBookmark();
+          }
+        })
+        .catch(() => {
+          this.checkRefreshToken(option);
+        });
+    },
+    async checkRefreshToken(option) {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          if (option === "remove") {
+            this.removeBookmark();
+          } else {
+            this.setBookmark();
+          }
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
+    async toggleBookmark() {
+      if (!localStorage.getItem("accessToken")) {
+        this.$store.commit("TOGGLE_LOGIN_FORM", true);
+        return;
+      }
+      if (this.iconBookmark === require("../../assets/icon-bookmark-on.png")) {
+        this.checkAcessToken("remove");
+      } else {
+        this.checkAcessToken("set");
+      }
     },
   },
   created() {
@@ -58,6 +153,7 @@ export default {
         : require("../../assets/icon-bookmark-on.png")),
       console.log(this.value);
     console.log(this.iconBookmark);
+    console.log(this.selectedHotel);
   },
 };
 </script>
@@ -75,17 +171,22 @@ export default {
 }
 
 .booking-info .el-button--default {
-  background-color: #fd9a1a;
-  color: #fff;
+  /* background-color: #fd9a1a; */
+  background-color: #fff;
+  color: #fd9a1a;
   border-color: #fd9a1a;
   width: 100%;
   position: relative;
+  padding: 1rem 0;
 }
 
 .booking-info .icon-bookmark {
   width: 30px;
   position: absolute;
   right: 0rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .booking-info .heading {

@@ -84,6 +84,57 @@ export default {
         // throw error;
       });
   },
+  async setBookmarkHotel(context, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+    await axios
+      .post(
+        "/api/wishlist",
+        { hotelId: payload.hotelId },
+        {
+          headers: {
+            authorization: accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        const data = {
+          value: payload.value,
+          hotelId: payload.hotelId,
+        };
+        context.commit("booking/TOGGLE_BOOKMARK_HOTEL", data, { root: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        // const error = new Error("請登錄以使用此功能");
+        // throw error;
+      });
+  },
+  async removeBookmarkHotel(context, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+    await axios
+      .delete("/api/wishlist", {
+        headers: {
+          authorization: accessToken,
+        },
+        data: {
+          hotelId: payload.hotelId,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const data = {
+          value: payload.value,
+          hotelId: payload.hotelId,
+        };
+        context.commit("booking/TOGGLE_BOOKMARK_HOTEL", data, { root: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        // const error = new Error("請登錄以使用此功能");
+        // throw error;
+      });
+  },
   async removeBookmark(context, payload) {
     const accessToken = localStorage.getItem("accessToken");
     await axios
