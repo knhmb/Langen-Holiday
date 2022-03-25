@@ -13,6 +13,7 @@
           :image="item.thumbnail"
           :bookmarked="item.bookmarked"
           :id="item.wishlistId"
+          :hotel-id="item.hotelId"
         />
       </el-col>
     </el-row>

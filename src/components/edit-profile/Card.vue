@@ -56,6 +56,7 @@ export default {
     "image",
     "bookmarked",
     "id",
+    "hotelId",
   ],
   data() {
     return {
@@ -118,13 +119,13 @@ export default {
       }
     },
     async selectHotel() {
-      console.log(this.id);
+      console.log(this.hotelId);
       const date = new Date();
       const today = date.setDate(date.getDate());
       const tomorrow = date.setDate(date.getDate() + 1);
 
       const data = {
-        hotelId: this.id,
+        hotelId: this.hotelId,
         checkInDate: today,
         checkOutDate: tomorrow,
         roomQty: 1,
@@ -132,7 +133,7 @@ export default {
       console.log(data);
       await this.$store.dispatch("booking/getHotel", data).then(() => {
         console.log(this.selectedHotel);
-        this.$router.push("/booking-details/" + this.id);
+        this.$router.push("/booking-details/" + this.hotelId);
       });
     },
   },
