@@ -14,11 +14,11 @@
               <el-input v-model.trim="ruleForm.username"></el-input>
             </el-form-item>
           </el-col>
-          <el-col>
+          <!-- <el-col>
             <el-form-item label="電話號碼" prop="phone">
               <el-input v-model.number="ruleForm.phone"></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col>
             <el-button @click="firstStep">下一步</el-button>
           </el-col>
@@ -126,7 +126,7 @@ export default {
       this.$emit("toggleLoginForm", { title: "登入" });
     },
     async firstStep() {
-      this.$refs.ruleForm.validate((valid) => {
+      await this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           this.$store
             .dispatch("auth/forgotPassword", {

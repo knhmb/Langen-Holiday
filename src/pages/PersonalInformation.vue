@@ -34,6 +34,7 @@
 
 <script>
 import ManageProfileEdit from "./ManageProfileEdit.vue";
+import { ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -66,6 +67,30 @@ export default {
       this.username = JSON.parse(localStorage.getItem("userData")).username;
       this.isProfileEdit = val;
     },
+    async checkAccessToken() {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.$store.dispatch("profile/getAccount");
+        })
+        .catch(() => {
+          this.checkRefershToken();
+          console.log("NOT WORKING2");
+        });
+    },
+    async checkRefershToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {})
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
   },
   created() {
     if (localStorage.getItem("userData")) {
@@ -73,6 +98,7 @@ export default {
       this.username = JSON.parse(localStorage.getItem("userData")).username;
     }
     console.log(this.currentUserData);
+    this.checkAccessToken();
   },
 };
 </script>

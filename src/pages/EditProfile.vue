@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { ElNotification } from "element-plus";
+// import { ElNotification } from "element-plus";
 
 export default {
   data() {
@@ -129,30 +129,30 @@ export default {
     setOption(option) {
       this.isActive = option;
     },
-    async checkAccessToken() {
-      await this.$store
-        .dispatch("auth/checkAccessTokenValidity")
-        .then(() => {
-          this.$store.dispatch("profile/getAccount");
-        })
-        .catch(() => {
-          this.checkRefershToken();
-          console.log("NOT WORKING2");
-        });
-    },
-    async checkRefershToken() {
-      await this.$store
-        .dispatch("auth/checkRefreshTokenValidity")
-        .then(() => {})
-        .catch((err) => {
-          ElNotification({
-            title: "Error",
-            message: err.message,
-            type: "error",
-          });
-          this.$store.dispatch("auth/logout");
-        });
-    },
+    // async checkAccessToken() {
+    //   await this.$store
+    //     .dispatch("auth/checkAccessTokenValidity")
+    //     .then(() => {
+    //       this.$store.dispatch("profile/getAccount");
+    //     })
+    //     .catch(() => {
+    //       this.checkRefershToken();
+    //       console.log("NOT WORKING2");
+    //     });
+    // },
+    // async checkRefershToken() {
+    //   await this.$store
+    //     .dispatch("auth/checkRefreshTokenValidity")
+    //     .then(() => {})
+    //     .catch((err) => {
+    //       ElNotification({
+    //         title: "Error",
+    //         message: err.message,
+    //         type: "error",
+    //       });
+    //       this.$store.dispatch("auth/logout");
+    //     });
+    // },
   },
   watch: {
     $route(to) {
@@ -207,7 +207,7 @@ export default {
         this.iconComment = require("../assets/icon-profile-comment-off.svg");
         this.iconBooking = require("../assets/icon-profile-bookging-on.svg");
         this.isMemberClicked = false;
-        this.isPasswordClicked = true;
+        this.isPasswordClicked = false;
         this.isBookmarkClicked = false;
         this.isCommentClicked = false;
         this.isBookingClicked = true;
@@ -220,7 +220,7 @@ export default {
     },
   },
   mounted() {
-    this.checkAccessToken();
+    // this.checkAccessToken();
   },
   created() {
     this.currentPath = this.$route.path;
