@@ -367,4 +367,16 @@ export default {
         console.log(err);
       });
   },
+  async joinUs(_, payload) {
+    await axios
+      .post("/api/become-partner", payload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        const error = new Error(err.message);
+        throw error;
+      });
+  },
 };

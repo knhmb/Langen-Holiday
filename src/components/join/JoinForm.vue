@@ -1,41 +1,51 @@
 <template>
   <div class="form">
     <h4>請填寫以下資料,我們在短時間內聯絡您</h4>
-    <el-form label-position="top">
+    <el-form
+      label-position="top"
+      ref="ruleFormRef"
+      :model="ruleForm"
+      :rules="rules"
+      hide-required-asterisk
+    >
       <el-row :gutter="20">
         <el-col :sm="24" :md="12">
-          <el-form-item label="公司名稱：">
-            <el-input></el-input>
+          <el-form-item label="公司名稱：" prop="companyName">
+            <el-input v-model="ruleForm.companyName"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="服務種類/行業：">
-            <el-input></el-input>
+          <el-form-item label="服務種類/行業：" prop="industry">
+            <el-input v-model="ruleForm.industry"></el-input>
           </el-form-item>
         </el-col>
         <el-col>
-          <el-form-item label="網站(或社交媒體)：">
-            <el-input></el-input>
+          <el-form-item label="網站(或社交媒體)：" prop="website">
+            <el-input v-model="ruleForm.website"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="聯絡人：">
-            <el-input></el-input>
+          <el-form-item label="聯絡人：" prop="contactPerson">
+            <el-input v-model="ruleForm.contactPerson"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="聯絡電話：">
-            <el-input></el-input>
+          <el-form-item label="聯絡電話：" prop="contactNo">
+            <el-input v-model="ruleForm.contactNo"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="電郵地址：">
-            <el-input></el-input>
+          <el-form-item label="電郵地址：" prop="email">
+            <el-input v-model="ruleForm.email"></el-input>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
-          <el-form-item label="如何認識我們？">
-            <el-select v-model="value" class="m-2" placeholder="如何認識我們？">
+          <el-form-item label="如何認識我們？" prop="knowUsFrom">
+            <el-select
+              v-model="ruleForm.knowUsFrom"
+              class="m-2"
+              placeholder="如何認識我們？"
+            >
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -47,7 +57,7 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-button>提交</el-button>
+          <el-button @click="submit">提交</el-button>
         </el-col>
       </el-row>
     </el-form>
@@ -106,6 +116,7 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
 export default {
   data() {
     return {
@@ -137,6 +148,67 @@ export default {
           label: "其他途徑",
         },
       ],
+      ruleForm: {
+        companyName: "",
+        industry: "",
+        website: "",
+        contactPerson: "",
+        contactNo: "",
+        email: "",
+        knowUsForm: "",
+      },
+      rules: {
+        companyName: [
+          {
+            required: true,
+            message: "請輸入公司名稱",
+            trigger: "blur",
+          },
+        ],
+        industry: [
+          {
+            required: true,
+            message: "請進入行業",
+            trigger: "blur",
+          },
+        ],
+        website: [
+          {
+            required: true,
+            message: "請輸入您的網站",
+            trigger: "blur",
+          },
+        ],
+        contactPerson: [
+          {
+            required: true,
+            message: "請輸入聯繫人",
+            trigger: "blur",
+          },
+        ],
+        contactNo: [
+          {
+            required: true,
+            message: "請輸入您的號碼",
+            trigger: "blur",
+          },
+        ],
+        email: [
+          {
+            required: true,
+            message: "請輸入您的電子郵件",
+            type: "email",
+            trigger: "blur",
+          },
+        ],
+        knowUsFrom: [
+          {
+            required: true,
+            message: "請輸入您聽說過我們的地方",
+            trigger: "change",
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -145,6 +217,49 @@ export default {
     },
     closeDialog() {
       this.isDialogOpen = false;
+    },
+    resetForm() {
+      this.ruleForm.companyName = "";
+      this.ruleForm.industry = "";
+      this.ruleForm.website = "";
+      this.ruleForm.contactPerson = "";
+      this.ruleForm.contactNo = "";
+      this.ruleForm.email = "";
+      this.ruleForm.knowUsFrom = "";
+    },
+    async submit() {
+      const data = {
+        companyName: this.ruleForm.companyName,
+        industry: this.ruleForm.industry,
+        website: this.ruleForm.website,
+        contactPerson: this.ruleForm.contactPerson,
+        contactNo: this.ruleForm.contactNo,
+        email: this.ruleForm.email,
+        knowUsFrom: this.ruleForm.knowUsFrom,
+      };
+      console.log(data);
+
+      await this.$refs.ruleFormRef.validate((valid) => {
+        if (valid) {
+          this.$store
+            .dispatch("dashboard/joinUs", data)
+            .then(() => {
+              ElNotification({
+                title: "Success",
+                message: "請求已發送",
+                type: "success",
+              });
+              this.resetForm();
+            })
+            .catch((err) => {
+              ElNotification({
+                title: "Error",
+                message: err.message,
+                type: "error",
+              });
+            });
+        }
+      });
     },
   },
 };
