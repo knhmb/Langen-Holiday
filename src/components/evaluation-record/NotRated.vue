@@ -105,7 +105,7 @@
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="addReview()" class="submit"
+            <el-button @click.prevent="checkAccessToken" class="submit"
               >提交</el-button
             >
           </el-col>
@@ -117,6 +117,7 @@
 
 <script>
 import moment from "moment";
+import { ElNotification } from "element-plus";
 
 export default {
   data() {
@@ -145,6 +146,31 @@ export default {
       this.hotelId = rate.hotelId;
       this.reservationId = rate.reservationId;
       this.dialogFormVisible = true;
+    },
+    async checkAccessToken() {
+      await this.$store
+        .disptach("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.addReview();
+        })
+        .catch(() => {
+          this.checkRefreshToken();
+        });
+    },
+    async checkRefreshToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.addReview();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
     },
     async addReview() {
       // this.$emit("submitReview", {

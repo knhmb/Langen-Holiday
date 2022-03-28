@@ -432,7 +432,7 @@
 import Login from "../Login.vue";
 import Register from "../Register.vue";
 import ForgotPassword from "../ForgotPassword.vue";
-import { ElNotification } from "element-plus";
+// import { ElNotification } from "element-plus";
 
 export default {
   props: ["isActive", "isActiveSubMenuItem"],
@@ -479,41 +479,41 @@ export default {
     },
   },
   methods: {
-    async profileNavigation(value) {
+    profileNavigation(value) {
       // this.$router.push({ name: value });
       // this.navLocation = value
-      await this.$store
-        .dispatch("auth/checkAccessTokenValidity")
-        .then(() => {
-          this.$router.push({ name: value });
-        })
-        .catch((err) => {
-          console.log(err);
-          // ElNotification({
-          //   title: "Error",
-          //   message: "access token expired",
-          //   type: "error",
-          // });
-          this.checkRefershToken(value);
-          // this.$store.dispatch("auth/logout");
-          // console.log("Failed Access Token");
-        });
+      // this.$store;
+      // .dispatch("auth/checkAccessTokenValidity")
+      // .then(() => {
+      this.$router.push({ name: value });
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // ElNotification({
+      //   title: "Error",
+      //   message: "access token expired",
+      //   type: "error",
+      // });
+      // this.checkRefershToken(value);
+      // this.$store.dispatch("auth/logout");
+      // console.log("Failed Access Token");
+      // });
     },
-    async checkRefershToken(value) {
-      await this.$store
-        .dispatch("auth/checkRefreshTokenValidity")
-        .then(() => {
-          this.$router.push({ name: value });
-        })
-        .catch((err) => {
-          ElNotification({
-            title: "Error",
-            message: err.message,
-            type: "error",
-          });
-          this.$store.dispatch("auth/logout");
-        });
-    },
+    // async checkRefershToken(value) {
+    //   await this.$store
+    //     .dispatch("auth/checkRefreshTokenValidity")
+    //     .then(() => {
+    //       this.$router.push({ name: value });
+    //     })
+    //     .catch((err) => {
+    //       ElNotification({
+    //         title: "Error",
+    //         message: err.message,
+    //         type: "error",
+    //       });
+    //       this.$store.dispatch("auth/logout");
+    //     });
+    // },
     openDialog() {
       this.$store.commit("TOGGLE_LOGIN_FORM", true);
       // this.dialogFormVisible = true;

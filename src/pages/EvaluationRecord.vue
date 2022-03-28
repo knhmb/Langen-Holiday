@@ -35,7 +35,10 @@
             <el-button class="cancel" @click="dialogVisible = false"
               >返回</el-button
             >
-            <el-button class="delete" type="primary" @click="deleteItem(id)"
+            <el-button
+              class="delete"
+              type="primary"
+              @click="checkAccessTokenDelete(id)"
               >刪除</el-button
             >
           </span>
@@ -114,6 +117,31 @@ export default {
       this.id = id;
       // this.itemId = itemId;
     },
+    async checkAccessTokenDelete(id) {
+      await this.$store
+        .disptach("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.deleteItem(id);
+        })
+        .catch(() => {
+          this.checkRefreshTokenDelete(id);
+        });
+    },
+    async checkRefreshTokenDelete(id) {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.deleteItem(id);
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
     async deleteItem(id) {
       await this.$store.dispatch("profile/deleteComment", id).then(() => {
         this.dialogVisible = false;
@@ -154,7 +182,7 @@ export default {
       this.$store.dispatch("profile/getHotelComments");
     },
   },
-  created() {
+  mounted() {
     console.log("comments");
     this.checkAccessToken();
   },

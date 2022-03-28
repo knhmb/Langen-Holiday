@@ -8,4 +8,10 @@ export default {
   hotelComments(state) {
     return state.hotelComments;
   },
+  reservations(state) {
+    return state.reservations;
+  },
+  reservationDetail(state) {
+    return state.reservationDetail;
+  },
 };

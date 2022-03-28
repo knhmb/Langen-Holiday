@@ -73,7 +73,7 @@
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="updateItem()" class="submit"
+            <el-button @click.prevent="checkAccessToken" class="submit"
               >提交</el-button
             >
           </el-col>
@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     return {
@@ -104,6 +106,31 @@ export default {
     },
   },
   methods: {
+    async checkAccessToken() {
+      await this.$store
+        .disptach("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.updateItem();
+        })
+        .catch(() => {
+          this.checkRefreshToken();
+        });
+    },
+    async checkRefreshToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.updateItem();
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
     edit(id) {
       console.log(id);
       this.selectedId = id;

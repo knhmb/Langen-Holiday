@@ -9,6 +9,8 @@ export default {
       account: {},
       wishlist: [],
       hotelComments: [],
+      reservations: [],
+      reservationDetail: {},
     };
   },
   getters,

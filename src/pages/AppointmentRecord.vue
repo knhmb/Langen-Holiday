@@ -2,18 +2,26 @@
   <div class="appointment-record" v-for="rate in rates" :key="rate.id">
     <el-row>
       <el-col :sm="24" :lg="8">
-        <img :src="rate.image" alt="" />
+        <img :src="rate.thumbnail" alt="" />
       </el-col>
       <el-col :sm="24" :lg="16">
         <div class="card-content">
           <div class="head">
             <el-row>
               <el-col :span="12">
-                <h3>{{ rate.title }}</h3>
-                <p>{{ rate.description }}</p>
+                <h3>{{ rate.hotelName }}</h3>
+                <p>{{ rate.hotelAddress }}</p>
               </el-col>
               <el-col class="btn-alignment" :span="12">
-                <el-button @click="openDialog(rate.id)">詳細</el-button>
+                <el-button
+                  @click="
+                    checkAccessToken({
+                      id: rate.reservationId,
+                      option: 'detail',
+                    })
+                  "
+                  >詳細</el-button
+                >
               </el-col>
             </el-row>
           </div>
@@ -21,13 +29,25 @@
             <el-row>
               <el-col :span="12">
                 <p>人數:</p>
-                <p>{{ rate.noOfPeople }}</p>
+                <p>{{ rate.adultQty }}位成人 + {{ rate.childrenQty }}位兒童</p>
               </el-col>
               <el-col :span="12">
                 <p>寵物:</p>
-                <p>{{ rate.pets }}</p>
+                <p>
+                  {{
+                    rate.petsQty === 0 || rate.petsQty === null
+                      ? 0
+                      : rate.petsQty
+                  }}
+                </p>
               </el-col>
-              <el-col :span="8">
+              <template v-for="(child, index) in rate.childrenAge" :key="child">
+                <el-col v-if="rate.childrenAge.length > 0" :span="8">
+                  <p>兒童{{ index + 1 }}年齡:</p>
+                  <p>{{ child }}</p>
+                </el-col>
+              </template>
+              <!-- <el-col :span="8">
                 <p>兒童1年齡:</p>
                 <p>8</p>
               </el-col>
@@ -38,18 +58,24 @@
               <el-col :span="8">
                 <p>兒童3年齡:</p>
                 <p>10</p>
-              </el-col>
+              </el-col> -->
             </el-row>
           </div>
           <div class="days-of-stay">
             <el-row>
               <el-col :span="12">
                 <p>入住日期:</p>
-                <p>{{ rate.checkInDate }}</p>
+                <p>
+                  {{ formatDate(rate.checkInDate) }}
+                  {{ rate.checkInTime.replace(/(.{2})$/, ":$1") }}
+                </p>
               </el-col>
               <el-col :span="12">
                 <p>離開日期:</p>
-                <p>{{ rate.checkOutDate }}</p>
+                <p>
+                  {{ formatDate(rate.checkOutDate) }}
+                  {{ rate.checkOutTime.replace(/(.{2})$/, ":$1") }}
+                </p>
               </el-col>
             </el-row>
           </div>
@@ -59,7 +85,7 @@
                 <p>總價格(已包含稅款及服務費):</p>
               </el-col>
               <el-col>
-                <p class="price-after-tax">HK$1480.00</p>
+                <p class="price-after-tax">HK${{ rate.totalPrice }}.00</p>
               </el-col>
             </el-row>
           </div>
@@ -69,18 +95,40 @@
   </div>
 
   <div class="appointment-record-dialog">
-    <el-dialog v-model="dialogFormVisible" title="白沙灣渡假酒店">
+    <el-dialog v-model="dialogFormVisible" :title="reservationDetail.hotelName">
+      <p class="subtitle">
+        {{ reservationDetail.hotelAddress }}
+      </p>
       <div class="number-of-individuals">
         <el-row>
           <el-col :span="12">
             <p>人數:</p>
-            <p>2位成人 + 3位兒童</p>
+            <p>
+              {{ reservationDetail.adultQty }}位成人 +
+              {{ reservationDetail.childrenQty }}位兒童
+            </p>
           </el-col>
           <el-col :span="12">
             <p>寵物:</p>
-            <p>2</p>
+            <p>
+              {{
+                reservationDetail.petsQty === null ||
+                reservationDetail.petsQty === ""
+                  ? 0
+                  : reservationDetail.petsQty
+              }}
+            </p>
           </el-col>
-          <el-col :span="8">
+          <template
+            v-for="(child, index) in reservationDetail.childrenAge"
+            :key="child"
+          >
+            <el-col v-if="reservationDetail.childrenAge.length > 0" :span="8">
+              <p>兒童{{ index + 1 }}年齡:</p>
+              <p>{{ child }}</p>
+            </el-col>
+          </template>
+          <!-- <el-col :span="8">
             <p>兒童1年齡:</p>
             <p>8</p>
           </el-col>
@@ -91,18 +139,24 @@
           <el-col :span="8">
             <p>兒童3年齡:</p>
             <p>10</p>
-          </el-col>
+          </el-col> -->
         </el-row>
       </div>
       <div class="days-of-stay">
         <el-row>
           <el-col :span="12">
             <p>入住日期:</p>
-            <p>2021年5月22日 15:00</p>
+            <p>
+              {{ formatDate(reservationDetail.checkInDate) }}
+              {{ reservationDetail.checkInTime.replace(/(.{2})$/, ":$1") }}
+            </p>
           </el-col>
           <el-col :span="12">
             <p>離開日期:</p>
-            <p>2021年5月22日 12:00</p>
+            <p>
+              {{ formatDate(reservationDetail.checkOutDate) }}
+              {{ reservationDetail.checkOutTime.replace(/(.{2})$/, ":$1") }}
+            </p>
           </el-col>
         </el-row>
       </div>
@@ -112,30 +166,35 @@
             <p>原價:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price">HK$1280.00</p>
+            <p class="price">HK${{ reservationDetail.roomPrice }}.00</p>
           </el-col>
           <el-col :span="12">
             <p>折扣:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price">HK$0.00</p>
+            <p class="price">HK${{ reservationDetail.discount }}.00</p>
           </el-col>
         </el-row>
       </div>
-      <div class="pet-info">
+      <div class="pet-info" v-if="reservationDetail.addlService.length > 0">
         <el-row>
-          <el-col :span="12">
-            <p>寵物留宿:</p>
-          </el-col>
-          <el-col :span="12">
-            <p class="price">2</p>
-          </el-col>
-          <el-col :span="12">
-            <p>寵物留宿附加費:</p>
-          </el-col>
-          <el-col :span="12">
-            <p class="price">HK$200.00</p>
-          </el-col>
+          <template
+            v-for="service in reservationDetail.addlService"
+            :key="service"
+          >
+            <el-col :span="12">
+              <p>{{ service.name }}:</p>
+            </el-col>
+            <el-col :span="12">
+              <p class="price">{{ service.quantity }}</p>
+            </el-col>
+            <el-col :span="12">
+              <p>寵物留宿附加費:</p>
+            </el-col>
+            <el-col :span="12">
+              <p class="price">HK${{ service.unitCharge }}.00</p>
+            </el-col>
+          </template>
         </el-row>
       </div>
       <div class="full-price">
@@ -144,19 +203,25 @@
             <p>總價格(已包含稅款及服務費):</p>
           </el-col>
           <el-col :span="10">
-            <p class="price-colored">HK$1480.00</p>
+            <p class="price-colored">
+              HK${{ reservationDetail.totalPrice }}.00
+            </p>
           </el-col>
           <el-col :span="12">
             <p>現需繳付:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price-colored">HK$1480.00</p>
+            <p class="price-colored">
+              HK${{ reservationDetail.pricePayNow }}.00
+            </p>
           </el-col>
           <el-col :span="12">
             <p>入住時需繳付:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price-colored">HK$0.00</p>
+            <p class="price-colored">
+              HK${{ reservationDetail.pricePayCheckIn }}.00
+            </p>
           </el-col>
         </el-row>
       </div>
@@ -166,7 +231,7 @@
             <p>按金:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price">HK$200.00</p>
+            <p class="price">HK${{ reservationDetail.deposit }}.00</p>
           </el-col>
         </el-row>
       </div>
@@ -175,38 +240,70 @@
 </template>
 
 <script>
+import moment from "moment";
+import { ElNotification } from "element-plus";
+
 export default {
   data() {
     return {
       dialogFormVisible: false,
-      rates: [
-        {
-          id: 1,
-          title: "白沙灣渡假酒店",
-          description: "香港新界西貢區白沙灣",
-          noOfPeople: "2位成人 + 3位兒童",
-          pets: 2,
-          checkInDate: "2021年5月22日 15:00",
-          checkOutDate: "2021年5月22日 12:00",
-          image: require("../assets/img-house1.jpg"),
-        },
-        {
-          id: 2,
-          title: "白沙灣渡假酒店",
-          description: "香港新界西貢區白沙灣",
-          noOfPeople: "2位成人 + 3位兒童",
-          pets: 2,
-          checkInDate: "2021年5月22日 15:00",
-          checkOutDate: "2021年5月22日 12:00",
-          image: require("../assets/img-house2.jpg"),
-        },
-      ],
     };
   },
-  methods: {
-    openDialog() {
-      this.dialogFormVisible = true;
+  computed: {
+    rates() {
+      return this.$store.getters["profile/reservations"];
     },
+    reservationDetail() {
+      return this.$store.getters["profile/reservationDetail"];
+    },
+  },
+  methods: {
+    formatDate(date) {
+      return moment(date).locale("zh-cn").format("ll");
+    },
+    async openDialog(reservationId) {
+      await this.$store
+        .dispatch("profile/viewReservationDetail", reservationId)
+        .then(() => {
+          this.dialogFormVisible = true;
+        });
+    },
+    async checkAccessToken({ id, option }) {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          if (option && option === "detail") {
+            this.openDialog(id);
+          } else {
+            this.$store.dispatch("profile/getReservations");
+          }
+        })
+        .catch(() => {
+          this.checkRefreshToken({ id: id, option: option });
+        });
+    },
+    async checkRefreshToken({ id, option }) {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          if (option && option === "detail") {
+            this.openDialog(id);
+          } else {
+            this.$store.dispatch("profile/getReservations");
+          }
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
+  },
+  mounted() {
+    this.checkAccessToken({ id: null, option: null });
   },
 };
 </script>
@@ -296,28 +393,43 @@ export default {
 }
 
 .edit-profile .appointment-record-dialog .el-dialog .el-dialog__body {
-  padding: 16px;
+  padding: 20px;
 }
 
 .edit-profile .appointment-record-dialog .el-dialog .el-dialog__title {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 1rem;
+  /* border-bottom: 1px solid #eee;
+  padding-bottom: 1rem; */
   letter-spacing: 1.4px;
   font-weight: bold;
   color: #3e3e3e;
   display: block;
 }
 
-.edit-profile .appointment-record-dialog .el-dialog .el-dialog__title::after {
+.edit-profile .appointment-record-dialog .el-dialog p.subtitle {
+  margin-top: -1.5rem;
+  /* padding-left: 4px; */
+  /* margin-bottom: 2rem; */
+  letter-spacing: 0.8px;
+  color: #8d8d8d;
+  font-size: 12px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+/* .edit-profile .appointment-record-dialog .el-dialog .el-dialog__title::after {
   content: "香港新界西貢區白沙灣";
   display: block;
   letter-spacing: 0.8px;
   color: #8d8d8d;
   font-size: 12px;
-}
+} */
 
 .edit-profile .appointment-record-dialog .number-of-individuals .el-col {
   margin-bottom: 0.5rem;
+}
+
+.edit-profile .appointment-record-dialog .number-of-individuals {
+  padding-top: 1rem;
 }
 
 .edit-profile .appointment-record-dialog .number-of-individuals,

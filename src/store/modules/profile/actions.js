@@ -268,4 +268,36 @@ export default {
         console.log(err);
       });
   },
+  getReservations(context) {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .get("/api/reservation", {
+        headers: {
+          authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        context.commit("SET_RESERVATIONS", res.data.items);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  async viewReservationDetail(context, payload) {
+    const accessToken = localStorage.getItem("accessToken");
+    await axios
+      .get(`/api/reservation/${payload}`, {
+        headers: {
+          authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        context.commit("SET_RESERVATION_DETAIL", res.data.item);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
