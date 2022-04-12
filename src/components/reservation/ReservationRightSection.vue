@@ -13,8 +13,8 @@
             </el-col>
             <el-col :span="14">
               <p class="data">
-                {{ numberOfAdults === "" ? 0 : payload }}位成人 +
-                {{ numberOfChildren === "" ? 0 : payload }}位兒童
+                {{ numberOfAdults === "" ? 0 : numberOfAdults }}位成人 +
+                {{ numberOfChildren === "" ? 0 : numberOfChildren }}位兒童
               </p>
             </el-col>
             <template v-for="(age, key) in childrenAge[0]" :key="age">
@@ -133,7 +133,13 @@
               <p class="info">按金:</p>
             </el-col>
             <el-col :span="14">
-              <p class="data">HK$200.00</p>
+              <p class="data">
+                HK${{
+                  selectedHotel.basicInfo.deposit === null
+                    ? 0
+                    : selectedHotel.basicInfo.deposit
+                }}.00
+              </p>
             </el-col>
           </el-row>
         </div>

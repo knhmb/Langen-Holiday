@@ -41,6 +41,7 @@
             >{{ checkOutDate }} {{ checkOutDateDay }}</span
           > -->
           <v-date-picker
+            v-if="!selectedHotel.hasDayNightSessions"
             locale="zh-cn"
             :masks="masks"
             :min-date="new Date()"
@@ -64,6 +65,53 @@
           <el-button class="small-btn"
             >{{ dateDifference === "" ? "1" : dateDifference }}晚</el-button
           >
+        </el-col>
+      </el-row>
+      <el-row :gutter="20" class="time-room">
+        <el-col :span="12" v-if="selectedHotel.hasDayNightSessions">
+          <label class="date-delivery" style="display: block">Time</label>
+          <el-select
+            v-model="timeslotids"
+            class="m-2"
+            placeholder="9:00 - 13:00"
+          >
+            <el-option
+              v-for="time in selectedHotel.timeslots"
+              :key="time.timeslotId"
+              :label="time.checkInTime + ' - ' + time.checkOutTime"
+              :value="time.timeslotId"
+            >
+              <span style="float: left">{{ time.checkInTime }}</span>
+              <span
+                style="
+                  float: right;
+
+                  font-size: 13px;
+                "
+                >{{ time.checkOutTime }}</span
+              >
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="12">
+          <label class="date-delivery" style="display: block"
+            >Room Quantity</label
+          >
+          <el-select
+            :disabled="parseInt(selectedHotel.basicInfo.maxRoomBooking) <= 1"
+            v-model="numberOfRooms"
+            class="m-2"
+          >
+            <el-option
+              v-for="roomQty in parseInt(
+                selectedHotel.basicInfo.maxRoomBooking
+              )"
+              :key="roomQty"
+              :label="roomQty"
+              :value="roomQty"
+            >
+            </el-option>
+          </el-select>
         </el-col>
       </el-row>
       <el-row :gutter="20">
@@ -159,6 +207,8 @@ export default {
       dummyDate: "",
       startDate: "",
       endDate: "",
+      timeSession: null,
+      time: "",
       masks: {
         input: "YYYY年M月DD日 WWW",
       },
@@ -175,8 +225,8 @@ export default {
       }
     },
     dateSelected() {
-      this.startDate = this.dateSelected.start;
-      this.endDate = this.dateSelected.end;
+      // this.startDate = moment(this.dateSelected.start).format("YYYY-MM-DD");
+      // this.endDate = moment(this.dateSelected.end).format("YYYY-MM-DD");
       this.isChangedDate = false;
     },
     startDate() {
@@ -208,76 +258,72 @@ export default {
         return;
       }
       this.assignDateDifference();
-      // if (this.dateDifference < 0) {
-      //   this.endDate = this.dateSelected.end;
-      //   const data = {
-      //     start: this.startDate,
-      //     end: this.endDate,
-      //   };
-      //   this.$store.dispatch("changeDate", data);
-      //   console.log("IM HEREERERERER");
-      // }
       console.log("reached changed date");
       const data = {
         start: this.startDate,
         end: this.endDate,
       };
-      // const data = {
-      //   start: moment(this.startDate).format("YYYYMMDD"),
-      //   end: moment(this.endDate).format("YYYYMMDD"),
-      // };
       this.$store.dispatch("changeDate", data);
       const selectedServices = Object.values(this.responses);
-      // console.log(selectedServices);
 
       const serviceData = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
         checkInDate: moment(this.startDate).format("YYYYMMDD"),
         checkOutDate: moment(this.endDate).format("YYYYMMDD"),
         service: selectedServices.toString(),
+        timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
+        roomQty: this.numberOfRooms,
       };
       console.log(serviceData);
-      if (
-        moment(this.startDate).format("YYYYMMDD") <
-        moment(this.endDate).format("YYYYMMDD")
-      ) {
-        console.log("End Date Comes Later");
-        console.log(data);
+      if (!this.timeSession) {
+        if (
+          moment(this.startDate).format("YYYYMMDD") <
+          moment(this.endDate).format("YYYYMMDD")
+        ) {
+          console.log("End Date Comes Later");
+          console.log(data);
+          this.$store.dispatch("booking/changedService", serviceData);
+        }
+      } else {
         this.$store.dispatch("booking/changedService", serviceData);
       }
-
-      // this.$store.dispatch("booking/changedService", serviceData);
+      this.$store.commit("SET_ROOM_QTY", 1);
     },
-    // dateSelected() {
-    //   this.assignDateDifference();
-    // },
-    // dateSelected() {
-    //   console.log("reached changed date");
-    //   const data = {
-    //     start: moment(this.startDate).format("YYYYMMDD"),
-    //     end: moment(this.endDate).format("YYYYMMDD"),
-    //   };
-    //   this.$store.dispatch("changeDate", data);
-    //   const selectedServices = Object.values(this.responses);
-    //   // console.log(selectedServices);
-
-    //   const serviceData = {
-    //     hotelId: this.selectedHotel.basicInfo.hotelId,
-    //     checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
-    //     checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
-    //     service: selectedServices.toString(),
-    //   };
-    //   console.log(serviceData);
-    //   if (
-    //     moment(this.dateSelected.start).format("YYYYMMDD") <
-    //     moment(this.dateSelected.end).format("YYYYMMDD")
-    //   ) {
-    //     console.log("End Date Comes Later");
-    //     console.log(data);
-    //     this.$store.dispatch("booking/changedService", serviceData);
-    //   }
-    //   // this.$store.dispatch("booking/changedService", serviceData);
-    // },
+    timeslotids() {
+      const selectedServices = Object.values(this.responses);
+      const serviceData = {
+        hotelId: this.selectedHotel.basicInfo.hotelId,
+        checkInDate: moment(this.startDate).format("YYYYMMDD"),
+        checkOutDate: moment(this.endDate).format("YYYYMMDD"),
+        service: selectedServices.toString(),
+        timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
+        roomQty: this.numberOfRooms,
+      };
+      this.$store.dispatch("booking/changedService", serviceData);
+      this.$store.commit("SET_ROOM_QTY", 1);
+    },
+    numberOfRooms() {
+      const selectedServices = Object.values(this.responses);
+      const serviceData = {
+        hotelId: this.selectedHotel.basicInfo.hotelId,
+        checkInDate: moment(this.startDate).format("YYYYMMDD"),
+        checkOutDate: moment(this.endDate).format("YYYYMMDD"),
+        service: selectedServices.toString(),
+        timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
+        roomQty: this.numberOfRooms,
+      };
+      if (!this.timeSession) {
+        if (
+          moment(this.startDate).format("YYYYMMDD") <
+          moment(this.endDate).format("YYYYMMDD")
+        ) {
+          console.log("No Time Session");
+          this.$store.dispatch("booking/changedService", serviceData);
+        }
+      } else {
+        this.$store.dispatch("booking/changedService", serviceData);
+      }
+    },
   },
   computed: {
     numberOfChildren: {
@@ -325,6 +371,22 @@ export default {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
     },
+    numberOfRooms: {
+      get() {
+        return this.$store.getters.numberOfRooms;
+      },
+      set(val) {
+        this.$store.commit("SET_ROOM_QTY", val);
+      },
+    },
+    timeslotids: {
+      get() {
+        return this.$store.getters.timeslotids;
+      },
+      set(val) {
+        this.$store.commit("SET_TIMESLOT", val);
+      },
+    },
   },
   methods: {
     dummy() {
@@ -342,11 +404,20 @@ export default {
     },
   },
   created() {
-    // this.startDate = this.dateSelected.start;
-    // console.log(this.startDate);
     console.log(this.dateSelected);
-    this.startDate = this.dateSelected.start;
-    this.endDate = this.dateSelected.end;
+    if (!this.selectedHotel.hasDayNightSessions) {
+      this.startDate = this.selectedHotel.defaultCheckInDate;
+      this.endDate = this.selectedHotel.defaultCheckOutDate;
+      this.timeSession = false;
+    } else {
+      this.startDate = this.selectedHotel.defaultCheckInDate;
+      this.endDate = this.selectedHotel.defaultCheckInDate;
+      this.timeSession = true;
+    }
+    console.log(this.startDate);
+    console.log(this.endDate);
+    console.log(moment(this.dateSelected.start).format("YYYY-MM-DD"));
+    console.log(moment(this.dateSelected.end).format("YYYY-MM-DD"));
     this.assignDateDifference();
   },
   mounted() {
@@ -373,6 +444,10 @@ export default {
 .service-detail .el-card .text.item .el-row {
   align-items: center;
   position: relative;
+}
+
+.service-detail .el-card .text.item .el-row.time-room {
+  margin: 1rem 0;
 }
 
 .service-detail .el-card .text.item .el-col {

@@ -32,6 +32,7 @@ const store = createStore({
       isHavePets: "false",
       numberOfIndividuals: 0,
       numberOfRooms: 0,
+      timeslotids: "",
     };
   },
   getters,

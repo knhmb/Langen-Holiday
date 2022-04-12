@@ -20,4 +20,7 @@ export default {
   dialogFormVisible(state) {
     return state.dialogFormVisible;
   },
+  timeslotids(state) {
+    return state.timeslotids;
+  },
 };

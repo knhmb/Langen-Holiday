@@ -173,6 +173,15 @@ export default {
     selectedServices() {
       return this.$store.getters["booking/selectedServices"];
     },
+    timeslotids() {
+      return this.$store.getters.timeslotids;
+    },
+    numberOfRooms() {
+      return this.$store.getters.numberOfRooms;
+    },
+    numberOfAdults() {
+      return this.$store.getters["booking/numberOfAdults"];
+    },
   },
   methods: {
     serviceChanged({ value, index, name, unitCharge }) {
@@ -230,6 +239,8 @@ export default {
         checkInDate: moment(this.dateSelected.start).format("YYYYMMDD"),
         checkOutDate: moment(this.dateSelected.end).format("YYYYMMDD"),
         service: this.finalArr.toString(),
+        timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
+        roomQty: this.numberOfRooms,
       };
       console.log(data);
       this.$store.dispatch("booking/changedService", data);
@@ -249,23 +260,39 @@ export default {
       }
       this.$store.dispatch("booking/storeChildrenAge", this.childAge);
       if (localStorage.getItem("accessToken")) {
-        await this.$store
-          .dispatch("auth/checkAccessTokenValidity")
-          .then(() => {
-            this.$router.push({
-              name: "reservation",
-              params: { id: this.$route.params.id },
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-            this.checkRefershToken();
+        if (this.numberOfAdults === "" || this.numberOfAdults === 0) {
+          ElNotification({
+            title: "Error",
+            message: "請輸入成人人數",
+            type: "error",
           });
+        } else {
+          await this.$store
+            .dispatch("auth/checkAccessTokenValidity")
+            .then(() => {
+              this.$router.push({
+                name: "reservation",
+                params: { id: this.$route.params.id },
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              this.checkRefershToken();
+            });
+        }
       } else {
-        this.$router.push({
-          name: "reservation",
-          params: { id: this.$route.params.id },
-        });
+        if (this.numberOfAdults === "" || this.numberOfAdults === 0) {
+          ElNotification({
+            title: "Error",
+            message: "請輸入成人人數",
+            type: "error",
+          });
+        } else {
+          this.$router.push({
+            name: "reservation",
+            params: { id: this.$route.params.id },
+          });
+        }
       }
     },
     async checkRefershToken() {

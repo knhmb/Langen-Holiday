@@ -41,4 +41,13 @@ export default {
   TOGGLE_LOGIN_FORM(state, payload) {
     state.dialogFormVisible = payload;
   },
+  SET_ROOM_QTY(state, payload) {
+    state.numberOfRooms = payload;
+  },
+  SET_TIMESLOT(state, payload) {
+    state.timeslotids = payload;
+  },
+  RESET_TIMESLOT(state) {
+    state.timeslotids = "";
+  },
 };

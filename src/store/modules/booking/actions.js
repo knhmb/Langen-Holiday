@@ -22,6 +22,7 @@ export default {
             root: true,
           }
         );
+        context.commit("SET_ROOM_QTY", payload.roomQty, { root: true });
       })
       .catch((err) => {
         console.log(err);
@@ -44,9 +45,9 @@ export default {
     const checkService = payload.service === "" ? "-" : payload.service;
     axios
       .get(
-        `/api/hotel/enquire-price/${payload.hotelId}/${1}/${
+        `/api/hotel/enquire-price/${payload.hotelId}/${payload.roomQty}/${
           payload.checkInDate
-        }/${payload.checkOutDate}${
+        }/${payload.checkOutDate}/${payload.timeslotids}${
           checkService === "" ? "" : "/" + checkService
         }`
       )
@@ -57,16 +58,20 @@ export default {
       .catch((err) => {
         const date = new Date();
         const today = moment(date).format("YYYYMMDD");
-        const tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+        let tomorrow = moment(date.setDate(date.getDate() + 1)).format(
           "YYYYMMDD"
         );
+        if (payload.timeslotids === "") {
+          tomorrow = today;
+        }
+
         console.log(err);
         if (err.response.data.statusCode === 400) {
           axios
             .get(
-              `/api/hotel/enquire-price/${
-                payload.hotelId
-              }/${1}/${today}/${tomorrow}${
+              `/api/hotel/enquire-price/${payload.hotelId}/${
+                payload.roomQty
+              }/${today}/${tomorrow}/${payload.timeslotids}${
                 checkService === "" ? "" : "/" + checkService
               }`
             )
