@@ -183,7 +183,7 @@
         </el-col>
       </el-row>
     </div>
-    <add-ons :child-age="childAge"></add-ons>
+    <add-ons :time-session="timeSession" :child-age="childAge"></add-ons>
   </el-card>
 </template>
 
@@ -230,16 +230,30 @@ export default {
       this.isChangedDate = false;
     },
     startDate() {
-      // this.assignDateDifference();
+      // const data = {
+      //   start: this.startDate,
+      //   end: this.dateSelected.end,
+      // };
       const data = {
         start: this.startDate,
-        end: this.dateSelected.end,
+        end: this.startDate,
       };
-      // const data = {
-      //   start: moment(this.startDate).format("YYYYMMDD"),
-      //   end: moment(this.endDate).format("YYYYMMDD"),
-      // };
-      this.$store.dispatch("changeDate", data);
+      if (this.timeSession) {
+        this.$store.dispatch("changeDate", data);
+        const selectedServices = Object.values(this.responses);
+
+        const serviceData = {
+          hotelId: this.selectedHotel.basicInfo.hotelId,
+          checkInDate: moment(this.startDate).format("YYYYMMDD"),
+          checkOutDate: moment(this.startDate).format("YYYYMMDD"),
+          service: selectedServices.toString(),
+          timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
+          roomQty: this.numberOfRooms,
+        };
+
+        this.$store.dispatch("booking/changedService", serviceData);
+        this.$store.commit("SET_ROOM_QTY", 1);
+      }
     },
     endDate() {
       if (!this.isChangedDate) {
@@ -294,7 +308,7 @@ export default {
       const serviceData = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
         checkInDate: moment(this.startDate).format("YYYYMMDD"),
-        checkOutDate: moment(this.endDate).format("YYYYMMDD"),
+        checkOutDate: moment(this.startDate).format("YYYYMMDD"),
         service: selectedServices.toString(),
         timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
         roomQty: this.numberOfRooms,
@@ -307,7 +321,9 @@ export default {
       const serviceData = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
         checkInDate: moment(this.startDate).format("YYYYMMDD"),
-        checkOutDate: moment(this.endDate).format("YYYYMMDD"),
+        checkOutDate: this.timeSession
+          ? moment(this.startDate).format("YYYYMMDD")
+          : moment(this.endDate).format("YYYYMMDD"),
         service: selectedServices.toString(),
         timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
         roomQty: this.numberOfRooms,

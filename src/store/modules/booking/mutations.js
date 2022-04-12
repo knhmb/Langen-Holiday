@@ -6,6 +6,8 @@ export default {
     if (!payload) {
       return;
     }
+    state.selectedHotel.basicInfo.maxRoomBooking =
+      payload.maxRoomBookingAllowed;
     state.selectedHotel.totalPrice = payload.totalPrice;
     state.selectedHotel.priceOfSelectedDate = payload.priceOfSelectedDate;
     state.selectedHotel.totalSelectedAddlServiceCharge =

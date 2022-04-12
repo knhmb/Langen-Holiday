@@ -128,7 +128,7 @@ import moment from "moment";
 import { ElNotification } from "element-plus";
 
 export default {
-  props: ["childAge"],
+  props: ["childAge", "timeSession"],
   data() {
     return {
       services: [],
@@ -266,6 +266,12 @@ export default {
             message: "請輸入成人人數",
             type: "error",
           });
+        } else if (this.timeSession && this.timeslotids === "") {
+          ElNotification({
+            title: "Error",
+            message: "請選擇時間段",
+            type: "error",
+          });
         } else {
           await this.$store
             .dispatch("auth/checkAccessTokenValidity")
@@ -285,6 +291,12 @@ export default {
           ElNotification({
             title: "Error",
             message: "請輸入成人人數",
+            type: "error",
+          });
+        } else if (this.timeSession && this.timeslotids === "") {
+          ElNotification({
+            title: "Error",
+            message: "請選擇時間段",
             type: "error",
           });
         } else {

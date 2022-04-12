@@ -139,6 +139,7 @@ export default {
         firstDayOfCurrentMonth: this.firstDayOfCurrentMonth,
         lastDayOfNextMonth: this.lastDayOfNextMonth,
         roomQty: 1,
+        hasDayNightSessions: this.selectedHotel.hasDayNightSessions,
       };
       console.log(data);
 

@@ -31,7 +31,7 @@ export default {
   getDate(context, payload) {
     axios
       .get(
-        `/api/hotel/check-availability/${payload.hotelId}/${payload.firstDayOfCurrentMonth}/${payload.lastDayOfNextMonth}/${payload.roomQty}`
+        `/api/hotel/check-availability/${payload.hotelId}/${payload.firstDayOfCurrentMonth}/${payload.lastDayOfNextMonth}/${payload.roomQty}/${payload.hasDayNightSessions}`
       )
       .then((res) => {
         console.log(res);
