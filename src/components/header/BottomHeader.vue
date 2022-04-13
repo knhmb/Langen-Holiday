@@ -412,6 +412,8 @@
 
     <!-- Dialog -->
     <el-dialog
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
       v-model="dialogFormVisible"
       :custom-class="{ center: this.dialogTitle === '重設密碼' }"
       :title="dialogTitle"

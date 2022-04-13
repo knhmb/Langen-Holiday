@@ -104,6 +104,7 @@ export default {
       try {
         await this.$store.dispatch("auth/login", data);
         this.$emit("closeDialog", { closeDialog: false });
+        this.$router.replace("/");
         this.resetFields();
       } catch (error) {
         ElNotification({
