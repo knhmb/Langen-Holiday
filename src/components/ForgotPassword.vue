@@ -20,7 +20,7 @@
             </el-form-item>
           </el-col> -->
           <el-col>
-            <el-button @click="firstStep">下一步</el-button>
+            <el-button @click="firstStep">提交</el-button>
           </el-col>
           <el-col>
             <p class="return" @click="toggleLoginForm">返回</p>
@@ -29,29 +29,38 @@
       </el-form>
     </div>
     <div v-if="stepOneComplete" class="password-confirmation">
-      <p>Email has been sent to {{ ruleForm.username }}</p>
+      <p>
+        重設密碼的連結即將發送至你的電郵地址 <br />
+        {{ ruleForm.username }}
+      </p>
       <div class="check-btn">
-        <el-button @click="completedLastStep">Submit</el-button>
+        <el-button @click="completedLastStep">確定</el-button>
       </div>
     </div>
     <div v-if="stepTwoComplete" class="password-confirmation">
-      <el-form label-position="top">
+      <el-form
+        label-position="top"
+        hide-required-asterisk
+        :model="ruleForm2"
+        ref="ruleForm2"
+        :rules="rules2"
+      >
         <el-row>
           <el-col>
-            <el-form-item label="新密碼">
+            <el-form-item label="新密碼" prop="password">
               <el-input
                 class="post-icon"
-                v-model="password"
+                v-model="ruleForm2.password"
                 :type="passwordType1"
               ></el-input>
               <img @click="switchIcon('password')" :src="iconEye1" alt="" />
             </el-form-item>
           </el-col>
           <el-col>
-            <el-form-item label="確認密碼">
+            <el-form-item label="確認密碼" prop="confirmPassword">
               <el-input
                 class="post-icon"
-                v-model="confirmPassword"
+                v-model="ruleForm2.confirmPassword"
                 :type="passwordType2"
               ></el-input>
               <img
@@ -62,7 +71,7 @@
             </el-form-item>
           </el-col>
           <el-col>
-            <el-button>重設密碼</el-button>
+            <el-button @click="submitPassword">重設密碼</el-button>
           </el-col>
           <el-col>
             <p @click="previousStep" class="return">返回</p>
@@ -78,13 +87,38 @@ import { ElNotification } from "element-plus";
 
 export default {
   data() {
+    const validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$i18n.t("password_required")));
+      } else {
+        if (this.ruleForm2.confirmPassword !== "") {
+          this.$refs.ruleForm2.validateField("confirmPassword");
+        }
+        callback();
+      }
+    };
+
+    const validateConfirmPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("請重新輸入密碼"));
+      } else {
+        if (value !== this.ruleForm2.password) {
+          callback(new Error(this.$i18n.t("password_dont_match")));
+        } else {
+          callback();
+        }
+      }
+    };
+
     return {
       ruleForm: {
         username: "",
         phone: "",
       },
-      password: "",
-      confirmPassword: "",
+      ruleForm2: {
+        password: "",
+        confirmPassword: "",
+      },
       passwordType1: "password",
       passwordType2: "password",
       iconEye1: require("../assets/icon-eyeoff.svg"),
@@ -103,6 +137,28 @@ export default {
           {
             required: true,
             message: this.$i18n.t("phone_required"),
+            trigger: "blur",
+          },
+        ],
+      },
+      rules2: {
+        password: [
+          {
+            required: true,
+            message: this.$i18n.t("password_required"),
+            validator: validatePass,
+            trigger: "blur",
+          },
+          {
+            min: 6,
+            message: "密碼必須至少6個字符",
+          },
+        ],
+        confirmPassword: [
+          {
+            required: true,
+            message: this.$i18n.t("password_required"),
+            validator: validateConfirmPass,
             trigger: "blur",
           },
         ],
@@ -141,7 +197,7 @@ export default {
             })
             .then(() => {
               this.stepOneComplete = true;
-              this.$emit("toggleLoginForm", { title: "Check Email" });
+              this.$emit("toggleLoginForm", { title: "重設密碼" });
             })
             .catch((err) => {
               ElNotification({
@@ -159,10 +215,28 @@ export default {
       this.$emit("toggleLoginForm", { title: "忘記密碼" });
     },
     completedLastStep() {
+      this.$store.commit("TOGGLE_LOGIN_FORM", false);
+    },
+    submitPassword() {
+      this.$refs.ruleForm2.validate((valid) => {
+        if (valid) {
+          const data = {
+            checkString: this.$route.query.value,
+            newPassword: this.ruleForm2.password,
+          };
+          console.log(data);
+          console.log(this.$route);
+          // this.$router.replace("/");
+        }
+      });
+    },
+  },
+  created() {
+    if (this.$route.path === "/reset-password") {
       this.stepOneComplete = false;
       this.stepTwoComplete = true;
       this.$emit("toggleLoginForm", { title: "忘記密碼" });
-    },
+    }
   },
 };
 </script>

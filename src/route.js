@@ -47,6 +47,7 @@ const router = createRouter({
     { path: "/hotel-recommendations", component: HotelRecommendations },
     { path: "/day-n-night-time/:name", component: DayTime },
     { path: "/privacy-and-policy", component: PrivacyPolicy },
+    { path: "/reset-password", component: Home },
     {
       path: "/edit-profile",
       component: EditProfile,

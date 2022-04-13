@@ -413,7 +413,7 @@
     <!-- Dialog -->
     <el-dialog
       v-model="dialogFormVisible"
-      :custom-class="{ center: this.dialogTitle === 'Check Email' }"
+      :custom-class="{ center: this.dialogTitle === '重設密碼' }"
       :title="dialogTitle"
     >
       <Login
@@ -453,6 +453,21 @@ export default {
       navLocation: "",
       // loggedIn: false,
     };
+  },
+  watch: {
+    $route() {
+      if (this.$route.path === "/reset-password") {
+        this.$store.commit("TOGGLE_LOGIN_FORM", true);
+        this.dialogTitle = "忘記密碼";
+
+        const dialog = document.querySelector(".el-dialog__headerbtn");
+        dialog.addEventListener("click", () => {
+          this.$router.replace("/");
+        });
+        console.log(dialog);
+      }
+      console.log("page changed");
+    },
   },
   computed: {
     loggedIn() {
@@ -601,6 +616,8 @@ export default {
     this.$store.dispatch("dashboard/setSubItemsLantau");
     this.$store.dispatch("dashboard/setSubItemsLamma");
     this.$store.dispatch("dashboard/setSubItemsDayAndNight");
+
+    console.log(this.$route);
     // this.$store.dispatch("dashboard/setSubItems");
     // console.log(this.cheungChauIslandItems);
   },
