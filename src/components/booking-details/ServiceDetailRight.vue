@@ -69,7 +69,7 @@
       </el-row>
       <el-row :gutter="20" class="time-room">
         <el-col :span="12" v-if="selectedHotel.hasDayNightSessions">
-          <label class="date-delivery" style="display: block">Time</label>
+          <label class="date-delivery" style="display: block">登記時間</label>
           <el-select
             v-model="timeslotids"
             class="m-2"
@@ -94,9 +94,7 @@
           </el-select>
         </el-col>
         <el-col :span="12">
-          <label class="date-delivery" style="display: block"
-            >Room Quantity</label
-          >
+          <label class="date-delivery" style="display: block">房間數量</label>
           <el-select
             :disabled="parseInt(selectedHotel.basicInfo.maxRoomBooking) <= 1"
             v-model="numberOfRooms"
@@ -132,7 +130,12 @@
         </el-col>
         <el-col :span="12">
           <label class="date-delivery" style="display: block">兒童</label>
-          <el-select v-model="numberOfChildren" class="m-2" placeholder="3">
+          <el-select
+            v-if="parseInt(selectedHotel.basicInfo.maxChildren) !== 0"
+            v-model="numberOfChildren"
+            class="m-2"
+            placeholder="3"
+          >
             <el-option
               v-for="adult in parseInt(selectedHotel.basicInfo.maxChildren)"
               :key="adult"
@@ -141,6 +144,7 @@
             >
             </el-option>
           </el-select>
+          <p v-else>這個房間沒有孩子</p>
         </el-col>
         <el-col
           v-for="(child, index) in numberOfChildren"
@@ -183,7 +187,12 @@
         </el-col>
       </el-row>
     </div>
-    <add-ons :time-session="timeSession" :child-age="childAge"></add-ons>
+    <add-ons
+      :start-date="startDate"
+      :end-date="endDate"
+      :time-session="timeSession"
+      :child-age="childAge"
+    ></add-ons>
   </el-card>
 </template>
 

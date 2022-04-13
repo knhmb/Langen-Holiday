@@ -52,6 +52,23 @@
               <p class="data">{{ checkInDate }} - {{ checkOutDate }}</p>
               <!-- <p class="data">2021年5月22日 - 2021年5月23日</p> -->
             </el-col>
+            <el-col :span="10" v-if="timeslotids">
+              <p class="info">登記時間:</p>
+            </el-col>
+            <el-col :span="14" v-if="timeslotids">
+              <p class="data">
+                {{ selectedTimeslot[0].checkInTime }} -
+                {{ selectedTimeslot[0].checkOutTime }}
+              </p>
+            </el-col>
+            <el-col :span="10">
+              <p class="info">房間數量:</p>
+            </el-col>
+            <el-col :span="14">
+              <p class="data">
+                {{ numberOfRooms }}
+              </p>
+            </el-col>
           </el-row>
         </div>
         <div class="price-single">
@@ -179,6 +196,17 @@ export default {
         this.$store.dispatch("changeService", value);
         console.log(value);
       },
+    },
+    timeslotids() {
+      return this.$store.getters.timeslotids;
+    },
+    selectedTimeslot() {
+      return this.selectedHotel.timeslots.filter(
+        (time) => time.timeslotId === this.timeslotids
+      );
+    },
+    numberOfRooms() {
+      return this.$store.getters.numberOfRooms;
     },
     petQty() {
       return this.$store.getters["booking/petQty"];

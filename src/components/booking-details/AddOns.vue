@@ -128,7 +128,7 @@ import moment from "moment";
 import { ElNotification } from "element-plus";
 
 export default {
-  props: ["childAge", "timeSession"],
+  props: ["childAge", "timeSession", "startDate", "endDate"],
   data() {
     return {
       services: [],
@@ -276,6 +276,18 @@ export default {
           await this.$store
             .dispatch("auth/checkAccessTokenValidity")
             .then(() => {
+              if (this.timeSession) {
+                this.$store.dispatch("changeDate", {
+                  start: this.startDate,
+                  end: this.startDate,
+                });
+              } else {
+                this.$store.dispatch("changeDate", {
+                  start: this.startDate,
+                  end: this.endDate,
+                });
+              }
+
               this.$router.push({
                 name: "reservation",
                 params: { id: this.$route.params.id },
@@ -300,6 +312,17 @@ export default {
             type: "error",
           });
         } else {
+          if (this.timeSession) {
+            this.$store.dispatch("changeDate", {
+              start: this.startDate,
+              end: this.startDate,
+            });
+          } else {
+            this.$store.dispatch("changeDate", {
+              start: this.startDate,
+              end: this.endDate,
+            });
+          }
           this.$router.push({
             name: "reservation",
             params: { id: this.$route.params.id },
@@ -311,6 +334,17 @@ export default {
       await this.$store
         .dispatch("auth/checkRefreshTokenValidity")
         .then(() => {
+          if (this.timeSession) {
+            this.$store.dispatch("changeDate", {
+              start: this.startDate,
+              end: this.startDate,
+            });
+          } else {
+            this.$store.dispatch("changeDate", {
+              start: this.startDate,
+              end: this.endDate,
+            });
+          }
           this.$router.push({
             name: "reservation",
             params: { id: this.$route.params.id },

@@ -209,6 +209,7 @@ export default {
             message: "已預訂",
             type: "success",
           });
+          this.$router.replace("/");
         });
       }
     },

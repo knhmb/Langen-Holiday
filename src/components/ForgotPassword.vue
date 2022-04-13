@@ -1,6 +1,6 @@
 <template>
   <div class="forgot-password">
-    <div v-if="!stepOneComplete" class="email-conformation">
+    <div v-if="!stepOneComplete && !stepTwoComplete" class="email-conformation">
       <el-form
         hide-required-asterisk
         :model="ruleForm"
@@ -29,6 +29,12 @@
       </el-form>
     </div>
     <div v-if="stepOneComplete" class="password-confirmation">
+      <p>Email has been sent to {{ ruleForm.username }}</p>
+      <div class="check-btn">
+        <el-button @click="completedLastStep">Submit</el-button>
+      </div>
+    </div>
+    <div v-if="stepTwoComplete" class="password-confirmation">
       <el-form label-position="top">
         <el-row>
           <el-col>
@@ -59,7 +65,7 @@
             <el-button>重設密碼</el-button>
           </el-col>
           <el-col>
-            <p @click="stepOneComplete = false" class="return">返回</p>
+            <p @click="previousStep" class="return">返回</p>
           </el-col>
         </el-row>
       </el-form>
@@ -84,6 +90,7 @@ export default {
       iconEye1: require("../assets/icon-eyeoff.svg"),
       iconEye2: require("../assets/icon-eyeoff.svg"),
       stepOneComplete: false,
+      stepTwoComplete: false,
       rules: {
         username: [
           {
@@ -134,6 +141,7 @@ export default {
             })
             .then(() => {
               this.stepOneComplete = true;
+              this.$emit("toggleLoginForm", { title: "Check Email" });
             })
             .catch((err) => {
               ElNotification({
@@ -145,6 +153,16 @@ export default {
         }
       });
     },
+    previousStep() {
+      this.stepOneComplete = false;
+      this.stepTwoComplete = false;
+      this.$emit("toggleLoginForm", { title: "忘記密碼" });
+    },
+    completedLastStep() {
+      this.stepOneComplete = false;
+      this.stepTwoComplete = true;
+      this.$emit("toggleLoginForm", { title: "忘記密碼" });
+    },
   },
 };
 </script>
@@ -155,7 +173,8 @@ export default {
   color: #8d8d8d;
 }
 
-.bottom-header .el-dialog .forgot-password .el-form .el-button {
+.bottom-header .el-dialog .forgot-password .el-form .el-button,
+.bottom-header .el-dialog .forgot-password .password-confirmation .el-button {
   background-color: #fd9a1a;
   border-color: #fd9a1a;
   color: #fff;
@@ -193,5 +212,22 @@ export default {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.bottom-header .el-dialog .forgot-password .password-confirmation p {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.bottom-header
+  .el-dialog
+  .forgot-password
+  .password-confirmation
+  p:last-of-type {
+  margin-top: 1rem;
+}
+
+.bottom-header .el-dialog .forgot-password .password-confirmation .check-btn {
+  text-align: center;
 }
 </style>

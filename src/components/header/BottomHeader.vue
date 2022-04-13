@@ -411,7 +411,11 @@
     </el-row>
 
     <!-- Dialog -->
-    <el-dialog v-model="dialogFormVisible" :title="dialogTitle">
+    <el-dialog
+      v-model="dialogFormVisible"
+      :custom-class="{ center: this.dialogTitle === 'Check Email' }"
+      :title="dialogTitle"
+    >
       <Login
         v-if="dialogTitle === '登入'"
         @closeDialog="login"
@@ -702,6 +706,10 @@ export default {
 
 .bottom-header .el-dialog .el-dialog__title {
   font-weight: bold;
+}
+.bottom-header .el-dialog.center .el-dialog__title {
+  display: flex;
+  justify-content: center;
 }
 
 .bottom-header .el-dialog .login .form-col {
