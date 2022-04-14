@@ -211,6 +211,8 @@ export default {
       })
       .catch((err) => {
         console.log(err);
+        const error = new Error(t(err.response.data.message));
+        throw error;
       });
   },
 };

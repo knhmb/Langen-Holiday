@@ -235,16 +235,14 @@ export default {
               this.ruleForm2.password = "";
               this.ruleForm2.confirmPassword = "";
             })
-            .catch(() => {
+            .catch((err) => {
               ElNotification({
                 title: "Error",
-                message: "ERROR OCCURRED",
+                message: err.message,
                 type: "error",
               });
             });
           console.log(data);
-          console.log(this.$route);
-          // this.$router.replace("/");
         }
       });
     },

@@ -22,5 +22,6 @@
   "error.account.invalid-one-time-password": "你輸入的一次性驗證碼無效",
   "error.account.phone-already-exist": "電話已經存在",
   "error.account.email-already-exist": "電子郵件已存在",
-  "error.account.username-already-exist": "用戶名已存在"
+  "error.account.username-already-exist": "用戶名已存在",
+  "error.account.id-not-exist": "身份證不存在"
 }
