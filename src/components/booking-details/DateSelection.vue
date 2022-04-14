@@ -72,5 +72,12 @@ export default {
     white-space: normal;
   }
 }
+
+@media screen and (max-width: 420px) {
+  .date-selection .grey,
+  .date-selection .yellow {
+    width: 100%;
+  }
+}
 </style>
 

@@ -7,12 +7,51 @@
     </template>
     <div class="text item">
       <el-row>
-        <el-col class="date" :span="5">入住日期</el-col>
-        <el-col :span="5" class="line"></el-col>
-        <el-col class="date" :span="5">入住日期</el-col>
+        <el-col class="date" :sm="24" :md="5">入住日期</el-col>
+        <v-date-picker
+          locale="zh-cn"
+          :masks="masks"
+          :min-date="new Date()"
+          class="inline-block h-full hidden-md-and-up"
+          v-model="startDate"
+        >
+          <template v-slot="{ inputValue, togglePopover }">
+            <div class="flex items-center">
+              <input
+                mode="date"
+                @click="togglePopover()"
+                :value="inputValue"
+                readonly
+                class="date-picker-input"
+              />
+            </div>
+          </template>
+        </v-date-picker>
+        <el-col :sm="3" :md="5" class="line hidden-sm-and-down"></el-col>
+        <el-col class="date" :sm="24" :md="5">入住日期</el-col>
+        <v-date-picker
+          v-if="!selectedHotel.hasDayNightSessions"
+          locale="zh-cn"
+          :masks="masks"
+          :min-date="new Date()"
+          class="inline-block h-full hidden-md-and-up"
+          v-model="endDate"
+          @click="isChangedDate = true"
+        >
+          <template v-slot="{ inputValue, togglePopover }">
+            <div class="flex items-center">
+              <input
+                @click="togglePopover()"
+                :value="inputValue"
+                readonly
+                class="date-picker-input"
+              />
+            </div>
+          </template>
+        </v-date-picker>
       </el-row>
       <el-row>
-        <el-col :span="10">
+        <el-col :span="10" class="hidden-sm-and-down">
           <!-- <span class="date-delivery"
             >{{ checkInDate }} {{ checkInDateDay }}</span
           > -->
@@ -36,7 +75,7 @@
             </template>
           </v-date-picker>
         </el-col>
-        <el-col :span="10">
+        <el-col :span="10" class="hidden-sm-and-down">
           <!-- <span class="date-delivery"
             >{{ checkOutDate }} {{ checkOutDateDay }}</span
           > -->

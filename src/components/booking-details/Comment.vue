@@ -145,6 +145,7 @@ export default {
   font-size: 18px;
   letter-spacing: 5.6px;
   color: #8d8d8d;
+  word-break: break-word;
 }
 
 .comment .el-row .el-col {
