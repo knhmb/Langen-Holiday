@@ -32,9 +32,11 @@ export default {
   },
   created() {
     this.$store.dispatch("hideHeader", false);
+    console.log(this.$route);
   },
   beforeUnmount() {
     this.$store.dispatch("displayHeader", true);
+    this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
   },
 };
 </script>

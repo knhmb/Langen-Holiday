@@ -33,6 +33,7 @@ const store = createStore({
       numberOfIndividuals: 0,
       numberOfRooms: 0,
       timeslotids: "",
+      authenticatedToReserve: false,
     };
   },
   getters,

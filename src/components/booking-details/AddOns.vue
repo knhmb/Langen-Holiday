@@ -272,6 +272,7 @@ export default {
             message: "請選擇時間段",
             type: "error",
           });
+          console.log(this.numberOfAdults);
         } else {
           await this.$store
             .dispatch("auth/checkAccessTokenValidity")
@@ -287,6 +288,7 @@ export default {
                   end: this.endDate,
                 });
               }
+              this.$store.commit("AUTHENTICATED_TO_RESERVE", true);
 
               this.$router.push({
                 name: "reservation",
@@ -323,6 +325,7 @@ export default {
               end: this.endDate,
             });
           }
+          this.$store.commit("AUTHENTICATED_TO_RESERVE", true);
           this.$router.push({
             name: "reservation",
             params: { id: this.$route.params.id },
@@ -364,6 +367,7 @@ export default {
     console.log(this.dummy[this.index + this.num]);
     this.$store.commit("RESET_RESPONSES");
     console.log(this.selectedServices);
+    console.log(this.numberOfAdults);
     this.$store.commit("booking/RESET_SELECTED_SERVICES");
   },
 };

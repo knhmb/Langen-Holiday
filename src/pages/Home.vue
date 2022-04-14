@@ -27,6 +27,9 @@ export default {
   created() {
     this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
     this.$store.dispatch("resetDate");
+    this.$store.dispatch("displayHeader", true);
+    this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
+    // this.$store.dispatch("resetIsHavePets");
   },
 };
 </script>

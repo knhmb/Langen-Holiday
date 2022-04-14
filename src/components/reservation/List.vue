@@ -209,7 +209,9 @@ export default {
             message: "已預訂",
             type: "success",
           });
+          this.$store.dispatch("resetIsHavePets");
           this.$router.replace("/");
+          this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
         });
       }
     },

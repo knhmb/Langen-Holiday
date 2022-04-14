@@ -50,4 +50,7 @@ export default {
   RESET_TIMESLOT(state) {
     state.timeslotids = "";
   },
+  AUTHENTICATED_TO_RESERVE(state, payload) {
+    state.authenticatedToReserve = payload;
+  },
 };

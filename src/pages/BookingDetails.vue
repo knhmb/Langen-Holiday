@@ -65,7 +65,7 @@ export default {
   },
   created() {
     // this.fetchHotel();
-    this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
+    // this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
     this.$store.commit("RESET_TIMESLOT");
   },
   // computed: {

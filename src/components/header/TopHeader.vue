@@ -3,7 +3,7 @@
     <el-row>
       <el-col class="logo-content" :sm="24" :lg="9">
         <img
-          @click="$router.push('/')"
+          @click="navigateToHome"
           src="../../assets/logo.png"
           class="logo"
           alt=""
@@ -161,6 +161,13 @@ export default {
       }
       this.$emit("setIsActiveSubMenuItem", option);
     },
+    navigateToHome() {
+      if (this.$route.path === `/reservation/${this.$route.params.id}`) {
+        this.$router.replace("/");
+      } else {
+        this.$router.push("/");
+      }
+    },
   },
 };
 </script>
@@ -317,12 +324,11 @@ export default {
   font-size: 12px;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::before {
-    /* display: none; */
     right: 0;
   }
-}
+} */
 
 @media screen and (max-width: 1024px) {
   .top-header .logo-content,
@@ -332,6 +338,9 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  .top-header .el-menu--horizontal .el-sub-menu .el-sub-menu__title::before {
+    right: 0;
+  }
   .top-header .brand-name {
     display: block;
     width: 200px;
@@ -371,7 +380,9 @@ export default {
   }
 
   .top-header .contact span {
-    font-size: 0.7rem;
+    /* font-size: 0.7rem; */
+    font-size: 0.58rem;
+    margin-left: 0.2rem;
   }
 }
 </style>

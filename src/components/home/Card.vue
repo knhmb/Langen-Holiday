@@ -333,5 +333,9 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  .places-carousel .el-rate .el-rate__text {
+    font-size: 10px;
+    margin-left: 0rem;
+  }
 }
 </style>
