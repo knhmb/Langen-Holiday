@@ -215,15 +215,33 @@ export default {
       this.$emit("toggleLoginForm", { title: "忘記密碼" });
     },
     completedLastStep() {
-      this.$store.commit("TOGGLE_LOGIN_FORM", false);
+      // this.$store.commit("TOGGLE_LOGIN_FORM", false);
+      this.stepOneComplete = false;
+      this.stepTwoComplete = true;
     },
-    submitPassword() {
-      this.$refs.ruleForm2.validate((valid) => {
+    async submitPassword() {
+      await this.$refs.ruleForm2.validate((valid) => {
         if (valid) {
           const data = {
             checkString: this.$route.query.value,
             newPassword: this.ruleForm2.password,
           };
+          this.$store
+            .dispatch("auth/resetPassword", data)
+            .then(() => {
+              this.$store.commit("TOGGLE_LOGIN_FORM", false);
+              this.$router.replace("/");
+              this.ruleForm.username = "";
+              this.ruleForm2.password = "";
+              this.ruleForm2.confirmPassword = "";
+            })
+            .catch(() => {
+              ElNotification({
+                title: "Error",
+                message: "ERROR OCCURRED",
+                type: "error",
+              });
+            });
           console.log(data);
           console.log(this.$route);
           // this.$router.replace("/");

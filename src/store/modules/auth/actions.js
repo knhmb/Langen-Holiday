@@ -203,4 +203,14 @@ export default {
         throw error;
       });
   },
+  async resetPassword(_, payload) {
+    await axios
+      .post("/api/account/reset-password", payload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
