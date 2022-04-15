@@ -271,7 +271,7 @@ export default {
         ) {
           ElNotification({
             title: "Error",
-            message: "Please Select Child Age",
+            message: "請選擇兒童年齡",
             type: "error",
           });
         } else {
@@ -320,7 +320,7 @@ export default {
         ) {
           ElNotification({
             title: "Error",
-            message: "Please Select Child Age",
+            message: "請選擇兒童年齡",
             type: "error",
           });
         } else {
