@@ -171,7 +171,7 @@ export default {
   color: #8d8d8d;
 }
 
-.contact-info h2 {
+.contact-info :deep(h2) {
   font-size: 24px;
   border-bottom: 1px solid #8d8d8d;
   padding-bottom: 0.5rem;
@@ -179,12 +179,12 @@ export default {
   color: #8d8d8d;
 }
 
-.contact-info .el-row {
+.contact-info :deep(.el-row) {
   margin-top: 2rem;
   /* align-items: center; */
 }
 
-.contact-info .el-row .el-col {
+.contact-info :deep(.el-row .el-col) {
   margin-bottom: 0.5rem;
 }
 
@@ -258,7 +258,7 @@ export default {
 }
 
 @media screen and (max-width: 991px) {
-  .contact-info .el-row .el-col {
+  .contact-info :deep(.el-row .el-col) {
     margin-bottom: 1rem;
   }
 
