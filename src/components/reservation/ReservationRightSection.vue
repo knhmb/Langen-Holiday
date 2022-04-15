@@ -20,11 +20,11 @@
             <template v-for="(age, key) in childrenAge[0]" :key="age">
               <el-col :span="10">
                 <!-- <p class="info">兒童1年齡:</p> -->
-                <p class="info">{{ childrenAge.length > 0 ? key : "" }}</p>
+                <p class="info">{{ childrenAge.length > 0 ? key : "1" }}</p>
               </el-col>
               <el-col :span="14">
                 <!-- <p class="data">8</p> -->
-                <p class="data">{{ childrenAge.length > 0 ? age : "" }}</p>
+                <p class="data">{{ childrenAge.length > 0 ? age : "1" }}</p>
               </el-col>
             </template>
             <!-- <el-col :span="8">

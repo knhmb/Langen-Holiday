@@ -182,6 +182,9 @@ export default {
     numberOfAdults() {
       return this.$store.getters["booking/numberOfAdults"];
     },
+    numberOfChildren() {
+      return this.$store.getters["booking/numberOfChildren"];
+    },
   },
   methods: {
     serviceChanged({ value, index, name, unitCharge }) {
@@ -205,7 +208,7 @@ export default {
       this.arr.filter((item) => {
         this.finalArr.push(item[0] + "|" + item[1]);
       });
-      let obj = {};
+      // let obj = {};
 
       this.arr.filter((item) => {
         item["amenitiesCode"] = item[0];
@@ -216,23 +219,13 @@ export default {
         delete item[2];
       });
 
-      // let dataArr = this.addlService.map((item) => {
-      //   return [item[0], item];
-      // }); // creates array of array
+      // console.log(obj);
 
-      // let maparr = new Map(dataArr); // create key value pair from array of array
-
-      // let result = [...maparr.values()]; //converting back to array from mapobject
-
-      // console.log(result); //[{"name":"abc","age":27},{"name":"pqr","age":27}]
-
-      console.log(obj);
-
-      console.log("===================================");
-      console.log(this.arr);
-      console.log(this.finalArr);
-      console.log(this.addlService);
-      console.log("===================================");
+      // console.log("===================================");
+      // console.log(this.arr);
+      // console.log(this.finalArr);
+      // console.log(this.addlService);
+      // console.log("===================================");
 
       const data = {
         hotelId: this.selectedHotel.basicInfo.hotelId,
@@ -272,7 +265,15 @@ export default {
             message: "請選擇時間段",
             type: "error",
           });
-          console.log(this.numberOfAdults);
+        } else if (
+          this.numberOfChildren &&
+          Object.keys(this.childAge).length < this.numberOfChildren
+        ) {
+          ElNotification({
+            title: "Error",
+            message: "Please Select Child Age",
+            type: "error",
+          });
         } else {
           await this.$store
             .dispatch("auth/checkAccessTokenValidity")
@@ -311,6 +312,15 @@ export default {
           ElNotification({
             title: "Error",
             message: "請選擇時間段",
+            type: "error",
+          });
+        } else if (
+          this.numberOfChildren &&
+          Object.keys(this.childAge).length < this.numberOfChildren
+        ) {
+          ElNotification({
+            title: "Error",
+            message: "Please Select Child Age",
             type: "error",
           });
         } else {

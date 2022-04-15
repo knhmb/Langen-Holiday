@@ -90,6 +90,7 @@ export default {
         .dispatch("search/getSearchTheme", theme)
         .then(() => {
           this.$router.push({ path: "/search", query: { q: theme } });
+          this.$store.dispatch("resetIsHavePets");
           console.log(theme);
         })
         .catch(() => {
