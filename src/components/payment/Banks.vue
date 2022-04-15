@@ -168,7 +168,7 @@ export default {
   position: relative;
 }
 
-.banks .all-bank {
+.banks :deep(.all-bank) {
   border-bottom: 1px solid #999;
 
   /* padding-bottom: 2rem; */
@@ -178,11 +178,11 @@ export default {
   /* padding-bottom: 4rem; */
 }
 
-.banks .el-row {
+.banks :deep(.el-row) {
   align-items: center;
 }
 
-.banks h2 {
+.banks :deep(h2) {
   font-size: 24px;
   border-bottom: 1px solid #8d8d8d;
   padding-bottom: 0.5rem;
@@ -190,42 +190,42 @@ export default {
   color: #8d8d8d;
 }
 
-.banks .single-bank {
+.banks :deep(.single-bank) {
   margin-bottom: 3rem;
 }
 
-.banks .single-bank.tall {
+.banks :deep(.single-bank.tall) {
   margin-top: 4.5rem;
 }
 
-.banks .single-bank .bank-title {
+.banks :deep(.single-bank .bank-title) {
   margin-bottom: 1.5rem;
   margin-top: 1rem;
   letter-spacing: 3px;
   color: #8d8d8d;
 }
 
-.banks .single-bank img {
+.banks :deep(.single-bank img) {
   width: 150px;
 }
 
-.banks .single-bank .bank-info {
+.banks :deep(.single-bank .bank-info) {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.banks .single-bank .bank-info .space {
+.banks :deep(.single-bank .bank-info .space) {
   margin-top: 2rem;
 }
 
-.banks .single-bank .bank-info p {
+.banks :deep(.single-bank .bank-info p) {
   margin-left: 6rem;
   letter-spacing: 2.2px;
   color: #8d8d8d;
 }
 
-.banks .single-bank .bank-info::before {
+.banks :deep(.single-bank .bank-info::before) {
   content: "";
   position: absolute;
   background-color: black;
@@ -233,7 +233,7 @@ export default {
   width: 1px;
 }
 
-.banks .single-bank .bank-info.payme::before {
+.banks :deep(.single-bank .bank-info.payme::before) {
   content: "";
   position: absolute;
   background-color: black;
@@ -241,15 +241,15 @@ export default {
   width: 1px;
 }
 
-.banks .single-bank .bank-info.payme img {
+.banks :deep(.single-bank .bank-info.payme img) {
   margin-left: 6rem;
 }
 
-.banks .all-bank.third .single-bank {
+.banks :deep(.all-bank.third .single-bank) {
   margin: 0;
 }
 
-.banks .all-bank.third .single-bank .bank-info::before {
+.banks :deep(.all-bank.third .single-bank .bank-info::before) {
   content: "";
   position: absolute;
   background-color: black;
@@ -257,7 +257,7 @@ export default {
   width: 1px;
 }
 
-.banks .all-bank.third {
+.banks :deep(.all-bank.third) {
   border: none;
 }
 
@@ -328,24 +328,24 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-  .banks .single-bank .bank-info::before {
+  .banks :deep(.single-bank .bank-info::before) {
     display: none;
   }
-  .banks .single-bank .bank-info p,
-  .banks .single-bank .bank-info.payme img {
+  .banks :deep(.single-bank .bank-info p),
+  .banks :deep(.single-bank .bank-info.payme img) {
     margin-left: 0;
     margin-top: 0.5rem;
   }
 
-  .banks .single-bank .bank-info {
+  .banks :deep(.single-bank .bank-info) {
     align-items: center;
   }
 
-  .banks .single-bank .bank-info {
+  .banks :deep(.single-bank .bank-info) {
     text-align: center;
   }
 
-  .banks .single-bank .bank-image {
+  .banks :deep(.single-bank .bank-image) {
     text-align: center;
   }
 
