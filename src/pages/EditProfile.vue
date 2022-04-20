@@ -76,7 +76,7 @@
 </template>
 
 <script>
-// import { ElNotification } from "element-plus";
+import { ElNotification } from "element-plus";
 
 export default {
   data() {
@@ -129,30 +129,31 @@ export default {
     setOption(option) {
       this.isActive = option;
     },
-    // async checkAccessToken() {
-    //   await this.$store
-    //     .dispatch("auth/checkAccessTokenValidity")
-    //     .then(() => {
-    //       this.$store.dispatch("profile/getAccount");
-    //     })
-    //     .catch(() => {
-    //       this.checkRefershToken();
-    //       console.log("NOT WORKING2");
-    //     });
-    // },
-    // async checkRefershToken() {
-    //   await this.$store
-    //     .dispatch("auth/checkRefreshTokenValidity")
-    //     .then(() => {})
-    //     .catch((err) => {
-    //       ElNotification({
-    //         title: "Error",
-    //         message: err.message,
-    //         type: "error",
-    //       });
-    //       this.$store.dispatch("auth/logout");
-    //     });
-    // },
+    async checkAccessToken() {
+      await this.$store
+        .dispatch("auth/checkAccessTokenValidity")
+        .then(() => {
+          this.$store.dispatch("profile/getAccount");
+        })
+        .catch(() => {
+          this.checkRefershToken();
+        });
+    },
+    async checkRefershToken() {
+      await this.$store
+        .dispatch("auth/checkRefreshTokenValidity")
+        .then(() => {
+          this.$store.dispatch("profile/getAccount");
+        })
+        .catch((err) => {
+          ElNotification({
+            title: "Error",
+            message: err.message,
+            type: "error",
+          });
+          this.$store.dispatch("auth/logout");
+        });
+    },
   },
   watch: {
     $route(to) {
@@ -240,6 +241,8 @@ export default {
       this.iconBooking = require("../assets/icon-profile-bookging-on.svg");
       this.isBookingClicked = true;
     }
+
+    this.checkAccessToken();
 
     const user = JSON.parse(localStorage.getItem("userData"));
     this.profileName = user.username;

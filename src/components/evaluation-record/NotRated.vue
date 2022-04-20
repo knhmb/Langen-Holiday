@@ -149,7 +149,7 @@ export default {
     },
     async checkAccessToken() {
       await this.$store
-        .disptach("auth/checkAccessTokenValidity")
+        .dispatch("auth/checkAccessTokenValidity")
         .then(() => {
           this.addReview();
         })
