@@ -67,14 +67,16 @@
                 <p>入住日期:</p>
                 <p>
                   {{ formatDate(rate.checkInDate) }}
-                  {{ rate.checkInTime.replace(/(.{2})$/, ":$1") }}
+                  {{ rate.checkInTime }}
+                  <!-- {{ rate.checkInTime.replace(/(.{2})$/, ":$1") }} -->
                 </p>
               </el-col>
               <el-col :span="12">
                 <p>離開日期:</p>
                 <p>
                   {{ formatDate(rate.checkOutDate) }}
-                  {{ rate.checkOutTime.replace(/(.{2})$/, ":$1") }}
+                  {{ rate.checkOutTime }}
+                  <!-- {{ rate.checkOutTime.replace(/(.{2})$/, ":$1") }} -->
                 </p>
               </el-col>
             </el-row>

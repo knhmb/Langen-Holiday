@@ -120,8 +120,14 @@ export default {
       });
   },
   async makeReservation() {
+    const accessToken = localStorage.getItem("accessToken");
+
     await axios
-      .post("/api/reservation")
+      .post(
+        "/api/reservation",
+        {},
+        accessToken ? { headers: { authorization: accessToken } } : ""
+      )
       .then((res) => {
         console.log(res);
       })
