@@ -186,6 +186,11 @@ export default {
       };
       console.log(data);
       await this.$store.dispatch("profile/addComment", data).then(() => {
+        ElNotification({
+          title: "Success",
+          message: "已添加評論",
+          type: "success",
+        });
         this.review = "";
         this.rate = null;
         this.dialogFormVisible = false;

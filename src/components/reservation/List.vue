@@ -146,7 +146,12 @@
             v-model="isAgreed"
             label="我同意本頁顯示的金額，也同意注意事項，取消政策和惡劣天氣安排以及網站使用條款"
             size="large"
-          ></el-checkbox>
+            >我同意本頁顯示的金額，也同意注意事項，取消政策和惡劣天氣安排以及<span
+              @click.stop="$router.push('/terms-and-conditions')"
+              class="terms-of-use"
+              >網站使用條款</span
+            ></el-checkbox
+          >
         </el-col>
       </el-row>
       <el-row>
@@ -353,6 +358,11 @@ export default {
 .reservation .el-checkbox .el-checkbox__label {
   color: #8d8d8d;
   white-space: normal;
+}
+
+.reservation .el-checkbox span.terms-of-use {
+  color: #fd9a1a;
+  text-decoration: underline;
 }
 
 .reservation .el-button--default.submit {

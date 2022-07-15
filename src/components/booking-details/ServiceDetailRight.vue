@@ -173,7 +173,7 @@
             v-if="parseInt(selectedHotel.basicInfo.maxChildren) !== 0"
             v-model="numberOfChildren"
             class="m-2"
-            placeholder="3"
+            placeholder="0"
           >
             <el-option
               v-for="adult in parseInt(selectedHotel.basicInfo.maxChildren)"
@@ -210,7 +210,7 @@
       <el-row :gutter="20" v-if="parseInt(selectedHotel.basicInfo.maxPets) > 0">
         <el-col :span="12">
           <label class="date-delivery" style="display: block">寵物</label>
-          <el-select v-model="petQty" class="m-2" placeholder="8">
+          <el-select v-model="petQty" class="m-2" placeholder="0">
             <el-option
               v-for="num in parseInt(selectedHotel.basicInfo.maxPets)"
               :key="num"

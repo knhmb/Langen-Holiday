@@ -167,7 +167,7 @@
                   <el-checkbox label="new-territories">新界區</el-checkbox> -->
                 </el-checkbox-group>
               </div>
-              <p>房間類型</p>
+              <!-- <p>房間類型</p>
               <el-checkbox-group v-model="roomType" @change="sortIsland">
                 <el-checkbox
                   v-for="room in roomTypes"
@@ -175,7 +175,7 @@
                   :label="room.slug"
                   >{{ room.name }}
                 </el-checkbox>
-              </el-checkbox-group>
+              </el-checkbox-group> -->
             </div>
           </el-col>
           <el-col :sm="24" :lg="18">

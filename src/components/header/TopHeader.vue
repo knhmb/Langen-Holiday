@@ -157,7 +157,8 @@ export default {
         this.$router.push("/contact-us");
       } else if (option === 3) {
         this.$emit("setIsActiveClass", 2);
-        this.$router.push("/join");
+        this.$router.push("/payment");
+        // this.$router.push("/join");
       }
       this.$emit("setIsActiveSubMenuItem", option);
     },

@@ -218,6 +218,12 @@ export default {
       });
     },
   },
+  created() {
+    this.bookmarkIcon =
+      this.bookmarked === false
+        ? require("../../assets/icon-bookmark-off.png")
+        : require("../../assets/icon-bookmark-on.png");
+  },
 };
 </script>
 

@@ -215,9 +215,9 @@ export default {
       this.$emit("toggleLoginForm", { title: "忘記密碼" });
     },
     completedLastStep() {
-      // this.$store.commit("TOGGLE_LOGIN_FORM", false);
-      this.stepOneComplete = false;
-      this.stepTwoComplete = true;
+      this.$store.commit("TOGGLE_LOGIN_FORM", false);
+      // this.stepOneComplete = false;
+      // this.stepTwoComplete = true;
     },
     async submitPassword() {
       await this.$refs.ruleForm2.validate((valid) => {
@@ -235,10 +235,10 @@ export default {
               this.ruleForm2.password = "";
               this.ruleForm2.confirmPassword = "";
             })
-            .catch((err) => {
+            .catch(() => {
               ElNotification({
                 title: "Error",
-                message: err.message,
+                message: this.$t("invalid_password"),
                 type: "error",
               });
             });
