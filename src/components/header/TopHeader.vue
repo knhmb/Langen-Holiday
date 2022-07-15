@@ -37,7 +37,11 @@
               @click="selectedSubMenu(1)"
               index="1-1"
             >
-              3598 6538</el-menu-item
+              <img
+                class="phone-icon"
+                src="../../assets/icon-phone.png"
+                alt=""
+              />3598 6538</el-menu-item
             >
           </el-sub-menu>
           <el-sub-menu
@@ -323,6 +327,12 @@ export default {
 
 .el-menu--horizontal.contact-payment li {
   font-size: 12px;
+}
+
+img.phone-icon {
+  width: 1.1rem;
+  vertical-align: middle;
+  margin-right: 0.3rem;
 }
 
 /* @media screen and (max-width: 768px) {
