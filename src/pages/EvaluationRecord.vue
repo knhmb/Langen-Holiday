@@ -111,6 +111,7 @@ export default {
         image: selectedRate.image,
         itemId: id,
       });
+      console.log(selectedRate);
     },
     assignValues(id) {
       this.dialogVisible = true;

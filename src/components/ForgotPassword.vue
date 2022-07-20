@@ -223,7 +223,7 @@ export default {
       await this.$refs.ruleForm2.validate((valid) => {
         if (valid) {
           const data = {
-            checkString: this.$route.query.value,
+            checkString: this.$route.query.value.replace(" ", "+"),
             newPassword: this.ruleForm2.password,
           };
           this.$store
