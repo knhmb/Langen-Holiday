@@ -84,32 +84,43 @@
         </p>
       </div>
       <div class="body">
-        <div class="grey">
-          <el-row :gutter="30">
-            <el-col :span="5">
-              <img
-                class="whats-img"
-                src="../../assets/icon-whatsapp.png"
-                alt=""
-              />
-            </el-col>
-            <el-col :span="19">
-              <p>WhatsApp</p>
-              <p>(852) 5396 2553</p>
-            </el-col>
-          </el-row>
-        </div>
-        <div class="grey">
-          <el-row :gutter="30">
-            <el-col :span="5">
-              <img class="whats-img" src="../../assets/icon-email.png" alt="" />
-            </el-col>
-            <el-col :span="19">
-              <p>Email</p>
-              <p>info@langenholiday.com</p>
-            </el-col>
-          </el-row>
-        </div>
+        <a
+          href="//api.whatsapp.com/send?phone=85253962553&text=From Langen Holiday"
+          target="_blank"
+        >
+          <div class="grey">
+            <el-row :gutter="30">
+              <el-col :span="5">
+                <img
+                  class="whats-img"
+                  src="../../assets/icon-whatsapp.png"
+                  alt=""
+                />
+              </el-col>
+              <el-col :span="19">
+                <p>WhatsApp</p>
+                <p>(852) 5396 2553</p>
+              </el-col>
+            </el-row>
+          </div>
+        </a>
+        <a href="mailto:info@langenholiday.com" target="_blank">
+          <div class="grey">
+            <el-row :gutter="30">
+              <el-col :span="5">
+                <img
+                  class="whats-img"
+                  src="../../assets/icon-email.png"
+                  alt=""
+                />
+              </el-col>
+              <el-col :span="19">
+                <p>Email</p>
+                <p>info@langenholiday.com</p>
+              </el-col>
+            </el-row>
+          </div>
+        </a>
       </div>
     </div>
   </div>
