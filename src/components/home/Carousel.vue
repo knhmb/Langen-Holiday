@@ -58,7 +58,7 @@ export default {
 }
 
 .carousel .el-carousel .el-carousel__container {
-  height: 100vh !important;
+  height: 75vh !important;
 }
 
 .carousel .el-carousel__arrow.el-carousel__arrow--left,

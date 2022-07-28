@@ -8,6 +8,7 @@
 .banner {
   margin: 1rem 0;
   position: relative;
+  height: 22rem;
 }
 
 /* .banner img {

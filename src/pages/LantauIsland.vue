@@ -384,7 +384,7 @@ export default {
 .lantau-island .banner img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .lantau-island .banner p,

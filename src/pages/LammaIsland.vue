@@ -387,7 +387,7 @@ export default {
 .lamma-island .banner img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .lamma-island .banner p,

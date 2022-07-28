@@ -12,11 +12,9 @@
         >
           <div class="card" @click="searchTheme(theme.slug)">
             <div class="card-img">
-              <!-- <img src="../../assets/img-service1.jpg" alt="" /> -->
               <img :src="theme.thumbnail" alt="" />
             </div>
             <div class="card-text">
-              <!-- <p>簡單煮食</p> -->
               <p>{{ theme.name }}</p>
             </div>
           </div>
@@ -144,8 +142,9 @@ export default {
 
 .activities .card .card-img img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  /* height: 100%; */
+  height: 9rem;
+  object-fit: cover;
   border-radius: inherit;
 }
 

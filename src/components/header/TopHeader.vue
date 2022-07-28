@@ -41,7 +41,7 @@
                 class="phone-icon"
                 src="../../assets/icon-phone.png"
                 alt=""
-              />3598 6538</el-menu-item
+              />852 3598 6538</el-menu-item
             >
           </el-sub-menu>
           <el-sub-menu

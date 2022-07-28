@@ -314,7 +314,7 @@ export default {
 .places-carousel .card-img {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 80%;
 }
 
 .places-carousel .card-img .ranks {
