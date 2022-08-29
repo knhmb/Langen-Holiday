@@ -10,7 +10,7 @@
           height="609px"
         >
           <el-carousel-item v-for="banner in banners" :key="banner.id">
-            <img :src="banner.thumbnail" class="img-carousel" alt="" />
+            <img :src="banner.path" class="img-carousel" alt="" />
           </el-carousel-item>
         </el-carousel>
       </el-col>

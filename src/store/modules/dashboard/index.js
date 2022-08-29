@@ -25,6 +25,7 @@ export default {
       joinContent: {},
       topPlaces: [],
       lastLocation: [],
+      menuItems: [],
     };
   },
   getters,

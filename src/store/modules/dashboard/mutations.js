@@ -65,4 +65,10 @@ export default {
     hotel.bookmarked = payload.value;
     console.log(state.topPlaces);
   },
+  SET_SUB_MENU_ITEMS(state, payload) {
+    state.menuItems.push(payload);
+  },
+  RESET_SUB_MENU(state) {
+    state.menuItems = [];
+  },
 };

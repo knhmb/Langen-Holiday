@@ -12,12 +12,25 @@ export default {
         console.log(err);
       });
   },
-  setHeaderItems(context) {
+  async setHeaderItems(context) {
     axios
       .get("/api/codex?filter=codextypecode:HDRITEMCAT&sort=+displayOrder")
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         context.commit("SET_HEADER_ITEMS", res.data.items);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  async setSubMenuItems(context, payload) {
+    axios
+      .get(
+        `/api/codex?filter=codextypecode:HDRITEMSUBCAT,parentCodexSlug:${payload}&sort=+displayOrder`
+      )
+      .then((res) => {
+        console.log(res);
+        context.commit("SET_SUB_MENU_ITEMS", res.data.items);
       })
       .catch((err) => {
         console.log(err);
@@ -73,14 +86,23 @@ export default {
   },
   setDashboardBanner(context) {
     axios
-      .get("/api/codex?filter=codextypecode:PROMOBANNER&sort=+displayOrder")
+      .get("/api/promo-banner")
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         context.commit("SET_DASHBOARD_BANNER", res.data.items);
       })
       .catch((err) => {
         console.log(err);
       });
+    // axios
+    //   .get("/api/codex?filter=codextypecode:PROMOBANNER&sort=+displayOrder")
+    //   .then((res) => {
+    //     console.log(res);
+    //     context.commit("SET_DASHBOARD_BANNER", res.data.items);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
   setCheungBanner(context) {
     axios

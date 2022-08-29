@@ -6,23 +6,24 @@
       @setIsActiveClass="setActive"
       @setIsActiveSubMenuItem="setActiveSubMenu"
     ></top-header>
-    <bottom-header
+    <bottom-header-1
       :isActive="isActive"
       :isActiveSubMenuItem="isActiveSubMenuItem"
       @setIsActiveClass="setActive"
       @setIsActiveSubMenuItem="setActiveSubMenu"
-    ></bottom-header>
+    ></bottom-header-1>
   </header>
 </template>
 
 <script>
 import TopHeader from "./TopHeader.vue";
-import BottomHeader from "./BottomHeader.vue";
+// import BottomHeader from "./BottomHeader.vue";
+import BottomHeader1 from "./BottomHeader1.vue";
 
 export default {
   components: {
     TopHeader,
-    BottomHeader,
+    BottomHeader1,
   },
   data() {
     return {

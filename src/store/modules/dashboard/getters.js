@@ -56,4 +56,7 @@ export default {
   lastLocation(state) {
     return state.lastLocation;
   },
+  menuItems(state) {
+    return state.menuItems;
+  },
 };
