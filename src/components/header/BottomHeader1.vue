@@ -13,10 +13,19 @@
           mode="horizontal"
         >
           <template v-for="item in headerItems" :key="item.id">
+            <el-menu-item
+              @click="navigateToCheung(item)"
+              v-if="item.slug === 'hotel-recommendations'"
+              :index="displayOrder"
+              :style="{
+                fontWeight: $route.path === '/' + item.slug ? 'bold' : 'normal',
+              }"
+              >{{ item.name }}</el-menu-item
+            >
             <el-sub-menu
+              @click="navigateToCheung(item)"
               v-if="item.slug !== 'hotel-recommendations'"
               :index="item.displayOrder"
-              @click="closeDropdown(item)"
               :style="{
                 fontWeight:
                   $route.path === '/' + item.slug + '/' + item.slug
@@ -25,182 +34,33 @@
               }"
             >
               <template #title>{{ item.name }}</template>
-              <template v-if="item.slug === 'cheung-chau-island'">
-                <el-menu-item
-                  :style="{
-                    color: $route.path.includes(cheung.slug)
-                      ? 'black'
-                      : '#8d8d8d',
-                    fontWeight: $route.path.includes(cheung.slug)
-                      ? 'bold'
-                      : 'normal',
-                  }"
-                  v-for="cheung in cheungChauIslandItems"
-                  :key="cheung.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 4 }"
-                  @click="navigateToCheung(cheung)"
-                  :index="item.id + ' - ' + cheung.displayOrder"
-                  >{{ cheung.name }}</el-menu-item
-                >
+              <template v-for="subItem in subMenuItems" :key="subItem">
+                <template v-for="subMenuItem in subItem" :key="subMenuItem">
+                  <el-menu-item
+                    :style="{
+                      color:
+                        $route.path ===
+                        `/${subMenuItem.parentCodexSlug}/${subMenuItem.slug}`
+                          ? 'black'
+                          : '#8d8d8d',
+                      fontWeight:
+                        $route.path ===
+                        `/${subMenuItem.parentCodexSlug}/${subMenuItem.slug}`
+                          ? 'bold'
+                          : 'normal',
+                    }"
+                    @click="navigateToCheung(subMenuItem)"
+                    v-if="subMenuItem.parentCodexSlug === item.slug"
+                    index="2-1"
+                    >{{ subMenuItem.name }}</el-menu-item
+                  >
+                </template>
               </template>
-              <template v-else-if="item.slug === 'lantau-island'">
-                <el-menu-item
-                  :style="{
-                    color: $route.path.includes(launtau.slug)
-                      ? 'black'
-                      : '#8d8d8d',
-                    fontWeight: $route.path.includes(launtau.slug)
-                      ? 'bold'
-                      : 'normal',
-                  }"
-                  v-for="launtau in lantauIslandItems"
-                  :key="launtau.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="navigateToLantau(launtau)"
-                  :index="item.id + ' - ' + launtau.displayOrder"
-                  >{{ launtau.name }}</el-menu-item
-                >
-              </template>
-              <template v-else-if="item.slug === 'lamma-island'">
-                <el-menu-item
-                  :style="{
-                    color: $route.path.includes(lamma.slug)
-                      ? 'black'
-                      : '#8d8d8d',
-                    fontWeight: $route.path.includes(lamma.slug)
-                      ? 'bold'
-                      : 'normal',
-                  }"
-                  v-for="lamma in lammaIslandItems"
-                  :key="lamma.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="navigateToLamma(lamma)"
-                  :index="item.id + ' - ' + lamma.displayOrder"
-                  >{{ lamma.name }}</el-menu-item
-                >
-              </template>
-              <template v-else-if="item.slug === 'day-n-night-time'">
-                <el-menu-item
-                  :style="{
-                    color:
-                      $route.path === '/' + day.parentCodexSlug + '/' + day.slug
-                        ? 'black'
-                        : '#8d8d8d',
-                    fontWeight:
-                      $route.path === '/' + day.parentCodexSlug + '/' + day.slug
-                        ? 'bold'
-                        : 'normal',
-                  }"
-                  v-for="day in dayNightItems"
-                  :key="day.id"
-                  :class="{ 'inner-active': isActiveSubMenuItem === 8 }"
-                  @click="navigateToDayTime(day)"
-                  :index="item.id + ' - ' + day.displayOrder"
-                  >{{ day.name }}</el-menu-item
-                >
-              </template>
+              <!-- <el-menu-item index="2-1">item one</el-menu-item>
+              <el-menu-item index="2-2">item two</el-menu-item>
+              <el-menu-item index="2-3">item three</el-menu-item> -->
             </el-sub-menu>
-            <el-menu-item
-              :style="{
-                fontWeight: $route.path === '/' + item.slug ? 'bold' : 'normal',
-              }"
-              @click="closeDropdown(item)"
-              :class="{ 'my-active': isActive === 7 }"
-              v-if="item.slug === 'hotel-recommendations'"
-              :index="item.id"
-              >{{ item.name }}</el-menu-item
-            >
           </template>
-          <el-sub-menu
-            v-if="loggedIn"
-            :class="{ 'my-active': isActive === 8 }"
-            class="edit-profile-menu"
-            index="6"
-          >
-            <template #title>會員中心</template>
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
-              @click="profileNavigation('personal-information')"
-              index="6-1"
-              :style="{
-                color:
-                  $route.path === '/edit-profile/personal-information'
-                    ? 'black'
-                    : '#8d8d8d',
-                fontWeight:
-                  $route.path === '/edit-profile/personal-information'
-                    ? 'bold'
-                    : 'normal',
-              }"
-              >個人資料</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
-              @click="profileNavigation('change-password')"
-              index="6-2"
-              :style="{
-                color:
-                  $route.path === '/edit-profile/change-password'
-                    ? 'black'
-                    : '#8d8d8d',
-                fontWeight:
-                  $route.path === '/edit-profile/change-password'
-                    ? 'bold'
-                    : 'normal',
-              }"
-              >修改密碼</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
-              @click="profileNavigation('places')"
-              index="6-3"
-              :style="{
-                color:
-                  $route.path === '/edit-profile/places' ? 'black' : '#8d8d8d',
-                fontWeight:
-                  $route.path === '/edit-profile/places' ? 'bold' : 'normal',
-              }"
-              >我的收藏</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
-              @click="profileNavigation('evaluation-record')"
-              index="6-4"
-              :style="{
-                color:
-                  $route.path === '/edit-profile/evaluation-record'
-                    ? 'black'
-                    : '#8d8d8d',
-                fontWeight:
-                  $route.path === '/edit-profile/evaluation-record'
-                    ? 'bold'
-                    : 'normal',
-              }"
-              >評價記錄</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
-              @click="profileNavigation('appointment-record')"
-              index="6-5"
-              :style="{
-                color:
-                  $route.path === '/edit-profile/appointment-record'
-                    ? 'black'
-                    : '#8d8d8d',
-                fontWeight:
-                  $route.path === '/edit-profile/appointment-record'
-                    ? 'bold'
-                    : 'normal',
-              }"
-              >預約記錄</el-menu-item
-            >
-            <el-menu-item
-              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
-              @click="logout"
-              index="6-6"
-              >登出</el-menu-item
-            >
-          </el-sub-menu>
         </el-menu>
 
         <!-- ================================================ LARGE SCREENS ======================================================== -->
@@ -216,13 +76,24 @@
         >
           <template v-for="item in headerItems" :key="item.id">
             <el-menu-item
+              @click="navigateToCheung(item)"
               v-if="item.slug === 'hotel-recommendations'"
               :index="displayOrder"
+              :style="{
+                fontWeight: $route.path === '/' + item.slug ? 'bold' : 'normal',
+              }"
               >{{ item.name }}</el-menu-item
             >
             <el-sub-menu
+              @click="navigateToCheung(item)"
               v-if="item.slug !== 'hotel-recommendations'"
               :index="item.displayOrder"
+              :style="{
+                fontWeight:
+                  $route.path === '/' + item.slug + '/' + item.slug
+                    ? 'bold'
+                    : 'normal',
+              }"
             >
               <template #title>{{ item.name }}</template>
               <template v-for="subItem in subMenuItems" :key="subItem">
@@ -452,7 +323,14 @@ export default {
       // this.loggedIn = event.login;
     },
     navigateToCheung(cheung) {
-      this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}`);
+      console.log(cheung);
+      if (cheung.slug === "hotel-recommendations") {
+        this.$router.push(`/${cheung.slug}`);
+      } else if (!cheung.parentCodexSlug) {
+        this.$router.push(`/${cheung.slug}/${cheung.slug}`);
+      } else {
+        this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}`);
+      }
     },
     navigateToLantau(lantau) {
       this.$router.push(`/lantau-island/${lantau.slug}`);
