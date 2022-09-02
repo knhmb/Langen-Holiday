@@ -83,7 +83,14 @@
               <p class="info">折扣:</p>
             </el-col>
             <el-col :span="14">
-              <p class="data">HK$0.00</p>
+              <p class="data">
+                HK${{
+                  Object.keys(discountData).length > 0
+                    ? discountData.discount
+                    : 0
+                }}.00
+              </p>
+              <!-- <p class="data">HK$0.00</p> -->
             </el-col>
           </el-row>
         </div>
@@ -234,6 +241,9 @@ export default {
     },
     selectedServices() {
       return this.$store.getters["booking/selectedServices"];
+    },
+    discountData() {
+      return this.$store.getters["booking/discountData"];
     },
     amount() {
       if (this.selectedServices.length > 0) {

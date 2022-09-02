@@ -17,4 +17,7 @@ export default {
   petQty(state) {
     return state.petQty;
   },
+  discountData(state) {
+    return state.discountData;
+  },
 };

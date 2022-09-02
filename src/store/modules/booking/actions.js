@@ -107,11 +107,12 @@ export default {
   updatePetQty(context, payload) {
     context.commit("UPDATE_PET_QTY", payload);
   },
-  async applyCoupon(_, payload) {
+  async applyCoupon(context, payload) {
     await axios
       .post("/api/coupon/apply-coupon", payload)
       .then((res) => {
         console.log(res);
+        context.commit("SET_DISCOUNT", res.data.item);
       })
       .catch((err) => {
         console.log(err);
@@ -119,13 +120,13 @@ export default {
         throw error;
       });
   },
-  async makeReservation() {
+  async makeReservation(_, payload) {
     const accessToken = localStorage.getItem("accessToken");
 
     await axios
       .post(
         "/api/reservation",
-        {},
+        payload,
         accessToken ? { headers: { authorization: accessToken } } : ""
       )
       .then((res) => {

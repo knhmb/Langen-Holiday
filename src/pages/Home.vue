@@ -25,6 +25,7 @@ export default {
     // TheFooter,
   },
   created() {
+    this.$store.commit("booking/RESET_DISCOUNT_DATA");
     this.$store.commit("booking/RESET_ADULTS_AND_CHILDREN");
     this.$store.dispatch("resetDate");
     this.$store.dispatch("displayHeader", true);

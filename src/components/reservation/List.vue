@@ -173,7 +173,7 @@
 </template>
 
 <script>
-// import { ElNotification } from "element-plus";
+import { ElNotification } from "element-plus";
 import moment from "moment";
 
 export default {
@@ -207,10 +207,18 @@ export default {
       return this.$store.getters.dateSelected;
     },
     checkInDate() {
-      return moment(this.dateSelected.start).locale("zh-cn").format("ll");
+      return moment(this.dateSelected.start).format("YYYYMMDD");
+      // return moment(this.dateSelected.start).locale("zh-cn").format("ll");
     },
     checkOutDate() {
-      return moment(this.dateSelected.end).locale("zh-cn").format("ll");
+      return moment(this.dateSelected.end).format("YYYYMMDD");
+      // return moment(this.dateSelected.end).locale("zh-cn").format("ll");
+    },
+    discountData() {
+      return this.$store.getters["booking/discountData"];
+    },
+    numberOfRooms() {
+      return this.$store.getters.numberOfRooms;
     },
   },
   methods: {
@@ -221,11 +229,12 @@ export default {
       this.isDialogOpen = false;
     },
     async reserve() {
-      const tempObject = { ...this.bookingInfo };
-      delete tempObject.specialRequest;
-      console.log(tempObject);
       console.log(this.bookingInfo);
-      console.log(this.selectedHotel);
+      const tempObject = { ...this.bookingInfo };
+      // delete tempObject.specialRequest;
+      // console.log(tempObject);
+      // console.log(this.bookingInfo);
+      // console.log(this.selectedHotel);
       let str = JSON.stringify(tempObject, (k, v) => (v === null ? "" : v));
       console.log(JSON.parse(str));
       const userInfo = JSON.parse(str);
@@ -237,10 +246,19 @@ export default {
       console.log(isEmpty);
 
       const childrenQty = this.numberOfChildren ? this.numberOfChildren : 0;
+      const discount =
+        Object.keys(this.discountData).length > 0
+          ? this.discountData.discount
+          : 0;
       const totalPrice =
-        this.selectedHotel.priceOfSelectedDate +
+        this.selectedHotel.priceOfSelectedDate -
+        discount +
         this.selectedHotel.totalSelectedAddlServiceCharge +
         ".00";
+      const couponId =
+        Object.keys(this.discountData).length > 0
+          ? this.discountData.couponId
+          : null;
 
       const data = {
         nameInChinese: userInfo.chineseName,
@@ -255,35 +273,42 @@ export default {
         petsQty: this.petQty ? this.petsQty : 0,
         checkInDate: this.checkInDate,
         checkOutDate: this.checkOutDate,
+        // checkInDate: moment(this.checkInDate).format("YYYYMMDD"),
+        // checkOutDate: moment(this.checkOutDate).format("YYYYMMDD"),
         roomPrice: this.selectedHotel.priceOfSelectedDate,
         addlService: this.selectedServices,
         totalPrice: totalPrice,
         pricePayNow: totalPrice,
         pricePayCheckIn: totalPrice - totalPrice,
         depoit: 0.0,
+        hotelId: this.selectedHotel.basicInfo.hotelId,
+        totalAddlServiceCharge:
+          this.selectedHotel.totalSelectedAddlServiceCharge,
+        roomQty: this.numberOfRooms,
+        couponId: couponId,
       };
       console.log(this.selectedServices);
       console.log(this.selectedHotel);
       console.log(data);
 
-      // if (isEmpty || Object.values(JSON.parse(str)).length <= 0) {
-      //   ElNotification({
-      //     title: "Error",
-      //     message: "請在上方輸入您的詳細信息",
-      //     type: "error",
-      //   });
-      // } else {
-      //   await this.$store.dispatch("booking/makeReservation").then(() => {
-      //     ElNotification({
-      //       title: "Success",
-      //       message: "已預訂",
-      //       type: "success",
-      //     });
-      //     this.$store.dispatch("resetIsHavePets");
-      //     this.$router.replace("/");
-      //     this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
-      //   });
-      // }
+      if (isEmpty || Object.values(JSON.parse(str)).length <= 0) {
+        ElNotification({
+          title: "Error",
+          message: "請在上方輸入您的詳細信息",
+          type: "error",
+        });
+      } else {
+        await this.$store.dispatch("booking/makeReservation", data).then(() => {
+          ElNotification({
+            title: "Success",
+            message: "已預訂",
+            type: "success",
+          });
+          this.$store.dispatch("resetIsHavePets");
+          this.$router.replace("/");
+          this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
+        });
+      }
     },
   },
   created() {

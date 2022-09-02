@@ -259,6 +259,7 @@ export default {
       time: "",
       masks: {
         input: "YYYY年M月DD日 WWW",
+        // input: "YYYYMDD WWW",
       },
       dummi: {
         date: new Date(),

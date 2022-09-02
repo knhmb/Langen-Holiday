@@ -48,4 +48,10 @@ export default {
     state.selectedHotel.bookmarked = payload.value;
     // hotel.bookmarked = payload.value;
   },
+  SET_DISCOUNT(state, payload) {
+    state.discountData = payload;
+  },
+  RESET_DISCOUNT_DATA(state) {
+    state.discountData = {};
+  },
 };
