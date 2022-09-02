@@ -173,7 +173,8 @@
 </template>
 
 <script>
-import { ElNotification } from "element-plus";
+// import { ElNotification } from "element-plus";
+import moment from "moment";
 
 export default {
   props: ["bookingInfo"],
@@ -186,6 +187,30 @@ export default {
   computed: {
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+    selectedServices() {
+      return this.$store.getters["booking/selectedServices"];
+    },
+    numberOfChildren() {
+      return this.$store.getters["booking/numberOfChildren"];
+    },
+    numberOfAdults() {
+      return this.$store.getters["booking/numberOfAdults"];
+    },
+    childrenAge() {
+      return this.$store.getters["booking/childrenAge"];
+    },
+    petQty() {
+      return this.$store.getters["booking/petQty"];
+    },
+    dateSelected() {
+      return this.$store.getters.dateSelected;
+    },
+    checkInDate() {
+      return moment(this.dateSelected.start).locale("zh-cn").format("ll");
+    },
+    checkOutDate() {
+      return moment(this.dateSelected.end).locale("zh-cn").format("ll");
     },
   },
   methods: {
@@ -200,32 +225,65 @@ export default {
       delete tempObject.specialRequest;
       console.log(tempObject);
       console.log(this.bookingInfo);
+      console.log(this.selectedHotel);
       let str = JSON.stringify(tempObject, (k, v) => (v === null ? "" : v));
       console.log(JSON.parse(str));
+      const userInfo = JSON.parse(str);
       // tempObject
 
       const isEmpty = Object.values(JSON.parse(str)).some(
         (item) => item === "" || item === null
       );
+      console.log(isEmpty);
 
-      if (isEmpty || Object.values(JSON.parse(str)).length <= 0) {
-        ElNotification({
-          title: "Error",
-          message: "請在上方輸入您的詳細信息",
-          type: "error",
-        });
-      } else {
-        await this.$store.dispatch("booking/makeReservation").then(() => {
-          ElNotification({
-            title: "Success",
-            message: "已預訂",
-            type: "success",
-          });
-          this.$store.dispatch("resetIsHavePets");
-          this.$router.replace("/");
-          this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
-        });
-      }
+      const childrenQty = this.numberOfChildren ? this.numberOfChildren : 0;
+      const totalPrice =
+        this.selectedHotel.priceOfSelectedDate +
+        this.selectedHotel.totalSelectedAddlServiceCharge +
+        ".00";
+
+      const data = {
+        nameInChinese: userInfo.chineseName,
+        nameInEnglish: userInfo.englishName,
+        email: userInfo.email,
+        telNo: userInfo.telephone,
+        specialRequest: userInfo.specialRequest,
+        guestQty: this.numberOfAdults + childrenQty,
+        adultQty: this.numberOfAdults,
+        childrenQty: childrenQty,
+        childrenAge: this.childrenAge,
+        petsQty: this.petQty ? this.petsQty : 0,
+        checkInDate: this.checkInDate,
+        checkOutDate: this.checkOutDate,
+        roomPrice: this.selectedHotel.priceOfSelectedDate,
+        addlService: this.selectedServices,
+        totalPrice: totalPrice,
+        pricePayNow: totalPrice,
+        pricePayCheckIn: totalPrice - totalPrice,
+        depoit: 0.0,
+      };
+      console.log(this.selectedServices);
+      console.log(this.selectedHotel);
+      console.log(data);
+
+      // if (isEmpty || Object.values(JSON.parse(str)).length <= 0) {
+      //   ElNotification({
+      //     title: "Error",
+      //     message: "請在上方輸入您的詳細信息",
+      //     type: "error",
+      //   });
+      // } else {
+      //   await this.$store.dispatch("booking/makeReservation").then(() => {
+      //     ElNotification({
+      //       title: "Success",
+      //       message: "已預訂",
+      //       type: "success",
+      //     });
+      //     this.$store.dispatch("resetIsHavePets");
+      //     this.$router.replace("/");
+      //     this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
+      //   });
+      // }
     },
   },
   created() {

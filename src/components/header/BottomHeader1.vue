@@ -61,6 +61,96 @@
               <el-menu-item index="2-3">item three</el-menu-item> -->
             </el-sub-menu>
           </template>
+          <el-sub-menu
+            v-if="loggedIn"
+            :class="{ 'my-active': isActive === 8 }"
+            class="edit-profile-menu"
+            index="6"
+          >
+            <template #title>會員中心</template>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
+              @click="profileNavigation('personal-information')"
+              index="6-1"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/personal-information'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/personal-information'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >個人資料</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
+              @click="profileNavigation('change-password')"
+              index="6-2"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/change-password'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/change-password'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >修改密碼</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
+              @click="profileNavigation('places')"
+              index="6-3"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/places' ? 'black' : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/places' ? 'bold' : 'normal',
+              }"
+              >我的收藏</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
+              @click="profileNavigation('evaluation-record')"
+              index="6-4"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/evaluation-record'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/evaluation-record'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >評價記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
+              @click="profileNavigation('appointment-record')"
+              index="6-5"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/appointment-record'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/appointment-record'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >預約記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
+              @click="logout"
+              index="6-6"
+              >登出</el-menu-item
+            >
+          </el-sub-menu>
         </el-menu>
 
         <!-- ================================================ LARGE SCREENS ======================================================== -->
@@ -123,6 +213,96 @@
               <el-menu-item index="2-3">item three</el-menu-item> -->
             </el-sub-menu>
           </template>
+          <el-sub-menu
+            v-if="loggedIn"
+            :class="{ 'my-active': isActive === 8 }"
+            class="edit-profile-menu"
+            index="6"
+          >
+            <template #title>會員中心</template>
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
+              @click="profileNavigation('personal-information')"
+              index="6-1"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/personal-information'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/personal-information'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >個人資料</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
+              @click="profileNavigation('change-password')"
+              index="6-2"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/change-password'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/change-password'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >修改密碼</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
+              @click="profileNavigation('places')"
+              index="6-3"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/places' ? 'black' : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/places' ? 'bold' : 'normal',
+              }"
+              >我的收藏</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
+              @click="profileNavigation('evaluation-record')"
+              index="6-4"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/evaluation-record'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/evaluation-record'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >評價記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
+              @click="profileNavigation('appointment-record')"
+              index="6-5"
+              :style="{
+                color:
+                  $route.path === '/edit-profile/appointment-record'
+                    ? 'black'
+                    : '#8d8d8d',
+                fontWeight:
+                  $route.path === '/edit-profile/appointment-record'
+                    ? 'bold'
+                    : 'normal',
+              }"
+              >預約記錄</el-menu-item
+            >
+            <el-menu-item
+              :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
+              @click="logout"
+              index="6-6"
+              >登出</el-menu-item
+            >
+          </el-sub-menu>
         </el-menu>
       </el-col>
       <el-col v-if="!loggedIn" :sm="24" :lg="2">
