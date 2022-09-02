@@ -59,4 +59,7 @@ export default {
   menuItems(state) {
     return state.menuItems;
   },
+  banner(state) {
+    return state.banner;
+  },
 };

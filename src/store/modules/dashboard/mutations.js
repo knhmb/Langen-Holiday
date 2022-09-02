@@ -71,4 +71,7 @@ export default {
   RESET_SUB_MENU(state) {
     state.menuItems = [];
   },
+  SET_BANNER(state, payload) {
+    state.banner = payload;
+  },
 };

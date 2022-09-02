@@ -504,13 +504,18 @@ export default {
     },
     navigateToCheung(cheung) {
       console.log(cheung);
-      if (cheung.slug === "hotel-recommendations") {
-        this.$router.push(`/${cheung.slug}`);
-      } else if (!cheung.parentCodexSlug) {
+      if (!cheung.parentCodexSlug) {
         this.$router.push(`/${cheung.slug}/${cheung.slug}`);
       } else {
         this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}`);
       }
+      // if (cheung.slug === "hotel-recommendations") {
+      //   this.$router.push(`/${cheung.slug}`);
+      // } else if (!cheung.parentCodexSlug) {
+      //   this.$router.push(`/${cheung.slug}/${cheung.slug}`);
+      // } else {
+      //   this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}`);
+      // }
     },
     navigateToLantau(lantau) {
       this.$router.push(`/lantau-island/${lantau.slug}`);

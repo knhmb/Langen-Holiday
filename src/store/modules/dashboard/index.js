@@ -26,6 +26,7 @@ export default {
       topPlaces: [],
       lastLocation: [],
       menuItems: [],
+      banner: [],
     };
   },
   getters,

@@ -22,6 +22,7 @@ import LammaIsland from "./pages/LammaIsland.vue";
 import HotelRecommendations from "./pages/HotelRecommendations.vue";
 import DayTime from "./pages/DayTime.vue";
 import PrivacyPolicy from "./pages/PrivacyPolicy.vue";
+import Test from "./pages/Test.vue";
 
 const router = createRouter({
   scrollBehavior(_, _2, savedPosition) {
@@ -53,6 +54,7 @@ const router = createRouter({
     { path: "/payment", component: Payment },
     { path: "/contact-us", component: ContactUs },
     { path: "/join", component: Join },
+    { path: "/:parentCodexSlug/:name", component: Test },
     { path: "/cheung-chau-island/:name", component: CheungChauIsland },
     { path: "/lantau-island/:name", component: LantauIsland },
     { path: "/lamma-island/:name", component: LammaIsland },

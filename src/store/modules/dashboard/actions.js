@@ -104,6 +104,16 @@ export default {
     //     console.log(err);
     //   });
   },
+  setBanner(context, payload) {
+    axios
+      .get(`/api/codex?filter=slug:${payload}`)
+      .then((res) => {
+        context.commit("SET_BANNER", res.data.items);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
   setCheungBanner(context) {
     axios
       .get("/api/codex?filter=slug:cheung-chau-island")
