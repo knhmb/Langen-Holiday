@@ -7,7 +7,11 @@
             <h1>注意事項</h1>
             <el-card class="box-card">
               <ul>
-                <template
+                <li>
+                  •
+                  {{ selectedHotel.basicInfo.thingsToNote }}
+                </li>
+                <!-- <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
                 >
@@ -15,28 +19,7 @@
                     •
                     {{ note.details }}
                   </li>
-                </template>
-                <!-- <li>
-                  •
-                  訂房時必須有確實人數(大小同計，訪客包括在內)，不接受之後加人或更改人數。
-                </li>
-                <li>
-                  •
-                  預訂一經確認，所有更改/取消程序，會按照該住宿的取消政策及惡劣天氣安排辦理，請先細閱取消政策及惡劣天氣安排。
-                </li>
-
-                <li>
-                  •
-                  必須至少2人同行登記取匙，登記人及同行住客須出示香港身份證辦理入住手續。
-                </li>
-                <li>
-                  •
-                  在任何時間內，上述房間不得超出議定人數，包括探訪者在內。如有超額，一經發現，立即收回單位，訂單即時作廢，並且不會退回任何款項，
-                  敬請注意。
-                </li>
-                <li>• 登記入住時需繳付按金HK$200</li>
-                <li>• 入住時間：下午3時 (最遲晚上09:00前辦理入住手續）</li>
-                <li>• 房間禁止攜帶貓狗或任何寵物</li> -->
+                </template> -->
               </ul>
             </el-card>
           </div>
@@ -48,20 +31,20 @@
             <h1>取消政策</h1>
             <el-card class="box-card">
               <ul>
-                <template
+                <li>
+                  •
+                  {{ selectedHotel.basicInfo.cancelPolicy }}
+                </li>
+                <!-- <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
                 >
-                  <li v-if="note.isCancelPolicy === true">
-                    •
-                    {{ note.details }}
-                  </li>
-                </template>
-                <!-- <li>• 不設更改/取消預訂</li> -->
+                <li v-if="note.isCancelPolicy === true">
+                  •
+                  {{ note.details }}
+                </li>
+                </template> -->
               </ul>
-              <!-- <p>
-                (無論在任何情況下，客人於行程中自行取消、放棄所訂之住宿，或提早退房，所繳付之一切費用恕不退還。)
-              </p> -->
             </el-card>
           </div>
         </el-col>
@@ -71,22 +54,16 @@
           <div class="list">
             <h1>惡劣天氣安排</h1>
             <el-card class="box-card last">
-              <template v-for="note in selectedHotel.hotelNotes" :key="note.id">
+              <p>
+                •
+                {{ selectedHotel.basicInfo.badWeatherArrangement }}
+              </p>
+              <!-- <template v-for="note in selectedHotel.hotelNotes" :key="note.id">
                 <p v-if="note.isBadWeather === true">
                   •
                   {{ note.details }}
                 </p>
-              </template>
-              <!-- <p>如在入住當天發出八號烈風或暴風信號，將作以下安排：</p>
-              <p>
-                1)
-                如信號在下午3:00後仍然懸掛，相關住宿可改至同等價值的日期入住，惟須於7天內回覆更改之入住日期。
-              </p>
-              <p>
-                2)
-                如信號已經在下午3:00之前除下，住宿安排將照常繼續，客人需如期入住。如有任何爭議，樂程假期將保留最終決定權
-                。
-              </p> -->
+              </template> -->
               <img @click="openDialog" src="../../assets/icon-cs.png" alt="" />
             </el-card>
             <div v-if="isDialogOpen" class="contact-us-list">
