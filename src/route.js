@@ -16,11 +16,11 @@ import ChangePassword from "./pages/ChangePassword.vue";
 import Places from "./components/edit-profile/Places.vue";
 import EvaluationRecord from "./pages/EvaluationRecord.vue";
 import AppointmentRecord from "./pages/AppointmentRecord.vue";
-import CheungChauIsland from "./pages/CheungChauIsland.vue";
-import LantauIsland from "./pages/LantauIsland.vue";
-import LammaIsland from "./pages/LammaIsland.vue";
-import HotelRecommendations from "./pages/HotelRecommendations.vue";
-import DayTime from "./pages/DayTime.vue";
+// import CheungChauIsland from "./pages/CheungChauIsland.vue";
+// import LantauIsland from "./pages/LantauIsland.vue";
+// import LammaIsland from "./pages/LammaIsland.vue";
+// import HotelRecommendations from "./pages/HotelRecommendations.vue";
+// import DayTime from "./pages/DayTime.vue";
 import PrivacyPolicy from "./pages/PrivacyPolicy.vue";
 import Test from "./pages/Test.vue";
 
@@ -55,11 +55,11 @@ const router = createRouter({
     { path: "/contact-us", component: ContactUs },
     { path: "/join", component: Join },
     { path: "/:parentCodexSlug/:name", component: Test },
-    { path: "/cheung-chau-island/:name", component: CheungChauIsland },
-    { path: "/lantau-island/:name", component: LantauIsland },
-    { path: "/lamma-island/:name", component: LammaIsland },
-    { path: "/hotel-recommendations", component: HotelRecommendations },
-    { path: "/day-n-night-time/:name", component: DayTime },
+    // { path: "/cheung-chau-island/:name", component: CheungChauIsland },
+    // { path: "/lantau-island/:name", component: LantauIsland },
+    // { path: "/lamma-island/:name", component: LammaIsland },
+    // { path: "/hotel-recommendations", component: HotelRecommendations },
+    // { path: "/day-n-night-time/:name", component: DayTime },
     { path: "/privacy-and-policy", component: PrivacyPolicy },
     { path: "/reset-password", component: Home },
     {

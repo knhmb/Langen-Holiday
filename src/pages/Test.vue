@@ -1,14 +1,13 @@
 <template>
   <section class="cheung-chau-island">
-    <banner v-for="banner in cheungBanner" :key="banner.id">
-      <img :src="banner.thumbnail" alt="" />
-      <h3>{{ banner.name }}</h3>
+    <banner v-for="item in banner" :key="item.id">
+      <img :src="item.thumbnail" alt="" />
+      <h3>{{ item.name }}</h3>
       <p>
-        {{ banner.description }}
+        {{ item.description }}
       </p>
     </banner>
-    {{ menuItems }}
-    kjhkhkhhk
+    <!-- {{ menuItems }} -->
     <base-container>
       <div class="search">
         <!-- <h2>渡假屋 <span>搜尋結果 :</span></h2> -->
@@ -92,16 +91,30 @@
                 </el-col>
               </el-row>
               <p>地點</p>
+
               <div class="location">
                 <el-checkbox-group v-model="location" @change="sortIsland">
                   <template v-for="cheung in headerItems" :key="cheung">
                     <el-checkbox
-                      v-if="cheung.slug === 'cheung-chau-island'"
+                      v-if="cheung.slug === this.$route.params.parentCodexSlug"
                       :label="cheung.slug"
                       >{{ cheung.name }}</el-checkbox
                     >
                   </template>
-                  <template
+                  <template v-for="subItem in menuItems" :key="subItem">
+                    <template v-for="subMenuItem in subItem" :key="subMenuItem">
+                      <el-checkbox
+                        :label="subMenuItem.slug"
+                        v-if="
+                          subMenuItem.parentCodexSlug ===
+                          this.$route.params.parentCodexSlug
+                        "
+                        :checked="$route.path.includes(subMenuItem.slug)"
+                        >{{ subMenuItem.name }}</el-checkbox
+                      >
+                    </template>
+                  </template>
+                  <!-- <template
                     v-for="cheung in cheungChauIslandItems"
                     :key="cheung.id"
                   >
@@ -111,7 +124,7 @@
                       :checked="$route.path.includes(cheung.slug)"
                       >{{ cheung.name }}</el-checkbox
                     >
-                  </template>
+                  </template> -->
                 </el-checkbox-group>
               </div>
               <p>房間類型</p>
@@ -187,6 +200,9 @@ export default {
     menuItems() {
       return this.$store.getters["dashboard/menuItems"];
     },
+    banner() {
+      return this.$store.getters["dashboard/banner"];
+    },
     dateSelected: {
       get() {
         return this.$store.getters.dateSelected;
@@ -202,6 +218,15 @@ export default {
     },
     recommendation() {
       this.sortIsland();
+    },
+    $route: {
+      deep: true,
+      handler() {
+        this.$store.dispatch(
+          "dashboard/setBanner",
+          this.$route.params.parentCodexSlug
+        );
+      },
     },
   },
   methods: {
@@ -278,7 +303,7 @@ export default {
     console.log(this.$route);
     // this.$store.dispatch("dashboard/setCheungBanner");
     this.$store.dispatch(
-      "dashboard/setCheungBanner",
+      "dashboard/setBanner",
       this.$route.params.parentCodexSlug
     );
     this.$store.dispatch("dashboard/setRoomType");

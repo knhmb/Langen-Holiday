@@ -108,6 +108,7 @@ export default {
     axios
       .get(`/api/codex?filter=slug:${payload}`)
       .then((res) => {
+        console.log(res);
         context.commit("SET_BANNER", res.data.items);
       })
       .catch((err) => {
