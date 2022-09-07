@@ -34,6 +34,7 @@ const store = createStore({
       numberOfRooms: 0,
       timeslotids: "",
       authenticatedToReserve: false,
+      isButtonDisabled: false,
     };
   },
   getters,

@@ -107,7 +107,13 @@
               </el-col>
 
               <el-col :span="10">
-                <p class="info">寵物留宿附加費:</p>
+                <p class="info">
+                  {{
+                    service.amenitiesCode === "amenities-hair-dryer"
+                      ? "附加設施-風筒"
+                      : "附加設施-燒烤爐"
+                  }}:
+                </p>
               </el-col>
               <el-col :span="14">
                 <p class="data">HK${{ service.unitCharge }}.00</p>

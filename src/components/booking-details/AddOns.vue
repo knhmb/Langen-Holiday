@@ -117,7 +117,7 @@
         >HK${{ selectedHotel.totalPrice }}.00</el-col
       >
       <el-col class="btn-alignment">
-        <el-button @click="book">預訂</el-button>
+        <el-button :disabled="isButtonDisabled" @click="book">預訂</el-button>
       </el-col>
     </el-row>
   </div>
@@ -166,6 +166,9 @@ export default {
     },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+    isButtonDisabled() {
+      return this.$store.getters.isButtonDisabled;
     },
     dateSelected() {
       return this.$store.getters.dateSelected;
@@ -236,7 +239,32 @@ export default {
         roomQty: this.numberOfRooms,
       };
       console.log(data);
-      this.$store.dispatch("booking/changedService", data);
+      // this.$store
+      //   .dispatch("booking/changedService", data)
+      //   .then(() => {})
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      this.$store
+        .dispatch("booking/changedService", data)
+        .then(() => {})
+        .catch(() => {
+          this.$store
+            .dispatch("booking/secondChangedService", data)
+            .then(() => {
+              this.$store.commit("TOGGLE_BUTTON", false);
+            })
+            .catch(() => {
+              this.$store.commit("TOGGLE_BUTTON", true);
+              ElNotification({
+                title: "Error",
+                message: "所選日期不可用",
+                type: "error",
+              });
+            });
+
+          // console.log(err.response.data);
+        });
       this.$store.dispatch("booking/storeSelectedServices", this.arr);
     },
     async book() {

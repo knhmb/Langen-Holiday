@@ -53,4 +53,7 @@ export default {
   AUTHENTICATED_TO_RESERVE(state, payload) {
     state.authenticatedToReserve = payload;
   },
+  TOGGLE_BUTTON(state, payload) {
+    state.isButtonDisabled = payload;
+  },
 };

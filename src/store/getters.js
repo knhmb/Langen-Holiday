@@ -23,4 +23,7 @@ export default {
   timeslotids(state) {
     return state.timeslotids;
   },
+  isButtonDisabled(state) {
+    return state.isButtonDisabled;
+  },
 };

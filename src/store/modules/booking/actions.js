@@ -41,57 +41,184 @@ export default {
         console.log(err);
       });
   },
-  changedService(context, payload) {
+  async changedService(context, payload) {
     const checkService = payload.service === "" ? "-" : payload.service;
-    axios
-      .get(
-        `/api/hotel/enquire-price/${payload.hotelId}/${payload.roomQty}/${
-          payload.checkInDate
-        }/${payload.checkOutDate}/${payload.timeslotids}${
-          checkService === "" ? "" : "/" + checkService
-        }`
-      )
-      .then((res) => {
-        console.log(res);
-        context.commit("UPDATE_HOTEL", res.data.item);
-      })
-      .catch((err) => {
-        const date = new Date();
-        const today = moment(date).format("YYYYMMDD");
-        let tomorrow = moment(date.setDate(date.getDate() + 1)).format(
-          "YYYYMMDD"
-        );
-        if (payload.timeslotids === "") {
-          tomorrow = today;
-        }
+    const response = await axios.get(
+      `/api/hotel/enquire-price/${payload.hotelId}/${payload.roomQty}/${
+        payload.checkInDate
+      }/${payload.checkOutDate}/${payload.timeslotids}${
+        checkService === "" ? "" : "/" + checkService
+      }`
+    );
+    console.log(response);
+    context.commit("UPDATE_HOTEL", response.data.item);
 
-        console.log(err);
-        if (err.response.data.statusCode === 400) {
-          axios
-            .get(
-              `/api/hotel/enquire-price/${payload.hotelId}/${
-                payload.roomQty
-              }/${today}/${tomorrow}/${payload.timeslotids}${
-                checkService === "" ? "" : "/" + checkService
-              }`
-            )
-            .then((res) => {
-              console.log("Second API Call");
-              context.commit("UPDATE_HOTEL", res.data.item);
-              console.log(moment(date.setDate(date.getDate() - 1)));
-              console.log(moment(date.setDate(date.getDate() + 1)));
-              context.commit(
-                "CHANGE_DATE",
-                {
-                  start: date.setDate(date.getDate() - 1),
-                  end: date.setDate(date.getDate() + 1),
-                },
-                { root: true }
-              );
-            });
-        }
-      });
+    // if(response.data.statusCode === 400)
+    // axios
+    //   .get(
+    //     `/api/hotel/enquire-price/${payload.hotelId}/${payload.roomQty}/${
+    //       payload.checkInDate
+    //     }/${payload.checkOutDate}/${payload.timeslotids}${
+    //       checkService === "" ? "" : "/" + checkService
+    //     }`
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     context.commit("UPDATE_HOTEL", res.data.item);
+    //   })
+    //   .catch((err) => {
+    //     const date = new Date();
+    //     const today = moment(date).format("YYYYMMDD");
+    //     let tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+    //       "YYYYMMDD"
+    //     );
+    //     console.log(tomorrow);
+    //     if (payload.timeslotids === "") {
+    //       tomorrow = today;
+    //     }
+
+    //     // console.log(err);
+    //     if (err.response.data.statusCode === 400) {
+    //       axios
+    //         .get(
+    //           `/api/hotel/enquire-price/${payload.hotelId}/${
+    //             payload.roomQty
+    //           }/${today}/${tomorrow}/${payload.timeslotids}${
+    //             checkService === "" ? "" : "/" + checkService
+    //           }`
+    //         )
+    //         .then((res) => {
+    //           console.log("Second API Call");
+    //           context.commit("UPDATE_HOTEL", res.data.item);
+    //           console.log(moment(date.setDate(date.getDate() - 1)));
+    //           console.log(moment(date.setDate(date.getDate() + 1)));
+    //           context.commit(
+    //             "CHANGE_DATE",
+    //             {
+    //               start: date.setDate(date.getDate() - 1),
+    //               end: date.setDate(date.getDate() + 1),
+    //             },
+    //             { root: true }
+    //           );
+    //         })
+    //         .catch((err) => {
+    //           // const error = new Error(err);
+    //           throw err;
+    //         });
+    //     }
+    //   });
   },
+  async secondChangedService(context, payload) {
+    const date = new Date();
+    const today = moment(date).format("YYYYMMDD");
+    let tomorrow = moment(date.setDate(date.getDate() + 1)).format("YYYYMMDD");
+    if (payload.timeslotids === "") {
+      tomorrow = today;
+    }
+
+    const checkService = payload.service === "" ? "-" : payload.service;
+
+    const response = await axios.get(
+      `/api/hotel/enquire-price/${payload.hotelId}/${
+        payload.roomQty
+      }/${today}/${tomorrow}/${payload.timeslotids}${
+        checkService === "" ? "" : "/" + checkService
+      }`
+    );
+
+    console.log("Second API Call");
+    context.commit("UPDATE_HOTEL", response.data.item);
+    console.log(moment(date.setDate(date.getDate() - 1)));
+    console.log(moment(date.setDate(date.getDate() + 1)));
+    context.commit(
+      "CHANGE_DATE",
+      {
+        start: date.setDate(date.getDate() - 1),
+        end: date.setDate(date.getDate() + 1),
+      },
+      { root: true }
+    );
+
+    // console.log(err);
+    // axios
+    //   .get(
+    //     `/api/hotel/enquire-price/${payload.hotelId}/${
+    //       payload.roomQty
+    //     }/${today}/${tomorrow}/${payload.timeslotids}${
+    //       checkService === "" ? "" : "/" + checkService
+    //     }`
+    //   )
+    //   .then((res) => {
+    //     console.log("Second API Call");
+    //     context.commit("UPDATE_HOTEL", res.data.item);
+    //     console.log(moment(date.setDate(date.getDate() - 1)));
+    //     console.log(moment(date.setDate(date.getDate() + 1)));
+    //     context.commit(
+    //       "CHANGE_DATE",
+    //       {
+    //         start: date.setDate(date.getDate() - 1),
+    //         end: date.setDate(date.getDate() + 1),
+    //       },
+    //       { root: true }
+    //     );
+    //   })
+  },
+  // changedService(context, payload) {
+  //   const checkService = payload.service === "" ? "-" : payload.service;
+  //   axios
+  //     .get(
+  //       `/api/hotel/enquire-price/${payload.hotelId}/${payload.roomQty}/${
+  //         payload.checkInDate
+  //       }/${payload.checkOutDate}/${payload.timeslotids}${
+  //         checkService === "" ? "" : "/" + checkService
+  //       }`
+  //     )
+  //     .then((res) => {
+  //       console.log(res);
+  //       context.commit("UPDATE_HOTEL", res.data.item);
+  //     })
+  //     .catch((err) => {
+  //       const date = new Date();
+  //       const today = moment(date).format("YYYYMMDD");
+  //       let tomorrow = moment(date.setDate(date.getDate() + 1)).format(
+  //         "YYYYMMDD"
+  //       );
+  //       console.log(tomorrow);
+  //       if (payload.timeslotids === "") {
+  //         tomorrow = today;
+  //       }
+
+  //       // console.log(err);
+  //       if (err.response.data.statusCode === 400) {
+  //         axios
+  //           .get(
+  //             `/api/hotel/enquire-price/${payload.hotelId}/${
+  //               payload.roomQty
+  //             }/${today}/${tomorrow}/${payload.timeslotids}${
+  //               checkService === "" ? "" : "/" + checkService
+  //             }`
+  //           )
+  //           .then((res) => {
+  //             console.log("Second API Call");
+  //             context.commit("UPDATE_HOTEL", res.data.item);
+  //             console.log(moment(date.setDate(date.getDate() - 1)));
+  //             console.log(moment(date.setDate(date.getDate() + 1)));
+  //             context.commit(
+  //               "CHANGE_DATE",
+  //               {
+  //                 start: date.setDate(date.getDate() - 1),
+  //                 end: date.setDate(date.getDate() + 1),
+  //               },
+  //               { root: true }
+  //             );
+  //           })
+  //           .catch((err) => {
+  //             // const error = new Error(err);
+  //             throw err;
+  //           });
+  //       }
+  //     });
+  // },
   updateChildren(context, payload) {
     context.commit("UPDATE_CHILDREN", payload);
   },

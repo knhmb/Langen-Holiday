@@ -248,6 +248,7 @@ export default {
   },
   data() {
     return {
+      startDateChanged: false,
       isChangedDate: false,
       dateDifference: "",
       childAge: {},
@@ -283,6 +284,7 @@ export default {
       //   start: this.startDate,
       //   end: this.dateSelected.end,
       // };
+      console.log("start Date");
       const data = {
         start: this.startDate,
         end: this.startDate,
@@ -300,7 +302,28 @@ export default {
           roomQty: this.numberOfRooms,
         };
 
-        this.$store.dispatch("booking/changedService", serviceData);
+        console.log(serviceData);
+
+        this.$store
+          .dispatch("booking/changedService", serviceData)
+          .then(() => {})
+          .catch(() => {
+            this.$store
+              .dispatch("booking/secondChangedService", serviceData)
+              .then(() => {
+                this.$store.commit("TOGGLE_BUTTON", false);
+              })
+              .catch(() => {
+                this.$store.commit("TOGGLE_BUTTON", true);
+                ElNotification({
+                  title: "Error",
+                  message: "所選日期不可用",
+                  type: "error",
+                });
+              });
+
+            // console.log(err.response.data);
+          });
         this.$store.commit("SET_ROOM_QTY", 1);
       }
     },
@@ -345,10 +368,60 @@ export default {
         ) {
           console.log("End Date Comes Later");
           console.log(data);
-          this.$store.dispatch("booking/changedService", serviceData);
+          this.$store
+            .dispatch("booking/changedService", serviceData)
+            .then(() => {})
+            .catch(() => {
+              this.$store
+                .dispatch("booking/secondChangedService", serviceData)
+                .then(() => {
+                  this.$store.commit("TOGGLE_BUTTON", false);
+                })
+                .catch(() => {
+                  this.$store.commit("TOGGLE_BUTTON", true);
+                  ElNotification({
+                    title: "Error",
+                    message: "所選日期不可用",
+                    type: "error",
+                  });
+                });
+
+              // console.log(err.response.data);
+            });
+          // this.$store
+          //   .dispatch("booking/changedService", serviceData)
+          //   .then(() => {})
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
         }
       } else {
-        this.$store.dispatch("booking/changedService", serviceData);
+        this.$store
+          .dispatch("booking/changedService", serviceData)
+          .then(() => {})
+          .catch(() => {
+            this.$store
+              .dispatch("booking/secondChangedService", serviceData)
+              .then(() => {
+                this.$store.commit("TOGGLE_BUTTON", false);
+              })
+              .catch(() => {
+                this.$store.commit("TOGGLE_BUTTON", true);
+                ElNotification({
+                  title: "Error",
+                  message: "所選日期不可用",
+                  type: "error",
+                });
+              });
+
+            // console.log(err.response.data);
+          });
+        // this.$store
+        //   .dispatch("booking/changedService", serviceData)
+        //   .then(() => {})
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
       }
       this.$store.commit("SET_ROOM_QTY", 1);
     },
@@ -362,7 +435,32 @@ export default {
         timeslotids: this.timeslotids === "" ? 0 : this.timeslotids,
         roomQty: this.numberOfRooms,
       };
-      this.$store.dispatch("booking/changedService", serviceData);
+      // this.$store
+      //   .dispatch("booking/changedService", serviceData)
+      //   .then(() => {})
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      this.$store
+        .dispatch("booking/changedService", serviceData)
+        .then(() => {})
+        .catch(() => {
+          this.$store
+            .dispatch("booking/secondChangedService", serviceData)
+            .then(() => {
+              this.$store.commit("TOGGLE_BUTTON", false);
+            })
+            .catch(() => {
+              this.$store.commit("TOGGLE_BUTTON", true);
+              ElNotification({
+                title: "Error",
+                message: "所選日期不可用",
+                type: "error",
+              });
+            });
+
+          // console.log(err.response.data);
+        });
       this.$store.commit("SET_ROOM_QTY", 1);
     },
     numberOfRooms() {
@@ -383,10 +481,60 @@ export default {
           moment(this.endDate).format("YYYYMMDD")
         ) {
           console.log("No Time Session");
-          this.$store.dispatch("booking/changedService", serviceData);
+          // this.$store
+          //   .dispatch("booking/changedService", serviceData)
+          //   .then(() => {})
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
+          this.$store
+            .dispatch("booking/changedService", serviceData)
+            .then(() => {})
+            .catch(() => {
+              this.$store
+                .dispatch("booking/secondChangedService", serviceData)
+                .then(() => {
+                  this.$store.commit("TOGGLE_BUTTON", false);
+                })
+                .catch(() => {
+                  this.$store.commit("TOGGLE_BUTTON", true);
+                  // ElNotification({
+                  //   title: "Error",
+                  //   message: "所選日期不可用",
+                  //   type: "error",
+                  // });
+                });
+
+              // console.log(err.response.data);
+            });
         }
       } else {
-        this.$store.dispatch("booking/changedService", serviceData);
+        // this.$store
+        //   .dispatch("booking/changedService", serviceData)
+        //   .then(() => {})
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+        this.$store
+          .dispatch("booking/changedService", serviceData)
+          .then(() => {})
+          .catch(() => {
+            this.$store
+              .dispatch("booking/secondChangedService", serviceData)
+              .then(() => {
+                this.$store.commit("TOGGLE_BUTTON", false);
+              })
+              .catch(() => {
+                this.$store.commit("TOGGLE_BUTTON", true);
+                ElNotification({
+                  title: "Error",
+                  message: "所選日期不可用",
+                  type: "error",
+                });
+              });
+
+            // console.log(err.response.data);
+          });
       }
     },
   },

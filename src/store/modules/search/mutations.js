@@ -1,6 +1,7 @@
 export default {
   SET_SEARCH_ITEMS(state, payload) {
     state.searchItems = payload;
+    console.log(state.searchItems);
     console.log("accessed");
   },
   TOGGLE_BOOKMARK_SEARCH(state, payload) {

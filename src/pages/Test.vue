@@ -226,6 +226,9 @@ export default {
           "dashboard/setBanner",
           this.$route.params.parentCodexSlug
         );
+        this.$store.dispatch("search/getSearchItems", {
+          slug: this.$route.params.parentCodexSlug,
+        });
       },
     },
   },
@@ -235,9 +238,9 @@ export default {
       this.sortIsland();
     },
     checkboxChanged() {
-      let subItem = this.cheungChauIslandItems.filter((item) =>
-        this.$route.path.split("/").includes(item.slug)
-      );
+      // let subItem = this.cheungChauIslandItems.filter((item) =>
+      //   this.$route.path.split("/").includes(item.slug)
+      // );
 
       const data = {
         stayingDate:
@@ -249,10 +252,11 @@ export default {
         isHavePets: this.isSelected,
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
-        slug:
-          subItem.length > 0
-            ? subItem[0].slug
-            : this.cheungChauIslandItems[0].parentCodexSlug,
+        slug: this.$route.params.parentCodexSlug,
+        // slug:
+        //   subItem.length > 0
+        //     ? subItem[0].slug
+        //     : this.cheungChauIslandItems[0].parentCodexSlug,
       };
       console.log(data);
       // this.$store.dispatch("dashboard/filterHotel", data);
@@ -263,9 +267,9 @@ export default {
       this.recommendation = value;
     },
     sortIsland() {
-      let subItem = this.cheungChauIslandItems.filter((item) =>
-        this.$route.path.split("/").includes(item.slug)
-      );
+      // let subItem = this.cheungChauIslandItems.filter((item) =>
+      //   this.$route.path.split("/").includes(item.slug)
+      // );
       const data = {
         stayingDate:
           moment(this.range.start).format("YYYYMMDD") +
@@ -277,10 +281,11 @@ export default {
         location: this.location.toString().replaceAll(",", "|"),
         roomType: this.roomType.toString().replaceAll(",", "|"),
         sort: this.recommendation === "" ? "" : this.recommendation,
-        slug:
-          subItem.length > 0
-            ? subItem[0].slug
-            : this.cheungChauIslandItems[0].parentCodexSlug,
+        slug: this.$route.params.parentCodexSlug,
+        // slug:
+        //   subItem.length > 0
+        //     ? subItem[0].slug
+        //     : this.cheungChauIslandItems[0].parentCodexSlug,
       };
       console.log(data);
       // this.$store.dispatch("dashboard/sortHotel", data);
@@ -289,14 +294,17 @@ export default {
     },
   },
   mounted() {
-    let subItem = this.cheungChauIslandItems.filter((item) =>
-      this.$route.path.split("/").includes(item.slug)
-    );
+    // let subItem = this.cheungChauIslandItems.filter((item) =>
+    //   this.$route.path.split("/").includes(item.slug)
+    // );
+    // this.$store.dispatch("search/getSearchItems", {
+    //   slug:
+    //     subItem.length > 0
+    //       ? subItem[0].slug
+    //       : this.cheungChauIslandItems[0].parentCodexSlug,
+    // });
     this.$store.dispatch("search/getSearchItems", {
-      slug:
-        subItem.length > 0
-          ? subItem[0].slug
-          : this.cheungChauIslandItems[0].parentCodexSlug,
+      slug: this.$route.params.parentCodexSlug,
     });
   },
   created() {
