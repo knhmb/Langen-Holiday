@@ -109,11 +109,7 @@
       <el-row :gutter="20" class="time-room">
         <el-col :span="12" v-if="selectedHotel.hasDayNightSessions">
           <label class="date-delivery" style="display: block">登記時間</label>
-          <el-select
-            v-model="timeslotids"
-            class="m-2"
-            placeholder="9:00 - 13:00"
-          >
+          <el-select v-model="timeslotids" class="m-2" placeholder="請選擇時間">
             <el-option
               v-for="time in selectedHotel.timeslots"
               :key="time.timeslotId"
@@ -157,7 +153,11 @@
         </el-col>
         <el-col :span="12">
           <label class="date-delivery" style="display: block">成人</label>
-          <el-select v-model="numberOfAdults" class="m-2" placeholder="2">
+          <el-select
+            v-model="numberOfAdults"
+            class="m-2"
+            placeholder="請輸入人數"
+          >
             <el-option
               v-for="adult in parseInt(selectedHotel.basicInfo.maxAdult)"
               :key="adult"
@@ -173,7 +173,7 @@
             v-if="parseInt(selectedHotel.basicInfo.maxChildren) !== 0"
             v-model="numberOfChildren"
             class="m-2"
-            placeholder="0"
+            placeholder="請輸入人數"
           >
             <el-option
               v-for="adult in parseInt(selectedHotel.basicInfo.maxChildren)"
@@ -306,7 +306,9 @@ export default {
 
         this.$store
           .dispatch("booking/changedService", serviceData)
-          .then(() => {})
+          .then(() => {
+            this.$store.commit("TOGGLE_BUTTON", false);
+          })
           .catch(() => {
             this.$store
               .dispatch("booking/secondChangedService", serviceData)

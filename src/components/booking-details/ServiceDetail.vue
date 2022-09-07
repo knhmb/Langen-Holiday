@@ -56,31 +56,36 @@
                 <span>{{ selectedHotel.basicInfo.maxGuest }}</span>
               </div>
             </el-col>
-            <el-col :span="12">
+            <!-- <el-col :span="12">
               <div class="separation">
                 <span>入住時間:</span>
                 <span>{{
                   $filters.formatTime(selectedHotel.basicInfo.checkInTime)
                 }}</span>
-                <!-- <span>{{ new Date.getTiem() }}</span> -->
               </div>
-            </el-col>
+            </el-col> -->
             <el-col :span="12">
-              <div class="separation no-border">
+              <div class="separation">
                 <span>竉物留宿:</span>
                 <span>{{
                   selectedHotel.petsWelcome === true ? "可以" : "不可以"
                 }}</span>
               </div>
+              <!-- <div class="separation no-border">
+                <span>竉物留宿:</span>
+                <span>{{
+                  selectedHotel.petsWelcome === true ? "可以" : "不可以"
+                }}</span>
+              </div> -->
             </el-col>
-            <el-col :span="12">
+            <!-- <el-col :span="12">
               <div class="separation no-border">
                 <span>退房時間:</span>
                 <span>{{
                   $filters.formatTime(selectedHotel.basicInfo.checkOutTime)
                 }}</span>
               </div>
-            </el-col>
+            </el-col> -->
           </el-row>
         </el-col>
         <el-col class="purchasing-details" :sm="24" :lg="12">
