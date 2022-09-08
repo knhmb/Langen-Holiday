@@ -378,7 +378,9 @@ export default {
           console.log(data);
           this.$store
             .dispatch("booking/changedService", serviceData)
-            .then(() => {})
+            .then(() => {
+              this.$store.commit("TOGGLE_BUTTON", false);
+            })
             .catch(() => {
               this.$store
                 .dispatch("booking/secondChangedService", serviceData)

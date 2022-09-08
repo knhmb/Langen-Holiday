@@ -6,12 +6,13 @@
           <div class="list">
             <h1>注意事項</h1>
             <el-card class="box-card">
-              <ul>
+              <div v-html="selectedHotel.basicInfo.thingsToNote"></div>
+              <!-- <ul>
                 <li>
                   •
                   {{ selectedHotel.basicInfo.thingsToNote }}
                 </li>
-                <!-- <template
+                <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
                 >
@@ -19,8 +20,8 @@
                     •
                     {{ note.details }}
                   </li>
-                </template> -->
-              </ul>
+                </template>
+              </ul> -->
             </el-card>
           </div>
         </el-col>
@@ -30,12 +31,14 @@
           <div class="list">
             <h1>取消政策</h1>
             <el-card class="box-card">
-              <ul>
+              <div v-html="selectedHotel.basicInfo.cancelPolicy"></div>
+
+              <!-- <ul>
                 <li>
                   •
                   {{ selectedHotel.basicInfo.cancelPolicy }}
                 </li>
-                <!-- <template
+                <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
                 >
@@ -43,8 +46,8 @@
                   •
                   {{ note.details }}
                 </li>
-                </template> -->
-              </ul>
+                </template>
+              </ul> -->
             </el-card>
           </div>
         </el-col>
@@ -54,10 +57,12 @@
           <div class="list">
             <h1>惡劣天氣安排</h1>
             <el-card class="box-card last">
-              <p>
+              <div v-html="selectedHotel.basicInfo.badWeatherArrangement"></div>
+
+              <!-- <p>
                 •
                 {{ selectedHotel.basicInfo.badWeatherArrangement }}
-              </p>
+              </p> -->
               <!-- <template v-for="note in selectedHotel.hotelNotes" :key="note.id">
                 <p v-if="note.isBadWeather === true">
                   •
