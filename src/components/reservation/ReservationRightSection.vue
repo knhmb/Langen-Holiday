@@ -17,7 +17,7 @@
                 {{ numberOfChildren === "" ? 0 : numberOfChildren }}位兒童
               </p>
             </el-col>
-            <template v-for="(age, key) in childrenAge[0]" :key="age">
+            <template v-for="(age, key) in childrenAgeText[0]" :key="age">
               <el-col :span="10">
                 <!-- <p class="info">兒童1年齡:</p> -->
                 <p class="info">{{ childrenAge.length > 0 ? key : "1" }}</p>
@@ -235,6 +235,9 @@ export default {
     },
     childrenAge() {
       return this.$store.getters["booking/childrenAge"];
+    },
+    childrenAgeText() {
+      return this.$store.getters["booking/childrenAgeText"];
     },
     dateSelected() {
       return this.$store.getters.dateSelected;

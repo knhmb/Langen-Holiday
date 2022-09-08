@@ -109,7 +109,12 @@
       <el-row :gutter="20" class="time-room">
         <el-col :span="12" v-if="selectedHotel.hasDayNightSessions">
           <label class="date-delivery" style="display: block">登記時間</label>
-          <el-select v-model="timeslotids" class="m-2" placeholder="請選擇時間">
+          <el-select
+            @change="setSelectedTime"
+            v-model="timeslotids"
+            class="m-2"
+            placeholder="請選擇時間"
+          >
             <el-option
               v-for="time in selectedHotel.timeslots"
               :key="time.timeslotId"
@@ -251,6 +256,7 @@ export default {
       startDateChanged: false,
       isChangedDate: false,
       dateDifference: "",
+      // childAge: [],
       childAge: {},
       date: new Date(),
       dummyDate: "",
@@ -606,6 +612,9 @@ export default {
   methods: {
     dummy() {
       console.log("clicked");
+    },
+    setSelectedTime() {
+      console.log(this.timeslotids);
     },
     assignDateDifference() {
       console.log("executed");

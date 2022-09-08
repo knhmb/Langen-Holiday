@@ -24,8 +24,11 @@ export default {
     state.numberOfAdults = payload;
   },
   STORE_CHILDREN_AGE(state, payload) {
+    console.log(payload);
     // state.childrenAge.unshift(payload);
-    state.childrenAge.splice(0, 1, payload);
+    // state.childrenAge.splice(0, 1, payload);
+    state.childrenAge.splice(0, 1, Object.values(payload));
+    state.childrenAgeText.splice(0, 1, payload);
     console.log(state.childrenAge);
   },
   RESET_ADULTS_AND_CHILDREN(state) {

@@ -168,6 +168,9 @@ export default {
     selectedServices() {
       return this.$store.getters["booking/selectedServices"];
     },
+    timeslotids() {
+      return this.$store.getters.timeslotids;
+    },
     numberOfChildren() {
       return this.$store.getters["booking/numberOfChildren"];
     },
@@ -180,6 +183,7 @@ export default {
     petQty() {
       return this.$store.getters["booking/petQty"];
     },
+
     dateSelected() {
       return this.$store.getters.dateSelected;
     },
@@ -197,6 +201,11 @@ export default {
     numberOfRooms() {
       return this.$store.getters.numberOfRooms;
     },
+    selectedTimeslot() {
+      return this.selectedHotel.timeslots.filter(
+        (time) => time.timeslotId === this.timeslotids
+      );
+    },
   },
   methods: {
     openDialog() {
@@ -206,18 +215,25 @@ export default {
       this.isDialogOpen = false;
     },
     async reserve() {
+      console.log(this.childrenAge);
+      console.log(Object.values(this.childrenAge));
       console.log(this.bookingInfo);
       const tempObject = { ...this.bookingInfo };
-      // delete tempObject.specialRequest;
+      delete tempObject.specialRequest;
+      delete tempObject.englishNameTitle;
+      delete tempObject.chineseNameTitle;
       // console.log(tempObject);
       // console.log(this.bookingInfo);
       // console.log(this.selectedHotel);
-      let str = JSON.stringify(tempObject, (k, v) => (v === null ? "" : v));
+      let str = JSON.stringify(this.bookingInfo, (k, v) =>
+        v === null ? "" : v
+      );
+      let str2 = JSON.stringify(tempObject, (k, v) => (v === null ? "" : v));
       console.log(JSON.parse(str));
       const userInfo = JSON.parse(str);
       // tempObject
 
-      const isEmpty = Object.values(JSON.parse(str)).some(
+      const isEmpty = Object.values(JSON.parse(str2)).some(
         (item) => item === "" || item === null
       );
       console.log(isEmpty);
@@ -236,18 +252,29 @@ export default {
         Object.keys(this.discountData).length > 0
           ? this.discountData.couponId
           : null;
+      const arr = [];
+
+      this.childrenAge.forEach((item) => {
+        item.forEach((i) => {
+          arr.push(i);
+        });
+      });
+
+      console.log(this.childrenAge);
 
       const data = {
-        nameInChinese: userInfo.chineseName,
-        nameInEnglish: userInfo.englishName,
+        nameInChinese: userInfo.chineseName ? userInfo.chineseName : "",
+        nameInEnglish: userInfo.englishName ? userInfo.englishName : "",
         email: userInfo.email,
         telNo: userInfo.telephone,
-        specialRequest: userInfo.specialRequest,
+        specialRequest: userInfo.specialRequest ? userInfo.specialRequest : "",
         guestQty: this.numberOfAdults + childrenQty,
         adultQty: this.numberOfAdults,
         childrenQty: childrenQty,
-        childrenAge: this.childrenAge,
-        petsQty: this.petQty ? this.petsQty : 0,
+        childrenAge: arr,
+        // childrenAge: this.childrenAge,
+        // childrenAge: Object.values(this.childrenAge),
+        petsQty: this.petQty ? this.petQty : 0,
         checkInDate: this.checkInDate,
         checkOutDate: this.checkOutDate,
         // checkInDate: moment(this.checkInDate).format("YYYYMMDD"),
@@ -263,6 +290,10 @@ export default {
           this.selectedHotel.totalSelectedAddlServiceCharge,
         roomQty: this.numberOfRooms,
         couponId: couponId,
+        timeslotId: this.timeslotids ? this.timeslotids : "",
+        timeslot: this.timeslotids
+          ? `${this.selectedTimeslot[0].checkInTime}-${this.selectedTimeslot[0].checkOutTime}`
+          : "",
       };
       console.log(this.selectedServices);
       console.log(this.selectedHotel);

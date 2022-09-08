@@ -252,10 +252,10 @@ export default {
           this.$store
             .dispatch("booking/secondChangedService", data)
             .then(() => {
-              this.$store.commit("TOGGLE_BUTTON", false);
+              // this.$store.commit("TOGGLE_BUTTON", false);
             })
             .catch(() => {
-              this.$store.commit("TOGGLE_BUTTON", true);
+              // this.$store.commit("TOGGLE_BUTTON", true);
               ElNotification({
                 title: "Error",
                 message: "所選日期不可用",

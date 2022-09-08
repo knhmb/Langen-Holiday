@@ -31,6 +31,7 @@ export default {
     this.$store.dispatch("displayHeader", true);
     this.$store.commit("AUTHENTICATED_TO_RESERVE", false);
     this.$store.commit("TOGGLE_BUTTON", false);
+    this.$store.commit("RESET_TIMESLOT");
 
     // this.$store.dispatch("resetIsHavePets");
   },

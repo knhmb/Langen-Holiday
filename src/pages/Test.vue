@@ -222,10 +222,12 @@ export default {
     $route: {
       deep: true,
       handler() {
+        console.log("banner");
         this.$store.dispatch(
           "dashboard/setBanner",
           this.$route.params.parentCodexSlug
         );
+        console.log("searchItems");
         this.$store.dispatch("search/getSearchItems", {
           slug: this.$route.params.parentCodexSlug,
         });
