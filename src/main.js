@@ -23,6 +23,8 @@ import vueI18n from "./i18n.js";
 
 import moment from "moment";
 
+import VuePdf from "vue3-pdfjs";
+
 const app = createApp(App);
 
 app.config.globalProperties.$filters = {
@@ -45,5 +47,6 @@ app.use(vueI18n);
 
 app.use(router);
 app.use(store);
+app.use(VuePdf);
 
 app.mount("#app");

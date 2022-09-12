@@ -6,31 +6,15 @@
           <h2>注意事項</h2>
           <div :class="{ 'sidebar-box': hideContent1 }">
             <div class="list">
-              <ul>
+              <div v-html="selectedHotel.basicInfo.thingsToNote"></div>
+              <!-- <ul>
                 <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
                 >
                   <li v-if="note.isNote === true">・{{ note.details }}</li>
                 </template>
-                <!-- <li>
-                  ・讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有
-                </li>
-                <li>
-                  ・片衣代可度和全農不嚴分，慢構醫有：推少過它自
-                  ・路具經上多然我直子名對空成沒一問論處客完環人以告節以可的……好出點之就會親工
-                </li>
-                <li>
-                  ・一跟決這下作布計，問會動展？灣作種手一義外重想府個有一家作四的為前變醫
-                </li>
-                <li>
-                  ・單藝重賣政跑做們林關境量連心……連蘭嗎。國動家國童火的年，包實業事希女發觀、想一爭體，成活物子被式，未不智
-                </li>
-                <li>・不親交童這備許表，唱年。</li> -->
-                <!-- <li>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </li> -->
-              </ul>
+              </ul> -->
             </div>
             <div :class="{ hide: hideContent1 }"></div>
           </div>
@@ -43,7 +27,8 @@
           <h2>取消政策</h2>
           <div :class="{ 'sidebar-box': hideContent2 }">
             <div class="list">
-              <ul>
+              <div v-html="selectedHotel.basicInfo.cancelPolicy"></div>
+              <!-- <ul>
                 <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
@@ -52,21 +37,7 @@
                     ・{{ note.details }}
                   </li>
                 </template>
-                <!-- <li>
-                  ・讀品公術利爾否有，建竟物八樣在總，此之事財及量角表食大子我國飯人展筆什現的親表可自我人根以了很香我太產獎生有
-                </li>
-                <li>
-                  ・片衣代可度和全農不嚴分，慢構醫有：推少過它自
-                  ・路具經上多然我直子名對空成沒一問論處客完環人以告節以可的……好出點之就會親工
-                </li>
-                <li>
-                  ・一跟決這下作布計，問會動展？灣作種手一義外重想府個有一家作四的為前變醫
-                </li>
-                <li>
-                  ・單藝重賣政跑做們林關境量連心……連蘭嗎。國動家國童火的年，包實業事希女發觀、想一爭體，成活物子被式，未不智
-                </li>
-                <li>・不親交童這備許表，唱年。</li> -->
-              </ul>
+              </ul> -->
             </div>
             <div :class="{ hide: hideContent2 }"></div>
           </div>
@@ -79,7 +50,8 @@
           <h2>惡劣天氣安排</h2>
           <div :class="{ 'sidebar-box': hideContent3 }">
             <div class="list">
-              <ul>
+              <div v-html="selectedHotel.basicInfo.badWeatherArrangement"></div>
+              <!-- <ul>
                 <template
                   v-for="note in selectedHotel.hotelNotes"
                   :key="note.id"
@@ -102,7 +74,7 @@
                   ・單藝重賣政跑做們林關境量連心……連蘭嗎。國動家國童火的年，包實業事希女發觀、想一爭體，成活物子被式，未不智
                 </li>
                 <li>・不親交童這備許表，唱年。</li>
-              </ul>
+              </ul> -->
             </div>
             <div :class="{ hide: hideContent3 }"></div>
           </div>

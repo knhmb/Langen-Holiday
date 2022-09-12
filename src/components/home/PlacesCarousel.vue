@@ -50,6 +50,7 @@
                 :rate-value="place.rating"
                 :rate-text="place.reviewsCount"
                 :image="place.thumbnail"
+                :top-five="place.topFive"
                 :bookmarked="place.bookmarked"
                 :id="place.hotelId"
               />
@@ -73,8 +74,8 @@
                 :price="place.originalPrice"
                 :rate-value="place.rating"
                 :rate-text="place.reviewsCount"
-                :icon="place.icon"
                 :image="place.thumbnail"
+                :top-five="place.topFive"
                 :bookmarked="place.bookmarked"
                 :id="place.hotelId"
               />
@@ -84,7 +85,7 @@
       </el-carousel-item>
     </el-carousel>
     <base-container>
-      <el-row>
+      <el-row class="images">
         <el-col :span="12">
           <img src="../../assets/main-img1.png" class="fish-img" alt="" />
         </el-col>
@@ -117,6 +118,10 @@ export default {
 
 
 <style>
+.places-carousel .el-row.images {
+  margin-top: -13rem;
+}
+
 .places-carousel .swimming-img {
   text-align: end;
 }
@@ -146,10 +151,12 @@ export default {
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--left {
   left: 5%;
+  top: 13rem;
 }
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--right {
   right: 6%;
+  top: 13rem;
 }
 
 .places-carousel .el-carousel__arrow.el-carousel__arrow--right .el-icon,
@@ -163,6 +170,9 @@ export default {
 }
 
 @media screen and (min-width: 1680px) {
+  .places-carousel .el-row.images {
+    margin-top: -22rem;
+  }
   .places-carousel .el-carousel__arrow.el-carousel__arrow--left {
     left: 3%;
   }
@@ -177,6 +187,9 @@ export default {
 }
 
 @media screen and (min-width: 2022px) {
+  /* .places-carousel .el-row.images {
+    margin-top: -16rem;
+  } */
   /* .places-carousel .el-carousel .el-carousel__container {
     height: 970px !important;
   } */

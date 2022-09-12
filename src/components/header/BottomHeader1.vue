@@ -194,18 +194,24 @@
                         $route.path ===
                         `/${subMenuItem.parentCodexSlug}/${subMenuItem.slug}`
                           ? 'black'
+                          : $route.path ===
+                            `/${subMenuItem.parentCodexSlug}/${subMenuItem.slug}.pdf`
+                          ? 'black'
                           : '#8d8d8d',
                       fontWeight:
                         $route.path ===
                         `/${subMenuItem.parentCodexSlug}/${subMenuItem.slug}`
+                          ? 'bold'
+                          : $route.path ===
+                            `/${subMenuItem.parentCodexSlug}/${subMenuItem.slug}.pdf`
                           ? 'bold'
                           : 'normal',
                     }"
                     @click="navigateToCheung(subMenuItem)"
                     v-if="subMenuItem.parentCodexSlug === item.slug"
                     index="2-1"
-                    >{{ subMenuItem.name }}</el-menu-item
-                  >
+                    >{{ subMenuItem.name }}
+                  </el-menu-item>
                 </template>
               </template>
               <!-- <el-menu-item index="2-1">item one</el-menu-item>
@@ -353,6 +359,7 @@ export default {
       // dialogFormVisible: false,
       dialogTitle: "登入",
       navLocation: "",
+      isPdf: false,
       // loggedIn: false,
     };
   },
@@ -504,10 +511,19 @@ export default {
     },
     navigateToCheung(cheung) {
       console.log(cheung);
-      if (!cheung.parentCodexSlug) {
+      if (cheung.name === "景點介紹") {
+        this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}.pdf`);
+        this.$store.commit("SET_PDF", cheung.slug);
+        // return;
+      } else if (!cheung.parentCodexSlug) {
         this.$router.push(`/${cheung.slug}/${cheung.slug}`);
+        // this.$store.commit("REMOVE_PDF");
+        this.$store.commit("TOGGLE_ISPDF", false);
       } else {
         this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}`);
+        this.$store.commit("TOGGLE_ISPDF", false);
+
+        // this.$store.commit("REMOVE_PDF");
       }
       // if (cheung.slug === "hotel-recommendations") {
       //   this.$router.push(`/${cheung.slug}`);

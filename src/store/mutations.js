@@ -56,4 +56,15 @@ export default {
   TOGGLE_BUTTON(state, payload) {
     state.isButtonDisabled = payload;
   },
+  SET_PDF(state, payload) {
+    state.pdf = payload;
+    // state.isPdf = true;
+  },
+  TOGGLE_ISPDF(state, payload) {
+    state.isPdf = payload;
+  },
+  REMOVE_PDF(state) {
+    state.pdf = null;
+    // state.isPdf = false;
+  },
 };

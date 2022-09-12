@@ -47,7 +47,10 @@
             /> -->
           </el-col>
           <el-col :sm="24" :lg="5">
-            <p>Copyright © 2005 - 2021 樂程假期公司 All Right Reserve</p>
+            <p>
+              Copyright © 2005 – 2022 樂程假期公司 <br />
+              All Right Reserve
+            </p>
           </el-col>
         </el-row>
       </div>

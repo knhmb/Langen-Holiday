@@ -26,4 +26,10 @@ export default {
   isButtonDisabled(state) {
     return state.isButtonDisabled;
   },
+  pdf(state) {
+    return state.pdf;
+  },
+  isPdf(state) {
+    return state.isPdf;
+  },
 };

@@ -87,6 +87,7 @@ export default {
     "image",
     "bookmarked",
     "id",
+    "topFive",
   ],
   data() {
     return {
@@ -96,11 +97,11 @@ export default {
           ? require("../../assets/icon-bookmark-off.png")
           : require("../../assets/icon-bookmark-on.png"),
       icon:
-        this.id === "2"
+        this.topFive === "1"
           ? require("../../assets/icon-rank1.png")
-          : this.id === "4"
+          : this.topFive === "2"
           ? require("../../assets/icon-rank2.png")
-          : this.id === "5"
+          : this.topFive === "3"
           ? require("../../assets/icon-rank3.png")
           : "",
     };

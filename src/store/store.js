@@ -35,6 +35,8 @@ const store = createStore({
       timeslotids: "",
       authenticatedToReserve: false,
       isButtonDisabled: false,
+      pdf: "lantau-island-recommendations",
+      isPdf: false,
     };
   },
   getters,

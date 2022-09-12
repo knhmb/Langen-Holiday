@@ -9,7 +9,7 @@
           alt=""
         />
         <img
-          @click="$router.push('/')"
+          @click="navigateToHome"
           class="brand-name"
           src="../../assets/brand-name.png"
           alt=""
@@ -169,8 +169,10 @@ export default {
     navigateToHome() {
       if (this.$route.path === `/reservation/${this.$route.params.id}`) {
         this.$router.replace("/");
+        this.$store.commit("REMOVE_PDF");
       } else {
         this.$router.push("/");
+        this.$store.commit("REMOVE_PDF");
       }
     },
   },

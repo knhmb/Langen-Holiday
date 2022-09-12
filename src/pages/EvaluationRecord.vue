@@ -120,7 +120,7 @@ export default {
     },
     async checkAccessTokenDelete(id) {
       await this.$store
-        .disptach("auth/checkAccessTokenValidity")
+        .dispatch("auth/checkAccessTokenValidity")
         .then(() => {
           this.deleteItem(id);
         })
