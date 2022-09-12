@@ -57,7 +57,9 @@
 
 <style>
 .footer {
-  background-color: orange;
+  /* background-color: orange; */
+  background-image: url("../assets/footer-bg.png");
+  background-size: cover;
   padding: 4rem 0;
   overflow-x: hidden;
 }

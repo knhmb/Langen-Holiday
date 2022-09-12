@@ -188,7 +188,7 @@
             >
             </el-option>
           </el-select>
-          <p v-else>這個房間沒有孩子</p>
+          <p v-else>{{ $t("no_children") }}</p>
         </el-col>
         <el-col
           v-for="(child, index) in numberOfChildren"

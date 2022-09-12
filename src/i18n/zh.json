@@ -23,5 +23,6 @@
   "error.account.phone-already-exist": "電話已經存在",
   "error.account.email-already-exist": "電子郵件已存在",
   "error.account.username-already-exist": "用戶名已存在",
-  "error.account.id-not-exist": "身份證不存在"
+  "error.account.id-not-exist": "身份證不存在",
+  "no_children": "這個房間沒有孩子"
 }

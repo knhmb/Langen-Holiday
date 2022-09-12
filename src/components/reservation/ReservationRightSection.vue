@@ -129,7 +129,9 @@
             <el-col :span="10">
               <!-- <p class="end">HK$1480.00</p> -->
               <p class="end">
-                HK${{ selectedHotel.priceOfSelectedDate - 0 + amount }}.00
+                HK${{
+                  selectedHotel.priceOfSelectedDate - discountFinal + amount
+                }}.00
               </p>
             </el-col>
             <el-col :span="12">
@@ -138,7 +140,9 @@
             <el-col :span="10">
               <!-- <p class="end">HK$1480.00</p> -->
               <p class="end">
-                HK${{ selectedHotel.priceOfSelectedDate - 0 + amount }}.00
+                HK${{
+                  selectedHotel.priceOfSelectedDate - discountFinal + amount
+                }}.00
               </p>
             </el-col>
             <el-col :span="12">
@@ -269,6 +273,12 @@ export default {
       }
 
       // return { ...this.arr };
+    },
+    discountFinal() {
+      if (Object.keys(this.discountData).length > 0) {
+        return this.discountData.discount;
+      }
+      return 0;
     },
   },
   methods: {
