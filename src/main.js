@@ -44,9 +44,9 @@ app.use(ElementPlus);
 app.use(VCalendar);
 
 app.use(vueI18n);
+app.use(VuePdf);
 
 app.use(router);
 app.use(store);
-app.use(VuePdf);
 
 app.mount("#app");

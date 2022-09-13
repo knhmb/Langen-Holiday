@@ -169,10 +169,12 @@ export default {
     navigateToHome() {
       if (this.$route.path === `/reservation/${this.$route.params.id}`) {
         this.$router.replace("/");
-        this.$store.commit("REMOVE_PDF");
+        // this.$store.commit("REMOVE_PDF");
+        this.$store.commit("TOGGLE_ISPDF", false);
       } else {
         this.$router.push("/");
-        this.$store.commit("REMOVE_PDF");
+        // this.$store.commit("REMOVE_PDF");
+        this.$store.commit("TOGGLE_ISPDF", false);
       }
     },
   },

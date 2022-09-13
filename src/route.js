@@ -23,6 +23,9 @@ import AppointmentRecord from "./pages/AppointmentRecord.vue";
 // import DayTime from "./pages/DayTime.vue";
 import PrivacyPolicy from "./pages/PrivacyPolicy.vue";
 import Test from "./pages/Test.vue";
+import CheungPdf from "./pages/CheungPdf";
+import LantauPdf from "./pages/LantauPdf";
+import LammaPdf from "./pages/LammaPdf";
 
 const router = createRouter({
   scrollBehavior(_, _2, savedPosition) {
@@ -62,6 +65,18 @@ const router = createRouter({
     // { path: "/day-n-night-time/:name", component: DayTime },
     { path: "/privacy-and-policy", component: PrivacyPolicy },
     { path: "/reset-password", component: Home },
+    {
+      path: "/cheung-chau-island/cheung-chau-island-recommendations.pdf",
+      component: CheungPdf,
+    },
+    {
+      path: "/lantau-island/lantau-island-recommendations.pdf",
+      component: LantauPdf,
+    },
+    {
+      path: "/lamma-island/lamma-island-recommendations.pdf",
+      component: LammaPdf,
+    },
     {
       path: "/edit-profile",
       component: EditProfile,

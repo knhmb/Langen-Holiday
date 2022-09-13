@@ -513,9 +513,12 @@ export default {
       console.log(cheung);
       if (cheung.name === "景點介紹") {
         this.$router.push(`/${cheung.parentCodexSlug}/${cheung.slug}.pdf`);
-        this.$store.commit("SET_PDF", cheung.slug);
-        // return;
-      } else if (!cheung.parentCodexSlug) {
+        // this.$store.commit("SET_PDF", cheung.slug);
+        // this.$store.commit("TOGGLE_ISPDF", true);
+
+        return;
+      }
+      if (!cheung.parentCodexSlug) {
         this.$router.push(`/${cheung.slug}/${cheung.slug}`);
         // this.$store.commit("REMOVE_PDF");
         this.$store.commit("TOGGLE_ISPDF", false);
