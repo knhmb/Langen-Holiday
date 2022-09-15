@@ -107,13 +107,14 @@
               </el-col>
 
               <el-col :span="10">
-                <p class="info">
+                <p class="info">{{ `附加設施-${service.amenityName}` }}:</p>
+                <!-- <p class="info">
                   {{
                     service.amenitiesCode === "amenities-hair-dryer"
                       ? "附加設施-風筒"
                       : "附加設施-燒烤爐"
                   }}:
-                </p>
+                </p> -->
               </el-col>
               <el-col :span="14">
                 <p class="data">HK${{ service.unitCharge }}</p>

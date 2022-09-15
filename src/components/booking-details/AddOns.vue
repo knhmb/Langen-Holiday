@@ -22,6 +22,7 @@
                   name: service.amenitiesCode,
                   unitCharge: service.unitCharge,
                   id: service.id,
+                  amenityName: service.name,
                 })
               "
               >{{
@@ -37,6 +38,7 @@
                     index: index,
                     name: service.amenitiesCode,
                     unitCharge: service.unitCharge,
+                    amenityName: service.name,
                   })
                 "
                 remote
@@ -53,7 +55,13 @@
                   v-for="num in parseInt(service.quantity)"
                   :key="num"
                   :value="
-                    service.amenitiesCode + '|' + num + '|' + service.unitCharge
+                    service.amenitiesCode +
+                    '|' +
+                    num +
+                    '|' +
+                    service.unitCharge +
+                    '|' +
+                    service.name
                   "
                   :label="num"
                 >
@@ -209,14 +217,18 @@ export default {
     },
   },
   methods: {
-    serviceChanged({ value, index, name, unitCharge }) {
+    serviceChanged({ value, index, name, unitCharge, amenityName }) {
+      console.log(name);
+      console.log(amenityName);
       this.finalArr = [];
       this.arr = [];
       if (value === false) {
         delete this.responses["service" + index];
         this.arr.splice(index, 1);
       } else if (value === true) {
-        this.responses["service" + index] = name + "|" + "1" + "|" + unitCharge;
+        // this.responses["service" + index] = name + "|" + "1" + "|" + unitCharge;
+        this.responses["service" + index] =
+          name + "|" + "1" + "|" + unitCharge + "|" + amenityName;
       }
 
       console.log(this.responses);
@@ -236,9 +248,11 @@ export default {
         item["amenitiesCode"] = item[0];
         item["quantity"] = item[1];
         item["unitCharge"] = item[2];
+        item["amenityName"] = item[3];
         delete item[0];
         delete item[1];
         delete item[2];
+        delete item[3];
       });
 
       // console.log(obj);
@@ -284,6 +298,8 @@ export default {
 
           // console.log(err.response.data);
         });
+      console.log("HEHEHREHREHREWHRWETERGDFG");
+      console.log(this.arr);
       this.$store.dispatch("booking/storeSelectedServices", this.arr);
     },
     async book() {
