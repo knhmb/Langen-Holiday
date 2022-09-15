@@ -1,6 +1,6 @@
 <template>
   <div class="add-ons">
-    <p>附加服務</p>
+    <p>{{ $t("additional_service") }}</p>
 
     <el-row class="add-on-item">
       <el-col :span="12">
@@ -119,7 +119,7 @@
   <div class="calculated-add-on">
     <el-row class="add-on-item">
       <el-col :span="12">
-        <p>附加服務價錢:</p>
+        <p>{{ $t("additional_service_price") }}:</p>
       </el-col>
       <el-col :span="12">
         <p class="add-on-price">
@@ -132,13 +132,15 @@
   <div class="total-price">
     <el-row>
       <el-col :span="14">
-        <p>總價格(已包含稅款及服務費):</p>
+        <p>{{ $t("total_price_including_tax_and_service_charge") }}:</p>
       </el-col>
       <el-col :span="10" class="final-price"
         >HK${{ selectedHotel.totalPrice }}</el-col
       >
       <el-col class="btn-alignment">
-        <el-button :disabled="isButtonDisabled" @click="book">預訂</el-button>
+        <el-button :disabled="isButtonDisabled" @click="book">{{
+          $t("booking")
+        }}</el-button>
       </el-col>
     </el-row>
   </div>

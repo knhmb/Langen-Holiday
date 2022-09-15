@@ -18,7 +18,7 @@
         </el-col>
         <el-col :sm="3" :md="3" :lg="3">
           <el-button
-            >加入收藏
+            >{{ $t("add_to_favorites") }}
             <img
               @click="toggleBookmark"
               class="icon-bookmark"

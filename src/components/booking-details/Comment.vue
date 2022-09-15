@@ -1,7 +1,7 @@
 <template>
   <base-container>
     <div class="comment">
-      <h2>最新評價</h2>
+      <h2>{{ $t("latest_evaluation") }}</h2>
       <el-row
         ><el-col class="alert" :span="23">
           <el-alert
@@ -27,7 +27,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button>顯示更多</el-button>
+          <el-button>{{ $t("display_more") }}</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -49,8 +49,7 @@
                 />
               </div>
               <p>
-                歡迎與我們聯繫！ 閣下可通過以下方式與我們聯絡，或致電 (852) 3598
-                6538查詢。
+                {{ $t("contact_us") }}
               </p>
             </div>
             <div class="body">

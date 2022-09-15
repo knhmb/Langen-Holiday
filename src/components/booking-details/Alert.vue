@@ -11,7 +11,7 @@
         <img src="../../assets/icon-warning.svg" alt="" />
       </el-col>
       <el-col :sm="24" :lg="21">
-        <h3>特別通告</h3>
+        <h3>{{ $t("special_notice") }}</h3>
         <p>
           {{ selectedHotel.basicInfo.specialNotice }}
         </p>

@@ -125,7 +125,9 @@
         <div class="total-price">
           <el-row>
             <el-col :span="12">
-              <p class="info">總價格(已包含稅款及服務費):</p>
+              <p class="info">
+                {{ $t("total_price_including_tax_and_service_charge") }}:
+              </p>
             </el-col>
             <el-col :span="10">
               <!-- <p class="end">HK$1480.00</p> -->

@@ -1,14 +1,16 @@
 <template>
   <base-container>
     <div class="date-selection">
-      <h2>查看可預定日期</h2>
+      <h2>{{ $t("view_available_dates") }}</h2>
       <el-row justify="space-around">
         <el-col :sm="24" :lg="15">
           <date-picker></date-picker>
         </el-col>
         <el-col class="date-btns" :sm="24" :lg="4">
-          <el-button class="yellow">可預訂</el-button>
-          <el-button class="grey">不可預訂或已售罄</el-button>
+          <el-button class="yellow">{{
+            $t("available_for_reservation")
+          }}</el-button>
+          <el-button class="grey">{{ $t("not_available") }}</el-button>
         </el-col>
       </el-row>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <base-container>
     <div class="booking-alert">
-      <h2>住宿訊息</h2>
+      <h2>{{ $t("accommodation_information") }}</h2>
       <el-alert
         type="warning"
         :closable="false"

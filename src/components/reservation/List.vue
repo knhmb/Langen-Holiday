@@ -4,7 +4,7 @@
       <el-row>
         <el-col>
           <div class="list">
-            <h1>注意事項</h1>
+            <h1>{{ $t("precautions") }}</h1>
             <el-card class="box-card">
               <div v-html="selectedHotel.basicInfo.thingsToNote"></div>
               <!-- <ul>
@@ -29,7 +29,7 @@
       <el-row>
         <el-col>
           <div class="list">
-            <h1>取消政策</h1>
+            <h1>{{ $t("cancellation_policy") }}</h1>
             <el-card class="box-card">
               <div v-html="selectedHotel.basicInfo.cancelPolicy"></div>
 
@@ -55,7 +55,7 @@
       <el-row>
         <el-col>
           <div class="list">
-            <h1>惡劣天氣安排</h1>
+            <h1>{{ $t("severe_weather_management") }}</h1>
             <el-card class="box-card last">
               <div v-html="selectedHotel.basicInfo.badWeatherArrangement"></div>
 

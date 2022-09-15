@@ -84,7 +84,7 @@
           <div class="total-price-with-tax">
             <el-row>
               <el-col>
-                <p>總價格(已包含稅款及服務費):</p>
+                <p>{{ $t("total_price_including_tax_and_service_charge") }}:</p>
               </el-col>
               <el-col>
                 <p class="price-after-tax">HK${{ rate.totalPrice }}</p>
@@ -202,7 +202,7 @@
       <div class="full-price">
         <el-row>
           <el-col :span="14">
-            <p>總價格(已包含稅款及服務費):</p>
+            <p>{{ $t("total_price_including_tax_and_service_charge") }}:</p>
           </el-col>
           <el-col :span="10">
             <p class="price-colored">HK${{ reservationDetail.totalPrice }}</p>

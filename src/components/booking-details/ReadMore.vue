@@ -3,7 +3,7 @@
     <div class="read-more">
       <el-row>
         <el-col :span="24">
-          <h2>注意事項</h2>
+          <h2>{{ $t("precautions") }}</h2>
           <div :class="{ 'sidebar-box': hideContent1 }">
             <div class="list">
               <div v-html="selectedHotel.basicInfo.thingsToNote"></div>
@@ -19,12 +19,12 @@
             <div :class="{ hide: hideContent1 }"></div>
           </div>
           <el-button @click="appendText('1')" v-if="hideContent1"
-            >+ 更多</el-button
+            >+ {{ $t("read_more") }}</el-button
           >
           <el-button @click="hideText('1')" v-else>- Less</el-button>
         </el-col>
         <el-col :span="24">
-          <h2>取消政策</h2>
+          <h2>{{ $t("cancellation_policy") }}</h2>
           <div :class="{ 'sidebar-box': hideContent2 }">
             <div class="list">
               <div v-html="selectedHotel.basicInfo.cancelPolicy"></div>
@@ -42,12 +42,12 @@
             <div :class="{ hide: hideContent2 }"></div>
           </div>
           <el-button @click="appendText('2')" v-if="hideContent2"
-            >+ 更多</el-button
+            >+ {{ $t("read_more") }}</el-button
           >
           <el-button @click="hideText('2')" v-else>- Less</el-button>
         </el-col>
         <el-col :span="24">
-          <h2>惡劣天氣安排</h2>
+          <h2>{{ $t("severe_weather_management") }}</h2>
           <div :class="{ 'sidebar-box': hideContent3 }">
             <div class="list">
               <div v-html="selectedHotel.basicInfo.badWeatherArrangement"></div>
@@ -79,7 +79,7 @@
             <div :class="{ hide: hideContent3 }"></div>
           </div>
           <el-button @click="appendText('3')" v-if="hideContent3"
-            >+ 更多</el-button
+            >+ {{ $t("read_more") }}</el-button
           >
           <el-button @click="hideText('3')" v-else>- Less</el-button>
         </el-col>

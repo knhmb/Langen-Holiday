@@ -2,13 +2,13 @@
   <base-container>
     <div class="service-detail">
       <Alert />
-      <h3>基本資料</h3>
+      <h3>{{ $t("basic_information") }}</h3>
       <el-row :gutter="30" v-if="Object.keys(selectedHotel).length > 0">
         <el-col :sm="24" :lg="12">
           <el-row :gutter="30" class="service-info">
             <el-col :span="12">
               <div class="separation">
-                <span>地區:</span>
+                <span>{{ $t("area") }}:</span>
                 <span
                   ><img
                     style="width: 15px"
@@ -21,19 +21,19 @@
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>樓層:</span>
+                <span>{{ $t("floor") }}:</span>
                 <span>{{ selectedHotel.basicInfo.floorNo }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>服務類別:</span>
+                <span>{{ $t("service_type") }}:</span>
                 <span>{{ selectedHotel.basicInfo.serviceType }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>景觀:</span>
+                <span>{{ $t("landscape") }}:</span>
                 <span>{{ selectedHotel.basicInfo.hotelView }}</span>
               </div>
             </el-col>
