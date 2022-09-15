@@ -5,60 +5,73 @@
     <el-row class="add-on-item">
       <el-col :span="12">
         <el-checkbox-group v-model="services">
-          <el-checkbox
-            :label="service.amenitiesCode"
-            @change="
-              serviceChanged({
-                value: $event,
-                index: index,
-                name: service.amenitiesCode,
-                unitCharge: service.unitCharge,
-                id: service.id,
-              })
-            "
+          <template
             v-for="(service, index) in selectedHotel.addlService"
             :key="service.id"
-            >{{ service.name }}
-            <el-select
+          >
+            <p v-if="service.name === '雙人床'" class="bed-description">
+              {{ getBedDescription.description }}
+            </p>
+            <el-checkbox
+              v-if="service.name !== '雙人床'"
+              :label="service.amenitiesCode"
               @change="
                 serviceChanged({
                   value: $event,
                   index: index,
                   name: service.amenitiesCode,
                   unitCharge: service.unitCharge,
+                  id: service.id,
                 })
               "
-              remote
-              default-first-option
-              v-model="responses['service' + index]"
-              :disabled="
-                services.length <= 0 ||
-                !services.toString().includes(service.amenitiesCode)
-              "
-              class="additional-services"
-              placeholder="選擇"
-            >
-              <el-option
-                v-for="num in parseInt(service.quantity)"
-                :key="num"
-                :value="
-                  service.amenitiesCode + '|' + num + '|' + service.unitCharge
+              >{{
+                service.name === "雙人床"
+                  ? getBedDescription.description
+                  : service.name
+              }}
+              <el-select
+                v-if="service.name !== '雙人床'"
+                @change="
+                  serviceChanged({
+                    value: $event,
+                    index: index,
+                    name: service.amenitiesCode,
+                    unitCharge: service.unitCharge,
+                  })
                 "
-                :label="num"
+                remote
+                default-first-option
+                v-model="responses['service' + index]"
+                :disabled="
+                  services.length <= 0 ||
+                  !services.toString().includes(service.amenitiesCode)
+                "
+                class="additional-services"
+                placeholder="選擇"
               >
-              </el-option>
-            </el-select>
-          </el-checkbox>
+                <el-option
+                  v-for="num in parseInt(service.quantity)"
+                  :key="num"
+                  :value="
+                    service.amenitiesCode + '|' + num + '|' + service.unitCharge
+                  "
+                  :label="num"
+                >
+                </el-option>
+              </el-select>
+            </el-checkbox>
+          </template>
         </el-checkbox-group>
       </el-col>
       <el-col :span="12">
-        <p
+        <template
           v-for="service in selectedHotel.addlService"
           :key="service.id"
-          class="add-on-price"
         >
-          + $ {{ service.unitCharge }}.00
-        </p>
+          <p v-if="service.name !== '雙人床'" class="add-on-price">
+            + $ {{ service.unitCharge }}
+          </p>
+        </template>
       </el-col>
     </el-row>
     <!-- <el-row>
@@ -102,7 +115,7 @@
       </el-col>
       <el-col :span="12">
         <p class="add-on-price">
-          ${{ selectedHotel.totalSelectedAddlServiceCharge }}.00
+          ${{ selectedHotel.totalSelectedAddlServiceCharge }}
         </p>
       </el-col>
     </el-row>
@@ -114,7 +127,7 @@
         <p>總價格(已包含稅款及服務費):</p>
       </el-col>
       <el-col :span="10" class="final-price"
-        >HK${{ selectedHotel.totalPrice }}.00</el-col
+        >HK${{ selectedHotel.totalPrice }}</el-col
       >
       <el-col class="btn-alignment">
         <el-button :disabled="isButtonDisabled" @click="book">預訂</el-button>
@@ -166,6 +179,12 @@ export default {
     },
     selectedHotel() {
       return this.$store.getters["booking/selectedHotel"];
+    },
+    getBedDescription() {
+      const data = this.selectedHotel.amenities.find(
+        (item) => item.name === "雙人床"
+      );
+      return data;
     },
     isButtonDisabled() {
       return this.$store.getters.isButtonDisabled;
@@ -427,11 +446,15 @@ export default {
 
 .add-ons .el-checkbox {
   display: block;
-  /* margin-top: 0.5rem; */
+  margin-top: 2rem;
+}
+
+.add-ons .el-checkbox:first-of-type {
+  margin-top: 1rem;
 }
 
 .add-ons .el-checkbox:last-of-type {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
 
 .add-ons .el-select.additional-services {
@@ -474,6 +497,14 @@ export default {
 
 .calculated-add-on .add-on-item {
   align-items: center;
+}
+
+.calculated-add-on .add-on-item .el-checkbox {
+  margin-bottom: 1rem;
+}
+
+.add-ons p.add-on-price {
+  margin-top: 2rem;
 }
 
 .add-ons .add-on-price:not(:first-of-type) {

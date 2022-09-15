@@ -77,7 +77,7 @@
               <p class="info">原價:</p>
             </el-col>
             <el-col :span="14">
-              <p class="data">HK${{ selectedHotel.priceOfSelectedDate }}.00</p>
+              <p class="data">HK${{ selectedHotel.priceOfSelectedDate }}</p>
             </el-col>
             <el-col :span="10">
               <p class="info">折扣:</p>
@@ -88,7 +88,7 @@
                   Object.keys(discountData).length > 0
                     ? discountData.discount
                     : 0
-                }}.00
+                }}
               </p>
               <!-- <p class="data">HK$0.00</p> -->
             </el-col>
@@ -116,7 +116,7 @@
                 </p>
               </el-col>
               <el-col :span="14">
-                <p class="data">HK${{ service.unitCharge }}.00</p>
+                <p class="data">HK${{ service.unitCharge }}</p>
               </el-col>
             </template>
           </el-row>
@@ -142,7 +142,7 @@
               <p class="end">
                 HK${{
                   selectedHotel.priceOfSelectedDate - discountFinal + amount
-                }}.00
+                }}
               </p>
             </el-col>
             <el-col :span="12">
@@ -156,7 +156,7 @@
                   0 +
                   amount -
                   (selectedHotel.priceOfSelectedDate - 0 + amount)
-                }}.00
+                }}
               </p>
             </el-col>
           </el-row>
@@ -172,7 +172,7 @@
                   selectedHotel.basicInfo.deposit === null
                     ? 0
                     : selectedHotel.basicInfo.deposit
-                }}.00
+                }}
               </p>
             </el-col>
           </el-row>

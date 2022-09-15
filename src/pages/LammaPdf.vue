@@ -1,5 +1,4 @@
 <template>
-  <h1>Lamma</h1>
   <VuePdf v-for="page in numOfPages" :key="page" :src="pdfSrc" :page="page" />
 </template>
 
@@ -16,7 +15,7 @@ export default {
     const pdfSrc = ref(
       `${window.location.protocol}//${window.location.hostname}/pdf/lamma-island-recommendations.pdf`
     );
-    const numOfPages = ref(1);
+    const numOfPages = ref(0);
 
     onMounted(() => {
       const loadingTask = createLoadingTask(pdfSrc.value);

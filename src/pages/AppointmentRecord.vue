@@ -87,7 +87,7 @@
                 <p>總價格(已包含稅款及服務費):</p>
               </el-col>
               <el-col>
-                <p class="price-after-tax">HK${{ rate.totalPrice }}.00</p>
+                <p class="price-after-tax">HK${{ rate.totalPrice }}</p>
               </el-col>
             </el-row>
           </div>
@@ -168,13 +168,13 @@
             <p>原價:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price">HK${{ reservationDetail.roomPrice }}.00</p>
+            <p class="price">HK${{ reservationDetail.roomPrice }}</p>
           </el-col>
           <el-col :span="12">
             <p>折扣:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price">HK${{ reservationDetail.discount }}.00</p>
+            <p class="price">HK${{ reservationDetail.discount }}</p>
           </el-col>
         </el-row>
       </div>
@@ -194,7 +194,7 @@
               <p>寵物留宿附加費:</p>
             </el-col>
             <el-col :span="12">
-              <p class="price">HK${{ service.unitCharge }}.00</p>
+              <p class="price">HK${{ service.unitCharge }}</p>
             </el-col>
           </template>
         </el-row>
@@ -205,24 +205,20 @@
             <p>總價格(已包含稅款及服務費):</p>
           </el-col>
           <el-col :span="10">
-            <p class="price-colored">
-              HK${{ reservationDetail.totalPrice }}.00
-            </p>
+            <p class="price-colored">HK${{ reservationDetail.totalPrice }}</p>
           </el-col>
           <el-col :span="12">
             <p>現需繳付:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price-colored">
-              HK${{ reservationDetail.pricePayNow }}.00
-            </p>
+            <p class="price-colored">HK${{ reservationDetail.pricePayNow }}</p>
           </el-col>
           <el-col :span="12">
             <p>入住時需繳付:</p>
           </el-col>
           <el-col :span="12">
             <p class="price-colored">
-              HK${{ reservationDetail.pricePayCheckIn }}.00
+              HK${{ reservationDetail.pricePayCheckIn }}
             </p>
           </el-col>
         </el-row>
@@ -233,7 +229,7 @@
             <p>按金:</p>
           </el-col>
           <el-col :span="12">
-            <p class="price">HK${{ reservationDetail.deposit }}.00</p>
+            <p class="price">HK${{ reservationDetail.deposit }}</p>
           </el-col>
         </el-row>
       </div>

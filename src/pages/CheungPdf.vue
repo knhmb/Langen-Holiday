@@ -1,5 +1,4 @@
 <template>
-  <h1>Cheung</h1>
   <VuePdf v-for="page in numOfPages" :key="page" :src="pdfSrc" :page="page" />
 </template>
 
@@ -14,7 +13,7 @@ export default {
   components: { VuePdf },
   setup() {
     const pdfSrc = ref(
-      "https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf"
+      `${window.location.protocol}//${window.location.hostname}/pdf/cheung-chau-island-recommendations.pdf`
     );
     const numOfPages = ref(0);
 
