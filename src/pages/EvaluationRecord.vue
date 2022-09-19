@@ -8,7 +8,7 @@
           @click="setOption('not-rated')"
           class="pill"
         >
-          未評價預約
+          {{ $t("not_rated_booking") }}
         </div>
       </el-col>
       <el-col :sm="24" :lg="5">
@@ -17,7 +17,7 @@
           @click="setOption('reviewed')"
           class="pill"
         >
-          已評價預約
+          {{ $t("appointment_reviewed") }}
         </div>
       </el-col>
     </el-row>
@@ -29,17 +29,17 @@
 
     <div class="delete-dialog">
       <el-dialog v-model="dialogVisible" title="刪除評價" width="30%">
-        <span>評價一但刪除，即無法恢復！ 確定要刪除此評價嗎？</span>
+        <span>{{ $t("review_confirm_delete") }}</span>
         <template #footer>
           <span class="dialog-footer">
-            <el-button class="cancel" @click="dialogVisible = false"
-              >返回</el-button
-            >
+            <el-button class="cancel" @click="dialogVisible = false">{{
+              $t("return")
+            }}</el-button>
             <el-button
               class="delete"
               type="primary"
               @click="checkAccessTokenDelete(id)"
-              >刪除</el-button
+              >{{ $t("delete") }}</el-button
             >
           </span>
         </template>

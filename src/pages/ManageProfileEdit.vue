@@ -35,7 +35,7 @@
                 telephone === ''
               "
               @click.prevent="submit"
-              >確定</el-button
+              >{{ $t("sure") }}</el-button
             >
           </el-col>
         </el-row>

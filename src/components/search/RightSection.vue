@@ -7,7 +7,7 @@
           :class="{ selected: isActive === '1' }"
           class="pill"
         >
-          樂程推薦
+          {{ $t("lechend_recommended") }}
         </div>
       </el-col>
       <el-col :sm="12" :md="3" :lg="4">
@@ -16,7 +16,7 @@
           :class="{ selected: isActive === '2' }"
           class="pill"
         >
-          價錢 - 由低至高
+          {{ $t("price_low_to_high") }}
         </div>
       </el-col>
       <el-col :sm="12" :md="3" :lg="4">
@@ -25,7 +25,7 @@
           :class="{ selected: isActive === '3' }"
           class="pill"
         >
-          價錢 - 由高至低
+          {{ $t("price_high_to_low") }}
         </div>
       </el-col>
       <el-col :sm="12" :md="3" :lg="4">
@@ -34,7 +34,7 @@
           :class="{ selected: isActive === '4' }"
           class="pill"
         >
-          評價 - 由低至高
+          {{ $t("rating_low_to_high") }}
         </div>
       </el-col>
       <el-col :sm="12" :md="3" :lg="4">
@@ -43,14 +43,14 @@
           :class="{ selected: isActive === '5' }"
           class="pill"
         >
-          評價 - 由高至低
+          {{ $t("rating_high_to_low") }}
         </div>
       </el-col>
     </el-row>
     <el-row class="card-row" :gutter="10">
       <!-- <template v-if="$route.path.includes('municipal-services-building')"> -->
       <template v-if="searchItems.length <= 0">
-        <p class="no-search">沒有相關搜索結果</p>
+        <p class="no-search">{{ $t("no_related_search_results") }}</p>
       </template>
       <template v-else>
         <el-col

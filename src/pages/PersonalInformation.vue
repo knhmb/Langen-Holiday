@@ -4,23 +4,23 @@
     <base-card>
       <el-row>
         <el-col>
-          <label>中文姓名 (與證件相同)</label>
+          <label>{{ $t("chinese_name") }}</label>
           <p>{{ user.fullNameTc }}</p>
         </el-col>
         <el-col>
-          <label>英文姓名 (與證件相同)</label>
+          <label>{{ $t("english_name") }}</label>
           <p>{{ user.fullName }}</p>
         </el-col>
         <el-col>
-          <label>電郵地址</label>
+          <label>{{ $t("email") }}</label>
           <p>{{ user.email }}</p>
         </el-col>
         <el-col>
-          <label>電話號碼</label>
+          <label>{{ $t("phone_number") }}</label>
           <p>{{ user.phoneNo }}</p>
         </el-col>
         <el-col>
-          <el-button @click="editProfile">修改</el-button>
+          <el-button @click="editProfile">{{ $t("revise") }}</el-button>
         </el-col>
       </el-row>
     </base-card>

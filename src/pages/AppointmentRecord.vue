@@ -20,7 +20,7 @@
                       option: 'detail',
                     })
                   "
-                  >詳細</el-button
+                  >{{ $t("detailed") }}</el-button
                 >
               </el-col>
             </el-row>
@@ -194,7 +194,7 @@
               <p class="price">{{ service.quantity }}</p>
             </el-col>
             <el-col :span="12">
-              <p>寵物留宿附加費:</p>
+              <p>{{ $t("pay_stay_surcharge") }}:</p>
             </el-col>
             <el-col :span="12">
               <p class="price">HK${{ service.unitCharge }}</p>

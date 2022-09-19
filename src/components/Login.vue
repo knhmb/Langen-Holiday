@@ -39,14 +39,17 @@
           <el-checkbox label="記住我"></el-checkbox>
         </el-col>
         <el-col class="form-col" :span="12">
-          <p @click="forgotPassword" class="forgot-password">忘記密碼?</p>
+          <p @click="forgotPassword" class="forgot-password">
+            {{ $t("forgot_password") }}
+          </p>
         </el-col>
         <el-col class="form-col">
           <el-button @click.prevent="login">{{ $t("login") }}</el-button>
         </el-col>
         <el-col class="form-col">
           <p class="register-link">
-            還未有帳號? <span @click="toggleRegister">立即註冊</span>
+            {{ $t("no_account") }}
+            <span @click="toggleRegister">{{ $t("sign_up") }}</span>
           </p>
         </el-col>
       </el-row>

@@ -6,29 +6,37 @@
           <el-col :sm="24" :lg="11">
             <div class="links">
               <router-link to="/contact-us" custom v-slot="{ href, navigate }">
-                <span @click="navigate" :href="href">聯絡我們</span>
+                <span @click="navigate" :href="href">{{
+                  $t("contact_us_text")
+                }}</span>
               </router-link>
               <router-link to="/payment" custom v-slot="{ href, navigate }">
-                <span @click="navigate" :href="href">付款方法</span>
+                <span @click="navigate" :href="href">{{
+                  $t("payment_methods")
+                }}</span>
               </router-link>
               <router-link
                 to="/terms-and-conditions"
                 custom
                 v-slot="{ href, navigate }"
               >
-                <span @click="navigate" :href="href">條例與細則</span>
+                <span @click="navigate" :href="href">{{
+                  $t("rules_and_regulations")
+                }}</span>
               </router-link>
               <router-link to="/join" custom v-slot="{ href, navigate }">
-                <span @click="navigate" :href="href">成為合作伙伴</span>
+                <span @click="navigate" :href="href">{{
+                  $t("become_our_partner")
+                }}</span>
               </router-link>
             </div>
           </el-col>
           <el-col class="payment-method" :sm="24" :lg="6">
-            <span>付款方式</span>
+            <span>{{ $t("payment_methods") }}</span>
             <img class="payment" src="../assets/footer-payment.png" alt="" />
           </el-col>
           <el-col class="social" :sm="24" :lg="5">
-            <span>關注我們</span>
+            <span>{{ $t("follow_us") }}</span>
             <div class="social-media">
               <a href="https://www.facebook.com/langenholiday" target="_blank">
                 <img src="../assets/icon-facebook.png" alt="" />

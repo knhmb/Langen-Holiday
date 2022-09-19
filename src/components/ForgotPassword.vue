@@ -30,7 +30,7 @@
     </div>
     <div v-if="stepOneComplete" class="password-confirmation">
       <p>
-        重設密碼的連結即將發送至你的電郵地址 <br />
+        {{ $t("reset_password_link") }} <br />
         {{ ruleForm.username }}
       </p>
       <div class="check-btn">
@@ -71,10 +71,12 @@
             </el-form-item>
           </el-col>
           <el-col>
-            <el-button @click="submitPassword">重設密碼</el-button>
+            <el-button @click="submitPassword">{{
+              $t("reset_password")
+            }}</el-button>
           </el-col>
           <el-col>
-            <p @click="previousStep" class="return">返回</p>
+            <p @click="previousStep" class="return">{{ $t("return") }}</p>
           </el-col>
         </el-row>
       </el-form>

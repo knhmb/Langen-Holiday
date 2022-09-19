@@ -107,10 +107,9 @@
             </p>
           </div>
           <div>
-            <p class="info">十. 與本公司聯絡</p>
+            <p class="info">{{ $t("contact_company") }}</p>
             <p>
-              如果您對本條款與細則有任何疑問或需要任何進一步資料，可電郵到
-              info@langenholiday.com，我們將會儘快回覆您。
+              {{ $t("contact_email") }}
             </p>
           </div>
         </el-scrollbar>
@@ -126,8 +125,7 @@
               />
             </div>
             <p>
-              歡迎與我們聯繫！ 閣下可通過以下方式與我們聯絡，或致電 (852) 3598
-              6538查詢。
+              {{ $t("contact_us") }}
             </p>
           </div>
           <div class="body">

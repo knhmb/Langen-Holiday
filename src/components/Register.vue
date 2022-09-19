@@ -47,9 +47,9 @@
               class="input-btn"
               v-model.trim="ruleForm.email"
             ></el-input>
-            <el-button @click="oneTimePassword" class="inner-btn"
-              >獲取驗證碼</el-button
-            >
+            <el-button @click="oneTimePassword" class="inner-btn">{{
+              $t("verification_code")
+            }}</el-button>
           </el-form-item>
         </el-col>
         <el-col :sm="24" :md="12">
@@ -90,22 +90,25 @@
           <el-form-item prop="terms">
             <el-checkbox v-model="ruleForm.terms"></el-checkbox>
             <span class="checkbox-label"
-              >我已詳閱並同意
+              >{{ $t("read_and_agreed") }}
               <span @click="navigateTC('/terms-and-conditions')"
-                >使用者條款</span
+                >{{{$t('terms_of_use_2')}}}</span
               >&
-              <span @click="navigateTC('/privacy-and-policy')"
-                >隱私權保護政策</span
-              ></span
+              <span @click="navigateTC('/privacy-and-policy')">{{
+                $t("privacy_policy")
+              }}</span></span
             >
           </el-form-item>
         </el-col>
         <el-col>
-          <el-button @click="register" class="register-btn">註冊</el-button>
+          <el-button @click="register" class="register-btn">{{
+            $t("register")
+          }}</el-button>
         </el-col>
         <el-col>
           <p class="login-link">
-            已有帳號? <span @click="toggleLoginForm">{{ $t("login") }}</span>
+            {{ $t("have_account") }}
+            <span @click="toggleLoginForm">{{ $t("login") }}</span>
           </p>
         </el-col>
       </el-row>

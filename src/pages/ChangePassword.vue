@@ -35,7 +35,7 @@
             </el-form-item>
           </el-col>
           <el-col>
-            <el-button @click="changePassword">修改</el-button>
+            <el-button @click="changePassword">{{ $t("reset") }}</el-button>
           </el-col>
         </el-row>
       </el-form>
