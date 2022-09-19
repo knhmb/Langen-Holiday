@@ -91,8 +91,9 @@
             <el-checkbox v-model="ruleForm.terms"></el-checkbox>
             <span class="checkbox-label"
               >{{ $t("read_and_agreed") }}
-              <span @click="navigateTC('/terms-and-conditions')"
-                >{{{$t('terms_of_use_2')}}}</span
+              <span @click="navigateTC('/terms-and-conditions')">{{
+                $t("terms_of_use_2")
+              }}</span
               >&
               <span @click="navigateTC('/privacy-and-policy')">{{
                 $t("privacy_policy")
