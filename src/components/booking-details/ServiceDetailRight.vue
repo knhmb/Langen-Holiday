@@ -2,12 +2,12 @@
   <el-card class="box-card">
     <template #header>
       <div class="card-header">
-        <span>請輸入日期查詢房間空缺及價格</span>
+        <span>{{ $t("enter_date_to_check_room_and_price") }}</span>
       </div>
     </template>
     <div class="text item">
       <el-row>
-        <el-col class="date" :sm="24" :md="5">入住日期</el-col>
+        <el-col class="date" :sm="24" :md="5">{{ $t("check_in_date") }}</el-col>
         <v-date-picker
           locale="zh-cn"
           :masks="masks"
@@ -28,7 +28,7 @@
           </template>
         </v-date-picker>
         <el-col :sm="3" :md="5" class="line hidden-sm-and-down"></el-col>
-        <el-col class="date" :sm="24" :md="5">入住日期</el-col>
+        <el-col class="date" :sm="24" :md="5">{{ $t("check_in_date") }}</el-col>
         <v-date-picker
           v-if="!selectedHotel.hasDayNightSessions"
           locale="zh-cn"
@@ -108,7 +108,9 @@
       </el-row>
       <el-row :gutter="20" class="time-room">
         <el-col :span="12" v-if="selectedHotel.hasDayNightSessions">
-          <label class="date-delivery" style="display: block">登記時間</label>
+          <label class="date-delivery" style="display: block">{{
+            $t("check_in_time")
+          }}</label>
           <el-select
             @change="setSelectedTime"
             v-model="timeslotids"
@@ -134,7 +136,9 @@
           </el-select>
         </el-col>
         <el-col :span="12">
-          <label class="date-delivery" style="display: block">房間數量</label>
+          <label class="date-delivery" style="display: block">{{
+            $t("number_of_rooms")
+          }}</label>
           <el-select
             :disabled="parseInt(selectedHotel.basicInfo.maxRoomBooking) <= 1"
             v-model="numberOfRooms"
@@ -154,10 +158,12 @@
       </el-row>
       <el-row :gutter="20">
         <el-col>
-          <p class="date">人數</p>
+          <p class="date">{{ $t("number_of_people") }}</p>
         </el-col>
         <el-col :span="12">
-          <label class="date-delivery" style="display: block">成人</label>
+          <label class="date-delivery" style="display: block">{{
+            $t("adult")
+          }}</label>
           <el-select
             v-model="numberOfAdults"
             class="m-2"
@@ -214,7 +220,9 @@
       </el-row>
       <el-row :gutter="20" v-if="parseInt(selectedHotel.basicInfo.maxPets) > 0">
         <el-col :span="12">
-          <label class="date-delivery" style="display: block">寵物</label>
+          <label class="date-delivery" style="display: block">{{
+            $t("pet")
+          }}</label>
           <el-select v-model="petQty" class="m-2" placeholder="0">
             <el-option
               v-for="num in parseInt(selectedHotel.basicInfo.maxPets)"

@@ -12,7 +12,7 @@
     <p>{{ "退房 " + checkOutDate + " (" + checkOutDateDay + ")" }}</p>
     <transition name="slide-fade">
       <div v-if="isDateOpen" class="date-picker_input">
-        <p>入住日期</p>
+        <p>{{ $t("check_in_date") }}</p>
         <DatePicker
           :model-config="modelConfig"
           @dayclick="onDayClick"
@@ -27,7 +27,7 @@
         >
         </DatePicker>
         <div class="date-picker-btn">
-          <el-button @click="closeDropdown">套用</el-button>
+          <el-button @click="closeDropdown">{{ $t("apply") }}</el-button>
         </div>
       </div>
     </transition>

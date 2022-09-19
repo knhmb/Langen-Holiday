@@ -1,7 +1,7 @@
 <template>
   <section class="activities">
     <base-container>
-      <h1>隨你鍾意</h1>
+      <h1>{{ $t("as_you_like") }}</h1>
       <el-row :gutter="30">
         <el-col
           v-for="theme in themes"

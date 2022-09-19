@@ -68,14 +68,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="dialogFormVisible = false" class="cancel"
-              >下次再說</el-button
+            <el-button
+              @click.prevent="dialogFormVisible = false"
+              class="cancel"
+              >{{ $t("next_time") }}</el-button
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="checkAccessToken" class="submit"
-              >提交</el-button
-            >
+            <el-button @click.prevent="checkAccessToken" class="submit">{{
+              $t("submit")
+            }}</el-button>
           </el-col>
         </el-row>
       </el-form>

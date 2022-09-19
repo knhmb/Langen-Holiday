@@ -105,7 +105,7 @@
         </el-col>
         <el-col>
           <p class="login-link">
-            已有帳號? <span @click="toggleLoginForm">登入</span>
+            已有帳號? <span @click="toggleLoginForm">{{ $t("login") }}</span>
           </p>
         </el-col>
       </el-row>

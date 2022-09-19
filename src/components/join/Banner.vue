@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
     <img :src="joinContent.thumbnail" alt="" />
-    <h3>成為我們的合作伙伴</h3>
+    <h3>{{ $t("become_our_partner") }}</h3>
   </div>
 </template>
 

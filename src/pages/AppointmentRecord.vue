@@ -28,11 +28,14 @@
           <div class="number-of-individuals">
             <el-row>
               <el-col :span="12">
-                <p>人數:</p>
-                <p>{{ rate.adultQty }}位成人 + {{ rate.childrenQty }}位兒童</p>
+                <p>{{ $t("number_of_people") }}:</p>
+                <p>
+                  {{ rate.adultQty }}{{ $t("adults") }} + {{ rate.childrenQty
+                  }}{{ $t("children") }}
+                </p>
               </el-col>
               <el-col :span="12">
-                <p>寵物:</p>
+                <p>{{ $t("pet") }}:</p>
                 <p>
                   {{
                     rate.petsQty === 0 || rate.petsQty === null
@@ -64,7 +67,7 @@
           <div class="days-of-stay">
             <el-row>
               <el-col :span="12">
-                <p>入住日期:</p>
+                <p>{{ $t("check_in_date") }}:</p>
                 <p>
                   {{ formatDate(rate.checkInDate) }}
                   {{ rate.checkInTime }}
@@ -72,7 +75,7 @@
                 </p>
               </el-col>
               <el-col :span="12">
-                <p>離開日期:</p>
+                <p>{{ $t("departure_date") }}:</p>
                 <p>
                   {{ formatDate(rate.checkOutDate) }}
                   {{ rate.checkOutTime }}
@@ -104,14 +107,14 @@
       <div class="number-of-individuals">
         <el-row>
           <el-col :span="12">
-            <p>人數:</p>
+            <p>{{ $t("number_of_people") }}:</p>
             <p>
-              {{ reservationDetail.adultQty }}位成人 +
-              {{ reservationDetail.childrenQty }}位兒童
+              {{ reservationDetail.adultQty }}{{ $t("adults") }} +
+              {{ reservationDetail.childrenQty }}{{ $t("children") }}
             </p>
           </el-col>
           <el-col :span="12">
-            <p>寵物:</p>
+            <p>{{ $t("pet") }}:</p>
             <p>
               {{
                 reservationDetail.petsQty === null ||
@@ -147,14 +150,14 @@
       <div class="days-of-stay">
         <el-row>
           <el-col :span="12">
-            <p>入住日期:</p>
+            <p>{{ $t("check_in_date") }}:</p>
             <p>
               {{ formatDate(reservationDetail.checkInDate) }}
               {{ reservationDetail.checkInTime.replace(/(.{2})$/, ":$1") }}
             </p>
           </el-col>
           <el-col :span="12">
-            <p>離開日期:</p>
+            <p>{{ $t("departure_date") }}:</p>
             <p>
               {{ formatDate(reservationDetail.checkOutDate) }}
               {{ reservationDetail.checkOutTime.replace(/(.{2})$/, ":$1") }}
@@ -165,13 +168,13 @@
       <div class="pricing">
         <el-row>
           <el-col :span="12">
-            <p>原價:</p>
+            <p>{{ $t("original_price") }}:</p>
           </el-col>
           <el-col :span="12">
             <p class="price">HK${{ reservationDetail.roomPrice }}</p>
           </el-col>
           <el-col :span="12">
-            <p>折扣:</p>
+            <p>{{ $t("discount") }}:</p>
           </el-col>
           <el-col :span="12">
             <p class="price">HK${{ reservationDetail.discount }}</p>
@@ -208,13 +211,13 @@
             <p class="price-colored">HK${{ reservationDetail.totalPrice }}</p>
           </el-col>
           <el-col :span="12">
-            <p>現需繳付:</p>
+            <p>{{ $t("pay_now") }}:</p>
           </el-col>
           <el-col :span="12">
             <p class="price-colored">HK${{ reservationDetail.pricePayNow }}</p>
           </el-col>
           <el-col :span="12">
-            <p>入住時需繳付:</p>
+            <p>{{ $t("paid_upon_check_in") }}:</p>
           </el-col>
           <el-col :span="12">
             <p class="price-colored">
@@ -226,7 +229,7 @@
       <div class="deposit">
         <el-row>
           <el-col :span="12">
-            <p>按金:</p>
+            <p>{{ $t("deposit") }}:</p>
           </el-col>
           <el-col :span="12">
             <p class="price">HK${{ reservationDetail.deposit }}</p>

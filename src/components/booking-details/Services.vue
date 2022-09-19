@@ -1,9 +1,9 @@
 <template>
   <base-container>
     <div class="services-provided">
-      <h2>設施</h2>
+      <h2>{{ $t("facility") }}</h2>
       <div>
-        <p>免費</p>
+        <p>{{ $t("free") }}</p>
         <el-row>
           <template v-for="item in selectedHotel.amenities" :key="item.id">
             <el-col
@@ -25,7 +25,7 @@
         </el-row>
       </div>
       <div class="not-provided-services">
-        <p>收費</p>
+        <p>{{ $t("toll") }}</p>
         <el-row>
           <template v-for="item in selectedHotel.amenities" :key="item.id">
             <el-col
@@ -48,7 +48,7 @@
         </el-row>
       </div>
       <div class="beds">
-        <p>床</p>
+        <p>{{ $t("bed") }}</p>
         <el-row>
           <template v-for="item in selectedHotel.amenities" :key="item.id">
             <el-col v-if="item.isBed === true" class="items" :sm="12" :md="4">

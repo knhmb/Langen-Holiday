@@ -30,7 +30,7 @@
             index="1"
             @click="closeDropdown"
           >
-            <template #title>熱線電話</template>
+            <template #title>{{ $t("hotline") }}</template>
             <el-menu-item
               class="top-menu-item"
               :class="{ 'inner-active': isActiveSubMenuItem === 1 }"
@@ -51,7 +51,7 @@
             index="2"
             @click="closeDropdown"
           >
-            <template #title>聯絡與付款</template>
+            <template #title>{{ $t("contact_us_and_payment") }}</template>
             <el-menu-item
               class="top-menu-item"
               :class="{ 'inner-active': isActiveSubMenuItem === 2 }"
@@ -63,7 +63,7 @@
                   ? 'bold'
                   : 'normal',
               }"
-              >聯絡我們</el-menu-item
+              >{{ $t("contact_us") }}</el-menu-item
             >
             <el-menu-item
               class="top-menu-item"
@@ -74,7 +74,7 @@
                 color: $route.path.includes('join') ? 'black' : '#8d8d8d',
                 fontWeight: $route.path.includes('join') ? 'bold' : 'normal',
               }"
-              >付款方法</el-menu-item
+              >{{ $t("payment_methods") }}</el-menu-item
             >
           </el-sub-menu>
           <div class="contact">

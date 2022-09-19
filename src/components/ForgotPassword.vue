@@ -20,7 +20,7 @@
             </el-form-item>
           </el-col> -->
           <el-col>
-            <el-button @click="firstStep">提交</el-button>
+            <el-button @click="firstStep">{{ $t("submit") }}</el-button>
           </el-col>
           <el-col>
             <p class="return" @click="toggleLoginForm">返回</p>

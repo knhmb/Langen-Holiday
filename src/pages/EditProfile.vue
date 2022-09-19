@@ -18,7 +18,7 @@
                 @mouseleave="leave('member')"
               >
                 <img :src="iconMember" alt="" />
-                個人資料
+                {{ $t("personal_information") }}
               </router-link>
               <router-link
                 tag="li"
@@ -29,7 +29,7 @@
                 @mouseleave="leave('password')"
               >
                 <img :src="iconPassword" alt="" />
-                修改密碼
+                {{ $t("change_password") }}
               </router-link>
               <router-link
                 tag="li"
@@ -40,7 +40,7 @@
                 @mouseleave="leave('bookmark')"
               >
                 <img :src="iconBookmark" alt="" />
-                我的收藏
+                {{ $t("my_collection") }}
               </router-link>
               <router-link
                 tag="li"
@@ -51,7 +51,7 @@
                 @mouseleave="leave('comment')"
               >
                 <img :src="iconComment" alt="" />
-                評價記錄
+                {{ $t("evaluation_record") }}
               </router-link>
               <router-link
                 tag="li"
@@ -62,7 +62,7 @@
                 @mouseleave="leave('booking')"
               >
                 <img :src="iconBooking" alt="" />
-                預約記錄
+                {{ $t("appointment_record") }}
               </router-link>
             </ul>
           </div>

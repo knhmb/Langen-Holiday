@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <h4>請填寫以下資料,我們在短時間內聯絡您</h4>
+    <h4>{{ $t("fill_information") }}</h4>
     <el-form
       label-position="top"
       ref="ruleFormRef"
@@ -57,7 +57,7 @@
           </el-form-item>
         </el-col>
         <el-col>
-          <el-button @click="submit">提交</el-button>
+          <el-button @click="submit">{{ $t("submit") }}</el-button>
         </el-col>
       </el-row>
     </el-form>

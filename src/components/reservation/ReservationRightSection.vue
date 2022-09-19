@@ -9,12 +9,14 @@
         <div class="days-of-stay">
           <el-row>
             <el-col :span="10">
-              <p class="info">人數:</p>
+              <p class="info">{{ $t("number_of_people") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">
-                {{ numberOfAdults === "" ? 0 : numberOfAdults }}位成人 +
-                {{ numberOfChildren === "" ? 0 : numberOfChildren }}位兒童
+                {{ numberOfAdults === "" ? 0 : numberOfAdults
+                }}{{ $t("adults") }} +
+                {{ numberOfChildren === "" ? 0 : numberOfChildren
+                }}{{ $t("children") }}
               </p>
             </el-col>
             <template v-for="(age, key) in childrenAgeText[0]" :key="age">
@@ -40,20 +42,20 @@
               <p class="data">10</p>
             </el-col> -->
             <el-col :span="10">
-              <p class="info">寵物:</p>
+              <p class="info">{{ $t("pet") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">{{ petQty === "" ? 0 : petQty }}</p>
             </el-col>
             <el-col :span="10">
-              <p class="info">入住日期:</p>
+              <p class="info">{{ $t("check_in_date") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">{{ checkInDate }} - {{ checkOutDate }}</p>
               <!-- <p class="data">2021年5月22日 - 2021年5月23日</p> -->
             </el-col>
             <el-col :span="10" v-if="timeslotids">
-              <p class="info">登記時間:</p>
+              <p class="info">{{ $t("check_in_time") }}:</p>
             </el-col>
             <el-col :span="14" v-if="timeslotids">
               <p class="data">
@@ -62,7 +64,7 @@
               </p>
             </el-col>
             <el-col :span="10">
-              <p class="info">房間數量:</p>
+              <p class="info">{{ $t("number_of_rooms") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">
@@ -74,13 +76,13 @@
         <div class="price-single">
           <el-row>
             <el-col :span="10">
-              <p class="info">原價:</p>
+              <p class="info">{{ $t("original_price") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">HK${{ selectedHotel.priceOfSelectedDate }}</p>
             </el-col>
             <el-col :span="10">
-              <p class="info">折扣:</p>
+              <p class="info">{{ $t("discount") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">
@@ -138,7 +140,7 @@
               </p>
             </el-col>
             <el-col :span="12">
-              <p class="info">現需繳付:</p>
+              <p class="info">{{ $t("pay_now") }}:</p>
             </el-col>
             <el-col :span="10">
               <!-- <p class="end">HK$1480.00</p> -->
@@ -149,7 +151,7 @@
               </p>
             </el-col>
             <el-col :span="12">
-              <p class="info">入住時需繳付:</p>
+              <p class="info">{{ $t("paid_upon_check_in") }}:</p>
             </el-col>
             <el-col :span="10">
               <!-- <p class="end">HK$0.00</p> -->
@@ -167,7 +169,7 @@
         <div class="tax">
           <el-row>
             <el-col :span="10">
-              <p class="info">按金:</p>
+              <p class="info">{{ $t("deposit") }}:</p>
             </el-col>
             <el-col :span="14">
               <p class="data">
@@ -184,13 +186,15 @@
     </el-card>
     <el-row>
       <el-col>
-        <label class="input-label">折扣代碼:</label>
+        <label class="input-label">{{ $t("discount_code") }}:</label>
         <el-input v-model="couponCode" size="large"></el-input>
       </el-col>
     </el-row>
     <el-row>
       <el-col>
-        <el-button @click="applyCoupon">使用折扣代碼</el-button>
+        <el-button @click="applyCoupon">{{
+          $t("use_discount_code")
+        }}</el-button>
       </el-col>
     </el-row>
   </div>

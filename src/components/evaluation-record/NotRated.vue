@@ -14,20 +14,23 @@
                   <p>{{ rate.hotelAddress }}</p>
                 </el-col>
                 <el-col class="btn-alignment" :span="12">
-                  <el-button @click="openDialog(rate)">評價</el-button>
+                  <el-button @click="openDialog(rate)">{{
+                    $t("evaluation")
+                  }}</el-button>
                 </el-col>
               </el-row>
             </div>
             <div class="number-of-individuals">
               <el-row>
                 <el-col :span="12">
-                  <p>人數:</p>
+                  <p>{{ $t("number_of_people") }}:</p>
                   <p>
-                    {{ rate.adultQty }}位成人 + {{ rate.childrenQty }}位兒童
+                    {{ rate.adultQty }}{{ $t("adults") }} + {{ rate.childrenQty
+                    }}{{ $t("children") }}
                   </p>
                 </el-col>
                 <el-col :span="12">
-                  <p>寵物:</p>
+                  <p>{{ $t("pet") }}:</p>
                   <p>
                     {{
                       rate.petsQty === null || rate.petsQty === ""
@@ -59,7 +62,7 @@
             <div class="days-of-stay">
               <el-row>
                 <el-col :span="12">
-                  <p>入住日期:</p>
+                  <p>{{ $t("check_in_date") }}:</p>
                   <p>
                     {{ formatDate(rate.checkInDate) }}
                     {{ rate.checkInTime.replace(/(.{2})$/, ":$1") }}
@@ -67,7 +70,7 @@
                   <p></p>
                 </el-col>
                 <el-col :span="12">
-                  <p>離開日期:</p>
+                  <p>{{ $t("departure_date") }}:</p>
                   <p>
                     {{ formatDate(rate.checkOutDate) }}
                     {{ rate.checkOutTime.replace(/(.{2})$/, ":$1") }}
@@ -100,14 +103,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="dialogFormVisible = false" class="cancel"
-              >下次再說</el-button
+            <el-button
+              @click.prevent="dialogFormVisible = false"
+              class="cancel"
+              >{{ $t("next_time") }}</el-button
             >
           </el-col>
           <el-col :span="12">
-            <el-button @click.prevent="checkAccessToken" class="submit"
-              >提交</el-button
-            >
+            <el-button @click.prevent="checkAccessToken" class="submit">{{
+              $t("submit")
+            }}</el-button>
           </el-col>
         </el-row>
       </el-form>

@@ -3,7 +3,7 @@
     <el-row :gutter="70">
       <el-col :sm="24" :lg="12">
         <div class="left-section">
-          <h1>預訂查詢</h1>
+          <h1>{{ $t("booking_inquiry") }}</h1>
           <p>
             {{ selectedHotel.basicInfo.stayInformation }}
           </p>

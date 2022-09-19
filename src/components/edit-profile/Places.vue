@@ -1,6 +1,6 @@
 <template>
   <div class="places">
-    <h3>我的收藏</h3>
+    <h3>{{ $t("my_collection") }}</h3>
     <el-row :gutter="10">
       <el-col v-for="item in wishlist" :key="item.id" :sm="24" :lg="12">
         <Card

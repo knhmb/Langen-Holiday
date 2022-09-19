@@ -2,7 +2,7 @@
   <section class="top-places">
     <base-container>
       <h1>
-        TOP 5 超人氣住宿
+        {{ $t("top_5_most_popular") }}
         <img src="../../assets/icon-top5.png" class="places-icon" alt="" />
       </h1>
     </base-container>

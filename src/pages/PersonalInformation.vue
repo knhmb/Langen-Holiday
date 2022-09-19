@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isProfileEdit" class="personal-information">
-    <h3>個人資料</h3>
+    <h3>{{ $t("personal_information") }}</h3>
     <base-card>
       <el-row>
         <el-col>

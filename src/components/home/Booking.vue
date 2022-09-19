@@ -3,7 +3,7 @@
     <base-container>
       <el-row>
         <el-col class="booking-title">
-          <h1>搜尋住宿優惠</h1>
+          <h1>{{ $t("search_for_accommodation") }}</h1>
           <img
             class="search-icon"
             src="../../assets/icon-search-jetso.png"
@@ -60,22 +60,23 @@
                 numberOfLivingPopulation === ""
                   ? "2位成人"
                   : numberOfLivingPopulation + " 位成人"
-              }}・沒有小孩入住・{{
-                isSelected === "false" ? "沒有寵物" : "帶寵物"
-              }}・{{ numberOfRooms === "" ? "1間房" : numberOfRooms + " 間房" }}
+              }}{{ $t("no_children_staying")
+              }}{{ isSelected === "false" ? "沒有寵物" : "帶寵物" }}・{{
+                numberOfRooms === "" ? "1間房" : numberOfRooms + " 間房"
+              }}
             </p>
             <transition name="slide-fade">
               <div v-if="isOpen" class="individual-booking">
                 <div class="content">
                   <el-row>
                     <el-col :span="12">
-                      <p class="head">住宿要求</p>
+                      <p class="head">{{ $t("accommodation_requirements") }}</p>
                     </el-col>
                     <el-col class="end" :span="12">
-                      <p class="small" @click="reset">清除</p>
+                      <p class="small" @click="reset">{{ $t("clear") }}</p>
                     </el-col>
                     <el-col :span="12">
-                      <p>入住人數</p>
+                      <p>{{ $t("living_population") }}</p>
                     </el-col>
                     <el-col :span="12">
                       <div class="range">
@@ -95,7 +96,7 @@
                       </div>
                     </el-col>
                     <el-col :span="12">
-                      <p>房間</p>
+                      <p>{{ $t("room") }}</p>
                     </el-col>
                     <el-col :span="12">
                       <div class="range">
@@ -115,7 +116,7 @@
                       </div>
                     </el-col>
                     <el-col :span="14">
-                      <p>寵物</p>
+                      <p>{{ $t("pet") }}</p>
                     </el-col>
                     <el-col class="pet" :span="10">
                       <div class="pet-option">
@@ -136,7 +137,7 @@
                             }"
                             :span="12"
                           >
-                            <p>沒有</p>
+                            <p>{{ $t("no") }}</p>
                           </el-col>
                         </el-row>
                       </div>
@@ -144,7 +145,9 @@
                   </el-row>
                 </div>
                 <div class="submit-btn">
-                  <el-button @click="isOpen = false">套用</el-button>
+                  <el-button @click="isOpen = false">{{
+                    $t("apply")
+                  }}</el-button>
                 </div>
               </div>
             </transition>
@@ -170,7 +173,7 @@
       </el-row>
       <el-row>
         <el-col>
-          <el-button @click="submitHotelSearch">搜尋</el-button>
+          <el-button @click="submitHotelSearch">{{ $t("search") }}</el-button>
         </el-col></el-row
       >
     </base-container>

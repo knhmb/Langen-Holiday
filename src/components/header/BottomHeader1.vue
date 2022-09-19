@@ -67,7 +67,7 @@
             class="edit-profile-menu"
             index="6"
           >
-            <template #title>會員中心</template>
+            <template #title>{{ $t("member_profile") }}</template>
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
               @click="profileNavigation('personal-information')"
@@ -82,7 +82,7 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >個人資料</el-menu-item
+              >{{ $t("personal_information") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
@@ -98,7 +98,7 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >修改密碼</el-menu-item
+              >{{ $t("change_password") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
@@ -110,7 +110,7 @@
                 fontWeight:
                   $route.path === '/edit-profile/places' ? 'bold' : 'normal',
               }"
-              >我的收藏</el-menu-item
+              >{{ $t("my_collection") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
@@ -126,7 +126,7 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >評價記錄</el-menu-item
+              >{{ $t("evaluation_record") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
@@ -142,13 +142,13 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >預約記錄</el-menu-item
+              >{{ $t("appointment_record") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
               @click="logout"
               index="6-6"
-              >登出</el-menu-item
+              >{{ $t("sign_out") }}</el-menu-item
             >
           </el-sub-menu>
         </el-menu>
@@ -225,7 +225,7 @@
             class="edit-profile-menu"
             index="6"
           >
-            <template #title>會員中心</template>
+            <template #title>{{ $t("member_profile") }}</template>
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 20 }"
               @click="profileNavigation('personal-information')"
@@ -240,7 +240,7 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >個人資料</el-menu-item
+              >{{ $t("personal_information") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 21 }"
@@ -256,7 +256,7 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >修改密碼</el-menu-item
+              >{{ $t("change_password") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 22 }"
@@ -268,7 +268,7 @@
                 fontWeight:
                   $route.path === '/edit-profile/places' ? 'bold' : 'normal',
               }"
-              >我的收藏</el-menu-item
+              >{{ $t("my_collection") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 23 }"
@@ -284,7 +284,7 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >評價記錄</el-menu-item
+              >{{ $t("evaluation_record") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 24 }"
@@ -300,19 +300,21 @@
                     ? 'bold'
                     : 'normal',
               }"
-              >預約記錄</el-menu-item
+              >{{ $t("appointment_record") }}</el-menu-item
             >
             <el-menu-item
               :class="{ 'inner-active': isActiveSubMenuItem === 25 }"
               @click="logout"
               index="6-6"
-              >登出</el-menu-item
+              >{{ $t("sign_out") }}</el-menu-item
             >
           </el-sub-menu>
         </el-menu>
       </el-col>
       <el-col v-if="!loggedIn" :sm="24" :lg="2">
-        <el-button class="login-btn" @click="openDialog">登入</el-button>
+        <el-button class="login-btn" @click="openDialog">{{
+          $t("login")
+        }}</el-button>
       </el-col>
     </el-row>
 

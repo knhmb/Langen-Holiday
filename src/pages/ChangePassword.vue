@@ -1,6 +1,6 @@
 <template>
   <div class="change-password">
-    <h3>修改密碼</h3>
+    <h3>{{ $t("change_password") }}</h3>
     <base-card>
       <el-form
         hide-required-asterisk

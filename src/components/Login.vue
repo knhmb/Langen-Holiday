@@ -42,7 +42,7 @@
           <p @click="forgotPassword" class="forgot-password">忘記密碼?</p>
         </el-col>
         <el-col class="form-col">
-          <el-button @click.prevent="login">登入</el-button>
+          <el-button @click.prevent="login">{{ $t("login") }}</el-button>
         </el-col>
         <el-col class="form-col">
           <p class="register-link">

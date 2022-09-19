@@ -13,7 +13,7 @@
         <el-row :gutter="20">
           <el-col :sm="24" :lg="6">
             <div class="left-section">
-              <p>入住日期</p>
+              <p>{{ $t("check_in_date") }}</p>
               <DatePicker
                 :model-config="modelConfig"
                 :min-date="new Date()"
@@ -23,10 +23,10 @@
               />
               <el-row>
                 <el-col>
-                  <p>住宿要求</p>
+                  <p>{{ $t("accommodation_requirements") }}</p>
                 </el-col>
                 <el-col :span="12">
-                  <p>入住人數</p>
+                  <p>{{ $t("living_population") }}</p>
                 </el-col>
                 <el-col :span="12">
                   <div class="range">
@@ -47,7 +47,7 @@
                 </el-col>
 
                 <el-col :span="12">
-                  <p>房間</p>
+                  <p>{{ $t("room") }}</p>
                 </el-col>
                 <el-col :span="12">
                   <div class="range">
@@ -68,7 +68,7 @@
                 </el-col>
 
                 <el-col :span="12">
-                  <p>寵物</p>
+                  <p>{{ $t("pet") }}</p>
                 </el-col>
                 <el-col :span="12">
                   <div class="pet-option">
@@ -83,13 +83,13 @@
                         :class="{ 'is-active-option': isSelected === 'false' }"
                         :span="12"
                       >
-                        <p @click="setOption('false')">沒有</p>
+                        <p @click="setOption('false')">{{ $t("no") }}</p>
                       </el-col>
                     </el-row>
                   </div>
                 </el-col>
               </el-row>
-              <p>地點</p>
+              <p>{{ $t("place") }}</p>
               <div class="location">
                 <el-checkbox-group v-model="location" @change="sortIsland">
                   <template v-for="cheung in headerItems" :key="cheung">
@@ -112,7 +112,7 @@
                   </template>
                 </el-checkbox-group>
               </div>
-              <p>房間類型</p>
+              <p>{{ $t("room_type") }}</p>
               <el-checkbox-group v-model="roomType" @change="sortIsland">
                 <el-checkbox
                   v-for="room in roomTypes"

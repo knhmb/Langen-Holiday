@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <h2>填寫你的詳細資料</h2>
+    <h2>{{ $t("fill_in_details") }}</h2>
     <el-form
       label-position="top"
       :model="ruleForm"
@@ -74,7 +74,7 @@
             ></el-input>
           </el-form-item>
           <p>
-            建議盡早提出特別要求,但最終仍需視乎實際情況作出安排,請注意無法保證能達成你的要求。
+            {{ $t("form_note") }}
           </p>
         </el-col>
       </el-row>

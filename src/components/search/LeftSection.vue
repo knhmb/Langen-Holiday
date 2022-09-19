@@ -1,11 +1,13 @@
 <template>
   <!-- <Carousel /> -->
   <base-container>
-    <h2>渡假屋 <span>搜尋結果 :</span></h2>
+    <h2>
+      {{ $t("holiday_home") }} <span>{{ $t("search_results") }} :</span>
+    </h2>
     <el-row :gutter="20">
       <el-col :sm="24" :lg="6">
         <div class="left-section">
-          <p>入住日期</p>
+          <p>{{ $t("check_in_date") }}</p>
           <DatePicker
             :model-config="modelConfig"
             :min-date="new Date()"
@@ -28,10 +30,10 @@
           </el-row> -->
           <el-row>
             <el-col>
-              <p>住宿要求</p>
+              <p>{{ $t("accommodation_requirements") }}</p>
             </el-col>
             <el-col :span="12">
-              <p>入住人數</p>
+              <p>{{ $t("living_population") }}</p>
             </el-col>
             <el-col :span="12">
               <div class="range">
@@ -52,7 +54,7 @@
             </el-col>
 
             <el-col :span="12">
-              <p>房間</p>
+              <p>{{ $t("room") }}</p>
             </el-col>
             <el-col :span="12">
               <div class="range">
@@ -73,7 +75,7 @@
             </el-col>
 
             <el-col :span="12">
-              <p>寵物</p>
+              <p>{{ $t("pet") }}</p>
             </el-col>
             <el-col :span="12">
               <div class="pet-option">
@@ -82,13 +84,13 @@
                     :class="{ 'is-active-option': isSelected === 'true' }"
                     :span="12"
                   >
-                    <p @click="setOption('true')">有</p>
+                    <p @click="setOption('true')">{{ $t("have") }}</p>
                   </el-col>
                   <el-col
                     :class="{ 'is-active-option': isSelected === 'false' }"
                     :span="12"
                   >
-                    <p @click="setOption('false')">沒有</p>
+                    <p @click="setOption('false')">{{ $t("do_not_have") }}</p>
                   </el-col>
                 </el-row>
               </div>
@@ -99,7 +101,7 @@
             <el-checkbox label="9:00 - 13:00" />
             <el-checkbox label="13:00 - 21:00" />
           </el-checkbox-group> -->
-          <p>地點</p>
+          <p>{{ $t("place") }}</p>
           <div class="location">
             <el-checkbox-group v-model="location" @change="sort">
               <template v-for="cheung in headerItems" :key="cheung">
@@ -164,12 +166,16 @@
           </div>
           <div class="location un-bordered">
             <el-checkbox-group v-model="location" @change="sort">
-              <el-checkbox label="hong-kong-island">港島區</el-checkbox>
-              <el-checkbox label="kowloon">九龍區</el-checkbox>
-              <el-checkbox label="new-territories">新界區</el-checkbox>
+              <el-checkbox label="hong-kong-island">{{
+                $t("hong_kong_island")
+              }}</el-checkbox>
+              <el-checkbox label="kowloon">{{ $t("kowloon") }}</el-checkbox>
+              <el-checkbox label="new-territories">{{
+                $t("new_territories")
+              }}</el-checkbox>
             </el-checkbox-group>
           </div>
-          <p>房間類型</p>
+          <p>{{ $t("room_type") }}</p>
           <el-checkbox-group v-model="roomType" @change="sort">
             <el-checkbox
               v-for="room in roomTypes"

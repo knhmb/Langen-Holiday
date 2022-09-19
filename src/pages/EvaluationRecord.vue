@@ -1,6 +1,6 @@
 <template>
   <div class="evaluation">
-    <h3>評價記錄</h3>
+    <h3>{{ $t("evaluation_record") }}</h3>
     <el-row>
       <el-col :sm="24" :lg="5">
         <div

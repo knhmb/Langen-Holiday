@@ -135,19 +135,20 @@
             v-model="isAgreed"
             label="我同意本頁顯示的金額，也同意注意事項，取消政策和惡劣天氣安排以及網站使用條款"
             size="large"
-            >我同意本頁顯示的金額，也同意注意事項，取消政策和惡劣天氣安排以及<span
+            >{{ $t("agreement")
+            }}<span
               @click.stop="$router.push('/terms-and-conditions')"
               class="terms-of-use"
-              >網站使用條款</span
+              >{{ $t("terms_of_use") }}</span
             ></el-checkbox
           >
         </el-col>
       </el-row>
       <el-row>
         <el-col>
-          <el-button :disabled="!isAgreed" @click="reserve" class="submit"
-            >提交</el-button
-          >
+          <el-button :disabled="!isAgreed" @click="reserve" class="submit">{{
+            $t("submit")
+          }}</el-button>
         </el-col>
       </el-row>
     </div>

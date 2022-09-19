@@ -39,20 +39,20 @@
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>房間類型:</span>
+                <span>{{ $t("room_type") }}:</span>
                 <span>{{ selectedHotel.basicInfo.roomType }}</span>
               </div>
             </el-col>
             <el-col :span="12">
               <div class="separation">
-                <span>面積:</span>
+                <span>{{ $t("area") }}:</span>
                 <span>{{ selectedHotel.basicInfo.size }} 呎</span>
               </div>
             </el-col>
 
             <el-col :span="12">
               <div class="separation">
-                <span>可住人數:</span>
+                <span>{{ $t("occupancy") }}:</span>
                 <span>{{ selectedHotel.basicInfo.maxGuest }}</span>
               </div>
             </el-col>
@@ -66,9 +66,11 @@
             </el-col> -->
             <el-col :span="12">
               <div class="separation">
-                <span>竉物留宿:</span>
+                <span>{{ $t("pet_stay") }}:</span>
                 <span>{{
-                  selectedHotel.petsWelcome === true ? "可以" : "不可以"
+                  selectedHotel.petsWelcome === true
+                    ? $t("can_pet")
+                    : $t("cannot_pet")
                 }}</span>
               </div>
               <!-- <div class="separation no-border">

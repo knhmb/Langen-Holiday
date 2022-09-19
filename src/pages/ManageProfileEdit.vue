@@ -1,6 +1,6 @@
 <template>
   <div class="manage-profile-edit">
-    <h3>個人資料</h3>
+    <h3>{{ $t("personal_information") }}</h3>
     <base-card>
       <el-form label-position="top">
         <el-row>
