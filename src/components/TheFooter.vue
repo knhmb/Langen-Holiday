@@ -31,7 +31,7 @@
               </router-link>
             </div>
           </el-col>
-          <el-col class="payment-method" :sm="24" :lg="6">
+          <el-col class="payment-method" :sm="24" :lg="5">
             <span>{{ $t("payment_methods") }}</span>
             <img class="payment" src="../assets/footer-payment.png" alt="" />
           </el-col>
@@ -54,7 +54,7 @@
               alt=""
             /> -->
           </el-col>
-          <el-col :sm="24" :lg="5">
+          <el-col :sm="24" :lg="7">
             <p>
               Copyright © 2005 – 2022 樂程假期公司 <br />
               All Right Reserve
