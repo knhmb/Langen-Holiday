@@ -55,7 +55,18 @@
               src="../../assets/icon-people.png"
               alt=""
             />
+            <!-- 入住人數0位, 沒有寵物, 房間0間 -->
             <p>
+              {{
+                numberOfLivingPopulation === ""
+                  ? "入住人數2位,"
+                  : `入住人數${numberOfLivingPopulation}位,`
+              }}{{ $t("no_children_staying")
+              }}{{ isSelected === "false" ? "沒有寵物" : "帶寵物" }}・{{
+                numberOfRooms === "" ? "房間1間" : `房間${numberOfRooms}間`
+              }}
+            </p>
+            <!-- <p>
               {{
                 numberOfLivingPopulation === ""
                   ? "2位成人"
@@ -64,7 +75,7 @@
               }}{{ isSelected === "false" ? "沒有寵物" : "帶寵物" }}・{{
                 numberOfRooms === "" ? "1間房" : numberOfRooms + " 間房"
               }}
-            </p>
+            </p> -->
             <transition name="slide-fade">
               <div v-if="isOpen" class="individual-booking">
                 <div class="content">
@@ -308,6 +319,7 @@ export default {
 <style>
 .booking {
   background-color: #fd9a1a;
+  /* background-color: oranges; */
   /* margin-top: -0.6rem; */
   padding: 4rem 0;
   /* overflow-x: hidden; */

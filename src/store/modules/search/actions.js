@@ -1,17 +1,15 @@
 import axios from "axios";
-import moment from "moment";
+// import moment from "moment";
 
 export default {
   getSearchItems(context, payload) {
-    const date = new Date();
-    const today = moment(date).format("YYYY-MM-DD").replaceAll("-", "");
-    const tomorrow = moment(date.setDate(date.getDate() + 1))
-      .format("YYYY-MM-DD")
-      .replaceAll("-", "");
+    // const date = new Date();
+    // const today = moment(date).format("YYYY-MM-DD").replaceAll("-", "");
+    // const tomorrow = moment(date.setDate(date.getDate() + 1))
+    //   .format("YYYY-MM-DD")
+    //   .replaceAll("-", "");
     axios
-      .get(
-        `/api/hotel?filter=itemcategory:${payload.slug},stayingDate:${today}|${tomorrow}`
-      )
+      .get(`/api/hotel?filter=itemcategory:${payload.slug}`)
       .then((res) => {
         console.log(res);
         context.commit("SET_SEARCH_ITEMS", res.data.items);
@@ -19,6 +17,17 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+    // axios
+    //   .get(
+    //     `/api/hotel?filter=itemcategory:${payload.slug},stayingDate:${today}|${tomorrow}`
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     context.commit("SET_SEARCH_ITEMS", res.data.items);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
   filterIslandSearch(context, payload) {
     axios

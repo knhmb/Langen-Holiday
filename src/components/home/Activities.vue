@@ -1,7 +1,11 @@
 <template>
   <section class="activities">
     <base-container>
-      <h1>{{ $t("as_you_like") }}</h1>
+      <div class="title">
+        <h1>{{ $t("as_you_like") }}</h1>
+        <img class="service-icon" src="../../assets/icon-service.png" alt="" />
+      </div>
+
       <el-row :gutter="30">
         <el-col
           v-for="theme in themes"
@@ -19,50 +23,10 @@
             </div>
           </div>
         </el-col>
-        <!-- <el-col :sm="24" :md="12" :lg="8">
+        <!-- <el-col v-for="item in 9" :key="item" :sm="24" :md="12" :lg="8">
           <div class="card">
             <div class="card-img">
               <img src="../../assets/img-service2.jpg" alt="" />
-            </div>
-            <div class="card-text">
-              <p>簡單煮食</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :sm="24" :md="12" :lg="8">
-          <div class="card">
-            <div class="card-img">
-              <img src="../../assets/img-service3.jpg" alt="" />
-            </div>
-            <div class="card-text">
-              <p>簡單煮食</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :sm="24" :md="12" :lg="8">
-          <div class="card">
-            <div class="card-img">
-              <img src="../../assets/img-service4.jpg" alt="" />
-            </div>
-            <div class="card-text">
-              <p>簡單煮食</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :sm="24" :md="12" :lg="8">
-          <div class="card">
-            <div class="card-img">
-              <img src="../../assets/img-service5.jpg" alt="" />
-            </div>
-            <div class="card-text">
-              <p>簡單煮食</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :sm="24" :md="12" :lg="8">
-          <div class="card">
-            <div class="card-img">
-              <img src="../../assets/img-service6.jpg" alt="" />
             </div>
             <div class="card-text">
               <p>簡單煮食</p>
@@ -106,10 +70,19 @@ export default {
 .activities {
   background-image: url("../../assets/main-bg2.png");
   background-size: cover;
-  background-repeat: no-repeat;
-  padding-top: 6rem;
-  padding-bottom: 4.5rem;
+  /* background-repeat: no-repeat; */
+  /* background-position: bottom; */
+  background-position: bottom 0 left -1rem;
+  padding-top: 3rem;
+  /* padding-bottom: 4.5rem; */
   margin-top: -8.9rem;
+}
+
+.activities div.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
 }
 
 .activities h1 {
@@ -120,7 +93,11 @@ export default {
   letter-spacing: 0.3rem;
   text-transform: uppercase;
   /* display: inline-block; */
-  margin-bottom: 4rem;
+}
+
+.activities img.service-icon {
+  width: 3rem;
+  margin-left: 0.3rem;
 }
 
 .activities .el-col {
@@ -143,7 +120,7 @@ export default {
 .activities .card .card-img img {
   width: 100%;
   /* height: 100%; */
-  height: 9rem;
+  height: 13rem;
   object-fit: cover;
   border-radius: inherit;
 }

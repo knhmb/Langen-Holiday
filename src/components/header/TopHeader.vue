@@ -63,7 +63,7 @@
                   ? 'bold'
                   : 'normal',
               }"
-              >{{ $t("contact_us") }}</el-menu-item
+              >{{ $t("contact_us_text") }}</el-menu-item
             >
             <el-menu-item
               class="top-menu-item"

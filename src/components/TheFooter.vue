@@ -56,7 +56,7 @@
           </el-col>
           <el-col :sm="24" :lg="7">
             <p>
-              Copyright © 2005 – 2022 樂程假期公司 <br />
+              Copyright © 2005 – {{ fullYear }} 樂程假期公司 <br />
               All Right Reserve
             </p>
           </el-col>
@@ -65,6 +65,16 @@
     </base-container>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    fullYear() {
+      return new Date().getFullYear();
+    },
+  },
+};
+</script>
 
 <style>
 .footer {

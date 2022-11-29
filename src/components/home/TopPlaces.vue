@@ -24,10 +24,10 @@ export default {
 <style scoped>
 .top-places {
   background-image: url("../../assets/main-bg1.png");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   padding-top: 8rem;
-  overflow-x: hidden;
+  overflow: hidden;
   /* margin-top: -0.6rem; */
 }
 
@@ -40,6 +40,7 @@ export default {
   text-transform: uppercase;
   /* display: inline-block; */
   margin-bottom: 4rem;
+  margin-top: 2rem;
 }
 
 .top-places .places-icon {

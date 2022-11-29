@@ -107,28 +107,56 @@
                         :label="subMenuItem.slug"
                         v-if="
                           subMenuItem.parentCodexSlug ===
-                          this.$route.params.parentCodexSlug
+                            this.$route.params.parentCodexSlug &&
+                          subMenuItem.name !== '景點介紹'
                         "
                         :checked="$route.path.includes(subMenuItem.slug)"
                         >{{ subMenuItem.name }}</el-checkbox
                       >
                     </template>
                   </template>
-                  <!-- <template
-                    v-for="cheung in cheungChauIslandItems"
-                    :key="cheung.id"
-                  >
+                </el-checkbox-group>
+              </div>
+              <div class="districts">
+                <p>離島區</p>
+                <el-checkbox-group v-model="location" @change="sortIsland">
+                  <!-- <template v-for="cheung in headerItems" :key="cheung">
                     <el-checkbox
+                      v-if="cheung.slug === this.$route.params.parentCodexSlug"
                       :label="cheung.slug"
-                      v-if="cheung.name !== '景點介紹'"
-                      :checked="$route.path.includes(cheung.slug)"
                       >{{ cheung.name }}</el-checkbox
                     >
                   </template> -->
+                  <template v-for="subItem in menuItems" :key="subItem">
+                    <template v-for="subMenuItem in subItem" :key="subMenuItem">
+                      <div class="single-district">
+                        <el-checkbox
+                          :label="subMenuItem.slug"
+                          v-if="subMenuItem.name !== '景點介紹'"
+                          :checked="$route.path.includes(subMenuItem.slug)"
+                          >{{ subMenuItem.name }}</el-checkbox
+                        >
+                      </div>
+                      <!-- <el-checkbox
+                        :label="subMenuItem.slug"
+                        v-if="subMenuItem.name !== '景點介紹'"
+                        :checked="$route.path.includes(subMenuItem.slug)"
+                        >{{ subMenuItem.name }}</el-checkbox
+                      > -->
+                    </template>
+                  </template>
                 </el-checkbox-group>
               </div>
-              <p>{{ $t("room_type") }}</p>
-              <el-checkbox-group v-model="roomType" @change="sortIsland">
+              <p
+                v-if="$route.params.parentCodexSlug !== 'hotel-recommendations'"
+              >
+                {{ $t("room_type") }}
+              </p>
+              <el-checkbox-group
+                v-if="$route.params.parentCodexSlug !== 'hotel-recommendations'"
+                v-model="roomType"
+                @change="sortIsland"
+              >
                 <el-checkbox
                   v-for="room in roomTypes"
                   :key="room.id"

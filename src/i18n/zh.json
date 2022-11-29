@@ -91,7 +91,7 @@
   "apply": "套用",
   "search": "搜尋",
   "top_5_most_popular": "TOP 5 超人氣住宿",
-  "become_our_partner": "成為我們的合作伙伴",
+  "become_our_partner": "成為合作伙伴",
   "fill_information": "請填寫以下資料,我們在短時間內聯絡您",
   "fill_in_details": "填寫你的詳細資料",
   "form_note": "建議盡早提出特別要求,但最終仍需視乎實際情況作出安排,請注意無法保證能達成你的要求。",
@@ -148,5 +148,6 @@
   "phone_number": "電話號碼",
   "revise": "修改",
   "contact_email": "如果您對本條款與細則有任何疑問或需要任何進一步資料，可電郵到 info@langenholiday.com，我們將會儘快回覆您。",
-  "contact_company": "十. 與本公司聯絡"
+  "contact_company": "十. 與本公司聯絡",
+  "contact_us_eng": "Contact us"
 }

@@ -103,6 +103,10 @@ export default {
           ? require("../../assets/icon-rank2.png")
           : this.topFive === "3"
           ? require("../../assets/icon-rank3.png")
+          : this.topFive === "4"
+          ? require("../../assets/icon-rank4.png")
+          : this.topFive === "5"
+          ? require("../../assets/icon-rank5.png")
           : "",
     };
   },
