@@ -385,7 +385,7 @@ export default {
 .booking .el-input .el-input__inner {
   border-radius: 0px;
   padding: 20px 55px;
-  border-color: #fd9a1a;
+  border-color: #fddb67;
 }
 
 /* .booking .el-input .el-input__inner[placeholder] {
@@ -414,7 +414,7 @@ export default {
 .booking .select-input {
   position: relative;
   background-color: #fff;
-  border: 1px solid #fd9a1a;
+  border: 1px solid #fddb67;
   height: 42px;
   display: flex;
   align-items: center;

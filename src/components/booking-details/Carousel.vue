@@ -9,7 +9,7 @@
       <img :src="photo" alt="" class="carousel-img" />
     </el-carousel-item>
   </el-carousel>
-  <div class="img-collection hidden-md-and-down">
+  <!-- <div class="img-collection hidden-md-and-down">
     <el-row :gutter="5">
       <el-col
         :sm="24"
@@ -20,7 +20,7 @@
         <img :src="photo" alt="" class="room-imgs" />
       </el-col>
     </el-row>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
 .booking-details .el-carousel .carousel-img {
   width: 100%;
   height: 100%;
-  /* object-fit: fill; */
+  object-fit: cover;
 }
 
 .booking-details .el-carousel .el-carousel__arrow {
@@ -58,7 +58,7 @@ export default {
 }
 
 .booking-details .el-carousel .el-carousel__container {
-  height: 100vh !important;
+  height: 70vh !important;
 }
 
 /* @media screen and (max-width: 768px) {

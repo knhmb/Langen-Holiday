@@ -179,7 +179,8 @@ export default {
 .booking .date-picker {
   position: relative;
   background-color: #fff;
-  border: 1px solid #fd9a1a;
+  border: 1px solid #fddb67;
+  /* border: 1px solid #fd9a1a; */
   width: 100%;
   height: 42px;
   padding: 20px 55px;

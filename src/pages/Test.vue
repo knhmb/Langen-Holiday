@@ -90,9 +90,23 @@
                   </div>
                 </el-col>
               </el-row>
-              <p>{{ $t("place") }}</p>
+              <el-row>
+                <el-col :span="24">
+                  <p>入住時段</p>
+                  <el-checkbox-group v-model="time">
+                    <el-checkbox label="9:00 - 13:00" />
+                    <el-checkbox label="13:00 - 21:00" />
+                  </el-checkbox-group>
+                </el-col>
+              </el-row>
+              <p v-if="$route.params.parentCodexSlug !== 'day-n-night-time'">
+                {{ $t("place") }}
+              </p>
 
-              <div class="location">
+              <div
+                v-if="$route.params.parentCodexSlug !== 'day-n-night-time'"
+                class="location"
+              >
                 <el-checkbox-group v-model="location" @change="sortIsland">
                   <template v-for="cheung in headerItems" :key="cheung">
                     <el-checkbox
@@ -117,43 +131,66 @@
                   </template>
                 </el-checkbox-group>
               </div>
-              <div class="districts">
+              <div
+                class="districts"
+                v-if="
+                  $route.params.parentCodexSlug === 'hotel-recommendations' ||
+                  $route.params.parentCodexSlug === 'day-n-night-time'
+                "
+              >
                 <p>離島區</p>
                 <el-checkbox-group v-model="location" @change="sortIsland">
                   <!-- <template v-for="cheung in headerItems" :key="cheung">
                     <el-checkbox
                       v-if="cheung.slug === this.$route.params.parentCodexSlug"
                       :label="cheung.slug"
-                      >{{ cheung.name }}</el-checkbox
+                      >{{ cheung }}</el-checkbox
                     >
                   </template> -->
                   <template v-for="subItem in menuItems" :key="subItem">
-                    <template v-for="subMenuItem in subItem" :key="subMenuItem">
-                      <div class="single-district">
+                    <div class="single-district" v-if="subItem.length > 0">
+                      <template v-for="cheung in headerItems" :key="cheung">
+                        <el-checkbox
+                          v-if="cheung.slug === subItem[0].parentCodexSlug"
+                          :label="cheung.slug"
+                          >{{ cheung.name }}</el-checkbox
+                        >
+                      </template>
+
+                      <template
+                        v-for="subMenuItem in subItem"
+                        :key="subMenuItem"
+                      >
                         <el-checkbox
                           :label="subMenuItem.slug"
                           v-if="subMenuItem.name !== '景點介紹'"
                           :checked="$route.path.includes(subMenuItem.slug)"
                           >{{ subMenuItem.name }}</el-checkbox
                         >
-                      </div>
-                      <!-- <el-checkbox
-                        :label="subMenuItem.slug"
-                        v-if="subMenuItem.name !== '景點介紹'"
-                        :checked="$route.path.includes(subMenuItem.slug)"
-                        >{{ subMenuItem.name }}</el-checkbox
-                      > -->
-                    </template>
+                        <!-- <el-checkbox
+                          :label="subMenuItem.slug"
+                          v-if="subMenuItem.name !== '景點介紹'"
+                          :checked="$route.path.includes(subMenuItem.slug)"
+                          >{{ subMenuItem.name }}</el-checkbox
+                          > -->
+                      </template>
+                    </div>
                   </template>
                 </el-checkbox-group>
               </div>
               <p
-                v-if="$route.params.parentCodexSlug !== 'hotel-recommendations'"
+                v-if="
+                  $route.params.parentCodexSlug !== 'hotel-recommendations' &&
+                  $route.params.parentCodexSlug !== 'day-n-night-time'
+                "
               >
                 {{ $t("room_type") }}
               </p>
               <el-checkbox-group
-                v-if="$route.params.parentCodexSlug !== 'hotel-recommendations'"
+                v-if="
+                  $route.params.parentCodexSlug !== 'hotel-recommendations' &&
+                  $route.params.parentCodexSlug !== 'day-n-night-time'
+                "
                 v-model="roomType"
                 @change="sortIsland"
               >
@@ -339,6 +376,8 @@ export default {
   },
   created() {
     console.log(this.$route);
+    console.log(this.headerItems);
+    console.log(this.menuItems);
     // this.$store.dispatch("dashboard/setCheungBanner");
     this.$store.dispatch(
       "dashboard/setBanner",
@@ -477,6 +516,11 @@ export default {
 .cheung-chau-island .banner p {
   top: 75%;
   max-width: 700px;
+}
+
+.cheung-chau-island .single-district:not(:last-of-type) {
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 0.5rem;
 }
 
 @media screen and (max-width: 820px) {
