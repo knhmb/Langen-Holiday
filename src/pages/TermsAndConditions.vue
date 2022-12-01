@@ -198,7 +198,6 @@ export default {
   padding: 0;
   font-size: 14px;
   word-break: break-all;
-  /* font-size: 14px; */
 }
 
 .TC .contact-us-list .header p {
